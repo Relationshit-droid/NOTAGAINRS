@@ -68,10 +68,12 @@ const HeartOfTheMatterGameScreen = () => {
       setGameState(prev => ({ ...prev, isLoading: true }));
 
       // Create game session with backend
+      const token = await user.getIdToken();
       const session = await gamesApi.createSession(
         user.uid,
         'heart-of-the-matter',
-        'emotional-connection'
+        'emotional-connection',
+        token
       );
 
       setGameState(prev => ({
@@ -101,6 +103,10 @@ const HeartOfTheMatterGameScreen = () => {
   };
 
   const handleRevelationSubmit = async (partner: 'A' | 'B', revelation: string) => {
+    if (!user) {
+      Alert.alert('Authentication Required', 'Please log in to play this game.');
+      return;
+    }
     try {
       setGameState(prev => ({
         ...prev,
@@ -110,11 +116,13 @@ const HeartOfTheMatterGameScreen = () => {
 
       // Get Dr. Marcie's feedback
       const context = `Heart of the Matter game - Partner ${partner} revelation`;
+      const chatToken = await user.getIdToken();
       const marcieResponse = await marcieApi.chat(
         user.uid,
         context,
         revelation,
-        2 // Reality Check Specialist level
+        2, // Reality Check Specialist level
+        chatToken
       );
 
       setGameState(prev => ({
@@ -136,6 +144,10 @@ const HeartOfTheMatterGameScreen = () => {
   };
 
   const calculateAlignment = async () => {
+    if (!user) {
+      Alert.alert('Authentication Required', 'Please log in to play this game.');
+      return;
+    }
     try {
       setGameState(prev => ({ ...prev, isLoading: true }));
 
@@ -164,22 +176,28 @@ const HeartOfTheMatterGameScreen = () => {
       }));
 
       // Update game session with results
+      // updateSession takes (sessionId, data, token) - the score/completed/
+      // responses values belong inside the data object, not as positional args.
+      const updateToken = await user.getIdToken();
       await gamesApi.updateSession(
         gameState.sessionId,
-        alignment,
-        true,
-        [
-          {
-            partner: 'A',
-            revelation: gameState.partnerARevelation,
-            timestamp: new Date().toISOString()
-          },
-          {
-            partner: 'B',
-            revelation: gameState.partnerBRevelation,
-            timestamp: new Date().toISOString()
-          }
-        ]
+        {
+          score: alignment,
+          completed: true,
+          responses: [
+            {
+              partner: 'A',
+              revelation: gameState.partnerARevelation,
+              timestamp: new Date().toISOString()
+            },
+            {
+              partner: 'B',
+              revelation: gameState.partnerBRevelation,
+              timestamp: new Date().toISOString()
+            }
+          ]
+        },
+        updateToken
       );
 
       // Update global game state
@@ -518,7 +536,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.xl,
   },
   revelationInput: {
-    ...TYPOGRAPHY.fontFamily.regular,
+    fontFamily: TYPOGRAPHY.fontFamily.regular,
     backgroundColor: COLORS.backgroundInput,
     borderWidth: 1,
     borderColor: COLORS.borderSubtle,

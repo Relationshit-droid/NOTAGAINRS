@@ -41,6 +41,10 @@ interface GameStore {
   hideMarcie: () => void;
   showMarcie: () => void;
   
+  // Per-game progress (0-100), keyed by game id
+  gameProgress: Record<string, number>;
+  updateGameProgress: (gameId: string, progress: number) => void;
+
   // Utility methods
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
@@ -54,6 +58,7 @@ async function getToken(): Promise<string | undefined> {
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
+  gameProgress: {},
   currentSession: null,
   gameState: 'waiting_for_partner',
   loading: false,
@@ -284,8 +289,20 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set({ error });
   },
 
+  // Several game screens call this on start/midpoint/completion. It was
+  // referenced but never defined on the store, so those calls threw.
+  updateGameProgress: (gameId: string, progress: number) => {
+    set(state => ({
+      gameProgress: {
+        ...state.gameProgress,
+        [gameId]: Math.max(0, Math.min(100, progress)),
+      },
+    }));
+  },
+
   resetGame: () => {
     set({
+      gameProgress: {},
       currentSession: null,
       gameState: 'waiting_for_partner',
       loading: false,
