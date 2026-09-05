@@ -8,6 +8,7 @@ import InputHandler from './InputHandler';
 import DrMarcieCommentary from './DrMarcieCommentary';
 import { selection, warning, success } from './HapticFeedbackSystem';
 import { speakMarcie } from '../../../lib/voice-engine';
+import { SPACING } from '../../../theme';
 import { enforceSkipPenaltyLegacy } from '../../../lib/consequence-engine';
 import { auth } from '../../../lib/firebaseClient';
 import { gamesApi } from '../../../lib/api';
@@ -54,7 +55,10 @@ export default function GameContainer({ state, inputs, onComplete, onSkip, input
     if (sessionId) {
       try {
         const currentUser = auth.currentUser;
-        const token = currentUser ? await currentUser.getIdToken() : undefined;
+        // completeSession requires a token; without a signed-in user there is
+        // nothing to persist against, so skip rather than send undefined.
+        const token = currentUser ? await currentUser.getIdToken() : null;
+        if (token) {
         await gamesApi.completeSession(
           sessionId,
           {
@@ -64,6 +68,7 @@ export default function GameContainer({ state, inputs, onComplete, onSkip, input
           },
           token
         );
+        }
       } catch (error) {
         console.error('Error completing game session on backend:', error);
       }
@@ -134,6 +139,12 @@ function computeXp(s: GameState, score: number) {
 }
 
 const styles = StyleSheet.create({
+  btn: {
+    marginTop: SPACING.small,
+  },
+  skip: {
+    marginTop: SPACING.small,
+  },
   root: { flex: 1, padding: 16, gap: 12 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   marcieWrap: { alignItems: 'center', gap: 8 },

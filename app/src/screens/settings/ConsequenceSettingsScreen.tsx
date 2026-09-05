@@ -370,6 +370,18 @@ const TimingInput = ({ label, description, value, unit, min, max, onChange }: Ti
 );
 
 const styles = StyleSheet.create({
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: SPACING.small,
+  },
+  sectionTitle: {
+    color: COLORS.textPrimary,
+  },
+  clearAllButton: {
+    alignSelf: 'flex-end',
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',

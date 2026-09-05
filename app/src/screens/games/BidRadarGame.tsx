@@ -94,6 +94,9 @@ const BidRadarGameScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  lockButtonText: {
+    color: COLORS.textPrimary,
+  },
     container: { 
         flex: 1, 
         backgroundColor: COLORS.backgroundPrimary 

@@ -101,6 +101,23 @@ const BedroomBingoGame2Screen = () => {
 };
 
 const styles = StyleSheet.create({
+  tileIcon: {
+    marginBottom: SPACING.micro,
+  },
+  completedCount: {
+    color: COLORS.vibrantPink,
+  },
+  nextChallengeText: {
+    color: COLORS.textSecondary,
+  },
+  hostQuote: {
+    color: COLORS.textSecondary,
+    fontStyle: 'italic',
+  },
+  hostSignature: {
+    color: COLORS.textHint,
+    fontStyle: 'italic',
+  },
     container: { 
         flex: 1, 
         backgroundColor: COLORS.backgroundSecondary 

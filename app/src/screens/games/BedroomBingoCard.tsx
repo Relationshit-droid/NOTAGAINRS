@@ -103,6 +103,21 @@ const BedroomBingoCardScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  freeSpaceText: {
+    color: COLORS.textPrimary,
+  },
+  tileText: {
+    color: COLORS.textPrimary,
+  },
+  progressTitle: {
+    color: COLORS.textPrimary,
+  },
+  progressSubtitle: {
+    color: COLORS.textSecondary,
+  },
+  progressCount: {
+    color: COLORS.vibrantPink,
+  },
     container: { 
         flex: 1, 
         backgroundColor: COLORS.backgroundSecondary 

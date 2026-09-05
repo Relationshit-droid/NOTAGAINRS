@@ -112,6 +112,23 @@ export default function AvoidanceArcade({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+  timerTextUrgent: {
+    color: COLORS.error,
+  },
+  timerTextNormal: {
+    color: COLORS.textPrimary,
+  },
+  instructionCard: {
+    alignItems: 'center',
+    gap: SPACING.small,
+  },
+  buttonText: {
+    color: COLORS.textPrimary,
+  },
+  gameOverText: {
+    color: COLORS.textSecondary,
+    marginTop: SPACING.small,
+  },
   container: { 
     flex: 1,
     backgroundColor: COLORS.backgroundPrimary,

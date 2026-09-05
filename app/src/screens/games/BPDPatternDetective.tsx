@@ -120,6 +120,16 @@ export default function BPDPatternDetective({ route, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+  scenarioText: {
+    color: COLORS.textSecondary,
+    marginTop: SPACING.small,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  submitButtonText: {
+    color: COLORS.textPrimary,
+  },
     gameTitle: {
         marginBottom: SPACING.small,
     },

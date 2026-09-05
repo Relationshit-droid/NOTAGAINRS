@@ -76,6 +76,24 @@ export default function BlameFlip({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+  instructionText: {
+    color: COLORS.textSecondary,
+    marginTop: SPACING.small,
+  },
+  buttonText: {
+    color: COLORS.textPrimary,
+  },
+  successContainer: {
+    alignItems: 'center',
+    gap: SPACING.small,
+  },
+  successText: {
+    color: COLORS.success,
+  },
+  feedbackText: {
+    color: COLORS.textSecondary,
+    marginTop: SPACING.small,
+  },
   container: { 
     flex: 1,
     backgroundColor: COLORS.backgroundPrimary,
