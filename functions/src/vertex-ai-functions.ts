@@ -9,18 +9,34 @@ if (admin.apps.length === 0) {
   admin.initializeApp();
 }
 
+// --- Runtime configuration ---
+// Everything below is overridable via environment variables (functions/.env or
+// `firebase functions:secrets`). Defaults preserve the previous hardcoded
+// behaviour so deployments without a .env keep working.
+const GCP_PROJECT =
+  process.env.GCLOUD_PROJECT || process.env.GOOGLE_CLOUD_PROJECT || 'love-actually-game';
+const VERTEX_LOCATION = process.env.VERTEX_AI_LOCATION || 'us-central1';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-1.5-pro-001';
+const TTS_LANGUAGE_CODE = process.env.TTS_LANGUAGE_CODE || 'en-US';
+const TTS_DEFAULT_VOICE = process.env.TTS_VOICE_NAME || 'en-US-Neural2-F';
+const TTS_SIGNED_URL_TTL_MS = Number(process.env.TTS_SIGNED_URL_TTL_MS || 15 * 60 * 1000);
+const STORAGE_BUCKET =
+  process.env.GCLOUD_STORAGE_BUCKET ||
+  process.env.FIREBASE_STORAGE_BUCKET ||
+  `${GCP_PROJECT}.appspot.com`;
+
 // Initialize Vertex AI
 const vertexAI = new VertexAI({
-  project: process.env.GCLOUD_PROJECT || 'love-actually-game',
-  location: 'us-central1',
+  project: GCP_PROJECT,
+  location: VERTEX_LOCATION,
 });
 
 // --- Gemini Model Configuration ---
 const MODEL_CONFIG = {
-  temperature: 0.8, 
-  topP: 0.8,
-  topK: 40,
-  maxOutputTokens: 4096,
+  temperature: Number(process.env.GEMINI_TEMPERATURE || 0.8),
+  topP: Number(process.env.GEMINI_TOP_P || 0.8),
+  topK: Number(process.env.GEMINI_TOP_K || 40),
+  maxOutputTokens: Number(process.env.GEMINI_MAX_OUTPUT_TOKENS || 4096),
 };
 
 const SAFETY_SETTINGS = [
@@ -73,14 +89,14 @@ const sosTools = [{ function_declarations: [sosVerdictFunction] }] as unknown as
 
 // Initialize the generative models
 const generativeModel = vertexAI.getGenerativeModel({
-  model: 'gemini-1.5-pro-001',
+  model: GEMINI_MODEL,
   generationConfig: MODEL_CONFIG,
   safetySettings: SAFETY_SETTINGS,
   tools: tools,
 });
 
 const sosModel = vertexAI.getGenerativeModel({
-  model: 'gemini-1.5-pro-001',
+  model: GEMINI_MODEL,
   generationConfig: { ...MODEL_CONFIG, temperature: 0.7 },
   safetySettings: SAFETY_SETTINGS,
   tools: sosTools,
@@ -262,7 +278,7 @@ async function synthesizeSpeechImpl(
   }
   
   const storage = getStorage();
-  const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET || `${process.env.GCLOUD_PROJECT}.appspot.com`);
+  const bucket = storage.bucket(STORAGE_BUCKET);
 
   // Voice configuration based on emotion
   const emotion = voiceSettings?.emotion || 'sassy';
@@ -279,7 +295,7 @@ async function synthesizeSpeechImpl(
   try {
     const [response] = await ttsClient.synthesizeSpeech({
       input: { text },
-      voice: { languageCode: 'en-US', name: voiceName },
+      voice: { languageCode: TTS_LANGUAGE_CODE, name: voiceName },
       audioConfig: { audioEncoding: 'MP3', speakingRate, pitch },
     });
 
@@ -293,7 +309,7 @@ async function synthesizeSpeechImpl(
     // Get a signed URL for the client to access the file
     const [signedUrl] = await file.getSignedUrl({
       action: 'read',
-      expires: Date.now() + 15 * 60 * 1000, // 15 minutes
+      expires: Date.now() + TTS_SIGNED_URL_TTL_MS,
     });
 
     const duration = Math.round((text.split(' ').length / speakingRate) * 600); // Estimated duration in ms
@@ -328,7 +344,7 @@ export const getTtsAudio = functions.https.onCall(async (data, context) => {
 
   // Delegate to synthesizeSpeech with default settings
   const result = await synthesizeSpeechImpl(
-    { text, voiceSettings: { voiceId: voiceId || 'en-US-Neural2-F' } },
+    { text, voiceSettings: { voiceId: voiceId || TTS_DEFAULT_VOICE } },
     context.auth.uid
   );
 
@@ -372,11 +388,11 @@ export const getAiAnalysis = functions.runWith({ memory: '256MB', timeoutSeconds
 
 function getVoiceConfig(emotion: string) {
   const configs: Record<string, { voiceName: string; speakingRate: number; pitch: number }> = {
-    sassy: { voiceName: 'en-US-Neural2-F', speakingRate: 1.05, pitch: -2.0 },
-    serious: { voiceName: 'en-US-Neural2-F', speakingRate: 0.95, pitch: -4.0 },
-    playful: { voiceName: 'en-US-Neural2-F', speakingRate: 1.1, pitch: 0.0 },
-    concerned: { voiceName: 'en-US-Neural2-F', speakingRate: 0.9, pitch: -3.0 },
-    default: { voiceName: 'en-US-Neural2-F', speakingRate: 1.0, pitch: -2.0 },
+    sassy: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 1.05, pitch: -2.0 },
+    serious: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 0.95, pitch: -4.0 },
+    playful: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 1.1, pitch: 0.0 },
+    concerned: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 0.9, pitch: -3.0 },
+    default: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 1.0, pitch: -2.0 },
   };
   return configs[emotion] || configs.default;
 }
