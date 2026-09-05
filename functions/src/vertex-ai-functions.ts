@@ -1,10 +1,13 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import * as admin from 'firebase-admin';
-import { VertexAI, FunctionDeclarationSchemaType, HarmCategory, HarmBlockThreshold } from '@google-cloud/vertexai';
+import { VertexAI, FunctionDeclarationSchemaType, HarmCategory, HarmBlockThreshold, Tool } from '@google-cloud/vertexai';
 import { getStorage } from 'firebase-admin/storage';
 import { TextToSpeechClient } from '@google-cloud/text-to-speech';
 
-admin.initializeApp();
+// Initialised once in index.ts; guard in case this module is loaded directly.
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
 
 // Initialize Vertex AI
 const vertexAI = new VertexAI({
@@ -65,21 +68,21 @@ const sosVerdictFunction = {
     }
 };
 
-const tools = [{ function_declarations: [analysisFunction] }];
-const sosTools = [{ function_declarations: [sosVerdictFunction] }];
+const tools = [{ function_declarations: [analysisFunction] }] as unknown as Tool[];
+const sosTools = [{ function_declarations: [sosVerdictFunction] }] as unknown as Tool[];
 
 // Initialize the generative models
 const generativeModel = vertexAI.getGenerativeModel({
   model: 'gemini-1.5-pro-001',
-  generation_config: MODEL_CONFIG,
-  safety_settings: SAFETY_SETTINGS,
+  generationConfig: MODEL_CONFIG,
+  safetySettings: SAFETY_SETTINGS,
   tools: tools,
 });
 
 const sosModel = vertexAI.getGenerativeModel({
   model: 'gemini-1.5-pro-001',
-  generation_config: { ...MODEL_CONFIG, temperature: 0.7 },
-  safety_settings: SAFETY_SETTINGS,
+  generationConfig: { ...MODEL_CONFIG, temperature: 0.7 },
+  safetySettings: SAFETY_SETTINGS,
   tools: sosTools,
 });
 
@@ -203,7 +206,16 @@ export const analyzeSosSession = functions.runWith({ memory: '512MB', timeoutSec
         const functionCall = response.candidates?.[0]?.content?.parts?.find(p => p.functionCall)?.functionCall;
 
         if (functionCall && functionCall.args) {
-            const verdict = functionCall.args;
+            const verdict = functionCall.args as {
+                callout: string;
+                rootCause: string;
+                patternIdentified: string;
+                repairsA: string;
+                repairsB: string;
+                trustDelta: number;
+                vulnerabilityDelta: number;
+                marcieCommentary: string;
+            };
             
             // Update SOS session in Firestore
             const db = admin.firestore();
@@ -235,11 +247,15 @@ export const analyzeSosSession = functions.runWith({ memory: '512MB', timeoutSec
  * Synthesizes speech for Marcie's responses using Google Cloud Text-to-Speech.
  * Returns a signed URL to the audio file in Firebase Storage.
  */
-export const synthesizeSpeech = functions.https.onCall(async (data, context) => {
-  if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated.');
-  }
-
+/**
+ * Shared TTS implementation. Kept separate from the callable wrapper so other
+ * functions can reuse it -- a callable returned by onCall() is an HTTP handler
+ * and cannot be invoked directly as a plain function.
+ */
+async function synthesizeSpeechImpl(
+  data: { text?: string; voiceSettings?: { voiceId?: string; speed?: number; pitch?: number; emotion?: string } },
+  uid: string
+): Promise<{ audioUrl: string; duration: number; text: string }> {
   const { text, voiceSettings } = data;
   if (!text) {
     throw new functions.https.HttpsError('invalid-argument', 'Text to synthesize is required.');
@@ -257,7 +273,7 @@ export const synthesizeSpeech = functions.https.onCall(async (data, context) => 
   const pitch = voiceSettings?.pitch ?? voiceConfig.pitch;
 
   // Generate a unique filename
-  const fileName = `marcie-audio/${context.auth.uid}/${Date.now()}.mp3`;
+  const fileName = `marcie-audio/${uid}/${Date.now()}.mp3`;
   const file = bucket.file(fileName);
 
   try {
@@ -292,6 +308,13 @@ export const synthesizeSpeech = functions.https.onCall(async (data, context) => 
     console.error('Speech synthesis error:', error);
     throw new functions.https.HttpsError('internal', 'Failed to synthesize speech. Please try again later.');
   }
+}
+
+export const synthesizeSpeech = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated.');
+  }
+  return synthesizeSpeechImpl(data, context.auth.uid);
 });
 
 /**
@@ -304,11 +327,11 @@ export const getTtsAudio = functions.https.onCall(async (data, context) => {
   if (!text) throw new functions.https.HttpsError('invalid-argument', 'Text is required.');
 
   // Delegate to synthesizeSpeech with default settings
-  const result = await synthesizeSpeech({ 
-    text, 
-    voiceSettings: { voiceId: voiceId || 'en-US-Neural2-F' }
-  }, context);
-  
+  const result = await synthesizeSpeechImpl(
+    { text, voiceSettings: { voiceId: voiceId || 'en-US-Neural2-F' } },
+    context.auth.uid
+  );
+
   return { url: result.audioUrl };
 });
 

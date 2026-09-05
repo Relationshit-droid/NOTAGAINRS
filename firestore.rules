@@ -3,17 +3,96 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     // -------------------------------------------------------------------
-    // All persistence flows through the FastAPI backend, which uses the
-    // Firebase Admin SDK (bypasses these rules). Clients therefore get:
-    //   - read access to their own profile document only
-    //   - no write access anywhere
+    // RELATIONSHIT! security rules
+    //
+    // The app talks to Firestore directly from the client (Firebase-only
+    // stack). Privileged mutations -- scoring, AI verdicts, payments -- run
+    // in Cloud Functions via the Admin SDK, which bypasses these rules.
+    //
+    // The guiding principle: a user may read and write their own documents,
+    // and may read documents belonging to the couple they are part of.
     // -------------------------------------------------------------------
 
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // True when the caller is one of the two partners on a couple document.
+    function isCoupleMember(coupleId) {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/couples/$(coupleId))
+        && request.auth.uid in get(/databases/$(database)/documents/couples/$(coupleId)).data.partners;
+    }
+
     match /users/{userId} {
-      allow read: if request.auth != null && request.auth.uid == userId;
+      allow read: if isSelf(userId);
+      // A user may edit their own profile but never their own entitlements;
+      // plan and points are written by Cloud Functions only.
+      allow create: if isSelf(userId);
+      allow update: if isSelf(userId)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+              .hasAny(['plan', 'points', 'trust_level']);
+      allow delete: if false;
+    }
+
+    match /couples/{coupleId} {
+      allow read: if isCoupleMember(coupleId);
+      // Meters are derived from gameplay and written server-side.
+      allow update: if isCoupleMember(coupleId)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+              .hasAny(['trust_meter', 'vulnerability_meter', 'romance_meter',
+                       'connection_meter', 'total_points']);
+      allow create: if isSignedIn() && request.auth.uid in request.resource.data.partners;
+      allow delete: if false;
+    }
+
+    // Game catalogue is public reference data; never client-writable.
+    match /games/{gameId} {
+      allow read: if isSignedIn();
       allow write: if false;
     }
 
+    match /gameSessions/{sessionId} {
+      allow read: if isSignedIn() && isCoupleMember(resource.data.couple_id);
+      allow create: if isSignedIn() && isCoupleMember(request.resource.data.couple_id);
+      // Final scores are validated and written by Cloud Functions.
+      allow update: if isSignedIn() && isCoupleMember(resource.data.couple_id)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+              .hasAny(['final_score', 'xp_awarded']);
+      allow delete: if false;
+    }
+
+    match /fights/{fightId} {
+      allow read: if isSignedIn() && isCoupleMember(resource.data.couple_id);
+      allow create: if isSignedIn() && isCoupleMember(request.resource.data.couple_id);
+      // The verdict is authored by the AI function, not by either partner.
+      allow update: if isSignedIn() && isCoupleMember(resource.data.couple_id)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+              .hasAny(['verdict', 'trust_delta', 'vulnerability_delta']);
+      allow delete: if false;
+    }
+
+    match /translations/{translationId} {
+      allow read, create: if isSignedIn()
+        && request.auth.uid == request.resource.data.user_id;
+      allow update, delete: if false;
+    }
+
+    match /achievements/{achievementId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    // Aggregated analytics are written by scheduled functions only.
+    match /analytics/{document=**} {
+      allow read, write: if false;
+    }
+
+    // Deny anything not explicitly matched above.
     match /{document=**} {
       allow read, write: if false;
     }

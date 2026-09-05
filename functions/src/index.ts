@@ -1,5 +1,5 @@
 
-import * as functions from "firebase-functions";
+import * as functions from "firebase-functions/v1";
 import * as admin from "firebase-admin";
 import { 
   generateGameContent, 
@@ -10,7 +10,10 @@ import {
   getAiAnalysis
 } from './vertex-ai-functions';
 
-admin.initializeApp();
+// Guarded: vertex-ai-functions.ts may initialise first depending on import order.
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
 
 // Export Vertex AI functions
 exports.generateGameContent = generateGameContent;

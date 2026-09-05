@@ -69,11 +69,14 @@ const AnimatedCard = ({ children, delay = 0 }: { children: React.ReactNode; dela
 const AvatarWithRing = ({ 
   imageUrl, 
   size = SPACING.xxxlarge + SPACING.large, 
-  isOnline = false 
+  isOnline = false,
+  name,
 }: { 
   imageUrl?: string; 
   size?: number;
   isOnline?: boolean;
+  /** Falls back to this person's initial when there is no avatar image. */
+  name?: string;
 }) => {
   return (
     <View style={[styles.avatarContainer, { width: size, height: size }]}>
@@ -104,7 +107,9 @@ const AvatarWithRing = ({
           />
         ) : (
           <View style={[styles.avatarPlaceholder, { backgroundColor: COLORS.midPurple }]}>
-            <Typography variant="h3" color={COLORS.textPrimary}>?</Typography>
+            <Typography variant="h3" color={COLORS.textPrimary}>
+              {name?.trim()?.charAt(0)?.toUpperCase() || '?'}
+            </Typography>
           </View>
         )}
       </View>
@@ -365,13 +370,18 @@ const HomeScreen = () => {
               <Typography variant="body" color={COLORS.textSecondary}>Welcome back,</Typography>
               <Typography variant="h2" color={COLORS.textPrimary}>{user?.display_name || 'Player'}!</Typography>
             </View>
-            <AvatarWithRing size={SPACING.xxxlarge + SPACING.large} isOnline={true} />
+            <AvatarWithRing
+              size={SPACING.xxxlarge + SPACING.large}
+              isOnline={true}
+              name={user?.display_name}
+             
+            />
           </View>
           
           {couple ? (
             <GlassCard variant="outlined" style={styles.coupleInfo} padding="medium">
               <View style={styles.coupleAvatars}>
-                <AvatarWithRing size={SPACING.xxlarge} />
+                <AvatarWithRing size={SPACING.xxlarge} name={user?.display_name} />
                 <View style={styles.connectionLine}>
                   <Typography variant="body">💕</Typography>
                 </View>

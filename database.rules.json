@@ -1,0 +1,48 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "presence": {
+      "$userId": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid == $userId"
+      }
+    },
+
+    "active_sessions": {
+      "$coupleId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+
+    "sos_sessions": {
+      "$coupleId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+
+    "live_games": {
+      "$gameId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+
+    "live_scores": {
+      "$gameId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+
+    "typing_indicators": {
+      "$chatId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    }
+  }
+}

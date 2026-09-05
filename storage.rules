@@ -1,0 +1,48 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Users own the files under their own uid prefix.
+    match /avatars/{userId}/{fileName} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && request.auth.uid == userId
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /voice_notes/{userId}/{fileName} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId
+        && request.resource.size < 20 * 1024 * 1024;
+    }
+
+    match /screenshots/{userId}/{fileName} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId
+        && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // Dr. Marcie's generated audio, written by the TTS Cloud Function.
+    match /marcie-audio/{userId}/{fileName} {
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    // Shared read-only assets.
+    match /game_assets/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /marcie_animations/{allPaths=**} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
