@@ -8,7 +8,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { gamesApi } from '../../lib/api';
 import { useAppStore } from '../../state/store';
-import { TrustThermometer } from '../../components/ui/TrustThermometer';
+import TrustThermometer from '../../components/ui/TrustThermometer';
 
 export default function WeeklyReportScreen() {
   const { user } = useAuth();

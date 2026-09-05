@@ -168,7 +168,7 @@ export default function TrustThermometer({
       {showPercentage && (
         <View style={styles.percentageContainer}>
           <Text style={styles.percentageText}>{percentage}%</Text>
-          {changeText && (
+          {!!changeText && (
             <Text style={[styles.changeText, { color: changeColor || COLORS.textSecondary }]}>
               {changeText}
             </Text>

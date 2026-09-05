@@ -150,7 +150,7 @@ export default function GameSearchScreen() {
               onSubmitEditing={handleSearchSubmit}
               placeholderTextColor={COLORS.textHint}
             />
-            {query && (
+            {!!query && (
               <TouchableOpacity onPress={() => setQuery('')} style={styles.clearButton}>
                 <Ionicons name="close-circle" size={24} color={COLORS.textHint} />
               </TouchableOpacity>

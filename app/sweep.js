@@ -1,8 +1,13 @@
+// Per-screen crash sweep. Navigates to every registered route, records the
+// first error each one produces, and returns Home in between so a failing
+// screen cannot contaminate the next result.
 const { JSDOM } = require('jsdom'); const fs=require('fs');
 const dom=new JSDOM(fs.readFileSync('/tmp/index.html','utf8'),{runScripts:'outside-only',pretendToBeVisual:true,url:'http://localhost:8081/'});
 const w=dom.window; let errors=[];
-w.addEventListener('error',e=>{errors.push(e.message); if(e.error&&e.error.stack) w.__lastStack=e.error.stack;});
-['log','warn','error'].forEach(k=>{w.console[k]=(...a)=>{const s=a.map(String).join(' ');if(k==='error'&&!/findDOMNode|deprecated|useNativeDriver|act\(/i.test(s))errors.push(s);};});
+const IGNORE=/findDOMNode|deprecated|useNativeDriver|act\(|timeout exceeded|componentStack/i;
+const push=s=>{ if(!IGNORE.test(s)) errors.push(s); };
+w.addEventListener('error',e=>push(e.message));
+['log','warn','error'].forEach(k=>{w.console[k]=(...a)=>{const s=a.map(String).join(' ');if(k==='error')push(s);};});
 w.matchMedia=q=>({matches:false,media:q,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){}});
 w.scrollTo=()=>{}; w.alert=()=>{};
 w.fetch=()=>Promise.resolve({ok:true,status:200,json:()=>Promise.resolve({}),text:()=>Promise.resolve('')});
@@ -10,11 +15,11 @@ w.WebSocket=function(){this.close=()=>{};this.send=()=>{};this.addEventListener=
 w.IntersectionObserver=class{observe(){}unobserve(){}disconnect(){}};
 w.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 w.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),16); w.cancelAnimationFrame=id=>clearTimeout(id);
-process.on('uncaughtException',e=>{if(!/timeout exceeded/.test(String(e&&e.message)))errors.push('uncaught: '+e.message);});
+process.on('uncaughtException',e=>push('uncaught: '+e.message));
+process.on('unhandledRejection',e=>push('rejection: '+(e&&e.message||e)));
 w.eval(fs.readFileSync('/tmp/b.js','utf8'));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const root=()=>w.document.getElementById('root');
-const txt=()=>(root()?.textContent||'').replace(/\s+/g,' ').trim();
 (async()=>{
   await sleep(9000);
   const els=[...w.document.querySelectorAll('div')].reverse();
@@ -22,20 +27,26 @@ const txt=()=>(root()?.textContent||'').replace(/\s+/g,' ').trim();
   if(cta)['pointerdown','mousedown','pointerup','mouseup','click'].forEach(t=>cta.dispatchEvent(new w.MouseEvent(t,{bubbles:true,cancelable:true,view:w})));
   await sleep(5000);
   const ref=w.__navigationRef;
-  console.log('navigationRef ready:', !!(ref&&ref.isReady&&ref.isReady()));
-  let pass=0;
-  const screens=JSON.parse(process.argv[2].startsWith('@')?fs.readFileSync(process.argv[2].slice(1),'utf8'):process.argv[2]);
+  if(!(ref&&ref.isReady&&ref.isReady())){ console.log('FATAL navigationRef not ready'); process.exit(1); }
+  const arg=process.argv[2];
+  const screens=JSON.parse(arg.startsWith('@')?fs.readFileSync(arg.slice(1),'utf8'):arg);
+  const fails=[];
   for(const [label,name,params] of screens){
+    // Return to a known-good screen so the previous route unmounts cleanly.
+    try{ ref.navigate('MainApp'); }catch(e){}
+    await sleep(250);
     errors=[];
-    try{ ref.navigate(name, params||{}); }catch(e){ errors.push('nav throw: '+e.message); }
-    if(w.__lastStack) { console.log('STACK:', w.__lastStack.split('\n').slice(0,6).join(' | ')); w.__lastStack=null; }
-    await sleep(900);
-    const n=root().querySelectorAll('*').length;
-    const body=txt().slice(0,150);
-    if(errors.length) console.log(`FAIL ${name} :: ${errors[0].slice(0,170)}`);
-    else if(n<5) console.log(`EMPTY ${name} nodes=${n}`);
-    else pass++;
+    try{ ref.navigate(name, params||{}); }catch(e){ push('nav throw: '+e.message); }
+    await sleep(1100);
+    const n=root()?root().querySelectorAll('*').length:0;
+    // A boundary hit renders this exact copy, so it is a reliable crash signal.
+    const caught=(root()?.textContent||'').includes('Dr. Marcie dropped this one');
+    if(errors.length||caught||n<5){
+      const why=errors[0]||(caught?'ErrorBoundary caught render error':'empty screen');
+      fails.push([name,why]); console.log(`FAIL ${name} :: ${why.slice(0,160)}`);
+    }
   }
-  console.log(`\nPASSED ${pass}/${screens.length}`);
+  console.log(`\nPASSED ${screens.length-fails.length}/${screens.length}  FAILED ${fails.length}`);
+  fs.writeFileSync('/tmp/fails.json',JSON.stringify(fails,null,1));
   process.exit(0);
 })();

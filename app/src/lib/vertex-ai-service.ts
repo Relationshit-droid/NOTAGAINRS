@@ -1,5 +1,6 @@
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import { app } from './firebaseClient';
+import { app, isFirebaseConfigured } from './firebaseClient';
+import { ENV } from './env';
 import { 
   AIContentRequest, 
   AIContentResponse, 
@@ -135,6 +136,13 @@ Format as JSON with categories containing clues with question, answer, value, an
     duration: number;
     text: string;
   }> {
+    // Speech synthesis runs in a deployed Cloud Function. Without a configured
+    // Firebase project (or in DEMO_MODE) there is nothing to call, so return a
+    // silent result and let the UI fall back to on-screen text.
+    if (!isFirebaseConfigured || ENV.DEMO_MODE) {
+      return { audioUrl: '', duration: 0, text };
+    }
+
     try {
       const result = await this.synthesizeSpeechCallable({
         text,
@@ -143,8 +151,8 @@ Format as JSON with categories containing clues with question, answer, value, an
 
       return result.data as any;
     } catch (error) {
-      console.error('Failed to synthesize speech:', error);
-      throw new Error('Speech synthesis failed');
+      console.warn('[tts] Speech synthesis unavailable, falling back to text:', error);
+      return { audioUrl: '', duration: 0, text };
     }
   }
 

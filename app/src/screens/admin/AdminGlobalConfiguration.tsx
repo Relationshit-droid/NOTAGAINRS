@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { GlobalMarcieOverlay } from '../../components/DrMarcieOverlay';
+import DrMarcieOverlay from '../../components/DrMarcieOverlay';
 import { functions } from '../../lib/firebaseClient';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton } from '../../components/ui';
@@ -25,7 +25,7 @@ const AdminGlobalConfiguration = () => {
         <SquishyButton onPress={handleSaveChanges}>
           <Typography variant="button">Save Changes</Typography>
         </SquishyButton>
-        <GlobalMarcieOverlay />
+        <DrMarcieOverlay />
       </View>
     </ScreenLayout>
   );

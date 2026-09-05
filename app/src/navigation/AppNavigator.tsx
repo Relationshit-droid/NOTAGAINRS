@@ -85,6 +85,7 @@ import GratitudeCloud from '../screens/games/GratitudeCloud';
 import EyeContactChallenge from '../screens/games/EyeContactChallenge';
 import MemoryLaneMap from '../screens/games/MemoryLaneMap';
 import VibeSync from '../screens/games/VibeSync';
+import ErrorBoundary from '../components/ErrorBoundary';
 import GratitudeGraffiti from '../screens/games/GratitudeGraffiti';
 import GratitudeGraffitiMural from '../screens/GratitudeGraffitiMural';
 import SlapOfTruth from '../screens/games/SlapOfTruth';
@@ -151,6 +152,12 @@ const AppNavigator = () => {
   return (
     <Stack.Navigator 
       initialRouteName="MainApp" 
+      /* Every screen renders inside its own ErrorBoundary, so a crash in one
+         screen shows a recoverable message instead of unmounting the navigator
+         and blanking the entire app. */
+      screenLayout={({ children, route }) => (
+        <ErrorBoundary resetKey={route?.key}>{children}</ErrorBoundary>
+      )}
       screenOptions={{ 
         headerShown: false,
         animation: 'slide_from_right',

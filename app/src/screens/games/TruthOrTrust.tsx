@@ -199,7 +199,7 @@ export default function TruthOrTrust({ route, navigation }: any) {
                         </Typography>
 
                         <LinearGradient
-                            colors={GRADIENTS.romanceHub}
+                            colors={GRADIENTS.romanceHub.colors}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             style={styles.gradientContainer}
@@ -286,7 +286,7 @@ export default function TruthOrTrust({ route, navigation }: any) {
             ) : (
                 <GlassCard>
                     <LinearGradient
-                        colors={GRADIENTS.romanceHub}
+                        colors={GRADIENTS.romanceHub.colors}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}
                         style={styles.gradientContainer}

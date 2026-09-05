@@ -188,7 +188,7 @@ export default function GameResultsScreen() {
             </GlassCard>
           </View>
 
-          {sessionData?.couple_id && (
+          {!!sessionData?.couple_id && (
             <GlassCard style={styles.meterUpdateCard}>
               <Typography variant="h2" style={styles.sectionTitle}>Relationship Meters Updated! 📊</Typography>
               <Typography variant="body" color={COLORS.textSecondary} style={styles.meterUpdateText}>

@@ -251,10 +251,14 @@ const StreakCard = ({ title, value, subtitle, icon, color, gradient }: {
   subtitle: string; 
   icon: string; 
   color: string; 
-  gradient: string[] 
+  /** Either a raw colour array or a design-system gradient token. */
+  gradient: string[] | { colors: string[] } 
 }) => (
   <TouchableOpacity style={styles.streakCard}>
-    <LinearGradient colors={gradient} style={styles.cardIcon}>
+    <LinearGradient
+      colors={Array.isArray(gradient) ? gradient : gradient.colors}
+      style={styles.cardIcon}
+    >
       <Ionicons name={icon} size={24} color={COLORS.textPrimary} />
     </LinearGradient>
     <Typography variant="header" style={styles.cardValue}>{value}</Typography>

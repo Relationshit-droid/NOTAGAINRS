@@ -2,6 +2,7 @@ import { ReactNode, useRef } from 'react';
 import { Pressable, ViewStyle, Platform, Animated, StyleProp } from 'react-native';
 import * as Haptics from '../../utils/haptics';
 import { LinearGradient } from 'expo-linear-gradient';
+import Typography from './Typography';
 import { COLORS, GRADIENTS, BORDER_RADIUS, SPACING, SHADOWS, ANIMATIONS } from '../../theme';
 
 type SquishyButtonProps = {
@@ -23,6 +24,20 @@ export default function SquishyButton({
   variant = 'primary',
   size = 'medium'
 }: SquishyButtonProps) {
+  /**
+   * react-native-web throws "Unexpected text node" when a bare string is a
+   * direct child of a <View>. Buttons are written as
+   * <SquishyButton>Save</SquishyButton> throughout the app, so normalise
+   * string/number children into <Typography> here rather than patching every
+   * call site individually.
+   */
+  const content =
+    typeof children === 'string' || typeof children === 'number' ? (
+      <Typography variant="button">{children}</Typography>
+    ) : (
+      children
+    );
+
   const scale = useRef(new Animated.Value(1)).current;
   const shadow = useRef(new Animated.Value(0.2)).current;
 
@@ -183,7 +198,7 @@ export default function SquishyButton({
               minHeight: sizeStyle.minHeight,
             }}
           >
-            {children}
+            {content}
           </Pressable>
         </LinearGradient>
       ) : (
@@ -211,7 +226,7 @@ export default function SquishyButton({
             width: '100%',
           }}
         >
-          {children}
+          {content}
         </Pressable>
       )}
     </Animated.View>
