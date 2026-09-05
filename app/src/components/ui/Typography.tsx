@@ -21,7 +21,18 @@ type Variant =
   | 'h1'
   | 'h2'
   | 'h3'
-  | 'h4';
+  | 'h4'
+  // Design-system scale names, mirroring TYPOGRAPHY.fontSize in the theme.
+  // Screens address these directly, so they are first-class variants.
+  | 'displayLarge'
+  | 'displayMedium'
+  | 'displaySmall'
+  | 'headerLarge'
+  | 'headerMedium'
+  | 'headerSmall'
+  | 'bodyLarge'
+  | 'bodyMedium'
+  | 'bodySmall';
 
 type TextProps = RNTextProps & {
   variant?: Variant;
@@ -87,8 +98,82 @@ function mapVariant(variant: Variant) {
         } as TextStyle,
       };
 
+    case 'displayLarge':
+      return {
+        family: TYPOGRAPHY_ROLES.gameTitle.fontFamily,
+        weight: TYPOGRAPHY_ROLES.gameTitle.fontWeight,
+        size: TYPOGRAPHY.fontSize.displayLarge,
+        additionalStyles: {
+          letterSpacing: TYPOGRAPHY.letterSpacing.tight,
+          lineHeight: TYPOGRAPHY.fontSize.displayLarge * TYPOGRAPHY.lineHeight.tight,
+        } as TextStyle,
+      };
+
+    case 'displayMedium':
+      return {
+        family: TYPOGRAPHY_ROLES.gameTitle.fontFamily,
+        weight: TYPOGRAPHY_ROLES.gameTitle.fontWeight,
+        size: TYPOGRAPHY.fontSize.displayMedium,
+        additionalStyles: {
+          letterSpacing: TYPOGRAPHY.letterSpacing.tight,
+          lineHeight: TYPOGRAPHY.fontSize.displayMedium * TYPOGRAPHY.lineHeight.tight,
+        } as TextStyle,
+      };
+
+    case 'displaySmall':
+      return {
+        family: TYPOGRAPHY_ROLES.gameTitle.fontFamily,
+        weight: TYPOGRAPHY_ROLES.gameTitle.fontWeight,
+        size: TYPOGRAPHY.fontSize.displaySmall,
+        additionalStyles: {
+          letterSpacing: TYPOGRAPHY.letterSpacing.tight,
+          lineHeight: TYPOGRAPHY.fontSize.displaySmall * TYPOGRAPHY.lineHeight.tight,
+        } as TextStyle,
+      };
+
+    case 'headerMedium':
+      return {
+        family: TYPOGRAPHY_ROLES.header.fontFamily,
+        weight: TYPOGRAPHY.fontWeight.semiBold,
+        size: TYPOGRAPHY.fontSize.headerMedium,
+        additionalStyles: {
+          lineHeight: TYPOGRAPHY.fontSize.headerMedium * TYPOGRAPHY.lineHeight.normal,
+        } as TextStyle,
+      };
+
+    case 'headerSmall':
+      return {
+        family: TYPOGRAPHY_ROLES.header.fontFamily,
+        weight: TYPOGRAPHY.fontWeight.medium,
+        size: TYPOGRAPHY.fontSize.headerSmall,
+        additionalStyles: {
+          lineHeight: TYPOGRAPHY.fontSize.headerSmall * TYPOGRAPHY.lineHeight.normal,
+        } as TextStyle,
+      };
+
+    case 'bodyMedium':
+      return {
+        family: TYPOGRAPHY_ROLES.body.fontFamily,
+        weight: TYPOGRAPHY_ROLES.body.fontWeight,
+        size: TYPOGRAPHY.fontSize.bodyMedium,
+        additionalStyles: {
+          lineHeight: TYPOGRAPHY.fontSize.bodyMedium * TYPOGRAPHY.lineHeight.relaxed,
+        } as TextStyle,
+      };
+
+    case 'bodySmall':
+      return {
+        family: TYPOGRAPHY_ROLES.body.fontFamily,
+        weight: TYPOGRAPHY_ROLES.body.fontWeight,
+        size: TYPOGRAPHY.fontSize.bodySmall,
+        additionalStyles: {
+          lineHeight: TYPOGRAPHY.fontSize.bodySmall * TYPOGRAPHY.lineHeight.relaxed,
+        } as TextStyle,
+      };
+
     case 'h1':
     case 'header':
+    case 'headerLarge':
     case 'title':
       return {
         family: TYPOGRAPHY_ROLES.header.fontFamily,
@@ -131,6 +216,7 @@ function mapVariant(variant: Variant) {
       };
 
     case 'body':
+    case 'bodyLarge':
       return {
         family: TYPOGRAPHY_ROLES.body.fontFamily,
         weight: TYPOGRAPHY_ROLES.body.fontWeight,

@@ -8,13 +8,15 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "types": [
-      "nativewind/types"
+      "nativewind/types",
+      "jest",
+      "node"
     ]
   },
   "exclude": [
-    "src/__tests__/**/*",
-    "jest.setup.ts",
-    "coverage/**/*"
+    "coverage/**/*",
+    "cypress/**/*",
+    "vite.config.ts"
   ],
   "include": [
     "**/*.ts",
