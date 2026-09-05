@@ -1,0 +1,17 @@
+{
+  "game_id": "dream-decoder",
+  "title": "Dream Decoder",
+  "description": "Interpret relationship conflicts to reveal underlying emotional dreams and needs.",
+  "rules": "Enter a surface conflict. System generates possible underlying dreams/needs. Match the correct interpretation to score points.",
+  "scoring": {
+    "base_xp": 80,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "DreamDecoderGame",
+    "props": {}
+  },
+  "assets": {}
+}

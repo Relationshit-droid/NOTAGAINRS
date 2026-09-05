@@ -1,0 +1,17 @@
+{
+  "game_id": "slap-of-truth",
+  "title": "The Slap of Truth",
+  "description": "High-stakes game of radical honesty where you can demand an unfiltered answer using Truth Slaps.",
+  "rules": "Each partner has 3 Truth Slaps. When used, the target must answer with 100% honesty. Questions range from light to deeply personal. Points for courage, honesty, and using slaps at the right moments.",
+  "scoring": {
+    "base_xp": 80,
+    "category": "Conflict Resolution",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "SlapOfTruthGame",
+    "props": {}
+  },
+  "assets": {}
+}

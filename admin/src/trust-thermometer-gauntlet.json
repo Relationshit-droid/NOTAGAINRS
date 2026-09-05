@@ -1,0 +1,17 @@
+{
+  "game_id": "trust-thermometer-gauntlet",
+  "title": "Trust Thermometer Gauntlet",
+  "description": "Progressive trust-building challenges that test and strengthen your trust meter across multiple dimensions.",
+  "rules": "6 progressive trust challenges: honesty, reliability, vulnerability, consistency, transparency, future-commitment. Each challenge tested with mini-game. Points for completion, honesty, and trust growth.",
+  "scoring": {
+    "base_xp": 85,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TrustThermometerGauntletGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "truth-or-trust",
+  "title": "Truth or Trust",
+  "description": "Voice recording vulnerability assessment where Marcie analyzes emotional keywords vs. one-word answers.",
+  "rules": "Marcie asks personalized questions based on your origin story. Record 60-second voice response. Gemini analyzes emotional vocabulary, response length, and pauses. Points for vulnerability, honesty, and emotional depth.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TruthOrTrustGame",
+    "props": {}
+  },
+  "assets": {}
+}

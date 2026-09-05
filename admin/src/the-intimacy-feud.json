@@ -1,0 +1,17 @@
+{
+  "game_id": "the-intimacy-feud",
+  "title": "The Intimacy Feud",
+  "description": "Family Feud-style game with relationship survey questions answered by 100 recovered couples.",
+  "rules": "Face-Off: buzz in to guess #1 answer. Main Board: both rank top 3 answers privately. Points for survey matches and partner matches. Authenticity Streak bonus for identical ranked lists.",
+  "scoring": {
+    "base_xp": 90,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TheIntimacyFeudGame",
+    "props": {}
+  },
+  "assets": {}
+}

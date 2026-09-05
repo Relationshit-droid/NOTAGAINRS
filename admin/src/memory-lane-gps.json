@@ -1,0 +1,17 @@
+{
+  "game_id": "memory-lane-gps",
+  "title": "Memory Lane GPS",
+  "description": "Map pin dropping for significant memories with photo proof and timestamp verification.",
+  "rules": "Drop pins on map for significant memories. Upload photo proof. System verifies timestamps. Partner confirms or questions. Points for accuracy, proximity, and memory quality.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "MemoryLaneGpsGame",
+    "props": {}
+  },
+  "assets": {}
+}

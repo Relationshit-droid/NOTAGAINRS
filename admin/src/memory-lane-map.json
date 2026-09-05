@@ -1,0 +1,17 @@
+{
+  "game_id": "memory-lane-map",
+  "title": "Memory Lane Map",
+  "description": "GPS pin-drop memory game where both partners mark significant locations from their relationship.",
+  "rules": "Answer prompts like \"Where was your first kiss?\" Both drop pins simultaneously. Distance calculation and accuracy scoring. Bonus for correct details. Points for accuracy, memory quality, and discovery of forgotten locations.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "MemoryLaneMapGame",
+    "props": {}
+  },
+  "assets": {}
+}

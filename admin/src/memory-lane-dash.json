@@ -1,0 +1,17 @@
+{
+  "game_id": "memory-lane-dash",
+  "title": "Memory Lane Dash",
+  "description": "Rapid-fire memory recall of past journal entries and shared experiences.",
+  "rules": "System displays a past journal entry. Recall details rapidly. Points for accuracy and speed. Streak bonuses for consecutive correct answers.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "MemoryLaneDashGame",
+    "props": {}
+  },
+  "assets": {}
+}

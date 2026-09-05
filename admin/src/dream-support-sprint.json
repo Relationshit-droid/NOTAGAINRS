@@ -1,0 +1,17 @@
+{
+  "game_id": "dream-support-sprint",
+  "title": "Dream Support Sprint",
+  "description": "Input personal dreams and generate support ideas with feasibility ratings.",
+  "rules": "Enter a dream or goal. Generate support ideas. Rate feasibility and willingness. Points for practical, supportive ideas.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "DreamSupportSprintGame",
+    "props": {}
+  },
+  "assets": {}
+}

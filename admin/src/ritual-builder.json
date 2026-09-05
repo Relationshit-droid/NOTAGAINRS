@@ -1,0 +1,17 @@
+{
+  "game_id": "ritual-builder",
+  "title": "Ritual Builder",
+  "description": "Design daily and weekly rituals that strengthen your relationship bond.",
+  "rules": "Drag and drop ritual components (frequency, action, meaning) to build a meaningful ritual. Partner rates the ritual. Points for creativity and compatibility.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RitualBuilderGame",
+    "props": {}
+  },
+  "assets": {}
+}

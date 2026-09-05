@@ -1,0 +1,17 @@
+{
+  "game_id": "whos-right",
+  "title": "Who's Right?",
+  "description": "Text highlighting game where you identify contempt, criticism, defensiveness, and stonewalling in fight transcripts.",
+  "rules": "Read fight transcripts. Highlight contemptuous language in red, criticism in orange, defensiveness in yellow, stonewalling in blue. Points for accuracy graded against Gottman key indicators.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Conflict Resolution",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "WhosRightGame",
+    "props": {}
+  },
+  "assets": {}
+}

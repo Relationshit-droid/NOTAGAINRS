@@ -1,0 +1,17 @@
+{
+  "game_id": "the-blame-flip",
+  "title": "The Blame Flip",
+  "description": "Drag-and-drop rewriting of blaming statements into I-statements.",
+  "rules": "Blaming statement displayed. Drag words to rewrite as \"I feel... about... I need...\". Timer pressure. Points for correct structure, speed, and empathy.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TheBlameFlipGame",
+    "props": {}
+  },
+  "assets": {}
+}

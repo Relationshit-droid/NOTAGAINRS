@@ -1,0 +1,17 @@
+{
+  "game_id": "relational-jeopardy",
+  "title": "Relational Jeopardy!",
+  "description": "Classic Jeopardy with therapy categories designed by couples who rebuilt their relationships.",
+  "rules": "3 categories x 5 clues (100-500 pts). Buzz in to answer, consult partner for 5 seconds. Daily Double hidden. Final Jeopardy is a joint creative challenge. Points for correct answers, wagers, and creative motto.",
+  "scoring": {
+    "base_xp": 100,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RelationalJeopardyGame",
+    "props": {}
+  },
+  "assets": {}
+}

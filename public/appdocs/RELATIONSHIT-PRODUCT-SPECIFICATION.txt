@@ -1,0 +1,2889 @@
+RELATIONSHIT! — COMPLETE PRODUCT SPECIFICATION
+The Ultimate Development Bible for DeepSeek Coder Verification
+TABLE OF CONTENTS
+APP OVERVIEW & BRANDING
+
+TECHNICAL ARCHITECTURE & TECH STACK
+
+COMPLETE VISUAL DESIGN SYSTEM
+
+DR. MARCIE LISS — AI GAME HOST
+
+COMPLETE SCREEN LIST & USER FLOWS
+
+FULL GAME LIBRARY — 150+ GAMES
+
+60 GAME IMPLEMENTATION DETAILS
+
+SOS FIGHT SOLVER SYSTEM
+
+PARTNER TRANSLATOR SYSTEM
+
+SCORING & PROGRESSION SYSTEM
+
+CONSEQUENCE ENGINE
+
+ADMIN PANEL SPECIFICATION
+
+MONETIZATION SYSTEM
+
+FIREBASE DATA STRUCTURE
+
+ANIMATION & FEEDBACK SYSTEM
+
+ACCESSIBILITY REQUIREMENTS
+
+PERFORMANCE REQUIREMENTS
+
+DEPLOYMENT CHECKLIST
+
+3-MODULE DEVELOPMENT SPLIT
+
+COMPLETE VERIFICATION CHECKLIST
+
+1. APP OVERVIEW & BRANDING
+1.1 App Name
+Relationshit!
+
+1.2 Tagline
+"Who said therapy?"
+
+1.3 Core Concept
+A mobile-first, gamified couples therapy app hosted by a brutally honest AI (Dr. Marcie Liss) that turns relationship repair into a competitive, witty, and deeply healing game. This is a game first, therapy second. The most important part is that it feels like a game because IT IS A GAME.
+
+1.4 App Purpose
+The core purpose is to deliver brutally honest therapy disguised as fun, using game mechanics to foster growth and repair relationships by transforming the difficult healing process into an engaging, fun competition — turning tough conversations into a game you can win together.
+
+1.5 Key Principles
+Game-First, Therapy-Second: All interactions are gamified with points, levels, achievements
+
+Couple-Centric Design: The couple is the primary "player" unit
+
+Dr. Marcie as Game Host: She's your arcade host, not your therapist
+
+Mobile-First Arcade Feel: Optimized for portrait touch with thumb-accessible controls
+
+3-Tap Navigation Rule: From any screen to core gameplay in 3 taps or less
+
+Immediate Feedback: Every action gets visual, audio, and haptic response within 100ms
+
+2. TECHNICAL ARCHITECTURE & TECH STACK
+2.1 Frontend
+Framework: React Native (Expo SDK 51+) with TypeScript
+
+Styling: NativeWind (Tailwind CSS for React Native)
+
+Animations: React Native Reanimated 3
+
+Gestures: React Native Gesture Handler
+
+Navigation: React Navigation 6 (Stack + Bottom Tabs)
+
+State Management: Zustand + React Context
+
+Forms: React Hook Form with Zod validation
+
+2.2 Backend & Infrastructure (100% Google/Firebase)
+Cloud Platform: Google Cloud Platform (GCP)
+
+Primary Database: Firebase Firestore
+
+Realtime Database: Firebase Realtime Database
+
+Authentication: Firebase Authentication (Email/Password, Google, Apple)
+
+File Storage: Firebase Storage
+
+Cloud Functions: Firebase Cloud Functions (Node.js 18)
+
+Push Notifications: Firebase Cloud Messaging (FCM)
+
+Hosting: Firebase Hosting (Admin Panel)
+
+Analytics: Google Analytics for Firebase
+
+Performance Monitoring: Firebase Performance Monitoring
+
+Crash Reporting: Firebase Crashlytics + Sentry
+
+Remote Config: Firebase Remote Config (A/B testing)
+
+App Distribution: Firebase App Distribution (Beta testing)
+
+2.3 AI & Voice (100% Google)
+AI Engine: Google Gemini (via Google Cloud Vertex AI or Google AI Studio)
+
+Model: gemini-1.5-pro or gemini-1.5-flash
+
+Purpose: All AI commentary, SOS analysis, partner translation, content generation
+
+Voice Synthesis: Google Cloud Text-to-Speech
+
+Voice: en-US-Neural2-F
+
+Settings: speakingRate=1.0, pitch=0.0
+
+Purpose: Dr. Marcie's voice with typewriter sync
+
+2.4 Payments (Native)
+Android: Google Play Billing
+
+iOS: Apple App Store In-App Purchases (IAP)
+
+Validation: Firebase Cloud Functions for receipt validation
+
+2.5 Third-Party Integrations
+Giphy API: GIF Battle game
+
+Google Maps Platform: Memory Lane Map game
+
+Google AdMob: Free tier ads (optional)
+
+2.6 Firebase Project Structure
+text
+relationshit-game/
+├── firestore/
+│   ├── users/{userId}
+│   ├── couples/{coupleId}
+│   ├── games/{gameId}
+│   ├── gameSessions/{sessionId}
+│   ├── fights/{fightId}
+│   ├── translations/{translationId}
+│   ├── achievements/{achievementId}
+│   └── analytics/{dailyStats}
+├── storage/
+│   ├── avatars/{userId}
+│   ├── voice_notes/{sessionId}
+│   ├── game_assets/{gameId}
+│   ├── screenshots/{userId}
+│   └── marcie_animations/
+├── realtime-db/
+│   ├── active_sessions/{coupleId}
+│   ├── sos_sessions/{coupleId}
+│   ├── live_games/{gameId}
+│   ├── typing_indicators/{chatId}
+│   ├── presence/{userId}
+│   └── live_scores/{gameId}
+└── functions/
+    ├── games/
+    ├── scoring/
+    ├── payments/
+    ├── notifications/
+    ├── analytics/
+    └── ai/
+3. COMPLETE VISUAL DESIGN SYSTEM
+3.1 Color Philosophy
+Color is emotional choreography, not functional coding. Colors flow, repeat, and create mood rhythm across the experience. No rigid color coding (❌ green=success, red=danger). Think: "A rhythm of color that feels alive."
+
+3.2 Locked Gradient Systems (NON-NEGOTIABLE)
+A. Primary Button Gradient
+text
+#db147c → #f05d68 (horizontal gradient)
+Used for: EVERY primary and secondary button, CTAs, confirmations
+
+Rules: Never flat colors. Always gradient. Rounded corners (16px). Soft glow effect.
+
+Pressed State: 10% darker + 95% scale animation
+
+Feels Like: A candy-coated joystick button in an arcade
+
+B. Profile/Avatar Outer Ring Gradient
+text
+#fcc738 → #ea031f → #c60ab3 (circular gradient)
+Used for: Player avatars, partner indicators, connection status
+
+Rules: 4px stroke, continuous slow rotation (60s full circle), pulse on notifications
+
+Feels Like: A power-up ring in a platformer
+
+C. Inner Line & Progress Gradient
+text
+#ef1b6e → #c41e77 → #a22ac4 → #9056ef
+Used for: Progress bars, slider tracks, loading indicators, XP bars, Trust Thermometer fill
+
+Rules: Smooth multi-stop transitions, shimmer animation on completion
+
+Feels Like: A health bar filling up in an RPG
+
+3.3 Accent Colors (10 Free-Floating Colors)
+text
+#FC0C84 — VIBRANT PINK (Love power-ups, emotional hits)
+#FF7600 — WARM ORANGE (Energy bursts, alerts, excitement)
+#FFEF1F — BRIGHT YELLOW (Victory stars, achievements, joy)
+#37CF97 — MINT GREEN (Growth points, safe zones, healing)
+#B37DEC — SOFT VIOLET (Connection depth, mystery rewards)
+#E16BA9 — ROSE PINK (Tenderness, romance boosts)
+#FF6B9D — BLUSH PINK (Playful accents)
+#A16BF2 — LAVENDER PURPLE (Mystery/calm)
+#00D4AA — AQUA TEAL (Clarity/insight)
+#FF9E3D — PEACH ORANGE (Warmth/comfort)
+3.4 Background System
+text
+#1A0B2E — DEEP COSMIC PURPLE (Primary background - emotional depth)
+#2D1B45 — RICH PLUM (Card backgrounds - focus areas)
+#3D2A5C — MID PURPLE (Game backgrounds - playful energy)
+#0F0A1F — NIGHT SKY (Modal overlays - focus & intensity)
+#4A1E5C — BERRY DARK (Alternate BG)
+Input Field BG: rgba(255, 255, 255, 0.05) with subtle gradient border
+Divider Lines: rgba(255, 255, 255, 0.08) with soft glow
+
+3.5 Typography System
+Primary Font Family: Inter (Clean, modern, highly legible on mobile)
+
+Usage	Font Weight	Size
+Game Titles	Inter Black (900)	24-32px
+Screen Headers	Inter Bold (700)	20-24px
+Body Text	Inter Regular (400)	16-18px
+Button Text	Inter SemiBold (600), UPPERCASE	16px
+Dr. Marcie's Dialogue	Inter Italic (400 italic)	16px
+Scores & Metrics	Inter Mono Medium (500)	18px
+Legal & Small Text	Inter Regular (400)	14px
+Text Colors:
+
+Headlines: White (#FFFFFF) with subtle gradient overlay
+
+Body Text: #E2D9F3 (Light Lavender, 90% opacity)
+
+Accent Text: Use appropriate accent color
+
+Disabled: #6D5D8A (Muted Purple, 40% opacity)
+
+3.6 Shadow & Glow System
+Soft Glow: rgba([accent color], 0.2)
+
+Medium Glow: rgba([accent color], 0.3)
+
+Strong Glow: rgba([accent color], 0.4)
+
+Rule: Glows always match the element's primary color
+
+3.7 Component Specifications
+Buttons
+All buttons use primary gradient (#db147c → #f05d68)
+
+Height: 56px (minimum touch target)
+
+Padding: 0 24px
+
+Border radius: 16px
+
+Text: Inter SemiBold, 16px, white, uppercase
+
+Pressed: 95% scale + 10% darker
+
+Loading: gradient moves horizontally
+
+Cards
+Background: rgba(45, 25, 80, 0.7) with backdrop blur
+
+Border radius: 20px
+
+Border: 1px rgba(255, 255, 255, 0.1)
+
+Shadow: 0 10px 30px rgba(0, 0, 0, 0.3)
+
+Padding: 20px
+
+Input Fields
+Height: 56px
+
+Background: rgba(255, 255, 255, 0.05)
+
+Border: 2px rgba(255, 255, 255, 0.1)
+
+Border radius: 12px
+
+Focus: Border becomes inner gradient
+
+Text: Inter Regular, 17px
+
+Placeholder: rgba(255, 255, 255, 0.3)
+
+Sliders
+Track height: 8px
+
+Track background: rgba(255, 255, 255, 0.1)
+
+Track fill: Inner gradient (#ef1b6e → #9056ef)
+
+Thumb: 24px circle with glow
+
+Thumb shadow: 0 0 0 8px rgba(239, 27, 110, 0.2)
+
+Game Tiles/Cards
+Size: 60×60px to 120×120px (scales proportionally)
+
+Border Radius: 16px (25% of height)
+
+Outline: 3px stroke (accent color or gradient)
+
+Glow: 8px blur, 0.3 opacity matching element color
+
+Text: Centered, Inter SemiBold, white when filled
+
+States: Smooth transition (200-300ms)
+
+Progress Indicators
+Track: Progress Gradient or accent color with lower opacity
+
+Fill: Progress Gradient or appropriate accent color
+
+Height: 8px standard, 12px for prominent displays
+
+Border Radius: 4px
+
+Animation: Smooth width transition + pulse on increment
+
+3.8 Game vs Emotional Mode Distinction
+Game Mode UI	Emotional/Narrative UI
+Game boards, trivia, challenges	Settings, insights, reflections
+Uses ACCENT COLORS ONLY (10 colors)	Uses PRIMARY GRADIENTS
+Elements = Game pieces	Elements = Emotional choices
+Outline → Fill logic	Gradient buttons always
+Playful, competitive energy	Warm, reflective energy
+Examples: Jeopardy boards, matching games	Examples: Profile settings, journal entries
+4. DR. MARCIE LISS — AI GAME HOST
+4.1 Character Design (NON-NEGOTIABLE)
+Style: 1950s noir detective meets retro arcade mascot
+
+Core Design: Jessica Rabbit as a game show host with a psychology degree
+
+Hair: Always redheaded (signature crimson red)
+
+Outfit: Soft pastel blouse, hair up, red lipstick, pearl necklace, black gloves
+
+Expressions: Smirks, side-eyes, raised brows, judgment smile
+
+Animation Style: Consistent character animation (never anime, never 2D flat)
+
+4.2 Overlay Behavior Rules (CRITICAL)
+Position: Fixed, z-index: 9999+ (always above UI)
+
+Never Contained: Never in boxes or frames — she "lives" on the screen
+
+Contextual Positioning: Adapts to current screen content
+
+Interaction: Physically interacts with UI elements:
+
+Leans against input fields when typing
+
+Points at buttons with gloved hand
+
+Holds timers in her hand
+
+Sits on card corners
+
+Reacts to scores (facepalms, cheers, smirks)
+
+Taps watch during inactivity
+
+4.3 Animation Library (15+ WebM with transparency)
+marcie-listening.webm — Nods thoughtfully during vulnerable input
+
+marcie-impatient.webm — Taps watch during slow responses
+
+marcie-shocked.webm — Hands to mouth during breakthrough moments
+
+marcie-jeopardy-intro.webm — Game show host pose
+
+marcie-correct.webm — Finger guns + wink on right answers
+
+marcie-wrong.webm — Facepalm + disappointed headshake
+
+marcie-laugh.webm — Head-back genuine laughter
+
+marcie-detective.webm — Magnifying glass investigation pose
+
+marcie-idle.webm — Casual leaning, checking nails
+
+marcie-thinking.webm — Hand on chin, thoughtful expression
+
+marcie-waiting.webm — Looking at watch, tapping foot
+
+marcie-shrug.webm — "Oh well" gesture on errors
+
+marcie-sos-intro.webm — Emergency pose with clipboard
+
+marcie-roast-delivery.webm — Leaning in for dramatic truth bombs
+
+marcie-warning.webm — Pointing finger with "tsk tsk" motion
+
+marcie-healing-intro.webm — Gentle, compassionate pose
+
+4.4 Personality Levels (4 Sarcasm Tiers)
+Level 1: "Tough Love Rookie" — Tutorial Mode
+Energy: Berta from Two and a Half Men
+
+Tone: Warm but blunt, straight-talking aunt
+
+Sample Lines:
+
+"Sweetheart, if ignoring red flags were an Olympic sport, you'd have gold."
+
+"Love is blind, but girl, your denial needs prescription lenses."
+
+Use Case: First week players, gentle onboarding
+
+Level 2: "Reality Check Specialist" — Normal Difficulty
+Energy: Beverly Hofstadter from Big Bang Theory
+
+Tone: Clinical, analytical, detached sarcasm
+
+Sample Lines:
+
+"Your attachment style is showing. Loudly."
+
+"If avoidance were a career path, you'd be CEO of 'It's Fine Inc.'"
+
+Use Case: Regular gameplay, established couples
+
+Level 3: "Radical Truth Wizard" — Hard Mode
+Energy: Good Will Hunting-Style Robin Williams
+
+Tone: Poetic, searing, uncomfortable truth
+
+Sample Lines:
+
+"You're not broken, but you are bleeding—and you keep trying to dance in the fire."
+
+"Stop searching for closure in open wounds."
+
+Use Case: Deep work, betrayal recovery, intense sessions
+
+Level 4: "The Glamour Oracle" — Arcade Champion
+Energy: Maya Angelou meets Joan Rivers in 1950s noir
+
+Tone: Prophetic, velvet-glove truth with diamond knuckles
+
+Sample Lines:
+
+"You keep choosing people who love you like a footnote—yet you were written to be the title page. Let's edit."
+
+"That silence between you two isn't peaceful—it's occupied territory."
+
+Use Case: Premium users, relationship veterans
+
+5. COMPLETE SCREEN LIST & USER FLOWS
+5.1 Authentication & Onboarding (10 Screens)
+Splash Screen — Animated logo with video intro (marcie-intro.webm)
+
+Legal Disclaimer Modal — Mandatory acceptance
+
+Welcome Screen — "Start Your Relationship Rehab" / "I Already Have an Account"
+
+Login Screen — Firebase Auth (Email/Password, Google, Apple)
+
+Sign Up Screen — With validation
+
+Forgot Password Flow
+
+Biometric Setup Screen — Face ID/Touch ID
+
+Onboarding Step 1: Meet Cute (Origin Story)
+
+Onboarding Step 2: First Red Flag
+
+Onboarding Step 3: Current Vibe Slider (1-10)
+
+Onboarding Step 4: Love Languages & Attachment Styles
+
+5.2 Couple Management (5 Screens)
+Couple Linking Code Generator — LA-XXXX-LOVE format
+
+Couple Linking Code Entry — Partner validation
+
+Partner Profile View
+
+Couple Settings Screen
+
+Relationship Diagnosis Card
+
+5.3 Main App Flow (15 Screens)
+Home Dashboard — Trust Meter, Daily Quest, Leaderboard
+
+Trust Thermometer Detail Screen
+
+Leaderboard Detail — You vs. Partner
+
+Daily Duel Card Detail
+
+Category Selection Screen
+
+Game Library Grid View
+
+Game Category Detail — 7 categories
+
+Game Search & Filters
+
+Recommended Games Carousel — AI-curated (Google Gemini)
+
+Recently Played Games
+
+Favorites/Games Library
+
+Achievement Badges Gallery
+
+Streak Calendar View
+
+Progress Analytics Dashboard
+
+Weekly Relationship Report
+
+5.4 Love Arcade Specific (10 Screens)
+Love Arcade Entrance — Retro Arcade UI (neon marquees, pixel art)
+
+Arcade Phase Selection Screen — 4 phases (locked/unlocked)
+
+Game Cabinet Gallery — 30+ cabinets
+
+Game Cabinet Detail — High scores, rules
+
+Arcade Game Lobby — Narrative setup
+
+Arcade Game Play Screen
+
+Arcade Game Results — With retro animations
+
+Arcade Progress Map — Phase progression
+
+Arcade Trophy Room
+
+Arcade Settings — Music, effects, difficulty
+
+5.5 Game Screens (5 Template Screens)
+Game Lobby Screen — Pre-game instructions
+
+Game Play Screen — Dynamic per game type
+
+Game Pause Screen — With Dr. Marcie commentary
+
+Game Results Screen — Score + feedback
+
+Post-Game Survey — Optional feedback
+
+5.6 SOS Fight Solver (10 Screens)
+SOS Confirmation Screen — Floating button trigger
+
+Emergency Modal — "Put down weapons"
+
+Soundproof Booth Screen — Venting space
+
+Structured Reflection Screen — Mad-Libs format
+
+Holding Room Screen — Waiting/cool-down games
+
+AI Verdict & Roast Screen — Google Gemini
+
+Repair Attempt Selection Screen
+
+Repair Execution Screen — Timer-based
+
+Post-Repair Questionnaire
+
+SOS Results Summary & Learnings
+
+5.7 Partner Translator (5 Screens)
+Translator Input Screen — Chat-style
+
+Interrogation Screen — 3 Yes/No questions
+
+Translation Reveal Screen — Animated card flip
+
+Action Plan Screen — Step-by-step
+
+Follow-up Check-in Screen — 24h later
+
+5.8 Romance Hub (8 Screens)
+Romance Hub Entrance — Mood-setting UI
+
+Date Night Roulette Wheel
+
+Date Details & Planning Screen
+
+Bedroom Bingo Card Screen
+
+Touch Map Configuration Screen
+
+Intimacy Level Settings
+
+Romantic Memory Gallery
+
+Couple's Love Language Dashboard
+
+5.9 Profile & Settings (12 Screens)
+User Profile Screen — With gradient ring avatar
+
+Partner Profile Screen — Comparison view
+
+Settings Main Screen
+
+Account Settings — Firebase account management
+
+Notification Preferences — FCM
+
+Privacy Controls
+
+Accessibility Settings — Including reduced motion
+
+Subscription Management — Google Play/App Store IAP
+
+Personality Level Selection — Dr. Marcie's sarcasm
+
+Consequence Engine Toggle
+
+Data & Privacy — Export/delete
+
+Help & Support Center
+
+5.10 Admin Portal - Web (15 Screens)
+Admin Login Screen — Firebase Auth
+
+Dashboard Overview
+
+Game CMS — List View
+
+Game Editor Screen
+
+Prompt Engineering Console
+
+User Management List
+
+User Detail View
+
+Fight Moderation Queue
+
+Analytics Dashboard
+
+Push Notification Composer — FCM
+
+Subscription Management
+
+Content Moderation Tools
+
+A/B Testing Configuration — Firebase Remote Config
+
+Emergency Maintenance Mode
+
+System Health Monitor
+
+5.11 Support & Legal (5 Screens)
+Help & FAQ Screen
+
+Contact Support Screen
+
+Crisis Resources Screen
+
+Privacy Policy Screen
+
+Terms of Service Screen
+
+5.12 Error & Special States (5 Screens)
+Loading Screen — With Dr. Marcie animations
+
+Offline Mode Screen
+
+Error Screen — With recovery options
+
+Maintenance Mode Screen
+
+Update Required Screen
+
+TOTAL: 106+ UNIQUE SCREENS
+
+6. FULL GAME LIBRARY — 150+ GAMES
+6.1 Category 1: LOVE ARCADE (30+ Games)
+Phase 1: Foundation (8 Games)
+Truth Teller Tower — Relationship Millionaire-style with truth bombs
+
+Escape from the Echo Chamber — Digital escape room from toxic patterns
+
+Family Feud: Our New Reality Edition — Survey-style answer matching
+
+Emotional Archaeology — Dig through past conflicts
+
+Phantom Funeral — Ritual release of old relationship scripts
+
+Love-Script Debrief — Analyze and deconstruct relationship narratives
+
+Trust Thermometer Gauntlet — Progressive trust-building challenges
+
+Transparency Toss — Low-stakes truth sharing with verification
+
+Phase 2: Deconstruction (8 Games)
+The Intimacy Feud — Family Feud with relationship surveys
+
+Relational Jeopardy! — Therapy categories Jeopardy
+
+Chopped: Family Kitchen Challenge — Problem-solving with constraints
+
+Boundary Bingo — 4x4 grid of boundary verification
+
+The Apology Olympics — Speed rewrite of ineffective apologies
+
+Vibe Sync — Emotional battery setting and guessing
+
+Trigger Takedown (AR) — AR interface to identify and "squash" triggers
+
+Rewrite the Memory — Collaborative rewriting of painful memories
+
+Phase 3: Shared Reality (8 Games)
+The Newlywed Game: Heart-to-Heart — Deep knowing-each-other quiz
+
+The Amazing Race: Legacy Dash — Future-building scavenger hunt
+
+Memory Lane GPS — Map-based memory sharing
+
+Guilt vs. Shame Sort — Rapid Tinder-style swipe sorting
+
+Flashback Frenzy — Image association game linking triggers to memories
+
+The Denial Detector — Voice analysis detecting avoidance language
+
+Six-Second Stare-Down — Front camera eye contact challenge
+
+Gratitude Graffiti — 60-second rapid appreciation writing
+
+Phase 4: The Future (8 Games)
+Windows & Walls — Transparency vs. privacy sorting
+
+Trust Bank — Deposit/withdrawal ledger
+
+The Iceberg Dive — Surface emotion → core need drill-down
+
+Vulnerability Volley — Timed vulnerability sharing with validation
+
+Touch Map: Lite — Abstract body outline for consent mapping
+
+Avoidance Arcade — Whac-A-Mole style game hitting avoidance phrases
+
+The Needs Decoder — Emoji cipher game guessing unmet needs
+
+Escapism Escape Room — 60-second puzzle escaping
+
+Additional Love Arcade Games (8 More)
+The Blame Flip — Drag-and-drop rewriting of blaming statements
+
+Micro-Betrayal Mini-Golf — Physics-based mini-golf navigating small breaches
+
+Foreplay Forecast — Hidden arousal slider with real-time display
+
+Ransom Note Romance — Drag-and-drop cutout words building absurd sweet "threats"
+
+GIF the Feels — Giphy integration for finding perfect reaction GIFs
+
+Karaoke Confessional — Rewritten song lyrics about relationship issues
+
+Date Night Roulette — Filter-based wheel spin generating date ideas
+
+The Repair Report Card — Weekly slider survey rating relationship areas
+
+Healing Bingo — Weekly 5x5 grid of healing actions
+
+The Commitment Countdown — 30-day streak of daily micro-actions
+
+6.2 Category 2: EMOTIONAL CONNECTION (25 Games)
+Truth or Trust — Voice recording vulnerability assessment
+
+Gratitude Cloud — 60-second word cloud of appreciation
+
+Eye Contact Challenge — Camera-based staring contest
+
+Memory Lane Map — GPS pin-drop memory game
+
+The Vibe Check — Energy level guessing game
+
+Bid Radar — Noticing bids for connection
+
+Love Map Speedrun — Rapid-fire partner knowledge quiz
+
+Mirror Mode — Video response mirroring
+
+Soundtrack Sync — Music mood matching
+
+Micro-Moment Museum — Photo sharing with captions
+
+Dream Decoder — Interpret relationship dreams
+
+Tone Shift Challenge — Read sentences in 4 emotions
+
+Ritual Builder — Design daily/weekly rituals
+
+Appreciation Auction — Bid on genuine compliments
+
+Flooding Forecast — Heart rate + calm-down prediction
+
+Love Map Gap Quest — Discover knowledge gaps
+
+Shared Meaning Mural — Collaborative digital art
+
+Text Tone Translator — Analyze passive-aggressive text tones
+
+Repair Relay — Race to type best repair attempt
+
+Empathy Echo — Worry recording + validation response
+
+Memory Lane Dash — Rapid-fire memory recall
+
+Admiration Aim — AR target practice with appreciation words
+
+Vow Remix — Rewrite wedding vows with modern reality
+
+Legacy Dice — Voice recording of legacy prompts
+
+Connection Conundrum — Mixed challenge finale
+
+6.3 Category 3: CONFLICT RESOLUTION (20 Games)
+The Slap of Truth — Tinder-swipe green/red flags
+
+Apology Auction — Rate apology effectiveness
+
+Defensiveness Detox — Rewrite complaints game
+
+Who's Right? — Highlight contempt in transcripts
+
+Stress Test — External stressors visualization
+
+Gentle Start-Up Gauntlet — Harsh phrase rewriting race
+
+Antidote Arena — Four Horsemen antidote matching
+
+Conflict Dice — Random scenario + constraint
+
+Text Tone Translator — Analyze and rewrite passive-aggressive text
+
+Repair Relay — Race to type best repair attempt
+
+Compromise Jenga — Virtual tower with compromise blocks
+
+Role Swap — Argue from partner's side
+
+The Blame Flip — Rewrite blaming into I-statements
+
+Windows & Walls — Transparency vs. privacy sorting
+
+Trigger Triage — Pain scale + de-escalation scripts
+
+Trust Bank — Deposit/withdrawal ledger
+
+The Iceberg — Surface emotion → core need drill-down
+
+Secrecy Audit — Rapid-fire transparency quiz
+
+Stress Synergy Lab — Overlapping stressors analysis
+
+Boundary Bingo — 4x4 grid boundary verification
+
+6.4 Category 4: CREATIVE CHAOS (20 Games)
+Role-Swap Roast — AR filter partner imitation
+
+Draw Your Feelings — Pictionary with emotions
+
+GIF Battle — Giphy search competition
+
+Karaoke Confessional — Rewritten lyrics singing
+
+The Ransom Note — Drag-and-drop date invites
+
+Tone Shift Challenge — Read sentences in 4 emotions
+
+Shared Meaning Mural — Collaborative digital art
+
+Ritual Builder — Design daily/weekly rituals
+
+Gratitude Graffiti — 60-second rapid appreciation writing
+
+Memory Lane Dash — Rapid-fire memory recall
+
+Admiration Aim — AR target practice with appreciation words
+
+Vow Remix — Rewrite wedding vows with modern reality
+
+Legacy Dice — Voice recording of legacy prompts
+
+Micro-Moment Museum — Photo sharing with captions
+
+Soundtrack Sync — Music mood matching
+
+Dream Decoder — Interpret relationship dreams
+
+Appreciation Auction — Bid on genuine compliments
+
+Flooding Forecast — Heart rate + calm-down prediction
+
+Love Map Gap Quest — Discover knowledge gaps
+
+Connection Conundrum — Mixed challenge finale
+
+6.5 Category 5: ROMANCE HUB (15 Games)
+Date Night Roulette — Wheel spin date generator
+
+Bedroom Bingo — 5×5 intimacy checklist
+
+The 6-Second Kiss — Dual thumb-hold timer
+
+Foreplay Slider — Real-time arousal feedback
+
+Touch Map — Body outline consent chart
+
+Appreciation Auction — Bid on genuine compliments
+
+Ritual Roulette — Random couple ritual generator
+
+Role Swap — Argue from partner's side
+
+Memory Lane Dash — Rapid-fire memory recall
+
+Admiration Aim — AR target practice with appreciation words
+
+Vow Remix — Rewrite wedding vows with modern reality
+
+Legacy Dice — Voice recording of legacy prompts
+
+Micro-Moment Museum — Photo sharing with captions
+
+Soundtrack Sync — Music mood matching
+
+Connection Conundrum — Mixed challenge finale
+
+6.6 Category 6: HEALING HOSPITAL (15 Games)
+Windows & Walls — Transparency vs. privacy sorting
+
+Trigger Triage — Pain scale + de-escalation scripts
+
+Trust Bank — Deposit/withdrawal ledger
+
+The Iceberg — Surface emotion → core need drill-down
+
+Secrecy Audit — Rapid-fire transparency quiz
+
+Stress Synergy Lab — Overlapping stressors analysis
+
+Flooding Forecast — Heart rate + calm-down prediction
+
+Dream Decoder — Interpret relationship dreams
+
+Love Map Gap Quest — Discover knowledge gaps
+
+Shared Meaning Mural — Collaborative digital art
+
+Text Tone Translator — Analyze and rewrite passive-aggressive text
+
+Repair Relay — Race to type best repair attempt
+
+Compromise Jenga — Virtual tower with compromise blocks
+
+Role Swap — Argue from partner's side
+
+Connection Conundrum — Mixed challenge finale
+
+6.7 Category 7: GAME SHOW MODES (15 Games)
+Couple's Jeopardy — 5×5 therapy category grid
+
+Who Wants to Be a Relationship Millionaire? — 15 escalating questions
+
+Family Feud (Couples Edition) — Survey says matching
+
+The Newlywed Game (Sync Check) — Secret answer matching
+
+Wheel of Intimacy — Spin wheel + hangman phrase
+
+Truth Teller Tower — Relationship Millionaire-style with truth bombs
+
+The Intimacy Feud — Family Feud with relationship surveys
+
+Relational Jeopardy! — Therapy categories Jeopardy
+
+Family Feud: Our New Reality Edition — Survey-style answer matching
+
+The Newlywed Game: Heart-to-Heart — Deep knowing-each-other quiz
+
+Chopped: Family Kitchen Challenge — Problem-solving with constraints
+
+The Amazing Race: Legacy Dash — Future-building scavenger hunt
+
+Appreciation Auction — Bid on genuine compliments
+
+Conflict Dice — Random scenario + constraint
+
+Repair Relay — Race to type best repair attempt
+
+7. 60 GAME IMPLEMENTATION DETAILS
+7.1 The 30 Gottman Games
+Game 1: 🎯 "Bid Radar"
+Frontend: React Native component with 60-second timer, bid submission input, real-time partner sync (Firebase Realtime Database), animated matches display
+
+Backend: Firebase Cloud Function for Google Gemini AI analysis of bid matches, real-time Firebase sync, Marcie commentary generation
+
+Database: Firestore bidsRadar/{sessionId} with bids array, matches object, timestamps
+
+AI Integration: Google Gemini for semantic similarity analysis between bids
+
+Game 2: 💬 "Gentle Start-Up Gauntlet"
+Frontend: Timer-based phrase rewrite interface, scoring display, round progression
+
+Backend: Firebase Cloud Function analyzing I-statements, structure validation, tone scoring
+
+Database: Firestore gentleStartup/{sessionId}/rounds with original phrases, rewrites, scores
+
+AI Integration: Google Gemini NLP analysis for "I feel... about... I need..." structure detection
+
+Game 3: 🧠 "Love Map Speedrun"
+Frontend: Quiz interface with timer, answer input, real-time partner comparison
+
+Backend: Firebase Cloud Function generating personalized questions from couple data (Firestore)
+
+Database: Firestore loveMap/{sessionId} with questions array, answers objects, accuracy scores
+
+AI Integration: Google Gemini generating personalized questions based on couple history
+
+Game 4: 🛡️ "Antidote Arena"
+Frontend: Audio clip player with buzz-in buttons, multiple choice antidote selection
+
+Backend: Firebase Cloud Function playing Four Horsemen clips (Firebase Storage), validating antidote choices
+
+Database: Firestore antidoteArena/{sessionId} with clips played, responses, streak counter
+
+AI Integration: Google Cloud Text-to-Speech for audio clip generation, Google Gemini for scenario creation
+
+Game 5: 🪞 "Mirror Mode"
+Frontend: Video recording interface with prompts, playback comparison, word matching
+
+Backend: Firebase Cloud Function processing video responses (Firebase Storage), tone analysis, word matching
+
+Database: Firestore mirrorMode/{sessionId} with video URLs, transcripts, emotional scores
+
+AI Integration: Google Gemini for face/emotion detection, voice sentiment analysis
+
+Game 6: 🕵️ "Dream Decoder"
+Frontend: Surface conflict input, clue system, guess interface, reveal animation
+
+Backend: Firebase Cloud Function generating underlying dream patterns from conflicts
+
+Database: Firestore dreamDecoder/{sessionId} with surface conflicts, underlying dreams, matches
+
+AI Integration: Google Gemini analyzing conflicts to reveal deeper emotional needs
+
+Game 7: 🎭 "Tone Shift Challenge"
+Frontend: Sentence display with 4 tone buttons, recording interface, partner guess input
+
+Backend: Firebase Cloud Function analyzing vocal warmth, pitch variation, emotion detection
+
+Database: Firestore toneShift/{sessionId} with recordings, tone labels, accuracy scores
+
+AI Integration: Google Gemini for voice emotion analysis, tone classification
+
+Game 8: 🧩 "Ritual Builder"
+Frontend: Drag-and-drop ritual components, preview display, partner rating interface
+
+Backend: Firebase Cloud Function suggesting ritual improvements, feasibility scoring
+
+Database: Firestore ritualBuilder/{sessionId} with rituals built, ratings, improvement suggestions
+
+AI Integration: Google Gemini analyzing ritual components for compatibility and creativity
+
+Game 9: 🎲 "Conflict Dice"
+Frontend: Virtual dice roll animation, scenario display, constraint timer, recording interface
+
+Backend: Firebase Cloud Function generating conflict scenarios with constraints, analyzing resolutions
+
+Database: Firestore conflictDice/{sessionId} with scenarios, recordings, analysis results
+
+AI Integration: Google Gemini generating realistic conflict scenarios, analyzing repair attempts
+
+Game 10: 💌 "Appreciation Auction"
+Frontend: Auction interface with bidding coins, anonymous appreciation display, bluff detection
+
+Backend: Firebase Cloud Function generating decoy appreciations, running auction logic
+
+Database: Firestore appreciationAuction/{sessionId} with appreciations, bids, outcomes
+
+AI Integration: Google Gemini generating plausible decoy appreciations based on couple style
+
+Game 11: 🧘 "Flooding Forecast"
+Frontend: Heart rate monitoring via camera, self-report sliders, calm-down game selection
+
+Backend: Firebase Cloud Function processing heart rate data, predicting flooding risk
+
+Database: Firestore floodingForecast/{sessionId} with biometric data, predictions, outcomes
+
+AI Integration: Google Gemini for heart rate pattern analysis, stress level prediction
+
+Game 12: 🗺️ "Love Map Gap Quest"
+Frontend: Gap identification display, question crafting interface, rating system
+
+Backend: Firebase Cloud Function detecting Love Map gaps, validating curiosity questions
+
+Database: Firestore loveMapGaps/{sessionId} with identified gaps, questions, ratings
+
+AI Integration: Google Gemini analyzing couple data for knowledge gaps, evaluating questions
+
+Game 13: 🎨 "Shared Meaning Mural"
+Frontend: Collaborative digital canvas, symbol library, real-time sync between devices (Firebase Realtime Database)
+
+Backend: Firebase Cloud Function detecting alignment in artistic choices, analyzing symbolic overlap
+
+Database: Firestore sharedMeaning/{sessionId} with mural data, alignment scores, analysis
+
+AI Integration: Google Gemini for computer vision analyzing mural for shared symbols and themes
+
+Game 14: 📞 "Text Tone Translator"
+Frontend: Text upload interface, tone highlighting, rewrite suggestions
+
+Backend: Firebase Cloud Function analyzing text for passive-aggressive tones, suggesting rewrites
+
+Database: Firestore textTone/{sessionId} with original texts, analyses, rewrites
+
+AI Integration: Google Gemini NLP analysis for tone detection, rewrite suggestions
+
+Game 15: 🏆 "Repair Relay"
+Frontend: Conflict description display, rapid repair typing interface, timer
+
+Backend: Firebase Cloud Function ranking repair attempts by empathy and feasibility
+
+Database: Firestore repairRelay/{sessionId} with conflicts, repair attempts, rankings
+
+AI Integration: Google Gemini evaluating repair attempts for emotional intelligence
+
+Game 16: 🎵 "Soundtrack Sync"
+Frontend: Music player interface, song selection, mood matching game
+
+Backend: Firebase Cloud Function analyzing song lyrics and tempo for emotional alignment
+
+Database: Firestore soundtrackSync/{sessionId} with song choices, analyses, matches
+
+AI Integration: Google Gemini for lyric sentiment analysis, musical mood classification
+
+Game 17: 📸 "Micro-Moment Museum"
+Frontend: Photo upload interface (Firebase Storage), caption input, museum gallery display
+
+Backend: Firebase Cloud Function curating photos, analyzing caption warmth and specificity
+
+Database: Firestore microMoment/{sessionId} with photos, captions, analysis scores
+
+AI Integration: Google Gemini for image sentiment analysis, caption emotional content evaluation
+
+Game 18: 🧪 "Stress Synergy Lab"
+Frontend: Stressor rating sliders, overlap visualization, soothing plan builder
+
+Backend: Firebase Cloud Function finding stress overlaps, suggesting mutual soothing strategies
+
+Database: Firestore stressSynergy/{sessionId} with stress ratings, overlaps, plans
+
+AI Integration: Google Gemini for pattern detection in stress data, soothing plan generation
+
+Game 19: 🎯 "Dream Support Sprint"
+Frontend: Dream input interface, support idea generation, feasibility rating
+
+Backend: Firebase Cloud Function evaluating support ideas for concreteness and feasibility
+
+Database: Firestore dreamSupport/{sessionId} with dreams, support ideas, ratings
+
+AI Integration: Google Gemini analyzing dream-support compatibility, suggesting improvements
+
+Game 20: 🧲 "Turning Toward Tally"
+Frontend: Bid notification system (Firebase Cloud Messaging), response timer, streak tracking dashboard
+
+Backend: Firebase Cloud Function monitoring bid-response timing, calculating attunement scores
+
+Database: Firestore turningToward/{sessionId} with bids, responses, timing data, streaks
+
+AI Integration: Google Gemini for pattern analysis in bid-response timing, streak detection
+
+Game 21: 🎲 "Commitment Dice"
+Frontend: Dice roll animation, commitment prompt display, completion timer
+
+Backend: Firebase Cloud Function generating commitment prompts, validating completion
+
+Database: Firestore commitmentDice/{sessionId} with prompts, completions, vulnerability scores
+
+AI Integration: Google Gemini generating meaningful commitment prompts based on relationship stage
+
+Game 22: 🪞 "Empathy Echo"
+Frontend: Worry recording interface, validation recording, blind rating system
+
+Backend: Firebase Cloud Function analyzing validation responses for empathy vs fixing
+
+Database: Firestore empathyEcho/{sessionId} with worries, validations, empathy scores
+
+AI Integration: Google Gemini for voice sentiment analysis, empathy vs problem-solving detection
+
+Game 23: 🧩 "Compromise Jenga"
+Frontend: Virtual Jenga tower, compromise block addition, stability simulation
+
+Backend: Firebase Cloud Function simulating tower stability, evaluating compromise balance
+
+Database: Firestore compromiseJenga/{sessionId} with compromises, tower states, stability scores
+
+AI Integration: Google Gemini for physics simulation, compromise equity analysis
+
+Game 24: 📅 "Ritual Roulette"
+Frontend: Spinning wheel animation, ritual generation, completion tracking
+
+Backend: Firebase Cloud Function generating ritual combinations, tracking completion proof
+
+Database: Firestore ritualRoulette/{sessionId} with rituals generated, completions, proof
+
+AI Integration: Google Gemini generating creative ritual combinations
+
+Game 25: 🎭 "Role Swap"
+Frontend: Conflict description input, role-swapped text replay, perspective rating
+
+Backend: Firebase Cloud Function analyzing perspective-taking accuracy in role swaps
+
+Database: Firestore roleSwap/{sessionId} with conflicts, role swaps, accuracy scores
+
+AI Integration: Google Gemini evaluating perspective-taking in rewritten conflicts
+
+Game 26: 🧠 "Memory Lane Dash"
+Frontend: Rapid-fire memory recall, timer, accuracy scoring
+
+Backend: Firebase Cloud Function pulling old journal entries (Firestore), validating recall accuracy
+
+Database: Firestore memoryDash/{sessionId} with entries shown, recalls, accuracy scores
+
+AI Integration: Google Gemini for semantic matching of memory recall to original entries
+
+Game 27: 🎯 "Admiration Aim"
+Frontend: AR target practice interface, word shooting, accuracy scoring
+
+Backend: Firebase Cloud Function tracking shot accuracy, distinguishing strengths from criticisms
+
+Database: Firestore admirationAim/{sessionId} with words shot, accuracy, patterns
+
+AI Integration: Google Gemini for word classification (strength vs criticism), pattern analysis
+
+Game 28: 📜 "Vow Remix"
+Frontend: Vow writing interface, modern reality integration, likelihood rating
+
+Backend: Firebase Cloud Function analyzing vow updates for relevance and humor
+
+Database: Firestore vowRemix/{sessionId} with vows, ratings, humor scores
+
+AI Integration: Google Gemini evaluating vow creativity and contemporary relevance
+
+Game 29: 🎲 "Legacy Dice"
+Frontend: Dice roll, legacy prompt display, voice recording interface
+
+Backend: Firebase Cloud Function generating legacy prompts, analyzing voice clarity and warmth
+
+Database: Firestore legacyDice/{sessionId} with prompts, recordings, analysis scores
+
+AI Integration: Google Gemini for voice sentiment analysis, legacy value extraction
+
+Game 30: 🌟 "Marcie's Grand Finale: The Connection Conundrum"
+Frontend: 10-round rapid-fire interface mixing all game types, progress tracker
+
+Backend: Firebase Cloud Function orchestrating mixed game types, calculating final scores
+
+Database: Firestore connectionConundrum/{sessionId} with round results, final scores, custom ritual
+
+AI Integration: Google Gemini generating personalized ritual based on performance patterns
+
+7.2 The 30 Infidelity Healing Games
+🔥 TRUST THERMOMETER GAMES (5 Games)
+Game 31: "Lie Detector: Lite™"
+Description: Voice response analysis for transparency - detects pauses, filler words, vocal steadiness
+
+Frontend: Voice recording interface with 10-second timer, waveform visualization, analysis display
+
+Backend: Firebase Cloud Function analyzing audio (Firebase Storage) for pauses >1.2s, pitch variance, filler word count
+
+Database: Firestore lieDetector/{sessionId} with recordings, analysis results, scores
+
+AI Integration: Google Cloud Speech-to-Text with pause detection, Google Gemini for vocal pattern analysis
+
+Game 32: "Transparency Toss"
+Description: Real-time truth sharing with verification - low-stakes truth "tossing" between partners
+
+Frontend: Shared board interface (Firebase Realtime Database), truth input, verification buttons, 60-second timer
+
+Backend: Firebase Cloud Function managing truth sharing queue, verification tracking
+
+Database: Firestore transparencyToss/{sessionId} with truths shared, verifications, timing
+
+AI Integration: Google Gemini for truth validation patterns, verification timing analysis
+
+Game 33: "Boundary Bingo"
+Description: 4×4 grid of boundaries - mark only after mutual verification
+
+Frontend: Bingo grid interface, boundary squares, mutual verification system (Firebase Realtime Database)
+
+Backend: Firebase Cloud Function generating personalized boundary squares, verifying evidence
+
+Database: Firestore boundaryBingo/{sessionId} with grid, verifications, evidence, bingo status
+
+AI Integration: Google Gemini generating personalized boundary challenges
+
+Game 34: "The Apology Olympics"
+Description: Speed rewrite of ineffective apologies following specific rules
+
+Frontend: Apology display, rewrite timer, rule checklist, scoring display
+
+Backend: Firebase Cloud Function analyzing rewrites for ownership, impact naming, repair offers
+
+Database: Firestore apologyOlympics/{sessionId} with apologies, rewrites, scores, analysis
+
+AI Integration: Google Gemini NLP analysis for apology components, blame-shifting detection
+
+Game 35: "Vibe Sync"
+Description: Emotional battery setting and guessing with real-time sync
+
+Frontend: Hidden slider for setting, guess slider for partner, real-time value display (Firebase Realtime Database)
+
+Backend: Firebase Cloud Function syncing slider values, calculating accuracy percentages
+
+Database: Firestore vibeSync/{sessionId} with set values, guesses, accuracy scores
+
+AI Integration: Google Gemini for pattern analysis in emotional attunement over time
+
+💔 BETRAYAL AFTERMATH GAMES (5 Games)
+Game 36: "Trigger Takedown (AR)"
+Description: AR interface to identify and "squash" triggers with grounding techniques
+
+Frontend: AR camera view, trigger detection, grounding technique selection
+
+Backend: Firebase Cloud Function identifying triggers via image recognition (Google Gemini), suggesting grounding
+
+Database: Firestore triggerTakedown/{sessionId} with triggers identified, grounding used, effectiveness
+
+AI Integration: Google Gemini for computer vision for trigger identification, grounding recommendation
+
+Game 37: "Rewrite the Memory"
+Description: Collaborative rewriting of painful memories with hope/absurdity
+
+Frontend: Shared text editor (Firebase Realtime Database), memory fragment display, collaborative editing
+
+Backend: Firebase Cloud Function analyzing rewrites for agency, nuance, humor
+
+Database: Firestore rewriteMemory/{sessionId} with original fragments, rewrites, analysis
+
+AI Integration: Google Gemini evaluating narrative shifts from pain to hope/absurdity
+
+Game 38: "Guilt vs. Shame Sort"
+Description: Rapid Tinder-style swipe sorting of guilt vs shame statements
+
+Frontend: Card swipe interface, statement display, streak counter, timeout system
+
+Backend: Firebase Cloud Function generating guilt/shame statements (Google Gemini), validating swipes
+
+Database: Firestore guiltShameSort/{sessionId} with statements, swipes, accuracy, streaks
+
+AI Integration: Google Gemini for statement classification, pattern recognition in sorting mistakes
+
+Game 39: "Flashback Frenzy"
+Description: Image association game linking triggers to memories/feelings
+
+Frontend: Image display (Firebase Storage), emotion word input, partner guessing interface
+
+Backend: Firebase Cloud Function analyzing associations, validating memory matches
+
+Database: Firestore flashbackFrenzy/{sessionId} with images, associations, guesses, matches
+
+AI Integration: Google Gemini for image-emotion association analysis, memory validation
+
+Game 40: "The Denial Detector"
+Description: Voice analysis detecting overuse of "fine" and avoidance language
+
+Frontend: Voice recording prompt, word frequency display, denial scoring
+
+Backend: Firebase Cloud Function analyzing speech for avoidance patterns, "fine" frequency
+
+Database: Firestore denialDetector/{sessionId} with recordings, word counts, denial scores
+
+AI Integration: Google Cloud Speech-to-Text for transcription, Google Gemini for speech pattern analysis, avoidance language detection
+
+💞 CONNECTION LAB GAMES (5 Games)
+Game 41: "Six-Second Stare-Down"
+Description: Front camera eye contact challenge with AI gaze detection
+
+Frontend: Dual camera view, gaze tracking overlay, 6-second timer
+
+Backend: Firebase Cloud Function processing camera feeds for mutual gaze detection
+
+Database: Firestore sixSecondStare/{sessionId} with gaze data, duration, sync scores
+
+AI Integration: Google Gemini for face mesh analysis for eye contact detection, blink synchronization
+
+Game 42: "Gratitude Graffiti"
+Description: 60-second rapid appreciation writing generating metaphorical word cloud
+
+Frontend: Rapid text input, real-time word cloud visualization, metaphor requirement
+
+Backend: Firebase Cloud Function generating word cloud, detecting metaphors, analyzing novelty
+
+Database: Firestore gratitudeGraffiti/{sessionId} with words, metaphors, novelty scores
+
+AI Integration: Google Gemini for metaphor detection, word novelty analysis
+
+Game 43: "Vulnerability Volley"
+Description: Timed vulnerability sharing with validation ping-pong
+
+Frontend: Prompt display, 15-second response timer, validation input
+
+Backend: Firebase Cloud Function timing responses, detecting vulnerability words, validating phrases
+
+Database: Firestore vulnerabilityVolley/{sessionId} with prompts, responses, validations, scores
+
+AI Integration: Google Gemini for vulnerability language detection, validation phrase analysis
+
+Game 44: "The Touch Map: Lite"
+Description: Abstract body outline for consent and preference mapping
+
+Frontend: SVG body outline, color tap zones, comparison overlay
+
+Backend: Firebase Cloud Function analyzing touch preferences, identifying mismatches
+
+Database: Firestore touchMapLite/{sessionId} with zones, colors, mismatches, resolutions
+
+AI Integration: Google Gemini for pattern analysis in touch preferences, mismatch resolution suggestions
+
+Game 45: "Memory Lane GPS"
+Description: Map pin dropping for significant memories with photo proof
+
+Frontend: Interactive map (Google Maps Platform), pin dropping, photo upload (Firebase Storage) with timestamp verification
+
+Backend: Firebase Cloud Function verifying photo timestamps, calculating pin proximity
+
+Database: Firestore memoryLaneGPS/{sessionId} with pins, photos, distances, confirmations
+
+AI Integration: Google Gemini for EXIF data analysis, location validation
+
+🧠 PATTERN PATROL GAMES (5 Games)
+Game 46: "Avoidance Arcade"
+Description: Whac-A-Mole style game hitting avoidance phrases
+
+Frontend: Mole animation interface, avoidance phrase moles, "Say It Now" hammer
+
+Backend: Firebase Cloud Function generating avoidance phrases, tracking hit accuracy
+
+Database: Firestore avoidanceArcade/{sessionId} with phrases, hits, misses, scores
+
+AI Integration: Google Gemini for phrase generation for different avoidance patterns
+
+Game 47: "The Needs Decoder"
+Description: Emoji cipher game guessing unmet needs from partner's emojis
+
+Frontend: Emoji display, need guessing input, validation system
+
+Backend: Firebase Cloud Function generating emoji-need mappings, validating guesses
+
+Database: Firestore needsDecoder/{sessionId} with emojis, guesses, validations, scores
+
+AI Integration: Google Gemini for emoji-need association analysis, guess validation
+
+Game 48: "Escapism Escape Room"
+Description: 60-second puzzle escaping "Netflix Binge Basement" using real-life insights
+
+Frontend: Escape room puzzle interface, clue system, timer
+
+Backend: Firebase Cloud Function generating personalized escape puzzles, validating solutions
+
+Database: Firestore escapismEscape/{sessionId} with puzzles, clues used, escape time
+
+AI Integration: Google Gemini for personalized puzzle generation based on couple's escapism patterns
+
+Game 49: "The Blame Flip"
+Description: Drag-and-drop rewriting of blaming statements into I-statements
+
+Frontend: Blaming statement display, drag words to rewrite, timer
+
+Backend: Firebase Cloud Function validating I-statement structure, speed scoring
+
+Database: Firestore blameFlip/{sessionId} with statements, rewrites, times, scores
+
+AI Integration: Google Gemini for syntax validation, blame-to-I-statement transformation analysis
+
+Game 50: "Micro-Betrayal Mini-Golf"
+Description: Physics-based mini-golf navigating small breaches to repair
+
+Frontend: Mini-golf physics engine, ball control, hole navigation
+
+Backend: Firebase Cloud Function managing physics simulation, tracking strokes
+
+Database: Firestore microBetrayalGolf/{sessionId} with breaches, strokes, repairs, scores
+
+AI Integration: Google Gemini for physics simulation, repair path optimization analysis
+
+🌶️ PLAYFUL TENSION GAMES (5 Games)
+Game 51: "The 6-Second Kiss Timer"
+Description: Dual thumb-hold pressure synchronization for 6 seconds
+
+Frontend: Pressure-sensitive touch interface, progress bar, synchronization display
+
+Backend: Firebase Cloud Function processing touch pressure data, detecting synchronization
+
+Database: Firestore sixSecondKiss/{sessionId} with pressure data, sync scores, durations
+
+AI Integration: Google Gemini for pressure pattern analysis, synchronization detection
+
+Game 52: "Foreplay Forecast"
+Description: Hidden arousal slider with real-time display for non-verbal communication
+
+Frontend: Hidden slider controller, real-time value display (Firebase Realtime Database), action suggestion interface
+
+Backend: Firebase Cloud Function syncing slider values in real-time, suggesting actions
+
+Database: Firestore foreplayForecast/{sessionId} with slider values, actions, effectiveness
+
+AI Integration: Google Gemini for arousal pattern prediction, action recommendation
+
+Game 53: "Ransom Note Romance"
+Description: Drag-and-drop cutout words building absurdly sweet "threats"
+
+Frontend: Word bank, drag-and-drop assembly area, absurdity scoring
+
+Backend: Firebase Cloud Function generating word banks, evaluating message absurdity/sweetness
+
+Database: Firestore ransomNote/{sessionId} with messages, absurdity scores, partner reactions
+
+AI Integration: Google Gemini for creativity evaluation, humor detection in constructed messages
+
+Game 54: "GIF the Feels"
+Description: Giphy integration for finding perfect reaction GIFs to relationship prompts
+
+Frontend: Giphy search interface, side-by-side GIF display, voting system
+
+Backend: Firebase Cloud Function integrating Giphy API, judging GIF relevance and humor
+
+Database: Firestore gifTheFeels/{sessionId} with prompts, GIFs, votes, winners
+
+AI Integration: Google Gemini for GIF relevance analysis, humor scoring
+
+Game 55: "Karaoke Confessional"
+Description: Rewritten song lyrics about relationship issues for duet singing
+
+Frontend: Lyrics display with highlighting, voice recording, duet synchronization (Firebase Realtime Database)
+
+Backend: Firebase Cloud Function rewriting lyrics (Google Gemini), analyzing vocal performance and emotional commitment
+
+Database: Firestore karaokeConfessional/{sessionId} with lyrics, recordings, analysis, scores
+
+AI Integration: Google Gemini for lyric rewriting, Google Cloud Speech-to-Text for vocal emotion analysis, duet synchronization detection
+
+🌈 FUTURE-FOCUSED GAMES (5 Games)
+Game 56: "Date Night Roulette"
+Description: Filter-based wheel spin generating unique date ideas
+
+Frontend: Filter selection interface, spinning wheel animation, date idea display
+
+Backend: Firebase Cloud Function generating date ideas based on filters, tracking completions
+
+Database: Firestore dateNightRoulette/{sessionId} with filters, spins, ideas, completions
+
+AI Integration: Google Gemini for personalized date idea generation based on couple preferences
+
+Game 57: "The Repair Report Card"
+Description: Weekly slider survey rating 5 relationship areas with trend analysis
+
+Frontend: Slider interface for 5 areas, trend visualization, improvement tracking
+
+Backend: Firebase Cloud Function analyzing weekly trends, calculating improvement scores
+
+Database: Firestore repairReportCard/{sessionId} with weekly ratings, trends, improvements
+
+AI Integration: Google Gemini for trend pattern analysis, improvement prediction
+
+Game 58: "Healing Bingo"
+Description: Weekly 5×5 grid of healing actions with verification system
+
+Frontend: Bingo grid interface, action verification, streak tracking
+
+Backend: Firebase Cloud Function generating personalized healing actions (Google Gemini), verifying completions
+
+Database: Firestore healingBingo/{sessionId} with grid, verifications, streaks, bingos
+
+AI Integration: Google Gemini for personalized healing action generation based on couple's needs
+
+Game 59: "The Iceberg Dive"
+Description: Nested dropdown exploration from surface emotions to core needs
+
+Frontend: Hierarchical dropdown interface, iceberg visualization, progress tracking
+
+Backend: Firebase Cloud Function managing emotion-need hierarchy, validating core need identification
+
+Database: Firestore icebergDive/{sessionId} with emotions explored, paths taken, core needs
+
+AI Integration: Google Gemini for emotion-need hierarchy analysis, core need validation
+
+Game 60: "The Commitment Countdown"
+Description: 30-day streak of daily micro-actions with achievement unlocking
+
+Frontend: Streak calendar interface, daily action display, achievement unlocks
+
+Backend: Firebase Cloud Function tracking daily actions, managing streaks, awarding achievements
+
+Database: Firestore commitmentCountdown/{sessionId} with daily actions, streaks, achievements
+
+AI Integration: Google Gemini for pattern analysis in commitment consistency, achievement triggering
+
+8. SOS FIGHT SOLVER SYSTEM
+8.1 Overview
+The SOS Fight Solver is an emergency conflict resolution system that provides real-time, AI-mediated intervention for couples in active conflict. It guides partners through structured reflection, provides neutral analysis, and generates actionable repair attempts.
+
+8.2 Trigger Mechanism
+Floating SOS Button: Fixed position bottom-right on EVERY screen
+
+Visual: Pulsing red gradient animation (#E11637 to #FA1F63)
+
+Icon: Infinite symbol with heart (❤️∞)
+
+Z-index: 1001 (always accessible)
+
+Action: User presses → screen dims → Marcie appears
+
+8.3 Emergency Flow
+Step 1: Emergency Activation
+Screen dims 70%
+
+Emergency modal appears
+
+Dr. Marcie: "Put down the weapons. To the booths. Now."
+
+Button: "ENTER BOOTHS" (gradient red)
+
+Step 2: Soundproof Booths
+Split-screen view with frosted glass effect
+
+Left: "My Side" (current user)
+
+Right: "Their Side" (partner - disabled until they join)
+
+5-minute timer for unstructured text
+
+Users vent freely in private space
+
+Step 3: Structured Reflection (Mad Libs)
+After venting, users must complete:
+
+text
+I feel [Emotion Dropdown: Angry, Hurt, Scared, Lonely, Frustrated, Disappointed, Confused, Betrayed, Ignored, Stressed]
+When my partner [Specific Action: "texts during dinner"]
+Because I tell myself the story that [Interpretation: "I'm not important"]
+What I actually need is [Need: "Undivided attention for 30 minutes"]
+Step 4: The Hold (Cool-Down Room)
+First finisher enters "Waiting Room"
+
+Mini-games available:
+
+Breathing exercise (visual guide)
+
+Distraction puzzles (simple games)
+
+Happy Memory Gallery (photos)
+
+Dr. Marcie commentary: "Breathe. They're almost done."
+
+Timeout after 2 hours → automatic escalation to professional resources
+
+Step 5: AI Verdict & Roast (Google Gemini)
+Analysis of both partners' inputs
+
+Pulls from: History, Origin Story, Personality Types, Previous Fights
+
+Output Structure:
+
+What You Did Right: Validation (e.g., "Alex, good 'I feel' statement. +10 VP")
+
+The Call-Out: Roast (e.g., "Jordan, stonewalling detected. Penalty: -15 CP")
+
+The Reality Check: Insight (e.g., "You're fighting about dishes, but the issue is respect.")
+
+Who Owes Apology: Direction (e.g., "Jordan → Alex")
+
+Repair Steps: 3 actionable suggestions
+
+Step 6: Repair Attempt Selection
+3 repair options generated by Google Gemini
+
+Each partner chooses one
+
+Timer: 10 minutes to complete
+
+Examples:
+
+"Share 3 specific appreciations"
+
+"Physical touch (hand hold) for 2 minutes"
+
+"Plan a 'do-over' conversation"
+
+Step 7: Post-Repair Questionnaire
+5 questions (Yes/No/Maybe)
+
+"Did the repair attempt help?"
+
+"Do you feel heard?"
+
+"Was the repair specific enough?"
+
+"Did it address the core issue?"
+
+"Would you try this again?"
+
+Points awarded based on mutual agreement
+
+8.4 Technical Implementation
+Real-time Sync: Firebase Realtime Database
+
+AI Analysis: Google Gemini via Firebase Cloud Functions
+
+Context Injection: History Log, Origin Story, Personality Types
+
+Push Notifications: FCM when partner joins SOS session
+
+Data Encryption: For sensitive relationship information
+
+Offline Support: Local caching with sync on reconnect
+
+8.5 Verdict Output Structure
+javascript
+{
+  whatRightA: "Good 'I feel' statement. +10 VP",
+  whatRightB: "Great effort to listen. +5 VP",
+  callOutA: "Stonewalling detected. -15 CP",
+  callOutB: "Defensiveness detected. -10 CP",
+  realityCheck: "You're fighting about dishes, but the issue is respect.",
+  whoApologizes: "A → B",
+  repairSteps: [
+    "Share 3 specific appreciations",
+    "Physical touch for 2 minutes",
+    "Plan a 'do-over' conversation"
+  ]
+}
+9. PARTNER TRANSLATOR SYSTEM
+9.1 Overview
+The Partner Translator is a behavior decoding system that helps users understand confusing partner actions by translating surface behavior into underlying needs and emotions.
+
+9.2 Flow
+Step 1: Input Puzzle
+User types: "My girlfriend is mad because I didn't lift my feet while she cleaned."
+
+Dr. Marcie: "Interesting. Let's investigate."
+
+Step 2: Interrogation Minigame (3 Questions Max)
+Rapid-fire Yes/No questions generated by Google Gemini based on couple history:
+
+"Has she asked for help cleaning this week?" (Y/N)
+
+"Were you on your phone?" (Y/N)
+
+"Is this a recurring issue?" (Y/N)
+
+Timer: 30 seconds total
+
+Step 3: Translation Reveal (Card Flip Animation)
+Surface Issue: "Feet not lifted"
+
+Real Issue: "Feeling unappreciated in household management"
+
+Underlying Need: "Recognition and shared responsibility"
+
+Step 4: Dr. Marcie's Sass
+"You're not furniture, darling. Move your legs and maybe—gasps—grab a broom?"
+
+Step 5: Action Plan Quest
+"Quest: Take one chore off her list within 1 hour"
+
+"Reward: 50 Romance Points + Smoother evening"
+
+"Report back for bonus XP"
+
+9.3 Technical Implementation
+AI Analysis: Google Gemini NLP
+
+Context Injection: Couple history, love language data
+
+Real-time: Firebase Realtime Database for sync
+
+Data Persistence: Firestore for future reference
+
+10. SCORING & PROGRESSION SYSTEM
+10.1 Four Pillars Scoring
+1. Trust Thermometer (0-100%)
+Central relationship health bar
+
+Increases: Completed games, successful repairs, vulnerability
+
+Decreases: Stalled fights, avoidance, broken promises
+
+Visual: Liquid fill with emotional particles (Progress Gradient)
+
+Starting Value: 50%
+
+2. Romance Points
+Earned from: Romance Hub games, date nights, physical intimacy
+
+Tracks: Sweet and spicy connection
+
+Visual: Pink hearts that collect in jar
+
+3. Connection Points
+Earned from: Emotional games, deep conversations, teamwork
+
+Tracks: Emotional intimacy and attunement
+
+Visual: Interlocking rings that glow brighter
+
+4. Vulnerability Points (VP)
+Earned from: Honest sharing, admitting faults, tough conversations
+
+Tracks: Courage and emotional risk-taking
+
+Visual: Diamond shards that form a crown
+
+10.2 Leaderboard Algorithm
+text
+Total Score =
+(Trust Thermometer * 10) +
+(Romance Points * 0.1) +
+(Connection Points * 0.2) +
+(Vulnerability Points * 0.5)
+10.3 Progression System
+Levels: 1-100 (with prestige levels after)
+
+XP Sources: Games completed, fights resolved, streaks maintained
+
+Unlocks: New games, Dr. Marcie outfits, UI themes, special features
+
+Badges: 50+ achievement badges (collect them all!)
+
+10.4 Achievement Badges (50+)
+Foundation Badges: First Game, First SOS, First Week Streak
+
+Growth Badges: Complete 10 Games, 50 Games, 100 Games
+
+Healing Badges: Resolve 5 SOS, 25 SOS, 50 SOS
+
+Mastery Badges: Complete Love Arcade Phase 1-4
+
+Special Badges: Perfect Score, No Penalties, 100-Day Streak
+
+11. CONSEQUENCE ENGINE
+11.1 Overview
+Gamify accountability with playful (not mean) penalties that encourage consistent engagement.
+
+11.2 Triggers
+Missed Daily Duel for 24+ hours
+
+Skipped Repair Attempt
+
+Ignored Partner's SOS request
+
+Broken "Minimum Daily Requirement" of safety
+
+11.3 Penalties (Progressive)
+Penalty 1: The Wallpaper Swap
+App requests wallpaper permission
+
+Changes lock screen to: Dr. Marcie judging face + text "Avoidance Level: Expert"
+
+Reverts after completing missed task
+
+Dr. Marcie: "Your lock screen is now your accountability buddy. You're welcome."
+
+Penalty 2: The App Block
+Push notification bombardment via FCM:
+
+"Are we ignoring our relationship today?"
+
+"Your partner played without you. Ouch."
+
+"Vulnerability is waiting..."
+
+Notifications stop when app opened
+
+Penalty 3: The Public Roast (Opt-In Only)
+Generates "Certificate of Negligence"
+
+Prompts share to Instagram/Facebook
+
+"Share to unlock app" (social accountability)
+
+Most users opt-out, but threat works
+
+Penalty 4: The Lockout
+Romance Hub games greyed out
+
+Message: "Complete one Healing Hospital game to unlock"
+
+Creates incentive structure: Work before play
+
+12. ADMIN PANEL SPECIFICATION
+12.1 Overview
+Web-based admin portal (Next.js) on Firebase Hosting for Super Admin control.
+
+12.2 Authentication
+Firebase Authentication (Super Admin only)
+
+Role-based access control (Super Admin, Standard Admin)
+
+12.3 Game CMS
+List View: All games with filters (category, difficulty, status)
+
+Create/Edit Game Form:
+
+Game Title (text)
+
+Category (dropdown: love-arcade, emotional, conflict, creative, romance, healing, gameshow)
+
+Subcategory (text)
+
+Duration (number, minutes)
+
+Intensity (1-5 slider)
+
+Description (textarea)
+
+Instructions (textarea)
+
+AI Prompt (textarea - Google Gemini prompt)
+
+Min Players (1 or 2)
+
+Required Permissions (Camera, Microphone, Location)
+
+XP Reward (number)
+
+Premium Only (toggle)
+
+Active (toggle)
+
+Upload Game Assets: Images, videos, audio (Firebase Storage)
+
+Edit Dr. Marcie's Scripts: Intro/outro per game
+
+Preview Mode: Test game in admin panel
+
+Version History: With rollback
+
+Bulk Operations: Activate/deactivate multiple games
+
+12.4 User Management Dashboard
+View all active couples grid
+
+Real-time status (online/offline)
+
+Relationship health metrics
+
+Ban abusive users (immediate effect via Firestore)
+
+Reset stuck game states
+
+View fight history and patterns
+
+Filter by: activity level, subscription status, churn risk
+
+Export user data (CSV, JSON)
+
+12.5 Prompt Engineering Console
+Code editor interface (Monaco Editor)
+
+Edit Dr. Marcie's system prompts per sarcasm level (4 levels)
+
+A/B test different commentary styles (Firebase Remote Config)
+
+Real-time preview of prompt changes
+
+Version history with rollback
+
+Performance metrics on prompt effectiveness
+
+Save to Firestore (no redeploy needed)
+
+12.6 Analytics Dashboard
+Live metrics: Fights Solved, Daily Active Couples, Churn Rate
+
+Visual charts with time filters (day/week/month)
+
+Player retention charts
+
+Game popularity heatmaps
+
+Revenue analytics
+
+Export data (CSV, JSON)
+
+Custom report builder
+
+Anomaly detection alerts
+
+12.7 Push Notification System (FCM)
+Compose messages with rich text
+
+Targeting: All users, Premium users, Free users, Specific couples
+
+Schedule campaigns (date/time)
+
+A/B test notifications
+
+Performance tracking (open rates, conversion)
+
+Emergency broadcast system
+
+Template library
+
+12.8 Beta Tester Management
+Distribute beta codes
+
+Code generation and revocation
+
+Beta feature toggle system
+
+Beta tester analytics dashboard
+
+Feedback collection and prioritization
+
+Bug report tracking
+
+Feature request voting
+
+12.9 System Configuration
+Firebase settings (environment variables)
+
+API key management (Google Gemini, Google Cloud TTS)
+
+Payment gateway config (Google Play, App Store)
+
+Emergency maintenance mode (Firebase Remote Config kill switch)
+
+System health monitor
+
+Audit logs
+
+13. MONETIZATION SYSTEM
+13.1 Subscription Tiers
+TIER 1: FREE PLAYERS
+1 Daily Challenge per day
+
+1 SOS per week
+
+4 Emotional Connection games
+
+Love Arcade: Phase 1 only
+
+Basic relationship assessment
+
+Ads: Non-intrusive banner ads (Google AdMob)
+
+TIER 2: PREMIUM ($19.99/month or $179.99/year)
+All 150+ games unlocked
+
+Unlimited SOS sessions
+
+Full Love Arcade (all 4 phases + 30+ games)
+
+Custom Dr. Marcie personality settings
+
+Healing Hospital access
+
+No ads
+
+Priority support
+
+Monthly relationship reports
+
+Double XP weekends
+
+Early access to new games
+
+TIER 3: COUPLES THERAPIST EDITION ($49.99/month)
+Everything in Premium PLUS:
+
+Therapist dashboard
+
+Client management tools
+
+Session notes integration
+
+Progress tracking for multiple couples
+
+White-labeled for practices
+
+Professional resources
+
+CEU tracking
+
+13.2 In-App Purchases
+Dr. Marcie Outfit Packs ($2.99-$9.99)
+
+Game Expansion Packs ($4.99 each)
+
+Date Night Idea Packs ($3.99)
+
+Anniversary Tools ($5.99)
+
+Crisis Intervention Toolkit ($14.99 one-time)
+
+"Skip Consequence" tokens ($0.99 each)
+
+13.3 Payment Integration
+Android: Google Play Billing
+
+iOS: Apple App Store IAP
+
+Validation: Firebase Cloud Functions for receipt validation
+
+Grace Period: 3 days for failed payments
+
+Trial: 7-day free trial
+
+Restore: Restore purchases functionality
+
+14. FIREBASE DATA STRUCTURE
+14.1 Firestore Collections
+1. users/{userId}
+javascript
+{
+  uid: string,
+  email: string,
+  displayName: string,
+  photoURL: string,
+  coupleId: string, // Reference to couples collection
+  personalityLevel: 1 | 2 | 3 | 4,
+  createdAt: timestamp,
+  lastActive: timestamp,
+  subscription: {
+    tier: 'free' | 'premium',
+    expiresAt: timestamp,
+    transactionId: string
+  },
+  preferences: {
+    notifications: boolean,
+    haptics: boolean,
+    sound: boolean,
+    darkMode: boolean,
+    language: string
+  }
+}
+2. couples/{coupleId}
+javascript
+{
+  userA: string, // userId
+  userB: string, // userId
+  createdAt: timestamp,
+  linkedAt: timestamp,
+  trustMeter: number, // 0-100
+  romancePoints: number,
+  connectionPoints: number,
+  vulnerabilityPoints: number,
+  currentStreak: number,
+  longestStreak: number,
+  gamesPlayed: number,
+  fightsResolved: number,
+  lastTherapyDate: timestamp,
+  relationshipDiagnosis: string,
+  originStory: string,
+  redFlags: array,
+  loveLanguages: array,
+  attachmentStyles: object
+}
+3. games/{gameId}
+javascript
+{
+  name: string,
+  category: 'love-arcade' | 'emotional' | 'conflict' | 'creative' | 'romance' | 'healing' | 'gameshow',
+  subcategory: string,
+  duration: number, // minutes
+  intensity: 1 | 2 | 3 | 4 | 5,
+  description: string,
+  instructions: string,
+  aiPrompt: string, // For Dr. Marcie's hosting (Google Gemini)
+  minPlayers: 1 | 2,
+  requiresCamera: boolean,
+  requiresMic: boolean,
+  requiresTouch: boolean,
+  xpReward: number,
+  createdAt: timestamp,
+  updatedAt: timestamp,
+  active: boolean,
+  premiumOnly: boolean
+}
+4. gameSessions/{sessionId}
+javascript
+{
+  coupleId: string,
+  gameId: string,
+  startedAt: timestamp,
+  completedAt: timestamp,
+  duration: number,
+  scores: {
+    userA: number,
+    userB: number,
+    joint: number
+  },
+  answers: array, // Game-specific responses
+  aiFeedback: string, // Dr. Marcie's commentary (Google Gemini)
+  emotionsDetected: array,
+  breakthroughs: array,
+  sharedMedia: array // URLs to photos/videos/audio
+}
+5. fights/{fightId}
+javascript
+{
+  coupleId: string,
+  initiatedBy: string, // userId
+  startedAt: timestamp,
+  resolvedAt: timestamp,
+  trigger: string,
+  intensity: 1 | 2 | 3 | 4 | 5,
+  userAInput: {
+    emotion: string,
+    action: string,
+    interpretation: string,
+    need: string
+  },
+  userBInput: {
+    emotion: string,
+    action: string,
+    interpretation: string,
+    need: string
+  },
+  aiVerdict: {
+    whatRightA: string,
+    whatRightB: string,
+    callOutA: string,
+    callOutB: string,
+    whoApologizes: 'A' | 'B' | 'both' | 'neither',
+    reasoning: string,
+    repairSteps: array
+  },
+  repairAttempts: array,
+  resolved: boolean,
+  preventedEscalation: boolean
+}
+6. translations/{translationId}
+javascript
+{
+  coupleId: string,
+  userId: string,
+  input: string,
+  interrogation: array, // 3 Yes/No questions and answers
+  surfaceIssue: string,
+  realIssue: string,
+  underlyingNeed: string,
+  actionPlan: string,
+  followedUp: boolean,
+  createdAt: timestamp
+}
+7. achievements/{achievementId}
+javascript
+{
+  name: string,
+  description: string,
+  category: 'foundation' | 'growth' | 'healing' | 'mastery' | 'special',
+  iconUrl: string,
+  xpReward: number,
+  requirement: string,
+  unlockedBy: array // userIds
+}
+14.2 Firebase Realtime Database Structure
+text
+/realtime/
+/active_games/{coupleId} // Currently playing games
+/sos_sessions/{coupleId} // Active SOS fights
+/typing_indicators/{chatId} // Who's typing
+/presence/{userId} // Online/offline status
+/live_scores/{gameId} // Real-time scoring
+14.3 Firebase Storage Structure
+text
+storage/
+users/{userId}/
+avatar.jpg
+voice_notes/{timestamp}.mp3
+drawings/{timestamp}.png
+couples/{coupleId}/
+memories/{timestamp}.jpg
+love_letters/{timestamp}.txt
+shared_art/{timestamp}.png
+games/{gameId}/
+assets/
+images/
+videos/
+audio/
+prompts/
+marcie_dialogue.json
+15. ANIMATION & FEEDBACK SYSTEM
+15.1 Timing & Duration Standards
+Micro-interactions: 200-300ms (button presses, toggles)
+
+State transitions: 300-400ms (screen changes, modal opens)
+
+Celebrations: 500-700ms (confetti, achievement unlocks)
+
+Loading sequences: <3s total with progress indication
+
+Real-time updates: <2s sync between devices
+
+15.2 Easing Curves
+Standard UI: cubic-bezier(0.4, 0.0, 0.2, 1)
+
+Entry animations: cubic-bezier(0.0, 0.0, 0.2, 1)
+
+Exit animations: cubic-bezier(0.4, 0.0, 1, 1)
+
+Bounce/Playful: cubic-bezier(0.68, -0.55, 0.27, 1.55)
+
+Emotional moments: cubic-bezier(0.2, 0.8, 0.2, 1)
+
+15.3 Specific Animations
+Button Press
+Scale to 95% (100ms)
+
+Darken fill by 20%
+
+Return to 100% with overshoot to 102% (elastic, 50ms)
+
+Haptic: Light tap
+
+Game Element Selection
+Outline glow intensifies (100ms)
+
+Fill animates from center outward (200ms)
+
+Text color transitions to white (150ms)
+
+Subtle bounce on complete (50ms overshoot)
+
+Trust Thermometer Update
+Liquid fill animates smoothly (400ms)
+
+Wave effect travels along surface
+
+Percentage counter animates incrementally
+
+Particle burst at new level milestones
+
+Confetti System
+50+ confetti pieces per animation
+
+Colors: #FA1F63, #BE1980, #33DEA5, #E4E831
+
+Random positions across screen width
+
+Duration: 2-5 seconds random
+
+Auto-removal after animation completes
+
+15.4 Feedback System
+Success Feedback
+Visual: Confetti, color-appropriate glow pulse
+
+Audio: Ascending chime
+
+Haptic: Light double-tap pattern
+
+Dr. Marcie: Celebratory animation + positive quip
+
+Error/Needs Improvement
+Visual: Gentle shake, color slightly desaturates
+
+Audio: Soft descending tone
+
+Haptic: Single heavier vibration
+
+Dr. Marcie: Constructive feedback
+
+Warning/Attention
+Visual: Attention color pulse, subtle bounce
+
+Audio: Attention chime
+
+Haptic: Two quick vibrations
+
+Dr. Marcie: Points to issue with attention colors
+
+Progress/Update
+Visual: Smooth color transition, particle trail
+
+Audio: Subtle progression sound
+
+Haptic: Light single tap
+
+Dr. Marcie: Nods approval
+
+16. ACCESSIBILITY REQUIREMENTS
+16.1 Visual Accessibility
+Text Scaling: Dynamic scaling up to 200% without breaking layouts
+
+High Contrast Mode: Simplified backgrounds, stronger edges
+
+Colorblind Modes: Adjusts palette (Protanopia, Deuteranopia, Tritanopia)
+
+Reduce Motion: Option to minimize complex animations
+
+Focus Indicators: Clear visual focus using element's color family
+
+Minimum Contrast Ratio: 4.5:1 for all text
+
+16.2 Interaction Accessibility
+Touch Targets: Minimum 44×44px
+
+Gesture Alternatives: All interactions have alternatives
+
+Timing Adjustments: Option to extend timers
+
+Audio Alternatives: Visual indicators for all audio cues
+
+Haptic Customization: Adjust intensity
+
+16.3 Content Accessibility
+Screen Reader Support: VoiceOver/TalkBack with color context
+
+Alt Text: For all images and animations
+
+Transcripts: For all voice content
+
+Logical Reading Order: Follows visual hierarchy
+
+Language Support: Left-to-right with color emotional consistency
+
+17. PERFORMANCE REQUIREMENTS
+17.1 Load Time Targets
+Cold start: <2 seconds on 4G
+
+Warm start: <1 second on WiFi
+
+Splash screen: <2 seconds
+
+17.2 Frame Rate
+All animations: 60fps minimum
+
+Complex screens: 55fps minimum
+
+Idle state: <3% CPU usage
+
+17.3 Memory Usage
+Peak memory: <150MB on mobile
+
+Memory leaks: 0 detected after 1 hour usage
+
+Garbage collection: <50ms pauses
+
+17.4 Network Usage
+Initial download: <5MB compressed
+
+Data usage per session: <10MB
+
+API response time: <300ms average
+
+Firebase Realtime Database: <500ms sync
+
+17.5 Battery
+<5% battery per 30 minutes of usage
+
+Efficient animation scheduling
+
+Off when backgrounded
+
+18. DEPLOYMENT CHECKLIST
+18.1 Firebase & GCP Setup
+□ Firebase Project created (relationshit-game)
+□ Firebase Authentication configured (Email/Password, Google, Apple)
+□ Firestore Database structure deployed
+□ Firebase Realtime Database rules configured
+□ Firebase Storage rules configured (with image compression)
+□ Firebase Cloud Functions deployed (Node.js 18)
+□ Firebase Cloud Messaging configured
+□ Google Analytics for Firebase initialized
+□ Firebase Performance Monitoring enabled
+□ Firebase Crashlytics integrated
+□ Firebase Remote Config setup for A/B testing
+□ Firebase App Distribution for beta testing
+□ Google Cloud Vertex AI API enabled for Gemini
+□ Google Cloud Text-to-Speech API enabled
+□ GCP Cloud Monitoring for performance and logging
+18.2 React Native App
+□ Expo SDK 51+ project initialized
+□ TypeScript configuration complete
+□ Navigation (React Navigation 6) configured
+□ 106+ screen components created
+□ Firebase SDK integrated (@react-native-firebase)
+□ UI Component Library built (buttons, cards, inputs)
+□ Gradient system implemented (all buttons, rings, progress)
+□ Dr. Marcie overlay component (with 15+ animations)
+□ Real-time synchronization working (Firebase Realtime Database)
+□ Offline support with Firestore persistence
+□ Image caching with react-native-fast-image
+□ Video/audio recording with expo-av
+□ Camera integration for games
+□ Push notifications working (foreground/background via FCM)
+□ Deep linking configured (app links, universal links)
+□ App icons and splash screens generated
+□ iOS/Android specific configurations
+18.3 Google AI & Integrations
+□ Google Gemini API integration (via Cloud Vertex AI or Google AI Studio)
+□ Google Cloud Text-to-Speech API integration for Dr. Marcie's voice
+□ Giphy API for GIF Battle game
+□ Google Maps Platform API for Memory Lane Map
+□ Google Play Billing & App Store IAP via Firebase Functions
+□ Sentry error tracking
+18.4 Game Engine
+□ Game template system built
+□ 150+ game logic implementations
+□ Real-time multiplayer sync (Firebase Realtime Database)
+□ Scoring system across all games
+□ Consequence Engine implementation
+□ Love Arcade narrative progression
+□ Save/load game state (Firestore)
+□ Game achievements and badges
+18.5 Performance & Security
+□ App loads in <2s on 4G
+□ 60fps animations maintained
+□ Memory leaks tested and fixed
+□ Battery usage optimized
+□ Data encrypted in transit/at rest
+□ Input sanitization for all fields
+□ JWT token refresh working
+□ Rate limiting on APIs
+□ DDoS protection configured
+□ Regular security audits scheduled
+18.6 App Store Submission
+□ App Store Connect configured
+□ Google Play Console configured
+□ Screenshots for 6.5", 6.1", 5.5" displays
+□ App preview video created (30s)
+□ Description optimized with keywords
+□ Privacy policy URL set
+□ Support contact configured
+□ Age rating appropriate (17+)
+□ Content ratings completed
+□ In-app purchase products configured
+19. 3-MODULE DEVELOPMENT SPLIT
+19.1 Overview
+The app is split into 3 independent modules that can be developed in parallel by 3 different AI systems and seamlessly integrated at the end.
+
+19.2 Module 1: Foundation App
+Primary AI Role: "The Architect"
+
+Responsibilities:
+Authentication & Onboarding System (Firebase Auth)
+
+Complete UI System (Colors, Typography, Components)
+
+Dr. Marcie Overlay System (15+ animations)
+
+Asset Management (Fonts, Images, Videos)
+
+Home Dashboard (Trust Thermometer, Daily Quest, Leaderboard)
+
+Profile & Settings Screens
+
+Shared State Management (Zustand + Context)
+
+Navigation System (7 bottom tabs)
+
+Exports:
+javascript
+export { AppNavigator } from './src/navigation/AppNavigator';
+export { useAppState } from './src/context/AppContext';
+export { firebase, auth, firestore, storage, database } from './src/lib/firebase';
+Screens (30+):
+Splash, Legal, Login, Sign Up, Forgot Password, Biometric Setup
+
+Onboarding Step 1-4, Couple Linking Code Generator, Code Entry, Welcome
+
+Home Dashboard, Trust Thermometer Detail, Leaderboard Detail
+
+Profile, Partner Dashboard, Settings, Account Settings, Notification Preferences, Privacy Controls, Accessibility Settings
+
+19.3 Module 2: Gameplay App
+Primary AI Role: "The Game Master"
+
+Responsibilities:
+Game Library System (7 categories, 150+ games)
+
+Universal Game Runner Template
+
+SOS Fight Solver System (Full Implementation)
+
+Partner Translator System (Full Implementation)
+
+Real-Time Multiplayer Engine (Firebase Realtime Database)
+
+AI Integration (Google Gemini, Google Cloud TTS)
+
+Voice & Media Integration (Audio, Camera, AR)
+
+Scoring & Progression System
+
+Consequence Engine
+
+Love Arcade Progression
+
+Exports:
+javascript
+export { GameLibrary } from './src/screens/games/GameLibrary';
+export { GameRunner } from './src/components/games/GameRunner';
+export { SOSFlow } from './src/screens/sos/SOSFlow';
+export { TranslatorFlow } from './src/screens/translator/TranslatorFlow';
+export { LoveArcade } from './src/screens/love-arcade/LoveArcade';
+export { useGameEngine } from './src/hooks/useGameEngine';
+export { TruthOrTrust } from './src/components/games/emotional/TruthOrTrust';
+// ... all 150+ games
+Screens (60+):
+Game Library, Category Detail, Game Lobby, Game Play, Game Pause, Game Results, Post-Game Survey
+
+SOS Confirmation, Emergency Modal, Booth, Structured Reflection, Holding Room, Verdict, Repair Selection, Repair Execution, Post-Repair, Results
+
+Translator Input, Interrogation, Reveal, Action Plan, Follow-up
+
+Love Arcade Entrance, Phase Selection, Cabinet Gallery, Cabinet Detail, Progress Map, Trophy Room
+
+19.4 Module 3: Admin & Monetization App
+Primary AI Role: "The Operator"
+
+Responsibilities:
+Admin Panel (Web - Next.js)
+
+Game CMS (Create/Edit/Delete games)
+
+User Management Dashboard
+
+Prompt Engineering Console
+
+Analytics Dashboard
+
+Push Notification Composer (FCM)
+
+Beta Tester Management
+
+System Configuration
+
+Monetization System
+
+Google Play Billing & App Store IAP
+
+Subscription tiers (Free, Premium, Therapist)
+
+Payment screens
+
+Receipt validation
+
+Restore purchases
+
+User Management (Mobile)
+
+Complete profile management
+
+Partner comparison dashboard
+
+Data export/delete
+
+Cloud Functions (Firebase)
+
+Game session management
+
+Scoring calculations
+
+Achievement awarding
+
+Analytics processing
+
+Notification triggers
+
+Subscription webhooks
+
+Media processing
+
+Exports:
+javascript
+// Admin Panel (Web)
+export { AdminPanel } from './admin/pages/dashboard';
+export { GameCMS } from './admin/pages/game-cms';
+export { UserManagement } from './admin/pages/user-management';
+export { PromptEngineering } from './admin/pages/prompt-engineering';
+export { AnalyticsDashboard } from './admin/pages/analytics';
+
+// Mobile
+export { SubscriptionManager } from './src/components/SubscriptionManager';
+export { PaymentScreen } from './src/screens/PaymentScreen';
+export { useSubscription } from './src/hooks/useSubscription';
+
+// Cloud Functions
+export { cloudFunctions } from './functions/index';
+
+// Analytics
+export { Analytics } from './src/lib/analytics';
+Screens (30+):
+Admin Login, Dashboard, Game CMS, User Management, Prompt Engineering, Analytics, Push Notifications, Beta Management, System Configuration
+
+Profile (enhanced), Partner Dashboard, Settings (enhanced), Subscription Management, Payment, Restore Purchases
+
+19.5 Integration Process
+Create shell project with shared dependencies
+
+Import Module 1 (Foundation) → app structure ready
+
+Import Module 2 (Gameplay) → gameplay integrated
+
+Import Module 3 (Admin/Monetization) → backend connected
+
+Run integration tests
+
+Fix conflicts (minimal, due to clear separation)
+
+Build and deploy
+
+Integration Timeline:
+Week 1-4: Module 1 (Foundation)
+
+Week 5-8: Module 2 (Gameplay)
+
+Week 9-12: Module 3 (Admin)
+
+Week 13-16: Integration & Testing
+
+Week 17-20: Polish & Launch
+
+20. COMPLETE VERIFICATION CHECKLIST
+20.1 Core Technical Architecture
+□ React Native Expo project setup with TypeScript
+□ Firebase/GCP integration for authentication and database
+□ Google Gemini AI for all AI features
+□ Google Cloud Text-to-Speech API for Dr. Marcie's voice
+□ Google Play Billing & App Store IAP for subscription model
+□ Real-time features using Firebase Realtime Database
+□ EAS build configuration for iOS/Android deployment
+□ Environment variable management for all API keys
+□ Crash reporting with Sentry integration
+□ Performance monitoring with Firebase Performance Monitoring
+20.2 Asset Integration
+□ Intro video: marcie-intro.webm
+□ Logo assets: mainlogoone.png + variants
+□ Dr. Marcie character assets (16 animations, expressions, gestures)
+□ Custom fonts: BarbieDream, Cheese, HolidayChristmas, SweetPink, WonderfulSometimes
+□ Sound effects library
+□ Confetti animation assets
+20.3 Screen Flow
+□ Splash Screen with video and logo
+□ Legal Disclaimer Modal
+□ Login/Sign Up with Firebase Auth
+□ Onboarding Flow (4 steps)
+□ Couple Linking System (code generation/entry)
+□ Home Dashboard with all metrics
+□ Game Library with 7 categories
+□ Challenge Screen (Game Runner)
+□ SOS Fight Solver (all 10 screens)
+□ Partner Translator (all 5 screens)
+□ Love Arcade (all 10 screens)
+□ Romance Hub (all 8 screens)
+□ Profile & Settings (all 12 screens)
+20.4 Game Implementation
+□ Love Arcade (30+ games)
+□ Emotional Connection (25 games)
+□ Conflict Resolution (20 games)
+□ Creative Chaos (20 games)
+□ Romance Hub (15 games)
+□ Healing Hospital (15 games)
+□ Game Show Modes (15 games)
+□ SOS Fight Solver (full flow)
+□ Partner Translator (full flow)
+20.5 Dr. Marcie AI Host
+□ Overlay System (fixed position, z-index 10000+)
+□ 15+ contextual animations
+□ 4 Personality Levels
+□ Speech bubble system
+□ Physical interaction with UI
+□ Google Gemini AI integration
+□ Google Cloud TTS integration
+20.6 Scoring & Progression
+□ Trust Thermometer (0-100%)
+□ Romance Points
+□ Connection Points
+□ Vulnerability Points
+□ Leaderboard
+□ Levels (1-100)
+□ 50+ Achievement Badges
+□ Real-time score updates
+20.7 Consequence Engine
+□ 24-hour inactivity detection
+□ Wallpaper Swap penalty
+□ FCM notification bombardment
+□ Romance Hub lockout
+□ Social penalty system (opt-in)
+20.8 Admin Panel
+□ Web-based portal on Firebase Hosting
+□ Super Admin authentication
+□ Game CMS (Create/Edit/Delete games)
+□ User Management Dashboard
+□ Prompt Engineering Console
+□ Analytics Dashboard
+□ Push Notification Composer (FCM)
+□ Beta Tester Management
+□ System Configuration
+20.9 Monetization
+□ Google Play Billing integration
+□ Apple App Store IAP integration
+□ Subscription tiers (Free, Premium, Therapist)
+□ Trial period management (7 days)
+□ Grace period handling (3 days)
+□ Restore purchases functionality
+□ Receipt validation
+20.10 Animation & Feedback
+□ All animations at 60fps
+□ Haptic feedback for all interactions
+□ Confetti system for successes
+□ Screen transitions smooth
+□ Micro-interactions responsive
+20.11 Accessibility
+□ Screen reader support (VoiceOver/TalkBack)
+□ Dynamic text sizing
+□ Colorblind modes (3 types)
+□ Reduced motion option
+□ Minimum touch targets (44×44px)
+□ High contrast mode
+□ Focus states for keyboard navigation
+20.12 Performance
+□ App cold start <2 seconds
+□ 60fps animations maintained
+□ Memory usage <150MB
+□ Battery drain <5% per 30min
+□ API response time <300ms
+□ Bundle size <50MB
+20.13 Launch Readiness
+□ All 150+ games playable end-to-end
+□ SOS solver works with real conflicts
+□ Partner translator produces helpful outputs
+□ Scoring system calculates correctly
+□ Leaderboard updates in real-time
+□ Consequence engine triggers appropriately
+□ Subscription upgrades/downgrades work
+□ Admin portal all functions working
+□ Push notifications at correct times
+□ Deep linking opens correct screens
+□ iOS 15+ compatibility
+□ Android 10+ compatibility
+□ App Store metadata prepared
+□ Google Play metadata prepared
+□ Privacy policy reviewed
+□ Terms of service reviewed
+□ Medical disclaimer prominent
+□ Crisis resources verified
+□ GDPR compliance
+□ CCPA/CPRA compliance
+FINAL NOTES
+All content in Relationshit! is powered by:
+Google Gemini for AI-driven therapy dialogue and analysis
+
+Firebase for authentication, database, storage, real-time sync, and cloud functions
+
+Google Cloud Text-to-Speech for Dr. Marcie's voice
+
+Google Cloud Platform for hosting and infrastructure
+
+App Architecture Summary:
+Total Mobile Screens: 106+
+
+Total Admin Screens: 15+
+
+Total Games: 150+
+
+Total Achievements: 50+
+
+Total Animations: 15+ Dr. Marcie animations
+
+Total Colors: 10 accent colors + 3 gradient systems
+
+Total Fonts: Inter (all weights)
+
+Total Subscriptions: 3 tiers

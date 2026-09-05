@@ -1,0 +1,17 @@
+{
+  "game_id": "text-tone-translator",
+  "title": "Text Tone Translator",
+  "description": "Analyze text messages for passive-aggressive tones and receive rewrite suggestions.",
+  "rules": "Upload or type a text message. System highlights passive-aggressive tones. Rewrite for clarity and kindness. Points for accurate detection and improved rewrites.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TextToneTranslatorGame",
+    "props": {}
+  },
+  "assets": {}
+}

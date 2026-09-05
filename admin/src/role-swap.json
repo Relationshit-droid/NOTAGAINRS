@@ -1,0 +1,17 @@
+{
+  "game_id": "role-swap",
+  "title": "Role Swap",
+  "description": "Argue from your partner's perspective by rewriting conflicts in their voice.",
+  "rules": "Enter a conflict description. Rewrite it from your partner's perspective. Rate accuracy of perspective-taking. Points for accuracy and empathy.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Romance Hub",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RoleSwapGame",
+    "props": {}
+  },
+  "assets": {}
+}

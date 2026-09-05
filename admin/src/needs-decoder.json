@@ -1,0 +1,17 @@
+{
+  "game_id": "needs-decoder",
+  "title": "The Needs Decoder",
+  "description": "Emoji cipher game guessing unmet needs from partner's emoji sequences.",
+  "rules": "Partner sends emoji sequence representing need. Guess the unmet need. System validates. Points for correct guesses and pattern recognition.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "NeedsDecoderGame",
+    "props": {}
+  },
+  "assets": {}
+}

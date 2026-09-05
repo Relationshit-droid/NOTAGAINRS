@@ -1,0 +1,17 @@
+{
+  "game_id": "commitment-countdown",
+  "title": "The Commitment Countdown",
+  "description": "30-day streak of daily micro-actions with achievement unlocking.",
+  "rules": "Receive daily micro-action. Complete within 24 hours. Track streaks and achievements. Points for consistency, streak length, and achievement unlocking.",
+  "scoring": {
+    "base_xp": 55,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "CommitmentCountdownGame",
+    "props": {}
+  },
+  "assets": {}
+}

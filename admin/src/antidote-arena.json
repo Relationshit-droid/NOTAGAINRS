@@ -1,0 +1,33 @@
+{
+  "game_id": "antidote_arena",
+  "title": "Antidote Arena",
+  "description": "A game to practice identifying and using antidotes to the Four Horsemen.",
+  "rules": "A 'horseman' will be presented. Choose the correct 'antidote' to score points.",
+  "ui": {
+    "component": "AntidoteArena",
+    "props": {
+      "quote": "Chef's kiss contempt level, honey. Quick, what's the cure?",
+      "horseman": "Contempt",
+      "correctAntidote": "Appreciation",
+      "antidotes": [
+        {
+          "name": "Gentle Start-Up",
+          "icon": "psychology"
+        },
+        {
+          "name": "Appreciation",
+          "icon": "favorite"
+        },
+        {
+          "name": "Responsibility",
+          "icon": "task-alt"
+        },
+        {
+          "name": "Self-Soothing",
+          "icon": "self-improvement"
+        }
+      ]
+    }
+  },
+  "category": "Conflict Resolution"
+}

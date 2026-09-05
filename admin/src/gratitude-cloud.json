@@ -1,0 +1,17 @@
+{
+  "game_id": "gratitude-cloud",
+  "title": "Gratitude Cloud",
+  "description": "A 60-second rapid appreciation writing generator that creates a metaphorical word cloud visualization.",
+  "rules": "Rapid-type positive adjectives about your partner for 60 seconds. Unique word detection with duplicate filtering. Size/position based on emotional weight. Shared viewing with partner comparison. Points for speed, uniqueness, and metaphor detection.",
+  "scoring": {
+    "base_xp": 30,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "GratitudeCloudGame",
+    "props": {}
+  },
+  "assets": {}
+}

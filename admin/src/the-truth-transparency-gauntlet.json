@@ -1,0 +1,17 @@
+{
+  "game_id": "the-truth-transparency-gauntlet",
+  "title": "The Truth & Transparency Gauntlet",
+  "description": "Cash Cab-style rapid-fire game where couples navigate toward safety, answering questions about truth and transparency.",
+  "rules": "Rapid-fire questions about truth-telling and transparency agreements. 10-second individual locks. Both correct and matched = Double Truth bonus. Wrong answers trigger Dr. Liss roasts. Points for accuracy and alignment.",
+  "scoring": {
+    "base_xp": 80,
+    "category": "Healing Hospital",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TheTruthTransparencyGauntletGame",
+    "props": {}
+  },
+  "assets": {}
+}

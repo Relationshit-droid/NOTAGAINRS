@@ -1,0 +1,17 @@
+{
+  "game_id": "defensiveness-detox",
+  "title": "Defensiveness Detox",
+  "description": "AI text rewrite game that blocks \"You always...\" and \"You never...\" statements, suggesting I-statement alternatives.",
+  "rules": "Type complaints or concerns. AI blocks defensive language and suggests I-statement alternatives. Rewrite until passing Marcie's filter. Points for successful rewrites, empathy level, and communication improvement.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Conflict Resolution",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "DefensivenessDetoxGame",
+    "props": {}
+  },
+  "assets": {}
+}

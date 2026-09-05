@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+service-account*.json
+*-service-account*.json
+.runtimeconfig.json
+node_modules/
+.expo/
+dist/
+build/

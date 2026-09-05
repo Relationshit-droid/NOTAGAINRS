@@ -1,0 +1,12 @@
+version: v1
+runConfig:
+  runCommand: ./backend/startup.sh
+  concurrency: 80
+  cpu: 2
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 14
+outputFiles:
+  serverApp:
+    include:
+      - backend

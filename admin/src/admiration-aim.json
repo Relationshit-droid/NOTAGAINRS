@@ -1,0 +1,16 @@
+{
+  "game_id": "admiration_aim",
+  "title": "Admiration Aim AR",
+  "description": "An augmented reality game to practice expressing admiration.",
+  "rules": "Point your camera at your partner. Compliments will appear on the screen. Tap the correct compliment to score points.",
+  "scoring": {
+    "correct_hit": 100,
+    "incorrect_hit": -50,
+    "category": "Emotional Connection"
+  },
+  "ui": {
+    "component": "AdmirationAim",
+    "props": {}
+  },
+  "assets": {}
+}

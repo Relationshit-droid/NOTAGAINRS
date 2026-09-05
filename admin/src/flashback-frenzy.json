@@ -1,0 +1,17 @@
+{
+  "game_id": "flashback-frenzy",
+  "title": "Flashback Frenzy",
+  "description": "Image association game linking triggers to memories and feelings.",
+  "rules": "View an image. Input associated emotion words. Partner guesses. Points for valid associations and memory matches.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "FlashbackFrenzyGame",
+    "props": {}
+  },
+  "assets": {}
+}

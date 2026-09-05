@@ -1,0 +1,17 @@
+{
+  "game_id": "vow-remix",
+  "title": "Vow Remix",
+  "description": "Rewrite wedding vows to reflect modern relationship reality and humor.",
+  "rules": "Original vows are displayed. Rewrite to include modern reality and humor. Rate likelihood of being said seriously. Points for creativity, relevance, and humor.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "VowRemixGame",
+    "props": {}
+  },
+  "assets": {}
+}

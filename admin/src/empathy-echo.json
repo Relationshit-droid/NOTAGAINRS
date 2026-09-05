@@ -1,0 +1,17 @@
+{
+  "game_id": "empathy-echo",
+  "title": "Empathy Echo",
+  "description": "Record worries and validate partner responses, with blind rating for empathy vs. fixing.",
+  "rules": "One partner records a worry. The other records a validation response. Blind rating for empathy vs. problem-solving. Points for empathetic validations.",
+  "scoring": {
+    "base_xp": 90,
+    "category": "Emotional Connection",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "EmpathyEchoGame",
+    "props": {}
+  },
+  "assets": {}
+}

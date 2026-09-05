@@ -1,0 +1,17 @@
+{
+  "game_id": "role-swap-roast",
+  "title": "Role-Swap Roast",
+  "description": "AR face filter partner imitation game with helium voice modulation and humor detection.",
+  "rules": "Record video arguing as your partner using AR face filters and voice modulation. Partner votes on accuracy. Points for performance accuracy, humor, and emotional commitment. Requires ARKit/ARCore.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Creative Chaos",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RoleSwapRoastGame",
+    "props": {}
+  },
+  "assets": {}
+}

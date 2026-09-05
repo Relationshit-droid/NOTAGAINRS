@@ -1,0 +1,17 @@
+{
+  "game_id": "lie-detector-lite",
+  "title": "Lie Detector: Lite™",
+  "description": "Voice response analysis for transparency - detects pauses, filler words, and vocal steadiness.",
+  "rules": "Answer relationship questions via voice recording within 10 seconds. System analyzes pauses >1.2s, pitch variance, and filler words. Points for vocal steadiness and honesty indicators.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Healing Hospital",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "LieDetectorLiteGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // -------------------------------------------------------------------
+    // All persistence flows through the FastAPI backend, which uses the
+    // Firebase Admin SDK (bypasses these rules). Clients therefore get:
+    //   - read access to their own profile document only
+    //   - no write access anywhere
+    // -------------------------------------------------------------------
+
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

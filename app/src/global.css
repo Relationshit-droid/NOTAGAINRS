@@ -1,0 +1,109 @@
+/* Reset default styles for mobile */
+* {
+  -webkit-user-select: none; /* Disable text selection on iOS */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Mobile-specific styles */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  -webkit-touch-callout: none; /* Disable context menu on iOS */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: none;
+}
+
+/* Scrollbar styling for mobile web */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Mobile touch targets */
+.touch-target {
+  min-height: 44px; /* Minimum touch target size according to Apple HIG */
+  min-width: 44px;
+  padding: 10px;
+}
+
+/* Gradient animations for mobile */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Responsive text sizing */
+.mobile-header {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.mobile-body {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Safe area handling for mobile devices */
+.safe-area-inset {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Hide elements not suitable for mobile */
+.desktop-only {
+  display: none;
+}
+
+/* Mobile-friendly modal styles */
+.mobile-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 80vh;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background: rgba(26, 10, 31, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Optimize for mobile touch interactions */
+.button-large {
+  min-height: 50px;
+  min-width: 50px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* Optimize for mobile performance */
+.optimized-component {
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "bid-radar",
+  "title": "Bid Radar",
+  "description": "Notice and respond to bids for connection from your partner. A game to practice catching daily bids for attention, affection, and interest.",
+  "rules": "A partner makes a bid for connection (verbal or non-verbal). You have 60 seconds to identify and submit your response. Points for correct identification and empathetic responses.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "BidRadarGame",
+    "props": {}
+  },
+  "assets": {}
+}

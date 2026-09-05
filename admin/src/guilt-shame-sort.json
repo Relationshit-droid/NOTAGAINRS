@@ -1,0 +1,17 @@
+{
+  "game_id": "guilt-shame-sort",
+  "title": "Guilt vs. Shame Sort",
+  "description": "Rapid Tinder-style swipe sorting of guilt vs. shame statements.",
+  "rules": "Statements appear as cards. Swipe to sort into guilt (self-focused) vs. shame (self-worth). Timer pressure with streak counter. Points for accuracy and speed.",
+  "scoring": {
+    "base_xp": 45,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "GuiltShameSortGame",
+    "props": {}
+  },
+  "assets": {}
+}

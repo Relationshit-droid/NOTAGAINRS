@@ -1,0 +1,19 @@
+{
+  "game_id": "six_second_kiss",
+  "title": "6-Second Kiss Challenge",
+  "description": "A challenge to reconnect and build intimacy through a simple, powerful act.",
+  "rules": "Both partners press and hold their respective buttons on the screen. The timer starts when both are pressing down. Hold for a full 6 seconds to complete the challenge. The synchronization meter measures how in-sync your presses are.",
+  "scoring": {
+    "completion": 25,
+    "sync_bonus": 10,
+    "category": "Romance Hub"
+  },
+  "ui": {
+    "component": "SixSecondKiss",
+    "props": {}
+  },
+  "assets": {
+    "background_music": "romantic_ambience.mp3",
+    "completion_sound": "sparkle.wav"
+  }
+}

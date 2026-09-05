@@ -1,0 +1,17 @@
+{
+  "game_id": "emotional-archaeology",
+  "title": "Emotional Archaeology",
+  "description": "Dig through the layers of past conflicts to uncover the fossils of old wounds and transform them.",
+  "rules": "Select a past conflict. Uncover layers: event, trigger, wound, need, gift. For each layer, both partners contribute insights. Points for depth, accuracy, and reframing toward growth.",
+  "scoring": {
+    "base_xp": 95,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "EmotionalArchaeologyGame",
+    "props": {}
+  },
+  "assets": {}
+}

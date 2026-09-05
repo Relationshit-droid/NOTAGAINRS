@@ -1,0 +1,539 @@
+﻿# Screen Violations Analysis Report
+
+Total files analyzed: 283
+
+## Summary by Category
+
+| Category | Count |
+|----------|-------|
+| Raw hex only | 2 |
+| Raw rgba only | 40 |
+| Raw fontSize only | 0 |
+| Raw padding/margin only | 2 |
+| Raw borderRadius only | 8 |
+| Raw shadow only | 1 |
+| Mixed style objects | 140 |
+| Mixed violations | 7 |
+| No violations | 83 |
+| Missing ScreenLayout (SafeAreaView) | 155 |
+| Using Text instead of Typography | 20 |
+| Using TouchableOpacity instead of SquishyButton | 34 |
+
+---
+
+## 1. Raw hex only
+- app/src/screens/games/RelationalJeopardy.tsx (2 hex values)
+- app/src/screens/games/CouplesJeopardyGame.tsx (7 hex values)
+
+## 2. Raw rgba only
+- app/src/screens/games/BoundaryBingo.tsx (3 rgba values)
+- app/src/screens/games/BidRadarGame.tsx (11 rgba values)
+- app/src/screens/games/BoundaryBingoGrid.tsx (7 rgba values)
+- app/src/screens/games/CommitmentDiceGame.tsx (6 rgba values)
+- app/src/screens/games/ChoppedFamily.tsx (4 rgba values)
+- app/src/screens/games/AdmirationAim.tsx (3 rgba values)
+- app/src/screens/games/AchievementsAndBadges.tsx (5 rgba values)
+- app/src/screens/games/AmazingRaceCrossroads.tsx (12 rgba values)
+- app/src/screens/games/AntidoteArenaGame.tsx (5 rgba values)
+- app/src/screens/games/AmazingRaceLegacyDash.tsx (10 rgba values)
+- app/src/screens/games/IntimacyFeud.tsx (2 rgba values)
+- app/src/screens/games/HarborMasterChallenge.tsx (5 rgba values)
+- app/src/screens/games/ToneShiftChallengeGame.tsx (3 rgba values)
+- app/src/screens/games/TruthTellerTower.tsx (5 rgba values)
+- app/src/screens/games/TouchMapLiteGame.tsx (14 rgba values)
+- app/src/screens/games/DateNightRouletteGame2.tsx (9 rgba values)
+- app/src/screens/games/DateNightRouletteGame1.tsx (4 rgba values)
+- app/src/screens/games/DateNightRouletteWheel.tsx (6 rgba values)
+- app/src/screens/games/GratitudeCloud.tsx (3 rgba values)
+- app/src/screens/games/DrawYourFeelingsGame.tsx (7 rgba values)
+- app/src/screens/LoginAndSignUp.tsx (2 rgba values)
+- app/src/screens/LoadingMarcieIsThinking.tsx (1 rgba values)
+- app/src/screens/LoveMapGapQuest1.tsx (4 rgba values)
+- app/src/screens/LoveMapSpeedrunGame.tsx (4 rgba values)
+- app/src/screens/LoveMapGapQuest2.tsx (2 rgba values)
+- app/src/screens/GameLibraryGridView.tsx (1 rgba values)
+- app/src/screens/CoupleLinking2.tsx (1 rgba values)
+- app/src/screens/HarborMastersChallenge.tsx (1 rgba values)
+- app/src/screens/HeartToHeartNewlywedGame.tsx (2 rgba values)
+- app/src/screens/HeartOfTheMatterGame.tsx (2 rgba values)
+- app/src/screens/PartnerComparisonProfile.tsx (3 rgba values)
+- app/src/screens/OfflineMode.tsx (1 rgba values)
+- app/src/screens/RateTheExperience.tsx (1 rgba values)
+- app/src/screens/games/6SecondKissChallenge2.tsx (4 rgba values)
+- app/src/screens/RelationshipDiagnosisCard.tsx (2 rgba values)
+- app/src/screens/MicroBetrayalMiniGolfGame.tsx (4 rgba values)
+- app/src/screens/MemoryLaneGpsGame.tsx (4 rgba values)
+- app/src/screens/MicroMomentMuseumGame1.tsx (1 rgba values)
+- app/src/screens/NewlywedSyncCheckGame.tsx (1 rgba values)
+- app/src/screens/MicroMomentMuseumGame2.tsx (2 rgba values)
+
+## 3. Raw fontSize only
+
+## 4. Raw padding/margin only
+- app/src/screens/workshops/ApologyAndReleaseWorkshop.tsx (1 padding/margin values)
+- app/src/screens/MainGameLibrary.tsx (1 padding/margin values)
+
+## 5. Raw borderRadius only
+- app/src/screens/sos/BoothsScreen.tsx (2 borderRadius values)
+- app/src/screens/games/TouchMapConfiguration.tsx (3 borderRadius values)
+- app/src/screens/sos/SOSModal.tsx (1 borderRadius values)
+- app/src/screens/sos/CoolDownRoom.tsx (2 borderRadius values)
+- app/src/screens/game/CategorySelectionScreen.tsx (1 borderRadius values)
+- app/src/screens/dashboard/AchievementsScreen.tsx (1 borderRadius values)
+- app/src/screens/game/GamePlayScreen.tsx (2 borderRadius values)
+- app/src/screens/game/GameLobbyScreen.tsx (2 borderRadius values)
+
+## 6. Raw shadow only
+- app/src/screens/onboarding/OnboardingCurrentVibe.tsx (3 shadow values)
+
+## 7. Mixed style objects (inline styles dominant)
+- app/src/screens/games/MicroMomentMuseum.tsx (2 inline style objects)
+- app/src/screens/games/MicroBetrayalGolf.tsx (5 inline style objects)
+- app/src/screens/games/NeedsDecoder.tsx (3 inline style objects)
+- app/src/screens/games/MirrorMode.tsx (3 inline style objects)
+- app/src/screens/games/MemoryLaneDash.tsx (1 inline style objects)
+- app/src/screens/games/LoveMapSpeedrun.tsx (1 inline style objects)
+- app/src/screens/games/MemoryLaneMap.tsx (1 inline style objects)
+- app/src/screens/games/MemoryLaneGPS.tsx (2 inline style objects)
+- app/src/screens/games/RansomNoteRomance.tsx (2 inline style objects)
+- app/src/screens/games/RoleSwapGame.tsx (2 inline style objects)
+- app/src/screens/games/RoleSwap.tsx (2 inline style objects)
+- app/src/screens/games/SafetyAndEmpathyFeud.tsx (3 inline style objects)
+- app/src/screens/games/RoleSwapRoast.tsx (3 inline style objects)
+- app/src/screens/games/RitualBuilder.tsx (1 inline style objects)
+- app/src/screens/games/RepairReportCard.tsx (2 inline style objects)
+- app/src/screens/games/RitualRouletteGame.tsx (1 inline style objects)
+- app/src/screens/games/RitualRoulette.tsx (3 inline style objects)
+- app/src/screens/games/LoveMapGapQuest.tsx (3 inline style objects)
+- app/src/screens/games/ForeplaySliderGame1.tsx (1 inline style objects)
+- app/src/screens/games/ForeplayForecast.tsx (2 inline style objects)
+- app/src/screens/games/GameLibraryScreen.tsx (5 inline style objects)
+- app/src/screens/games/FutureCouncil.tsx (1 inline style objects)
+- app/src/screens/games/FamilyFeudSafety.tsx (3 inline style objects)
+- app/src/screens/games/FamilyFeudNewReality.tsx (4 inline style objects)
+- app/src/screens/games/FloodingForecast.tsx (2 inline style objects)
+- app/src/screens/games/FlashbackFrenzy.tsx (2 inline style objects)
+- app/src/screens/games/GameResultsScreen.tsx (5 inline style objects)
+- app/src/screens/games/LegacyDash.tsx (1 inline style objects)
+- app/src/screens/games/LayersOfHurt.tsx (1 inline style objects)
+- app/src/screens/games/LieDetector.tsx (2 inline style objects)
+- app/src/screens/games/LegacyDice.tsx (5 inline style objects)
+- app/src/screens/games/GratitudeGraffiti.tsx (6 inline style objects)
+- app/src/screens/games/GentleStartUpGauntlet.tsx (2 inline style objects)
+- app/src/screens/games/JeopardyRebuilding.tsx (1 inline style objects)
+- app/src/screens/games/GuiltShameSort.tsx (1 inline style objects)
+- app/src/screens/games/TurningTowardTallyGame2.tsx (7 inline style objects)
+- app/src/screens/games/TurningTowardTallyGame1.tsx (4 inline style objects)
+- app/src/screens/games/VibeSync.tsx (4 inline style objects)
+- app/src/screens/games/ValidationGameShow.tsx (4 inline style objects)
+- app/src/screens/games/TruthOrTrust.tsx (10 inline style objects)
+- app/src/screens/games/TrustWiring.tsx (4 inline style objects)
+- app/src/screens/games/TurningTowardTally.tsx (1 inline style objects)
+- app/src/screens/games/TruthTransparencyGauntlet.tsx (4 inline style objects)
+- app/src/screens/games/VibeSyncScreen.tsx (1 inline style objects)
+- app/src/screens/onboarding/OnboardingAttachmentStyle.tsx (2 inline style objects)
+- app/src/screens/games/WhosRight.tsx (1 inline style objects)
+- app/src/screens/sos/VerdictScreen.tsx (2 inline style objects)
+- app/src/screens/onboarding/OnboardingMeetCute.tsx (3 inline style objects)
+- app/src/screens/games/VowRemixGame.tsx (3 inline style objects)
+- app/src/screens/games/VowRemix.tsx (1 inline style objects)
+- app/src/screens/games/VulnerabilityVolleyGame.tsx (4 inline style objects)
+- app/src/screens/games/VulnerabilityVolley.tsx (3 inline style objects)
+- app/src/screens/games/TrustBingo.tsx (2 inline style objects)
+- app/src/screens/games/StressSynergyLab.tsx (1 inline style objects)
+- app/src/screens/games/SoundtrackSync.tsx (1 inline style objects)
+- app/src/screens/games/TextToneTranslator.tsx (1 inline style objects)
+- app/src/screens/games/StressTest.tsx (2 inline style objects)
+- app/src/screens/games/SharedMeaningMural.tsx (1 inline style objects)
+- app/src/screens/games/SecrecyAudit.tsx (5 inline style objects)
+- app/src/screens/games/SlapOfTruth.tsx (1 inline style objects)
+- app/src/screens/games/SixSecondStareDown.tsx (2 inline style objects)
+- app/src/screens/games/TheIceberg.tsx (8 inline style objects)
+- app/src/screens/games/TriggerTakedown.tsx (3 inline style objects)
+- app/src/screens/games/TransparencyToss.tsx (1 inline style objects)
+- app/src/screens/games/TrustBank.tsx (1 inline style objects)
+- app/src/screens/games/TriggerTriage.tsx (4 inline style objects)
+- app/src/screens/games/TimelineDetective.tsx (1 inline style objects)
+- app/src/screens/games/TheIcebergDive.tsx (3 inline style objects)
+- app/src/screens/games/TouchMap.tsx (2 inline style objects)
+- app/src/screens/games/ToneShiftChallenge.tsx (1 inline style objects)
+- app/src/screens/auth/OnboardingNavigator.tsx (1 inline style objects)
+- app/src/screens/auth/CoupleCodeScreen.tsx (6 inline style objects)
+- app/src/screens/dashboard/ActionPlanScreen.tsx (10 inline style objects)
+- app/src/screens/auth/OriginStoryScreen.tsx (2 inline style objects)
+- app/src/screens/admin/AdminLoginScreen.tsx (1 inline style objects)
+- app/src/screens/admin/AdminFightModerationQueue.tsx (3 inline style objects)
+- app/src/screens/admin/AdminUserManagementList.tsx (4 inline style objects)
+- app/src/screens/admin/AdminPortal.tsx (7 inline style objects)
+- app/src/screens/dashboard/DashboardHome.tsx (8 inline style objects)
+- app/src/screens/game/GameScreenLoveTreaty.tsx (1 inline style objects)
+- app/src/screens/game/GameResultsScreen.tsx (1 inline style objects)
+- app/src/screens/games/ApologyAuction.tsx (8 inline style objects)
+- app/src/screens/games/6SecondKissChallenge1.tsx (1 inline style objects)
+- app/src/screens/dashboard/PartnerTranslator.tsx (12 inline style objects)
+- app/src/screens/dashboard/PartnerDashboard.tsx (5 inline style objects)
+- app/src/screens/dashboard/SettingsScreen.tsx (1 inline style objects)
+- app/src/screens/dashboard/ProfileScreen.tsx (2 inline style objects)
+- app/src/screens/admin/AdminFightModeration.tsx (2 inline style objects)
+- app/src/screens/LeaderboardDetail3.tsx (4 inline style objects)
+- app/src/screens/LeaderboardDetail2.tsx (1 inline style objects)
+- app/src/screens/RelationshipDiagnosisCard3.tsx (2 inline style objects)
+- app/src/screens/LeaderboardDetail8.tsx (2 inline style objects)
+- app/src/screens/GratitudeGraffitiMural.tsx (1 inline style objects)
+- app/src/screens/CoupleLinking1.tsx (3 inline style objects)
+- app/src/screens/LeaderboardDetail1.tsx (1 inline style objects)
+- app/src/screens/HomeScreen.tsx (7 inline style objects)
+- app/src/screens/TheHarborAndStormGuide.tsx (4 inline style objects)
+- app/src/screens/admin/AdminAnalyticsDashboard.tsx (1 inline style objects)
+- app/src/screens/admin/AdminAnalytics.tsx (1 inline style objects)
+- app/src/screens/admin/AdminDashboardOverview.tsx (5 inline style objects)
+- app/src/screens/admin/AdminDashboard.tsx (2 inline style objects)
+- app/src/screens/TranslatorActionPlan.tsx (3 inline style objects)
+- app/src/screens/TranslationReveal.tsx (2 inline style objects)
+- app/src/screens/WelcomeAndDisclaimer.tsx (2 inline style objects)
+- app/src/screens/VibeSyncSlider.tsx (4 inline style objects)
+- app/src/screens/games/DateNightRoulette.tsx (2 inline style objects)
+- app/src/screens/games/CycleBreakerBoardGame.tsx (2 inline style objects)
+- app/src/screens/games/DefensivenessDetox.tsx (10 inline style objects)
+- app/src/screens/games/DealOrNoDealAccountability.tsx (2 inline style objects)
+- app/src/screens/games/ConnectionConstructor.tsx (1 inline style objects)
+- app/src/screens/games/ConflictDiceGame.tsx (1 inline style objects)
+- app/src/screens/games/CycleBreaker.tsx (2 inline style objects)
+- app/src/screens/games/ConnectionConundrum.tsx (3 inline style objects)
+- app/src/screens/games/DenialDetector.tsx (3 inline style objects)
+- app/src/screens/games/EscapismRoom.tsx (8 inline style objects)
+- app/src/screens/games/EmpathyEchoGame.tsx (1 inline style objects)
+- app/src/screens/games/EyeContactChallengeGame.tsx (1 inline style objects)
+- app/src/screens/games/EyeContactChallenge.tsx (13 inline style objects)
+- app/src/screens/games/DreamDecoderGame.tsx (1 inline style objects)
+- app/src/screens/games/DreamDecoder.tsx (2 inline style objects)
+- app/src/screens/games/EmpathyEcho.tsx (2 inline style objects)
+- app/src/screens/games/DreamSupportSprint.tsx (3 inline style objects)
+- app/src/screens/games/ConflictDice.tsx (8 inline style objects)
+- app/src/screens/games/AvoidanceArcade.tsx (4 inline style objects)
+- app/src/screens/games/AppreciationAuctionGame.tsx (7 inline style objects)
+- app/src/screens/games/BedroomBingoGame1.tsx (9 inline style objects)
+- app/src/screens/games/BedroomBingoCard.tsx (6 inline style objects)
+- app/src/screens/games/ApologyOlympics.tsx (3 inline style objects)
+- app/src/screens/games/ApologyAuctionGame.tsx (3 inline style objects)
+- app/src/screens/games/AppreciationAuction.tsx (3 inline style objects)
+- app/src/screens/games/ApologyWorkshop.tsx (1 inline style objects)
+- app/src/screens/games/BedroomBingoGame2.tsx (5 inline style objects)
+- app/src/screens/games/CommitmentDice.tsx (6 inline style objects)
+- app/src/screens/games/CommitmentCountdown.tsx (3 inline style objects)
+- app/src/screens/games/CompromiseJengaGame.tsx (1 inline style objects)
+- app/src/screens/games/CompromiseJenga.tsx (5 inline style objects)
+- app/src/screens/games/BlameFlip.tsx (5 inline style objects)
+- app/src/screens/games/BidRadar.tsx (4 inline style objects)
+- app/src/screens/games/ChallengeScreen.tsx (13 inline style objects)
+- app/src/screens/games/BPDPatternDetective.tsx (3 inline style objects)
+
+## 8. Mixed violations (multiple equal dominant types)
+- app/src/screens/games/DeEscalationLab.tsx (hex: 2, rgba: 3, inlineStyle: 3)
+- app/src/screens/auth/LoginAndSignUp.tsx (rgba: 1, paddingMargin: 1)
+- app/src/screens/games/TheRansomNoteGame.tsx (shadow: 1, inlineStyle: 1)
+- app/src/screens/auth/LegalDisclaimerScreen.tsx (paddingMargin: 1, inlineStyle: 1)
+- app/src/screens/LoveArcadeHub.tsx (shadow: 1, inlineStyle: 1)
+- app/src/screens/MirrorModeVideoGame.tsx (rgba: 1, inlineStyle: 1)
+- app/src/screens/UpdateRequired.tsx (rgba: 1, inlineStyle: 1)
+
+## 9. No violations (clean files)
+- app/src/screens/CategorySelectionScreen.tsx
+- app/src/screens/CrisisResources.tsx
+- app/src/screens/GuiltVsShameSort.tsx
+- app/src/screens/HelpAndFaqScreen.tsx
+- app/src/screens/IntimacyLevelSettings.tsx
+- app/src/screens/JeopardyRebuildingRound.tsx
+- app/src/screens/LeaderboardDetail5.tsx
+- app/src/screens/LeaderboardDetail6.tsx
+- app/src/screens/LeaderboardDetail7.tsx
+- app/src/screens/LegacyDiceGame.tsx
+- app/src/screens/LieDetectorLite.tsx
+- app/src/screens/MemoryLaneMapGame.tsx
+- app/src/screens/PrivacyPolicy.tsx
+- app/src/screens/RelationalJeopardy.tsx
+- app/src/screens/RelationshipDiagnosisCard1.tsx
+- app/src/screens/RelationshipDiagnosisCard2.tsx
+- app/src/screens/TranslatorActionPlan10.tsx
+- app/src/screens/TranslatorActionPlan9.tsx
+- app/src/screens/UserProfileScreen.tsx
+- app/src/screens/admin/AdminGlobalConfiguration.tsx
+- app/src/screens/admin-portal/AdminDashboard.tsx
+- app/src/screens/admin-portal/AdminFightModerationQueue.tsx
+- app/src/screens/admin-portal/AdminGameCMSListView.tsx
+- app/src/screens/admin-portal/AdminGameEditorScreen.tsx
+- app/src/screens/admin-portal/AdminGlobalConfig.tsx
+- app/src/screens/admin-portal/AdminLoginScreen.tsx
+- app/src/screens/admin-portal/AdminNavigator.tsx
+- app/src/screens/admin-portal/AdminPromptEngineeringConsole.tsx
+- app/src/screens/admin-portal/AdminPushComposer.tsx
+- app/src/screens/admin-portal/AdminUserManagement.tsx
+- app/src/screens/admin-portal/FightModeration.tsx
+- app/src/screens/admin-portal/GameCMS.tsx
+- app/src/screens/admin-portal/GlobalConfig.tsx
+- app/src/screens/admin-portal/UserManagement.tsx
+- app/src/screens/auth/PartnerEntryScreen.tsx
+- app/src/screens/auth/PasswordResetScreen.tsx
+- app/src/screens/auth/SignInScreen.tsx
+- app/src/screens/auth/SplashScreen.tsx
+- app/src/screens/auth/WebSplash.tsx
+- app/src/screens/crisis/CrisisResources.tsx
+- app/src/screens/dashboard/LeaderboardScreen.tsx
+- app/src/screens/games/AdmirationAimArGame.tsx
+- app/src/screens/games/AntidoteArena.tsx
+- app/src/screens/games/CouplesFamilyFeudGame.tsx
+- app/src/screens/games/DefensivenessDetoxGame.tsx
+- app/src/screens/games/EscapeEchoChamber.tsx
+- app/src/screens/games/ForeplaySliderGame2.tsx
+- app/src/screens/games/GameWrapper.tsx
+- app/src/screens/games/GifTheFeels.tsx
+- app/src/screens/games/HealingBingo.tsx
+- app/src/screens/games/KaraokeConfessional.tsx
+- app/src/screens/games/NewGameLibrary.tsx
+- app/src/screens/games/NewlywedGame.tsx
+- app/src/screens/games/NewlywedHeart.tsx
+- app/src/screens/games/RelationshipCouncil.tsx
+- app/src/screens/games/RepairAttemptScreen.tsx
+- app/src/screens/games/RepairRelay.tsx
+- app/src/screens/games/ResultsRoastScreen.tsx
+- app/src/screens/games/RewriteMemory.tsx
+- app/src/screens/games/RoleSwapRoastArGame.tsx
+- app/src/screens/games/SecrecyAuditQuizGame1.tsx
+- app/src/screens/games/SecrecyAuditQuizGame2.tsx
+- app/src/screens/games/SixSecondKiss.tsx
+- app/src/screens/games/SixSecondKissResults.tsx
+- app/src/screens/games/TheIcebergEmotionalGame1.tsx
+- app/src/screens/games/TheIcebergEmotionalGame2.tsx
+- app/src/screens/games/TheIntimacyFeud.tsx
+- app/src/screens/games/TheLoveScriptDebacle.tsx
+- app/src/screens/games/TheNeedsDecoderGame.tsx
+- app/src/screens/games/TouchMapPreferenceGame1.tsx
+- app/src/screens/games/TouchMapPreferenceGame2.tsx
+- app/src/screens/games/WindowsAndWalls.tsx
+- app/src/screens/games/__tests__/BidRadar.test.tsx
+- app/src/screens/games/__tests__/GentleStartUpGauntlet.test.tsx
+- app/src/screens/matchmaking/Matchmaking.tsx
+- app/src/screens/onboarding/CoupleLinking1.tsx
+- app/src/screens/onboarding/CoupleLinking2.tsx
+- app/src/screens/onboarding/CoupleLinkingScreen.tsx
+- app/src/screens/onboarding/OnboardingFirstRedFlag.tsx
+- app/src/screens/planning/DateDetailsPlanning.tsx
+- app/src/screens/settings/AppSettingsAndPersonality.tsx
+- app/src/screens/support/ContactSupportScreen.tsx
+- app/src/screens/support/SupportScreen.tsx
+
+## 10. Missing ScreenLayout (uses SafeAreaView)
+- app/src/screens/games/RoleSwapGame.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RoleSwap.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RoleSwapRoastArGame.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RoleSwapRoast.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RitualRouletteGame.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RewriteMemory.tsx (1 SafeAreaView usages)
+- app/src/screens/games/ResultsRoastScreen.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RitualRoulette.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RitualBuilder.tsx (1 SafeAreaView usages)
+- app/src/screens/games/SafetyAndEmpathyFeud.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TheIntimacyFeud.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TheIcebergEmotionalGame2.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TheNeedsDecoderGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TheLoveScriptDebacle.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TheIcebergEmotionalGame1.tsx (3 SafeAreaView usages)
+- app/src/screens/games/SecrecyAuditQuizGame1.tsx (1 SafeAreaView usages)
+- app/src/screens/games/SecrecyAudit.tsx (1 SafeAreaView usages)
+- app/src/screens/games/SixSecondStareDown.tsx (3 SafeAreaView usages)
+- app/src/screens/games/SecrecyAuditQuizGame2.tsx (1 SafeAreaView usages)
+- app/src/screens/games/MicroBetrayalGolf.tsx (3 SafeAreaView usages)
+- app/src/screens/games/MemoryLaneMap.tsx (1 SafeAreaView usages)
+- app/src/screens/games/MirrorMode.tsx (1 SafeAreaView usages)
+- app/src/screens/games/MicroMomentMuseum.tsx (1 SafeAreaView usages)
+- app/src/screens/games/MemoryLaneGPS.tsx (3 SafeAreaView usages)
+- app/src/screens/games/LoveMapGapQuest.tsx (1 SafeAreaView usages)
+- app/src/screens/games/LieDetector.tsx (1 SafeAreaView usages)
+- app/src/screens/games/MemoryLaneDash.tsx (1 SafeAreaView usages)
+- app/src/screens/games/LoveMapSpeedrun.tsx (1 SafeAreaView usages)
+- app/src/screens/games/NeedsDecoder.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RepairAttemptScreen.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RelationshipCouncil.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RepairReportCard.tsx (3 SafeAreaView usages)
+- app/src/screens/games/RepairRelay.tsx (1 SafeAreaView usages)
+- app/src/screens/games/RelationalJeopardy.tsx (1 SafeAreaView usages)
+- app/src/screens/games/NewlywedGame.tsx (1 SafeAreaView usages)
+- app/src/screens/games/NewGameLibrary.tsx (3 SafeAreaView usages)
+- app/src/screens/games/RansomNoteRomance.tsx (3 SafeAreaView usages)
+- app/src/screens/games/NewlywedHeart.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TheRansomNoteGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/VulnerabilityVolley.tsx (3 SafeAreaView usages)
+- app/src/screens/games/VowRemixGame.tsx (1 SafeAreaView usages)
+- app/src/screens/games/WhosRight.tsx (1 SafeAreaView usages)
+- app/src/screens/games/VulnerabilityVolleyGame.tsx (1 SafeAreaView usages)
+- app/src/screens/games/VowRemix.tsx (1 SafeAreaView usages)
+- app/src/screens/games/ValidationGameShow.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TurningTowardTallyGame2.tsx (1 SafeAreaView usages)
+- app/src/screens/games/VibeSyncScreen.tsx (1 SafeAreaView usages)
+- app/src/screens/games/VibeSync.tsx (1 SafeAreaView usages)
+- app/src/screens/matchmaking/Matchmaking.tsx (3 SafeAreaView usages)
+- app/src/screens/support/ContactSupportScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/sos/VerdictScreen.tsx (7 SafeAreaView usages)
+- app/src/screens/workshops/ApologyAndReleaseWorkshop.tsx (3 SafeAreaView usages)
+- app/src/screens/support/SupportScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/sos/SOSModal.tsx (3 SafeAreaView usages)
+- app/src/screens/settings/AppSettingsAndPersonality.tsx (3 SafeAreaView usages)
+- app/src/screens/planning/DateDetailsPlanning.tsx (3 SafeAreaView usages)
+- app/src/screens/sos/CoolDownRoom.tsx (3 SafeAreaView usages)
+- app/src/screens/sos/BoothsScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TouchMapPreferenceGame1.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TouchMapLiteGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TransparencyToss.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TouchMapPreferenceGame2.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TouchMapConfiguration.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ToneShiftChallenge.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TimelineDetective.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TouchMap.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ToneShiftChallengeGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TriggerTakedown.tsx (3 SafeAreaView usages)
+- app/src/screens/games/TruthTransparencyGauntlet.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TruthTellerTower.tsx (5 SafeAreaView usages)
+- app/src/screens/games/TurningTowardTallyGame1.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TurningTowardTally.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TruthOrTrust.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TrustBank.tsx (5 SafeAreaView usages)
+- app/src/screens/games/TriggerTriage.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TrustWiring.tsx (1 SafeAreaView usages)
+- app/src/screens/games/TrustBingo.tsx (1 SafeAreaView usages)
+- app/src/screens/games/LegacyDice.tsx (1 SafeAreaView usages)
+- app/src/screens/games/AppreciationAuction.tsx (1 SafeAreaView usages)
+- app/src/screens/games/ApologyWorkshop.tsx (1 SafeAreaView usages)
+- app/src/screens/games/AvoidanceArcade.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AppreciationAuctionGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ApologyOlympics.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AntidoteArenaGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AntidoteArena.tsx (5 SafeAreaView usages)
+- app/src/screens/games/ApologyAuctionGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ApologyAuction.tsx (3 SafeAreaView usages)
+- app/src/screens/games/BedroomBingoCard.tsx (3 SafeAreaView usages)
+- app/src/screens/games/BoundaryBingoGrid.tsx (3 SafeAreaView usages)
+- app/src/screens/games/BoundaryBingo.tsx (3 SafeAreaView usages)
+- app/src/screens/games/CommitmentCountdown.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ChoppedFamily.tsx (5 SafeAreaView usages)
+- app/src/screens/games/BlameFlip.tsx (3 SafeAreaView usages)
+- app/src/screens/games/BedroomBingoGame2.tsx (3 SafeAreaView usages)
+- app/src/screens/games/BedroomBingoGame1.tsx (3 SafeAreaView usages)
+- app/src/screens/games/BidRadarGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/BidRadar.tsx (1 SafeAreaView usages)
+- app/src/screens/crisis/CrisisResources.tsx (3 SafeAreaView usages)
+- app/src/screens/admin/AdminUserManagementList.tsx (3 SafeAreaView usages)
+- app/src/screens/game/GameLobbyScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/game/CategorySelectionScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/UserProfileScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/OfflineMode.tsx (3 SafeAreaView usages)
+- app/src/screens/CrisisResources.tsx (3 SafeAreaView usages)
+- app/src/screens/UpdateRequired.tsx (3 SafeAreaView usages)
+- app/src/screens/PrivacyPolicy.tsx (3 SafeAreaView usages)
+- app/src/screens/game/GamePlayScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AdmirationAimArGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AdmirationAim.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AmazingRaceLegacyDash.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AmazingRaceCrossroads.tsx (3 SafeAreaView usages)
+- app/src/screens/games/AchievementsAndBadges.tsx (3 SafeAreaView usages)
+- app/src/screens/game/GameScreenLoveTreaty.tsx (3 SafeAreaView usages)
+- app/src/screens/game/GameResultsScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/games/6SecondKissChallenge2.tsx (3 SafeAreaView usages)
+- app/src/screens/games/6SecondKissChallenge1.tsx (3 SafeAreaView usages)
+- app/src/screens/games/CommitmentDiceGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/EyeContactChallenge.tsx (1 SafeAreaView usages)
+- app/src/screens/games/EscapismRoom.tsx (3 SafeAreaView usages)
+- app/src/screens/games/FlashbackFrenzy.tsx (3 SafeAreaView usages)
+- app/src/screens/games/EyeContactChallengeGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/EscapeEchoChamber.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DreamDecoder.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DrawYourFeelingsGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/EmpathyEchoGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DreamDecoderGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/FloodingForecast.tsx (3 SafeAreaView usages)
+- app/src/screens/games/GameWrapper.tsx (5 SafeAreaView usages)
+- app/src/screens/games/GameResultsScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/games/LegacyDash.tsx (1 SafeAreaView usages)
+- app/src/screens/games/GentleStartUpGauntlet.tsx (3 SafeAreaView usages)
+- app/src/screens/games/GameLibraryScreen.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ForeplaySliderGame1.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ForeplayForecast.tsx (3 SafeAreaView usages)
+- app/src/screens/games/FutureCouncil.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ForeplaySliderGame2.tsx (3 SafeAreaView usages)
+- app/src/screens/games/CouplesFamilyFeudGame.tsx (5 SafeAreaView usages)
+- app/src/screens/games/ConnectionConundrum.tsx (1 SafeAreaView usages)
+- app/src/screens/games/CycleBreaker.tsx (1 SafeAreaView usages)
+- app/src/screens/games/CouplesJeopardyGame.tsx (7 SafeAreaView usages)
+- app/src/screens/games/ConnectionConstructor.tsx (3 SafeAreaView usages)
+- app/src/screens/games/CompromiseJengaGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/CompromiseJenga.tsx (1 SafeAreaView usages)
+- app/src/screens/games/ConflictDiceGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/ConflictDice.tsx (1 SafeAreaView usages)
+- app/src/screens/games/CycleBreakerBoardGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DefensivenessDetox.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DeEscalationLab.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DenialDetector.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DefensivenessDetoxGame.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DealOrNoDealAccountability.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DateNightRouletteGame1.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DateNightRoulette.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DateNightRouletteWheel.tsx (3 SafeAreaView usages)
+- app/src/screens/games/DateNightRouletteGame2.tsx (3 SafeAreaView usages)
+
+## 11. Using Text instead of Typography
+- app/src/screens/games/EmpathyEchoGame.tsx (10 Text components)
+- app/src/screens/games/EscapeEchoChamber.tsx (16 Text components)
+- app/src/screens/games/EmpathyEcho.tsx (6 Text components)
+- app/src/screens/games/DreamDecoderGame.tsx (12 Text components)
+- app/src/screens/games/DreamSupportSprint.tsx (6 Text components)
+- app/src/screens/games/FamilyFeudNewReality.tsx (6 Text components)
+- app/src/screens/games/FamilyFeudSafety.tsx (5 Text components)
+- app/src/screens/games/EyeContactChallengeGame.tsx (8 Text components)
+- app/src/screens/games/EscapismRoom.tsx (10 Text components)
+- app/src/screens/games/EyeContactChallenge.tsx (16 Text components)
+- app/src/screens/games/ConflictDiceGame.tsx (9 Text components)
+- app/src/screens/games/ConnectionConstructor.tsx (8 Text components)
+- app/src/screens/games/ConflictDice.tsx (8 Text components)
+- app/src/screens/games/CompromiseJenga.tsx (7 Text components)
+- app/src/screens/games/CompromiseJengaGame.tsx (7 Text components)
+- app/src/screens/games/CycleBreaker.tsx (8 Text components)
+- app/src/screens/games/CycleBreakerBoardGame.tsx (13 Text components)
+- app/src/screens/games/CouplesJeopardyGame.tsx (13 Text components)
+- app/src/screens/games/ConnectionConundrum.tsx (4 Text components)
+- app/src/screens/games/CouplesFamilyFeudGame.tsx (15 Text components)
+
+## 12. Using TouchableOpacity instead of SquishyButton
+- app/src/screens/games/RelationalJeopardy.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/NewlywedGame.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/RoleSwapGame.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/RitualRouletteGame.tsx (5 TouchableOpacity usages)
+- app/src/screens/games/HarborMasterChallenge.tsx (5 TouchableOpacity usages)
+- app/src/screens/games/GratitudeGraffiti.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/NewGameLibrary.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/IntimacyFeud.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/RoleSwapRoastArGame.tsx (5 TouchableOpacity usages)
+- app/src/screens/games/TouchMapPreferenceGame1.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/TouchMapConfiguration.tsx (10 TouchableOpacity usages)
+- app/src/screens/games/TruthTellerTower.tsx (5 TouchableOpacity usages)
+- app/src/screens/games/TruthOrTrust.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/SecrecyAuditQuizGame1.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/SafetyAndEmpathyFeud.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/TheRansomNoteGame.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/TheIceberg.tsx (1 TouchableOpacity usages)
+- app/src/screens/LeaderboardDetail8.tsx (1 TouchableOpacity usages)
+- app/src/screens/LeaderboardDetail6.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/6SecondKissChallenge2.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/6SecondKissChallenge1.tsx (3 TouchableOpacity usages)
+- app/src/screens/JeopardyRebuildingRound.tsx (7 TouchableOpacity usages)
+- app/src/screens/HomeScreen.tsx (7 TouchableOpacity usages)
+- app/src/screens/LeaderboardDetail5.tsx (3 TouchableOpacity usages)
+- app/src/screens/LeaderboardDetail2.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/AmazingRaceCrossroads.tsx (5 TouchableOpacity usages)
+- app/src/screens/games/DefensivenessDetox.tsx (7 TouchableOpacity usages)
+- app/src/screens/games/ConflictDiceGame.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/GameLibraryScreen.tsx (11 TouchableOpacity usages)
+- app/src/screens/games/EyeContactChallenge.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/BedroomBingoGame1.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/BedroomBingoCard.tsx (3 TouchableOpacity usages)
+- app/src/screens/games/BoundaryBingo.tsx (1 TouchableOpacity usages)
+- app/src/screens/games/BedroomBingoGame2.tsx (3 TouchableOpacity usages)
+

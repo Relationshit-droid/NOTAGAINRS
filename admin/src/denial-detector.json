@@ -1,0 +1,17 @@
+{
+  "game_id": "denial-detector",
+  "title": "The Denial Detector",
+  "description": "Voice analysis detecting overuse of \"fine\" and avoidance language.",
+  "rules": "Prompt given. Record voice response. System detects avoidance patterns, \"fine\" frequency, and filler words. Points for honesty and lack of avoidance.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "DenialDetectorGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "family-feud-our-new-reality-edition",
+  "title": "Family Feud: Our New Reality Edition",
+  "description": "Family Feud themed around co-parenting and building chosen families after infidelity.",
+  "rules": "Survey questions about family reality. Face-off and main board rounds. Match before reveal for double points. Focuses on co-parenting, boundaries, and shared decision-making.",
+  "scoring": {
+    "base_xp": 110,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "FamilyFeudOurNewRealityEditionGame",
+    "props": {}
+  },
+  "assets": {}
+}

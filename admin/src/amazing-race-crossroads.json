@@ -1,0 +1,18 @@
+{
+  "game_id": "amazing_race_crossroads",
+  "title": "Amazing Race: Crossroads",
+  "description": "A decision-making challenge in the Amazing Race.",
+  "rules": "At the crossroads, you and your partner must choose a path forward. Discuss and make a joint decision.",
+  "ui": {
+    "component": "AmazingRaceCrossroads",
+    "props": {
+      "quote": "Phase 4 Word-Wound Protocol is active. Choose your path wisely, the rift is closing!",
+      "prompt": "Choose your communication style for the next 500 miles:",
+      "options": [
+        "Radical Candor",
+        "Softened Start-up"
+      ]
+    }
+  },
+  "category": "Love Arcade"
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "legacy-dice",
+  "title": "Legacy Dice",
+  "description": "Roll dice for legacy prompts, then record voice messages about your desired legacy.",
+  "rules": "Dice roll generates a legacy prompt. Record a voice message. System analyzes clarity and warmth. Points for depth, warmth, and authenticity.",
+  "scoring": {
+    "base_xp": 85,
+    "category": "Emotional Connection",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "LegacyDiceGame",
+    "props": {}
+  },
+  "assets": {}
+}

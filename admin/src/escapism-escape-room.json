@@ -1,0 +1,17 @@
+{
+  "game_id": "escapism-escape-room",
+  "title": "Escapism Escape Room",
+  "description": "60-second puzzle escaping the \"Netflix Binge Basement\" using real-life insights.",
+  "rules": "Solve personalized escape puzzles based on escapism patterns. 60-second time limit per puzzle. Points for speed, solution accuracy, and real-life application.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "EscapismEscapeRoomGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "tone-shift-challenge",
+  "title": "Tone Shift Challenge",
+  "description": "Read sentences in four different emotional tones and have your partner guess which one you chose.",
+  "rules": "Read a sentence with a selected emotion (warm, frustrated, curious, playful). Partner guesses the tone. Points for accuracy and vocal variety.",
+  "scoring": {
+    "base_xp": 40,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "ToneShiftChallengeGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,9 @@
+{
+  "gameId": "apology-auction",
+  "title": "Apology Auction",
+  "description": "Bid on the best apology for a given scenario.",
+  "rules": "Read the scenario and the apologies. Bid on the one you think is the most sincere and effective. The highest bidder wins the points.",
+  "points": 15,
+  "category": "Conflict Resolution",
+  "difficulty": "medium"
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "the-amazing-race-legacy-dash",
+  "title": "The Amazing Race: Legacy Dash",
+  "description": "Future-building scavenger hunt completing 5 linked challenges as a team.",
+  "rules": "Complete 5 challenges sequentially. Split-info mechanics: each player gets half the puzzle. Time-based scoring. Final task: record a 30-second legacy message together. Points for speed and inclusion of key phrases.",
+  "scoring": {
+    "base_xp": 120,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TheAmazingRaceLegacyDashGame",
+    "props": {}
+  },
+  "assets": {}
+}

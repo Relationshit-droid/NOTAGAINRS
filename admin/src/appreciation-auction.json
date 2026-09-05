@@ -1,0 +1,17 @@
+{
+  "game_id": "appreciation-auction",
+  "title": "Appreciation Auction",
+  "description": "Bid on genuine appreciations using fictional currency, with bluff detection.",
+  "rules": "Appreciations are revealed anonymously. Bid coins on the one you think is most genuine. Points for correctly identifying real appreciations.",
+  "scoring": {
+    "base_xp": 85,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "AppreciationAuctionGame",
+    "props": {}
+  },
+  "assets": {}
+}

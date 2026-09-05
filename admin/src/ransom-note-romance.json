@@ -1,0 +1,17 @@
+{
+  "game_id": "ransom-note-romance",
+  "title": "Ransom Note Romance",
+  "description": "Drag-and-drop cutout words building absurdly sweet \"threats\".",
+  "rules": "Drag words from bank to build absurdly sweet threat messages. Partner rates absurdity and sweetness. Points for creativity, humor, and partner reaction quality.",
+  "scoring": {
+    "base_xp": 45,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RansomNoteRomanceGame",
+    "props": {}
+  },
+  "assets": {}
+}

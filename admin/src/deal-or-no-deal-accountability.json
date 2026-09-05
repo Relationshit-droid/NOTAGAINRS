@@ -1,0 +1,17 @@
+{
+  "game_id": "deal-or-no-deal-accountability",
+  "title": "Deal or No Deal: The Accountability Briefcase",
+  "description": "Accountability game where couples open briefcases containing truth statements vs. defensive shrapnel.",
+  "rules": "Open 5 briefcases per round. Avoid defensive statements (0 pts). Select accountability statements (+50 each). Final Deal: accept Full Responsibility Declaration (+500 pts). Say NO DEAL if not ready - no shame. Points for accountability and progress.",
+  "scoring": {
+    "base_xp": 100,
+    "category": "Healing Hospital",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "DealOrNoDealAccountabilityGame",
+    "props": {}
+  },
+  "assets": {}
+}

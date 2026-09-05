@@ -1,0 +1,17 @@
+{
+  "game_id": "healing-bingo",
+  "title": "Healing Bingo",
+  "description": "Weekly 5×5 grid of healing actions with verification system.",
+  "rules": "Receive personalized healing actions grid. Complete actions with evidence. System verifies completions. Points for streaks, bingos, and healing progress.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "HealingBingoGame",
+    "props": {}
+  },
+  "assets": {}
+}

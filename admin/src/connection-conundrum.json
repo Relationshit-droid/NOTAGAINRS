@@ -1,0 +1,17 @@
+{
+  "game_id": "connection-conundrum",
+  "title": "Marcie's Grand Finale: The Connection Conundrum",
+  "description": "A 10-round rapid-fire finale mixing all previous game types, testing comprehensive relationship mastery.",
+  "rules": "10 rounds combining all game types: bidding, repair, vulnerability, trust. Each round tests different skills. Points based on performance across all categories. Generates personalized ritual.",
+  "scoring": {
+    "base_xp": 200,
+    "category": "Emotional Connection",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "ConnectionConundrumGame",
+    "props": {}
+  },
+  "assets": {}
+}

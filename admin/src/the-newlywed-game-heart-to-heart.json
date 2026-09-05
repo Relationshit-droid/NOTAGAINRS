@@ -1,0 +1,17 @@
+{
+  "game_id": "the-newlywife-game-heart-to-heart",
+  "title": "The Newlywed Game: Heart-to-Heart",
+  "description": "Deep, empathetic version of the classic newlywed game focusing on emotional understanding.",
+  "rules": "Both answer 5 questions privately. Points for exact match (+100), empathetic match (+75), directional match (+50). Bonus for predicting partner's emotional nuance. Empathy scale, not right/wrong.",
+  "scoring": {
+    "base_xp": 85,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TheNewlywifeGameHeartToHeartGame",
+    "props": {}
+  },
+  "assets": {}
+}

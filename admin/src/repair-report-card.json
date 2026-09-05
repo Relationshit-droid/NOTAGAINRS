@@ -1,0 +1,17 @@
+{
+  "game_id": "repair-report-card",
+  "title": "The Repair Report Card",
+  "description": "Weekly slider survey rating 5 relationship areas with trend analysis.",
+  "rules": "Rate 5 areas weekly: Communication, Trust, Intimacy, Conflict, Appreciation. System analyzes trends. Points for consistency, improvement, and trend awareness.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RepairReportCardGame",
+    "props": {}
+  },
+  "assets": {}
+}

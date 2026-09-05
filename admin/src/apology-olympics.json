@@ -1,0 +1,17 @@
+{
+  "game_id": "apology-olympics",
+  "title": "The Apology Olympics",
+  "description": "Speed rewrite of ineffective apologies following specific rules for ownership and repair.",
+  "rules": "View an ineffective apology. Rewrite following rules: ownership, impact naming, repair offer. Points for completeness, lack of blame-shifting, and repair quality.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "ApologyOlympicsGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "transparency-toss",
+  "title": "Transparency Toss",
+  "description": "Real-time truth sharing with verification - low-stakes truth \"tossing\" between partners.",
+  "rules": "Share a truth on a given topic within 60 seconds. Partner verifies or questions. Points for honesty, specificity, and verification timing.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TransparencyTossGame",
+    "props": {}
+  },
+  "assets": {}
+}

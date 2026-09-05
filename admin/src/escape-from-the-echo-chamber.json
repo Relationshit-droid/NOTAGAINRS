@@ -1,0 +1,17 @@
+{
+  "game_id": "escape-from-the-echo-chamber",
+  "title": "Escape from the Echo Chamber",
+  "description": "A digital escape room where you and your partner must collaborate to break free from toxic relationship patterns.",
+  "rules": "5 puzzles to solve by combining different clues each partner receives. 90 seconds per puzzle. Discuss out loud - no typing. Time penalties for failures. Points for speed, accuracy, and teamwork.",
+  "scoring": {
+    "base_xp": 120,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "EscapeFromTheEchoChamberGame",
+    "props": {}
+  },
+  "assets": {}
+}

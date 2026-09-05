@@ -1,0 +1,97 @@
+{
+  "expo": {
+    "name": "relationshit",
+    "slug": "relationshit",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "scheme": "relationshit",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "backgroundColor": "#0f0a0c",
+    "primaryColor": "#db147c",
+    "owner": "relationshit",
+    "plugins": [
+      "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/BarbieDream-Regular.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "backgroundColor": "#0f0a0c",
+          "imageWidth": 200
+        }
+      ],
+      [
+        "@sentry/react-native",
+        {
+          "enableInExpoDevelopment": false
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.relationshit.app",
+          "enableGooglePay": true,
+          "enableApplePay": true
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f0a0c"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.relationshit.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to capture photos for profile pictures and game activities.",
+        "NSPhotoLibraryUsageDescription": "This app accesses your photo library to select profile pictures and share game moments.",
+        "UIRequiresFullScreen": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f0a0c"
+      },
+      "package": "com.relationshit.app",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "VIBRATE"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "experiments": {
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    }
+  }
+}

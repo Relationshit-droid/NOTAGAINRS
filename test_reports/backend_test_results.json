@@ -1,0 +1,331 @@
+{
+  "summary": "15/15 tests passed",
+  "success_rate": 100.0,
+  "tests": [
+    {
+      "test_name": "Health Check",
+      "success": true,
+      "details": "Status: 200",
+      "response_data": {
+        "status": "healthy",
+        "app": "Love Actually - The Game",
+        "version": "1.0.0"
+      },
+      "timestamp": "2026-01-31T06:12:53.523546"
+    },
+    {
+      "test_name": "Health Status Validation",
+      "success": true,
+      "details": "Status is healthy",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:53.523630"
+    },
+    {
+      "test_name": "Get Game Categories",
+      "success": true,
+      "details": "Status: 200",
+      "response_data": {
+        "categories": [
+          {
+            "id": "emotional-connection",
+            "name": "Emotional Connection",
+            "description": "SEEN Method focused games",
+            "icon": "heart",
+            "color": "#FA1F63",
+            "games": [
+              "truth-or-trust",
+              "gratitude-cloud",
+              "eye-contact-challenge",
+              "memory-lane-map",
+              "vibe-check"
+            ]
+          },
+          {
+            "id": "conflict-resolution",
+            "name": "Conflict Resolution",
+            "description": "Gottman-inspired games",
+            "icon": "shield",
+            "color": "#33DEA5",
+            "games": [
+              "slap-of-truth",
+              "apology-auction",
+              "defensiveness-detox",
+              "whos-right",
+              "stress-test"
+            ]
+          },
+          {
+            "id": "creative-chaos",
+            "name": "Creative Chaos",
+            "description": "Playful, creative challenges",
+            "icon": "sparkles",
+            "color": "#E4E831",
+            "games": [
+              "role-swap-roast",
+              "draw-your-feelings",
+              "gif-battle",
+              "karaoke-confessional",
+              "ransom-note"
+            ]
+          },
+          {
+            "id": "romance-hub",
+            "name": "Romance Hub",
+            "description": "Spicy & sweet connections",
+            "icon": "flame",
+            "color": "#BE1980",
+            "games": [
+              "date-night-roulette",
+              "bedroom-bingo",
+              "six-second-kiss",
+              "foreplay-slider",
+              "touch-map"
+            ]
+          },
+          {
+            "id": "healing-hospital",
+            "name": "Healing Hospital",
+            "description": "Deep repair & recovery",
+            "icon": "medkit",
+            "color": "#5C1459",
+            "games": [
+              "windows-and-walls",
+              "trigger-triage",
+              "trust-bank",
+              "the-iceberg",
+              "secrecy-audit"
+            ]
+          },
+          {
+            "id": "game-show",
+            "name": "Game Show",
+            "description": "Classic game show formats",
+            "icon": "trophy",
+            "color": "#22d3ee",
+            "games": [
+              "couples-jeopardy",
+              "relationship-millionaire",
+              "family-feud-couples",
+              "newlywed-sync",
+              "wheel-of-intimacy"
+            ]
+          },
+          {
+            "id": "love-arcade",
+            "name": "The Love Arcade",
+            "description": "Championship matches of honesty, wit, and emotional parkour",
+            "icon": "game-controller",
+            "color": "#FF6B6B",
+            "games": [
+              "truth-teller-tower",
+              "echo-chamber-escape",
+              "intimacy-feud",
+              "relational-jeopardy",
+              "family-forge",
+              "harbor-storm"
+            ]
+          }
+        ]
+      },
+      "timestamp": "2026-01-31T06:12:53.525276"
+    },
+    {
+      "test_name": "Categories Count",
+      "success": true,
+      "details": "Found 7 categories",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:53.525426"
+    },
+    {
+      "test_name": "Love Arcade Category Found",
+      "success": true,
+      "details": "Love Arcade category exists",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:53.525442"
+    },
+    {
+      "test_name": "Love Arcade Properties",
+      "success": true,
+      "details": "All required properties present",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:53.525449"
+    },
+    {
+      "test_name": "Get Love Arcade Games",
+      "success": true,
+      "details": "Status: 200",
+      "response_data": {
+        "games": [
+          {
+            "id": "truth-teller-tower",
+            "name": "Truth Teller Tower",
+            "phase": "Foundation (Phase 1)",
+            "format": "Who Wants to Be a Millionaire meets The Newlywed Game",
+            "description": "Scale the lie-avalanche. Five questions. Three lifelines. One shared brain.",
+            "max_score": 100,
+            "lifelines": [
+              "50/50",
+              "Double Confidence",
+              "Trust Check"
+            ],
+            "scoring": {
+              "correct_answer": 10,
+              "predicted_partner": 5,
+              "double_truth": 20
+            }
+          },
+          {
+            "id": "echo-chamber-escape",
+            "name": "Escape from the Echo Chamber",
+            "phase": "Deconstruction (Phase 2)",
+            "format": "Digital Escape Room",
+            "description": "Trapped in a hall of infinite mirrors. Break the loop together.",
+            "max_score": 100,
+            "time_limit_per_puzzle": 90,
+            "puzzles": 5
+          },
+          {
+            "id": "intimacy-feud",
+            "name": "The Intimacy Feud",
+            "phase": "Shared Reality (Phase 3)",
+            "format": "Family Feud style",
+            "description": "Survey says... be boring. Be authentic. Be real.",
+            "max_score": 250,
+            "scoring": {
+              "1st_place": 50,
+              "2nd_place": 30,
+              "3rd_place": 20,
+              "partner_match": 10,
+              "authenticity_streak": 15
+            }
+          },
+          {
+            "id": "relational-jeopardy",
+            "name": "Relational Jeopardy!",
+            "phase": "The Future (Phase 4)",
+            "format": "Jeopardy style",
+            "description": "Categories designed by couples who rebuilt.",
+            "max_score": 2000,
+            "categories": [
+              "Accountability Plans",
+              "Redefinition",
+              "Integration"
+            ],
+            "has_daily_double": true,
+            "has_final_jeopardy": true
+          },
+          {
+            "id": "family-forge",
+            "name": "Family Forge Edition",
+            "phase": "Special - Family Building",
+            "format": "Mixed game show formats",
+            "description": "For couples forging families after betrayal.",
+            "max_score": 1800,
+            "sub_games": [
+              "Family Feud: Our New Reality",
+              "The Newlywed Game: Heart-to-Heart",
+              "Chopped: Family Kitchen",
+              "The Amazing Race: Legacy Dash"
+            ]
+          },
+          {
+            "id": "harbor-storm",
+            "name": "Harbor & Storm Edition",
+            "phase": "Special - BPD/Emotional Regulation",
+            "format": "Cooperative challenges",
+            "description": "Build a better boat. Learn to sail as a crew.",
+            "max_score": 1900,
+            "sub_games": [
+              "BPD Pattern Detective",
+              "Validation Game Show",
+              "Connection Constructor",
+              "Harbor Master's Challenge"
+            ]
+          }
+        ]
+      },
+      "timestamp": "2026-01-31T06:12:53.527210"
+    },
+    {
+      "test_name": "Arcade Games Count",
+      "success": true,
+      "details": "Found 6 arcade games",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:53.527350"
+    },
+    {
+      "test_name": "Arcade Game Structure",
+      "success": true,
+      "details": "Game objects have required properties",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:53.527367"
+    },
+    {
+      "test_name": "Create User",
+      "success": true,
+      "details": "Status: 200",
+      "response_data": {
+        "id": "36fc453b-09d5-4b37-83a1-901c4c12855e",
+        "email": "test_061253@example.com",
+        "display_name": "Test User",
+        "partner_id": null,
+        "couple_code": "E3ED4405",
+        "sarcasm_level": 1,
+        "trust_level": 0.5,
+        "vulnerability_level": 0.5,
+        "points": 0,
+        "plan": "free",
+        "created_at": "2026-01-31T06:12:53.528519+00:00"
+      },
+      "timestamp": "2026-01-31T06:12:53.529215"
+    },
+    {
+      "test_name": "User ID Generated",
+      "success": true,
+      "details": "User ID: 36fc453b-09d5-4b37-83a1-901c4c12855e",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:53.529281"
+    },
+    {
+      "test_name": "Dr. Marcie Chat",
+      "success": true,
+      "details": "Status: 200",
+      "response_data": {
+        "response": "Ah, hello there. So, you've reached out to the wit-infused guru of digital therapy, have you? Well, let\u2019s see if we can navigate through the labyrinth of emotions. If you\u2019re looking for help, I'd wager there's a storm brewing in your emotional teacup. \n\nWhat's the emergency? Miscommunication? A whiff of jealousy? Or perhaps your inner martyr complex is carrying the flag of perpetual misunderstanding? Remember, the hallmark of a true existential crisis is believing you're the only one having it. But don't worry, I've got a treasure chest of sarcasm and insight to get you through this. Unload your problem, and let's see if we can translate it from \"help me, I'm spiraling\" to something more akin to \"I'm practically thriving in this chaos.\"",
+        "animation": "marcie-laugh",
+        "sarcasm_level": 2
+      },
+      "timestamp": "2026-01-31T06:12:56.712762"
+    },
+    {
+      "test_name": "Marcie Response Structure",
+      "success": true,
+      "details": "Response has required fields",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:56.712874"
+    },
+    {
+      "test_name": "Create SOS Session",
+      "success": true,
+      "details": "Status: 200",
+      "response_data": {
+        "id": "719655dd-552a-48f9-ad4b-08723e0efb0d",
+        "initiator_id": "36fc453b-09d5-4b37-83a1-901c4c12855e",
+        "couple_id": "test-couple-id",
+        "status": "waiting_for_partner",
+        "started_at": "2026-01-31T06:12:56.714098+00:00",
+        "submissions": {},
+        "verdict": null
+      },
+      "timestamp": "2026-01-31T06:12:56.714450"
+    },
+    {
+      "test_name": "SOS Session ID Generated",
+      "success": true,
+      "details": "Session ID: 719655dd-552a-48f9-ad4b-08723e0efb0d",
+      "response_data": null,
+      "timestamp": "2026-01-31T06:12:56.714505"
+    }
+  ],
+  "timestamp": "2026-01-31T06:12:56.714523"
+}

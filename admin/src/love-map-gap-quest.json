@@ -1,0 +1,17 @@
+{
+  "game_id": "love-map-gap-quest",
+  "title": "Love Map Gap Quest",
+  "description": "Discover knowledge gaps about your partner and craft curiosity questions to fill them.",
+  "rules": "System identifies gaps in your knowledge of your partner. Craft a curiosity question. Points for question quality and gap identification.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "LoveMapGapQuestGame",
+    "props": {}
+  },
+  "assets": {}
+}

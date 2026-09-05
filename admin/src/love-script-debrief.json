@@ -1,0 +1,17 @@
+{
+  "game_id": "love-script-debrief",
+  "title": "Love-Script Debrief",
+  "description": "Analyze and deconstruct the unconscious scripts that governed your relationship before rebuilding.",
+  "rules": "Map the old love script: roles, triggers, patterns, payoffs. Identify 3 key script elements. Rewrite each with new choices. Points for script accuracy, insightfulness, and new pattern creation.",
+  "scoring": {
+    "base_xp": 90,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "LoveScriptDebriefGame",
+    "props": {}
+  },
+  "assets": {}
+}

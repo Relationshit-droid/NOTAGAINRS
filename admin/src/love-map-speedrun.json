@@ -1,0 +1,17 @@
+{
+  "game_id": "love-map-speedrun",
+  "title": "Love Map Speedrun",
+  "description": "A rapid-fire quiz testing how well you know your partner's inner world.",
+  "rules": "Answer 10 rapid-fire questions about your partner's preferences, fears, dreams, and daily life. Points for accuracy and speed.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "LoveMapSpeedrunGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "stress-test",
+  "title": "Stress Test",
+  "description": "External stressor analysis game that visualizes how life stress bleeds into relationships.",
+  "rules": "Rate external stressors: Money, Work, Family, Health. Visualizes \"Stress Spillover\" into relationship. Compare with partner. Points for accuracy, awareness, and implementing suggested coping strategies.",
+  "scoring": {
+    "base_xp": 55,
+    "category": "Conflict Resolution",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "StressTestGame",
+    "props": {}
+  },
+  "assets": {}
+}

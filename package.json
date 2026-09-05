@@ -1,0 +1,36 @@
+{
+  "name": "lovetrae-monorepo",
+  "version": "1.0.0",
+  "description": "A couples therapy app disguised as a game",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd backend && python -m uvicorn server:app --reload --host 0.0.0.0 --port 8001\" \"cd app && npx expo start\"",
+    "dev:backend": "cd backend && python -m uvicorn server:app --reload --host 0.0.0.0 --port 8001",
+    "dev:app": "cd app && npx expo start",
+    "test:backend": "cd backend && python -m pytest",
+    "deploy:gcloud": "gcloud builds submit --config cloudbuild.yaml --substitutions=_FIREBASE_PROJECT_ID=love-actually-thegame,_REGION=us-central1",
+    "deploy:frontend": "cd app && npm run export:web && firebase deploy --only hosting -P love-actually-thegame",
+    "deploy:all": "npm run deploy:gcloud && npm run deploy:frontend",
+    "seed:firebase": "cd scripts && ts-node seedGames.ts"
+  },
+  "keywords": [
+    "couples",
+    "therapy",
+    "game",
+    "dr-marcie",
+    "relationship"
+  ],
+  "author": "LOVETRAE Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "concurrently": "^8.2.2",
+    "typescript": "~5.9.2"
+  },
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^6.4.0",
+    "@react-native-async-storage/async-storage": "^1.24.0",
+    "expo-linear-gradient": "^15.0.8",
+    "firebase": "^10.14.1"
+  }
+}

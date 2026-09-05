@@ -1,0 +1,17 @@
+{
+  "game_id": "vibe-sync",
+  "title": "Vibe Sync",
+  "description": "Emotional battery setting and guessing with real-time sync between partners.",
+  "rules": "One partner sets a hidden emotional state slider. Other partner guesses. Real-time sync display. Points for accuracy and pattern recognition over time.",
+  "scoring": {
+    "base_xp": 55,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "VibeSyncGame",
+    "props": {}
+  },
+  "assets": {}
+}

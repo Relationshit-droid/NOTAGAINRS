@@ -1,0 +1,17 @@
+{
+  "game_id": "repair-relay",
+  "title": "Repair Relay",
+  "description": "Race to type the best repair attempt during a conflict, judged for empathy and feasibility.",
+  "rules": "A conflict scenario is displayed. Type your repair attempt within 60 seconds. Ranking based on empathy and feasibility. Points for top-ranked attempts.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RepairRelayGame",
+    "props": {}
+  },
+  "assets": {}
+}

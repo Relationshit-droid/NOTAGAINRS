@@ -1,0 +1,17 @@
+{
+  "game_id": "truth-teller-tower",
+  "title": "Truth Teller Tower",
+  "description": "A high-stakes trivia game about your relationship where both accuracy and mind-meld predictions score points.",
+  "rules": "5 escalating questions with fact and prediction layers. Use lifelines wisely. Correct answers earn points, prediction matches earn bonuses, mutual correct + matched = Double Truth bonus. Score determines your \"Truth Bandwidth\" title.",
+  "scoring": {
+    "base_xp": 100,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TruthTellerTowerGame",
+    "props": {}
+  },
+  "assets": {}
+}

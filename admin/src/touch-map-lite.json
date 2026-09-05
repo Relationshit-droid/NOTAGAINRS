@@ -1,0 +1,17 @@
+{
+  "game_id": "touch-map-lite",
+  "title": "The Touch Map: Lite",
+  "description": "Abstract body outline for consent and preference mapping.",
+  "rules": "Tap on body zones with Green (Yes), Yellow (Maybe), Red (No). Compare with partner. Points for honest mapping and communication about mismatches.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TouchMapLiteGame",
+    "props": {}
+  },
+  "assets": {}
+}

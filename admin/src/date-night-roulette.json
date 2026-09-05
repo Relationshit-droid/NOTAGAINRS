@@ -1,0 +1,17 @@
+{
+  "game_id": "date-night-roulette",
+  "title": "Date Night Roulette",
+  "description": "Filter-based wheel spin generating unique date ideas.",
+  "rules": "Select filters: Budget (Free, <$50, <$100, Splurge), Energy (Low, Medium, High), Time (30min, 1hr, 3hr, All day). Spin wheel. Complete date for bonus XP. Points for completion and creativity.",
+  "scoring": {
+    "base_xp": 60,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "DateNightRouletteGame",
+    "props": {}
+  },
+  "assets": {}
+}

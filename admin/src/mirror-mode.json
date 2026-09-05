@@ -1,0 +1,17 @@
+{
+  "game_id": "mirror-mode",
+  "title": "Mirror Mode",
+  "description": "Record video responses to prompts and compare emotional alignment with your partner.",
+  "rules": "Both partners record responses to the same prompt. System analyzes vocal tone, word matching, and emotional alignment. Points for synchronization and vulnerability.",
+  "scoring": {
+    "base_xp": 100,
+    "category": "Emotional Connection",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "MirrorModeGame",
+    "props": {}
+  },
+  "assets": {}
+}

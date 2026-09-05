@@ -1,0 +1,17 @@
+{
+  "game_id": "shared-meaning-mural",
+  "title": "Shared Meaning Mural",
+  "description": "Collaboratively create a digital art mural representing your shared values and symbols.",
+  "rules": "Both partners add symbols, colors, and text to a shared canvas in real-time. Points for alignment in choices and symbolic overlap.",
+  "scoring": {
+    "base_xp": 100,
+    "category": "Emotional Connection",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "SharedMeaningMuralGame",
+    "props": {}
+  },
+  "assets": {}
+}

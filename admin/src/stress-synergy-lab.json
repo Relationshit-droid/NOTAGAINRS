@@ -1,0 +1,17 @@
+{
+  "game_id": "stress-synergy-lab",
+  "title": "Stress Synergy Lab",
+  "description": "Map overlapping stressors and build a mutual soothing plan together.",
+  "rules": "Rate your stress levels across multiple categories. System finds overlaps. Build a soothing plan together. Points for overlap detection and plan quality.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "StressSynergyLabGame",
+    "props": {}
+  },
+  "assets": {}
+}

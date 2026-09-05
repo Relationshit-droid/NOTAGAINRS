@@ -1,0 +1,17 @@
+{
+  "game_id": "foreplay-forecast",
+  "title": "Foreplay Forecast",
+  "description": "Hidden arousal slider with real-time display for non-verbal communication.",
+  "rules": "One partner sets arousal level (hidden). Other guesses. Real-time sync. Action suggestions generated. Points for accuracy, connection, and non-verbal communication quality.",
+  "scoring": {
+    "base_xp": 80,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "ForeplayForecastGame",
+    "props": {}
+  },
+  "assets": {}
+}

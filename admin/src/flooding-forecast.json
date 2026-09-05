@@ -1,0 +1,17 @@
+{
+  "game_id": "flooding-forecast",
+  "title": "Flooding Forecast",
+  "description": "Monitor heart rate and predict emotional flooding risk before it happens.",
+  "rules": "Use camera-based heart rate monitoring or self-report sliders. Predict flooding risk based on patterns. Points for early detection and calm-down strategy selection.",
+  "scoring": {
+    "base_xp": 90,
+    "category": "Emotional Connection",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "FloodingForecastGame",
+    "props": {}
+  },
+  "assets": {}
+}

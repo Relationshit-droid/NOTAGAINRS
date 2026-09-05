@@ -1,0 +1,17 @@
+{
+  "game_id": "gentle-startup-gauntlet",
+  "title": "Gentle Start-Up Gauntlet",
+  "description": "Rewrite harsh complaints into gentle, effective \"I feel\" statements under time pressure.",
+  "rules": "A harsh complaint is displayed. You have 30 seconds to rewrite it using \"I feel... about... I need...\" structure. Points for correct structure, tone, and speed.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Conflict Resolution",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "GentleStartupGauntletGame",
+    "props": {}
+  },
+  "assets": {}
+}

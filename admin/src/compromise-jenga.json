@@ -1,0 +1,17 @@
+{
+  "game_id": "compromise-jenga",
+  "title": "Compromise Jenga",
+  "description": "Build a virtual Jenga tower with compromise blocks, testing balance and fairness.",
+  "rules": "Each block represents a compromise. Add blocks that represent fair compromises. System simulates tower stability. Points for balanced compromises and tower survival.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "CompromiseJengaGame",
+    "props": {}
+  },
+  "assets": {}
+}

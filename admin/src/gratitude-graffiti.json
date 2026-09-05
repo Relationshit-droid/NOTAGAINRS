@@ -1,0 +1,17 @@
+{
+  "game_id": "gratitude-graffiti",
+  "title": "Gratitude Graffiti",
+  "description": "60-second rapid appreciation writing generating metaphorical word cloud.",
+  "rules": "Type rapid appreciations in 60 seconds. Metaphor requirement enforced. Word cloud visualization. Points for speed, uniqueness, and metaphor inclusion.",
+  "scoring": {
+    "base_xp": 40,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "GratitudeGraffitiGame",
+    "props": {}
+  },
+  "assets": {}
+}

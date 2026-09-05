@@ -1,0 +1,17 @@
+{
+  "game_id": "rewrite-the-memory",
+  "title": "Rewrite the Memory",
+  "description": "Collaborative rewriting of painful memories with hope and absurdity.",
+  "rules": "Display a painful memory fragment. Collaboratively rewrite with agency, nuance, and hope. Points for narrative shift from pain to hope/absurdity.",
+  "scoring": {
+    "base_xp": 95,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RewriteTheMemoryGame",
+    "props": {}
+  },
+  "assets": {}
+}

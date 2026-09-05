@@ -1,0 +1,17 @@
+{
+  "game_id": "micro-moment-museum",
+  "title": "Micro-Moment Museum",
+  "description": "Share small, meaningful moments through photos and captions in a curated gallery.",
+  "rules": "Upload a photo of a micro-moment with a caption. View and rate partner's moments. Points for specificity, warmth, and caption quality.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "MicroMomentMuseumGame",
+    "props": {}
+  },
+  "assets": {}
+}

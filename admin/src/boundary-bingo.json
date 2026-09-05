@@ -1,0 +1,17 @@
+{
+  "game_id": "boundary-bingo",
+  "title": "Boundary Bingo",
+  "description": "4×4 grid of boundaries - mark only after mutual verification.",
+  "rules": "Review boundary statements. Both partners must verify before marking. System generates personalized boundaries. Points for correct identification and mutual agreement.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "BoundaryBingoGame",
+    "props": {}
+  },
+  "assets": {}
+}

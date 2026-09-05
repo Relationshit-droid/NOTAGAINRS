@@ -1,0 +1,17 @@
+{
+  "game_id": "bpd-pattern-detective",
+  "title": "The BPD Pattern Detective",
+  "description": "Interactive mystery game where couples identify and map emotional storm cycles.",
+  "rules": "Watch animated scenario. Reconstruct 4-part Storm Cycle: Trigger, Fearful Thought, Reaction, Aftermath. Split roles: SSP (internal clues) and SHP (external clues). Points for cycle completion accuracy and P.A.U.S.E. signal usage.",
+  "scoring": {
+    "base_xp": 95,
+    "category": "Healing Hospital",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "BpdPatternDetectiveGame",
+    "props": {}
+  },
+  "assets": {}
+}

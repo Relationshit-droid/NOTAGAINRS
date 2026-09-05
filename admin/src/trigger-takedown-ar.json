@@ -1,0 +1,17 @@
+{
+  "game_id": "trigger-takedown-ar",
+  "title": "Trigger Takedown (AR)",
+  "description": "AR interface to identify and \"squash\" triggers with grounding techniques.",
+  "rules": "Use AR camera to identify triggers in environment. Select grounding technique from options. Points for trigger identification accuracy and effective grounding selection.",
+  "scoring": {
+    "base_xp": 100,
+    "category": "Love Arcade",
+    "difficulty": "hard",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TriggerTakedownArGame",
+    "props": {}
+  },
+  "assets": {}
+}

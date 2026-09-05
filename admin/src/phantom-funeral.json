@@ -1,0 +1,17 @@
+{
+  "game_id": "phantom-funeral",
+  "title": "Phantom Funeral",
+  "description": "A ritual release game for former versions of yourself and old relationship scripts.",
+  "rules": "Write eulogies for aspects of the old relationship dynamic you are releasing. Both partners contribute. System generates ceremony elements. Points for completeness, ceremony participation, and emotional closure.",
+  "scoring": {
+    "base_xp": 80,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "PhantomFuneralGame",
+    "props": {}
+  },
+  "assets": {}
+}

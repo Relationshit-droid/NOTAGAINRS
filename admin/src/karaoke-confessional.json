@@ -1,0 +1,17 @@
+{
+  "game_id": "karaoke-confessional",
+  "title": "Karaoke Confessional",
+  "description": "Rewritten song lyrics about relationship issues for duet singing.",
+  "rules": "Lyrics rewritten to be about relationship issues. Record duet. System analyzes vocal performance, emotional commitment, and synchronization. Points for performance and emotional authenticity.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "KaraokeConfessionalGame",
+    "props": {}
+  },
+  "assets": {}
+}

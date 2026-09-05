@@ -1,0 +1,17 @@
+{
+  "game_id": "micro-betrayal-mini-golf",
+  "title": "Micro-Betrayal Mini-Golf",
+  "description": "Physics-based mini-golf navigating small breaches to repair.",
+  "rules": "Navigate mini-golf course where obstacles represent micro-betrayals. Select repair strategies at each hole. Points for strokes, repair quality, and tower stability.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "MicroBetrayalMiniGolfGame",
+    "props": {}
+  },
+  "assets": {}
+}

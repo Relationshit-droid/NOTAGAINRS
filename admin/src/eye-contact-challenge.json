@@ -1,0 +1,17 @@
+{
+  "game_id": "eye-contact-challenge",
+  "title": "Eye Contact Challenge",
+  "description": "Camera-based staring contest with face detection and AI gaze tracking.",
+  "rules": "Both activate front cameras. Maintain eye contact for minimum 6 seconds. AI gaze tracking overlay. Laughter detection via audio. Points for duration, sync, and maintaining focus without distraction.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "EyeContactChallengeGame",
+    "props": {}
+  },
+  "assets": {}
+}

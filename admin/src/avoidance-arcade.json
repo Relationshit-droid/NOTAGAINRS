@@ -1,0 +1,17 @@
+{
+  "game_id": "avoidance-arcade",
+  "title": "Avoidance Arcade",
+  "description": "Whac-A-Mole style game hitting avoidance phrases.",
+  "rules": "Avoidance phrases pop up as moles. Hit with \"Say It Now\" hammer. Points for accuracy, speed, and streaks. Avoid hitting healthy communication phrases.",
+  "scoring": {
+    "base_xp": 45,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "AvoidanceArcadeGame",
+    "props": {}
+  },
+  "assets": {}
+}

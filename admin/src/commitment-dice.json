@@ -1,0 +1,17 @@
+{
+  "game_id": "commitment-dice",
+  "title": "Commitment Dice",
+  "description": "Roll dice to generate commitment prompts and complete them within a time frame.",
+  "rules": "Dice roll generates a commitment prompt. Complete the commitment within 24 hours. Points for completion and vulnerability level.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Emotional Connection",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "CommitmentDiceGame",
+    "props": {}
+  },
+  "assets": {}
+}

@@ -1,0 +1,17 @@
+{
+  "game_id": "draw-your-feelings",
+  "title": "Draw Your Feelings",
+  "description": "Pictionary-style game where couples draw abstract emotions and guess each other's meanings.",
+  "rules": "Draw abstract concepts: Trust, Betrayal, Hope, Vulnerability. Line-by-line reveal. Partner guesses meaning. Points for accuracy, creativity, and emotional expression quality.",
+  "scoring": {
+    "base_xp": 40,
+    "category": "Creative Chaos",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "DrawYourFeelingsGame",
+    "props": {}
+  },
+  "assets": {}
+}

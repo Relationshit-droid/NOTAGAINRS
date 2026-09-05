@@ -1,0 +1,17 @@
+{
+  "game_id": "gif-the-feels",
+  "title": "GIF the Feels",
+  "description": "Giphy integration for finding perfect reaction GIFs to relationship prompts.",
+  "rules": "Prompt given (e.g., \"My face when you leave wet towels on the bed\"). Search Giphy for reaction GIF. Partner votes. Points for relevance, humor, and appropriateness.",
+  "scoring": {
+    "base_xp": 40,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "GifTheFeelsGame",
+    "props": {}
+  },
+  "assets": {}
+}

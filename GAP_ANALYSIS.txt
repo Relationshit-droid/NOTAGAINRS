@@ -1,0 +1,310 @@
+=== COMPONENT ANALYSIS ===
+
+TrustThermometer: FOUND (16 matches)
+  -> ..\..\..\C
+  -> ..\..\..\C
+  -> ..\..\..\C
+DailyQuest/Duel: MISSING (0 matches)
+Leaderboard: FOUND (41 matches)
+  -> ..\..\..\C
+  -> ..\..\..\C
+  -> ..\..\..\C
+PartnerTranslator: FOUND (9 matches)
+  -> ..\..\..\C
+  -> ..\..\..\C
+  -> ..\..\..\C
+SOSButton: FOUND (16 matches)
+  -> ..\..\..\C
+  -> ..\..\..\C
+  -> ..\..\..\C
+MarcieOverlay: MISSING (0 matches)
+BottomTabs: MISSING (0 matches)
+Subscription: MISSING (0 matches)
+ConsequenceEngine: MISSING (0 matches)
+GameEngine: MISSING (0 matches)
+OfflineMode: FOUND (12 matches)
+  -> ..\..\..\C
+  -> ..\..\..\C
+  -> ..\..\..\C
+DeepLinking: MISSING (0 matches)
+HapticFeedback: MISSING (0 matches)
+Biometric: MISSING (0 matches)
+ARFilter: MISSING (0 matches)
+
+=== BACKEND API ROUTES (95 total) ===
+  admin_routes.py: @router.get("/dashboard")
+  admin_routes.py: @router.get("/metrics")
+  admin_routes.py: @router.get("/users")
+  admin_routes.py: @router.get("/users/{user_id}")
+  admin_routes.py: @router.post("/users/{user_id}/ban")
+  admin_routes.py: @router.post("/users/{user_id}/unban")
+  admin_routes.py: @router.get("/sos-events")
+  admin_routes.py: @router.get("/sos-events/stats")
+  admin_routes.py: @router.get("/leaderboards/manage")
+  admin_routes.py: @router.post("/leaderboards/refresh")
+  admin_routes.py: @router.post("/announcements")
+  admin_routes.py: @router.get("/announcements")
+  admin_routes.py: @router.get("/health")
+  server.py: @app.websocket("/ws/{couple_id}")
+  server.py: @app.get("/api/health")
+  server.py: @app.post("/api/users", response_model=UserResponse)
+  server.py: @app.get("/api/users/{user_id}", response_model=UserResponse)
+  server.py: @app.put("/api/users/{user_id}")
+  server.py: @app.put("/api/users/{user_id}/sarcasm")
+  server.py: @app.post("/api/couples/create")
+  server.py: @app.post("/api/couples/join")
+  server.py: @app.post("/api/couples/regenerate-code")
+  server.py: @app.post("/api/couples/unlink")
+  server.py: @app.get("/api/couples/me")
+  server.py: @app.post("/api/couples/link")
+  server.py: @app.get("/api/couples/{couple_id}")
+  server.py: @app.get("/api/couples/{couple_id}/presence")
+  server.py: @app.put("/api/couples/{couple_id}/meters")
+  server.py: @app.get("/api/games/categories")
+  server.py: @app.get("/api/games/categories/{category_id}")
+  server.py: @app.get("/api/games/registry")
+  server.py: @app.get("/api/games/{game_id}")
+  server.py: @app.post("/api/games/sessions", response_model=GameSessionResponse)
+  server.py: @app.get("/api/games/sessions/{session_id}")
+  server.py: @app.put("/api/games/sessions/{session_id}")
+  server.py: @app.post("/api/games/sessions/{session_id}/answers")
+  server.py: @app.post("/api/games/sessions/{session_id}/complete")
+  server.py: @app.get("/api/users/{user_id}/sessions")
+  server.py: @app.get("/api/couples/{couple_id}/sessions")
+  server.py: @app.post("/api/sos/sessions", response_model=SOSSessionResponse)
+  server.py: @app.post("/api/sos/sessions/{session_id}/submit")
+  server.py: @app.get("/api/sos/sessions/{session_id}")
+  server.py: @app.post("/api/sos/trigger")
+  server.py: @app.get("/api/sos/resources")
+  server.py: @app.get("/api/sos/resources/recommended")
+  server.py: @app.post("/api/sos/{session_id}/booth/submit")
+  server.py: @app.post("/api/sos/{session_id}/resolve")
+  server.py: @app.post("/api/sos/{session_id}/escalate")
+  server.py: @app.get("/api/sos/user/{user_id}/history")
+  server.py: @app.post("/api/sos/sessions/{session_id}/analyze")
+  server.py: @app.post("/api/marcie/chat", response_model=MarcieResponse)
+  server.py: @app.get("/api/leaderboard/global")
+  server.py: @app.get("/api/leaderboard/categories/{category_id}")
+  server.py: @app.get("/api/leaderboards/categories/{category_id}")
+  server.py: @app.get("/api/leaderboards/global")
+  server.py: @app.get("/api/leaderboards/couples/{couple_id}/ranking")
+  server.py: @app.get("/api/leaderboards/friends/{user_id}")
+  server.py: @app.get("/api/leaderboards/achievements")
+  server.py: @app.get("/api/leaderboards/streaks")
+  server.py: @app.get("/api/leaderboards/newcomers")
+  server.py: @app.post("/api/leaderboards/refresh")
+  server.py: @app.get("/api/leaderboards/stats/summary")
+  server.py: @app.get("/api/love-arcade/games")
+  server.py: @app.get("/api/love-arcade/games/{game_id}/questions")
+  server.py: @app.exception_handler(HTTPException)
+  server.py: @app.exception_handler(Exception)
+  ai_marcie.py: @router.post("/marcie", response_model=MarcieChatResponse)
+  ai_marcie.py: @router.get("/marcie/conversation/{conversation_id}")
+  ai_marcie.py: @router.post("/marcie/conversation/{conversation_id}/clear")
+  ai_marcie.py: @router.get("/marcie/sarcasm-levels")
+  analytics.py: @router.post("/track")
+  analytics.py: @router.post("/session/start")
+  analytics.py: @router.post("/session/{session_id}/end")
+  analytics.py: @router.post("/session/{session_id}/event")
+  analytics.py: @router.get("/user/{user_id}/activity")
+  analytics.py: @router.get("/couple/{couple_id}/milestones")
+  analytics.py: @router.get("/admin/events")
+  analytics.py: @router.get("/admin/summary")
+  analytics.py: @router.post("/milestone")
+  couples.py: @router.post("/create", response_model=CoupleResponse)
+  couples.py: @router.post("/join", response_model=CoupleResponse)
+  couples.py: @router.get("/me", response_model=MyCoupleResponse)
+  couples.py: @router.post("/regenerate-code")
+  couples.py: @router.post("/unlink")
+  couples.py: @router.get("/{couple_id}/stats")
+  couples.py: @router.put("/{couple_id}/meters")
+  leaderboards.py: @router.get("/global")
+  leaderboards.py: @router.get("/couples/{couple_id}/ranking")
+  leaderboards.py: @router.get("/friends/{user_id}")
+  leaderboards.py: @router.get("/categories/{category_id}")
+  leaderboards.py: @router.get("/achievements")
+  leaderboards.py: @router.get("/streaks")
+  leaderboards.py: @router.get("/newcomers")
+  leaderboards.py: @router.post("/refresh")
+  leaderboards.py: @router.get("/stats/summary")
+
+=== ADMIN GAME JSON FILES (6 total) ===
+  achievements-and-badges.json
+  admiration-aim.json
+  amazing-race-crossroads.json
+  antidote-arena.json
+  apology-auction.json
+  six-second-kiss.json
+
+=== CLOUD FUNCTIONS (1 total) ===
+  vertex-ai-functions.ts
+
+=== MARIE ANIMATIONS (1 total) ===
+  marcie-intro.webm
+
+=== GAME SCREENS (161 total) ===
+  6SecondKissChallenge1.tsx
+  6SecondKissChallenge2.tsx
+  AchievementsAndBadges.tsx
+  AdmirationAim.tsx
+  AdmirationAimArGame.tsx
+  AmazingRaceCrossroads.tsx
+  AmazingRaceLegacyDash.tsx
+  AntidoteArena.tsx
+  AntidoteArenaGame.tsx
+  ApologyAuction.tsx
+  ApologyAuctionGame.tsx
+  ApologyOlympics.tsx
+  ApologyWorkshop.tsx
+  AppreciationAuction.tsx
+  AppreciationAuctionGame.tsx
+  AvoidanceArcade.tsx
+  BPDPatternDetective.tsx
+  BedroomBingoCard.tsx
+  BedroomBingoGame1.tsx
+  BedroomBingoGame2.tsx
+  BidRadar.tsx
+  BidRadarGame.tsx
+  BlameFlip.tsx
+  BoundaryBingo.tsx
+  BoundaryBingoGrid.tsx
+  ChallengeScreen.tsx
+  ChoppedFamily.tsx
+  CommitmentCountdown.tsx
+  CommitmentDice.tsx
+  CommitmentDiceGame.tsx
+  CompromiseJenga.tsx
+  CompromiseJengaGame.tsx
+  ConflictDice.tsx
+  ConflictDiceGame.tsx
+  ConnectionConstructor.tsx
+  ConnectionConundrum.tsx
+  CouplesFamilyFeudGame.tsx
+  CouplesJeopardyGame.tsx
+  CycleBreaker.tsx
+  CycleBreakerBoardGame.tsx
+  DateNightRoulette.tsx
+  DateNightRouletteGame1.tsx
+  DateNightRouletteGame2.tsx
+  DateNightRouletteWheel.tsx
+  DeEscalationLab.tsx
+  DealOrNoDealAccountability.tsx
+  DefensivenessDetox.tsx
+  DefensivenessDetoxGame.tsx
+  DenialDetector.tsx
+  DrawYourFeelingsGame.tsx
+  DreamDecoder.tsx
+  DreamDecoderGame.tsx
+  DreamSupportSprint.tsx
+  EmpathyEcho.tsx
+  EmpathyEchoGame.tsx
+  EscapeEchoChamber.tsx
+  EscapismRoom.tsx
+  EyeContactChallenge.tsx
+  EyeContactChallengeGame.tsx
+  FamilyFeudNewReality.tsx
+  FamilyFeudSafety.tsx
+  FlashbackFrenzy.tsx
+  FloodingForecast.tsx
+  ForeplayForecast.tsx
+  ForeplaySliderGame1.tsx
+  ForeplaySliderGame2.tsx
+  FutureCouncil.tsx
+  GameLibraryScreen.tsx
+  GameResultsScreen.tsx
+  GameWrapper.tsx
+  GentleStartUpGauntlet.tsx
+  GifTheFeels.tsx
+  GratitudeCloud.tsx
+  GratitudeGraffiti.tsx
+  GuiltShameSort.tsx
+  HarborMasterChallenge.tsx
+  HealingBingo.tsx
+  IntimacyFeud.tsx
+  JeopardyRebuilding.tsx
+  KaraokeConfessional.tsx
+  LayersOfHurt.tsx
+  LegacyDash.tsx
+  LegacyDice.tsx
+  LieDetector.tsx
+  LoveMapGapQuest.tsx
+  LoveMapSpeedrun.tsx
+  MemoryLaneDash.tsx
+  MemoryLaneGPS.tsx
+  MemoryLaneMap.tsx
+  MicroBetrayalGolf.tsx
+  MicroMomentMuseum.tsx
+  MirrorMode.tsx
+  NeedsDecoder.tsx
+  NewGameLibrary.tsx
+  NewlywedGame.tsx
+  NewlywedHeart.tsx
+  RansomNoteRomance.tsx
+  RelationalJeopardy.tsx
+  RelationshipCouncil.tsx
+  RepairAttemptScreen.tsx
+  RepairRelay.tsx
+  RepairReportCard.tsx
+  ResultsRoastScreen.tsx
+  RewriteMemory.tsx
+  RitualBuilder.tsx
+  RitualRoulette.tsx
+  RitualRouletteGame.tsx
+  RoleSwap.tsx
+  RoleSwapGame.tsx
+  RoleSwapRoast.tsx
+  RoleSwapRoastArGame.tsx
+  SafetyAndEmpathyFeud.tsx
+  SecrecyAudit.tsx
+  SecrecyAuditQuizGame1.tsx
+  SecrecyAuditQuizGame2.tsx
+  SharedMeaningMural.tsx
+  SixSecondKiss.tsx
+  SixSecondKissResults.tsx
+  SixSecondStareDown.tsx
+  SlapOfTruth.tsx
+  SoundtrackSync.tsx
+  StressSynergyLab.tsx
+  StressTest.tsx
+  TextToneTranslator.tsx
+  TheIceberg.tsx
+  TheIcebergDive.tsx
+  TheIcebergEmotionalGame1.tsx
+  TheIcebergEmotionalGame2.tsx
+  TheIntimacyFeud.tsx
+  TheLoveScriptDebacle.tsx
+  TheNeedsDecoderGame.tsx
+  TheRansomNoteGame.tsx
+  TimelineDetective.tsx
+  ToneShiftChallenge.tsx
+  ToneShiftChallengeGame.tsx
+  TouchMap.tsx
+  TouchMapConfiguration.tsx
+  TouchMapLiteGame.tsx
+  TouchMapPreferenceGame1.tsx
+  TouchMapPreferenceGame2.tsx
+  TransparencyToss.tsx
+  TriggerTakedown.tsx
+  TriggerTriage.tsx
+  TrustBank.tsx
+  TrustBingo.tsx
+  TrustWiring.tsx
+  TruthOrTrust.tsx
+  TruthTellerTower.tsx
+  TruthTransparencyGauntlet.tsx
+  TurningTowardTally.tsx
+  TurningTowardTallyGame1.tsx
+  TurningTowardTallyGame2.tsx
+  ValidationGameShow.tsx
+  VibeSync.tsx
+  VibeSyncScreen.tsx
+  VowRemix.tsx
+  VowRemixGame.tsx
+  VulnerabilityVolley.tsx
+  VulnerabilityVolleyGame.tsx
+  WhosRight.tsx
+  WindowsAndWalls.tsx
+
+=== MISSING GAMES FROM SPEC (2 missing) ===
+  BedroomBingo
+  VibeCheck

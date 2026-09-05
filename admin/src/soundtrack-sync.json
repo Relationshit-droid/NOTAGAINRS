@@ -1,0 +1,17 @@
+{
+  "game_id": "soundtrack-sync",
+  "title": "Soundtrack Sync",
+  "description": "Match songs to emotional moods and discover your shared musical emotional alignment.",
+  "rules": "Both partners select songs that match a given mood. System analyzes lyrics and tempo for emotional alignment. Points for matching and emotional accuracy.",
+  "scoring": {
+    "base_xp": 55,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "SoundtrackSyncGame",
+    "props": {}
+  },
+  "assets": {}
+}

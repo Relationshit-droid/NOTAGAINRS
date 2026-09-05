@@ -1,0 +1,17 @@
+{
+  "game_id": "bedroom-bingo",
+  "title": "Bedroom Bingo",
+  "description": "A 5×5 intimacy checklist with privacy-focused verification and celebration animations.",
+  "rules": "Customizable bingo card with intimate activities. Partner-verified completion via confirmation. Progressive difficulty levels. Points for completed lines and full bingo. All data private and encrypted.",
+  "scoring": {
+    "base_xp": 70,
+    "category": "Romance Hub",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "BedroomBingoGame",
+    "props": {}
+  },
+  "assets": {}
+}

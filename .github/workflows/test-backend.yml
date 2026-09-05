@@ -1,0 +1,79 @@
+# GitHub Actions Workflow for Backend Testing
+# Runs tests on pull requests and pushes
+
+name: Backend Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'backend/**'
+
+jobs:
+  test:
+    name: Test Backend
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        working-directory: ./backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio httpx flake8 black
+
+      - name: Lint with flake8
+        working-directory: ./backend
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Check formatting with black
+        working-directory: ./backend
+        run: |
+          black --check . || true
+
+      - name: Run tests with pytest
+        working-directory: ./backend
+        env:
+          SKIP_FIREBASE: "1"
+          JWT_SECRET: test-secret-key-0123456789abcdef0123456789abcdef
+        run: |
+          pytest -v --tb=short
+
+      - name: Test server starts
+        working-directory: ./backend
+        env:
+          SKIP_FIREBASE: "1"
+          JWT_SECRET: test-secret-key-0123456789abcdef0123456789abcdef
+        run: |
+          timeout 5 python -c "
+import sys
+sys.path.insert(0, '.')
+from server import app
+print('✅ Server module loads successfully')
+"
+
+      - name: Type check with pyright
+        working-directory: ./backend
+        run: |
+          pip install pyright
+          pyright || true

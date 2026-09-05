@@ -1,0 +1,17 @@
+{
+  "game_id": "ritual-roulette",
+  "title": "Ritual Roulette",
+  "description": "Spin a wheel to generate random couple rituals and track completion.",
+  "rules": "Spin the wheel to get a ritual. Complete it and track proof. Points for variety, creativity, and completion rate.",
+  "scoring": {
+    "base_xp": 45,
+    "category": "Romance Hub",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "RitualRouletteGame",
+    "props": {}
+  },
+  "assets": {}
+}

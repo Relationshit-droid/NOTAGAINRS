@@ -1,0 +1,17 @@
+{
+  "game_id": "six-second-stare-down",
+  "title": "Six-Second Stare-Down",
+  "description": "Front camera eye contact challenge with AI gaze detection.",
+  "rules": "Both partners activate front cameras. Maintain eye contact for 6 seconds. AI detects gaze, blink synchronization. Points for duration and sync quality.",
+  "scoring": {
+    "base_xp": 50,
+    "category": "Love Arcade",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "SixSecondStareDownGame",
+    "props": {}
+  },
+  "assets": {}
+}

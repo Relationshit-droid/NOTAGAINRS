@@ -1,0 +1,17 @@
+{
+  "game_id": "conflict-dice",
+  "title": "Conflict Dice",
+  "description": "Roll virtual dice to generate random conflict scenarios with constraints.",
+  "rules": "Dice roll generates a scenario and constraint. Discuss and record your resolution within the time limit. Points for empathy, creativity, and following constraints.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Conflict Resolution",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "ConflictDiceGame",
+    "props": {}
+  },
+  "assets": {}
+}

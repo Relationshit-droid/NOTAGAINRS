@@ -1,0 +1,17 @@
+{
+  "game_id": "the-validation-game-show",
+  "title": "The Validation Game Show",
+  "description": "Press Your Luck meets Wheel of Fortune where the jackpot is \"I feel seen.\"",
+  "rules": "Partner A records raw emotional statement. Partner B spins wheel of 4 responses (2 validating, 1 neutral, 1 invalidating). Choose before 15-second timer. Rating system. Lighthouse bonus for specific validation. Points for skill choice and partner rating.",
+  "scoring": {
+    "base_xp": 75,
+    "category": "Healing Hospital",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TheValidationGameShowGame",
+    "props": {}
+  },
+  "assets": {}
+}

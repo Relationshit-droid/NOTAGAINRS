@@ -1,0 +1,73 @@
+
+[
+  {
+    "id": "communication_king",
+    "title": "Communication King",
+    "description": "Unlock 10 deep conversations without interruption",
+    "category": "Communication",
+    "icon": "forum"
+  },
+  {
+    "id": "conflict_crusher",
+    "title": "Conflict Crusher",
+    "description": "Resolve a Tier 3 argument with perfect empathy",
+    "category": "Conflict",
+    "icon": "shield-with-heart"
+  },
+  {
+    "id": "zen_master",
+    "title": "Zen Master",
+    "description": "Complete a 20-minute guided partner meditation",
+    "category": "Intimacy",
+    "icon": "spa"
+  },
+  {
+    "id": "first_date_redux",
+    "title": "First Date Redux",
+    "description": "Recreate your very first date in the Metaverse",
+    "category": "Milestones",
+    "icon": "lock"
+  },
+  {
+    "id": "golden_anniversary",
+    "title": "Golden Anniversary",
+    "description": "Maintain a 365-day relationship streak",
+    "category": "Milestones",
+    "icon": "lock"
+  },
+  {
+    "id": "world_travelers",
+    "title": "World Travelers",
+    "description": "Unlock 5 destination-based quest lines",
+    "category": "Milestones",
+    "icon": "lock"
+  },
+  {
+    "id": "soul_resonance",
+    "title": "Soul Resonance",
+    "description": "Reach Level 50 Sync with your partner",
+    "category": "Intimacy",
+    "icon": "lock"
+  },
+  {
+    "id": "true_empath",
+    "title": "True Empath",
+    "description": "Identify 5 unstated partner emotions correctly",
+    "category": "Communication",
+    "icon": "volunteer-activism"
+  },
+  {
+    "id": "star_crossed",
+    "title": "Star-Crossed",
+    "description": "Complete the Cosmic Reunion quest-line",
+    "category": "Milestones",
+    "icon": "lock"
+  },
+  {
+    "id": "ultimate_bond",
+    "title": "Ultimate Bond",
+    "description": "Earn all other badges in the game",
+    "category": "Milestones",
+    "icon": "lock"
+  }
+]

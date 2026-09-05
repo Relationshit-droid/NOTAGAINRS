@@ -1,0 +1,17 @@
+{
+  "game_id": "iceberg-dive",
+  "title": "The Iceberg Dive",
+  "description": "Nested dropdown exploration from surface emotions to core needs.",
+  "rules": "Select surface emotion. Drill down through layers to core need. System validates core need identification. Points for depth, accuracy, and emotional precision.",
+  "scoring": {
+    "base_xp": 65,
+    "category": "Love Arcade",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "IcebergDiveGame",
+    "props": {}
+  },
+  "assets": {}
+}

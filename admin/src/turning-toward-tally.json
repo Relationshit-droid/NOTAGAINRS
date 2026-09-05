@@ -1,0 +1,17 @@
+{
+  "game_id": "turning-toward-tally",
+  "title": "Turning Toward Tally",
+  "description": "Track and respond to daily bids for connection to build attunement over time.",
+  "rules": "Receive push notifications for bids. Respond within the time limit. Track streaks and attunement scores. Points for timely responses and streak maintenance.",
+  "scoring": {
+    "base_xp": 40,
+    "category": "Emotional Connection",
+    "difficulty": "easy",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TurningTowardTallyGame",
+    "props": {}
+  },
+  "assets": {}
+}

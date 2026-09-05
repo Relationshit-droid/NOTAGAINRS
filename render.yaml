@@ -1,0 +1,131 @@
+# =============================================================================
+# Render.com Deployment Configuration
+# Love Actually - The Game (FastAPI Backend)
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # FastAPI Web Service
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: lovetrae-api
+    runtime: python
+    plan: standard
+    region: oregon
+    buildCommand: |
+      pip install -r requirements.txt
+      # Download Firebase service account if provided as base64
+      if [ -n "$FIREBASE_SERVICE_ACCOUNT_BASE64" ]; then
+        echo "$FIREBASE_SERVICE_ACCOUNT_BASE64" | base64 -d > firebase-service-account.json
+      fi
+    startCommand: gunicorn -c gunicorn.conf.py server:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        value: 8001
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: WEB_CONCURRENCY
+        value: "4"
+      # Firebase (individual env vars preferred for Render)
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: FIREBASE_CLIENT_EMAIL
+        sync: false
+      - key: FIREBASE_PRIVATE_KEY
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_BASE64
+        sync: false
+      # Redis
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: lovetrae-redis
+          property: connectionString
+      # Secrets (set via Render dashboard)
+      - key: JWT_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-1.5-flash
+      - key: POSTHOG_API_KEY
+        sync: false
+      - key: SENTRY_DSN
+        sync: false
+      - key: SENDGRID_API_KEY
+        sync: false
+    autoDeploy: true
+
+  # ---------------------------------------------------------------------------
+  # Background Worker Service (for async tasks)
+  # ---------------------------------------------------------------------------
+  - type: worker
+    name: lovetrae-worker
+    runtime: python
+    plan: starter
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A tasks worker --loglevel=info --concurrency=2
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: ENVIRONMENT
+        value: production
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: lovetrae-redis
+          property: connectionString
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: FIREBASE_CLIENT_EMAIL
+        sync: false
+      - key: FIREBASE_PRIVATE_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: POSTHOG_API_KEY
+        sync: false
+
+  # ---------------------------------------------------------------------------
+  # Redis Instance (Session Cache & Message Broker)
+  # ---------------------------------------------------------------------------
+  - type: redis
+    name: lovetrae-redis
+    plan: free
+    region: oregon
+    ipAllowList: []
+
+# =============================================================================
+# Cron Jobs (if needed for maintenance tasks)
+# =============================================================================
+# jobs:
+#   - type: cron
+#     name: lovetrae-daily-cleanup
+#     runtime: python
+#     plan: starter
+#     schedule: "0 3 * * *"  # Daily at 3 AM
+#     buildCommand: pip install -r requirements.txt
+#     startCommand: python scripts/daily_cleanup.py
+
+# =============================================================================
+# Environment Groups (for shared configuration)
+# =============================================================================
+envVarGroups:
+  - name: lovetrae-common
+    envVars:
+      - key: APP_NAME
+        value: Love Actually - The Game
+      - key: APP_VERSION
+        value: 2.0.0

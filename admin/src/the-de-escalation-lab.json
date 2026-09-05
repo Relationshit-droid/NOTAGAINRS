@@ -1,0 +1,17 @@
+{
+  "game_id": "the-de-escalation-lab",
+  "title": "The De-Escalation Lab",
+  "description": "Interactive scenario simulator in a calm, blue-lit lab for safely practicing disarming emotional landmines.",
+  "rules": "5 scenarios. Separate Fact/Injury, Name Internal States, Choose Joint Response following Time-In Agreement. Points for correct responses and specific internal state naming.",
+  "scoring": {
+    "base_xp": 85,
+    "category": "Healing Hospital",
+    "difficulty": "medium",
+    "mechanic": "interactive"
+  },
+  "ui": {
+    "component": "TheDeEscalationLabGame",
+    "props": {}
+  },
+  "assets": {}
+}
