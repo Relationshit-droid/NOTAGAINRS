@@ -63,6 +63,20 @@ export default function LegacyDice({ route, navigation }: any) {
     Alert.alert("Legacy Recorded", "Saved for posterity.", [{ text: "Done", onPress: () => navigation.goBack() }]);
   }
 
+  // Declared before any early return: hooks must run in the same order on
+  // every render, and the loading branch below returns early.
+  const baseState = useMemo(() => ({
+    id: gameId,
+    title: 'Legacy Dice',
+    description: 'Discuss big picture values',
+    category: 'creative' as const,
+    difficulty: 'medium' as const,
+    xpReward: 200,
+    currentStep: 0,
+    totalTime: 60,
+    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
+  }), [gameId]);
+
   // Loading state
   if (isLoading) {
     return (
@@ -111,17 +125,6 @@ export default function LegacyDice({ route, navigation }: any) {
     </View>
   );
 
-  const baseState = useMemo(() => ({
-    id: gameId,
-    title: 'Legacy Dice',
-    description: 'Discuss big picture values',
-    category: 'creative' as const,
-    difficulty: 'medium' as const,
-    xpReward: 200,
-    currentStep: 0,
-    totalTime: 60,
-    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
-  }), [gameId]);
 
   return (
     <ScreenLayout showHeader={false} scrollable={false}>

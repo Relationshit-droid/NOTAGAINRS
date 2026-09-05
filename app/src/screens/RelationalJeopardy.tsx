@@ -9,7 +9,7 @@ import {
   TextInput
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import ScreenLayout from '../layout';
+import { ScreenLayout } from '../layout';
 import { Typography, SquishyButton, GlassCard } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
 import { useGameStore } from '../lib/game-store';

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, ScrollView, TextInput, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { sosApi } from '../../lib/api';
 import { auth } from '../../lib/firebaseClient';
+import { ENV } from '../../lib/env';
 import { Ionicons } from '@expo/vector-icons';
 
 type SOSEmergencyBoothsProps = {
@@ -47,6 +48,15 @@ export default function SOSEmergencyBooths({ navigation, route }: SOSEmergencyBo
     const initSession = async () => {
       try {
         const user = auth.currentUser;
+
+        // DEMO_MODE has no signed-in user; run a local session so the SOS flow
+        // stays explorable instead of bouncing straight back.
+        if (ENV.DEMO_MODE && !user) {
+          setSessionId(`demo-sos-${Date.now()}`);
+          setTimeout(() => setPartnerJoined(true), 3000);
+          return;
+        }
+
         if (!user || !coupleId) {
           Alert.alert('Error', 'Missing authentication or couple ID');
           navigation.goBack();
@@ -286,7 +296,6 @@ export default function SOSEmergencyBooths({ navigation, route }: SOSEmergencyBo
 }
 
 // Need to import TouchableOpacity
-import { TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

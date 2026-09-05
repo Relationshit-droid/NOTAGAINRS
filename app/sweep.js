@@ -32,11 +32,14 @@ const root=()=>w.document.getElementById('root');
   const screens=JSON.parse(arg.startsWith('@')?fs.readFileSync(arg.slice(1),'utf8'):arg);
   const fails=[];
   for(const [label,name,params] of screens){
-    // Return to a known-good screen so the previous route unmounts cleanly.
-    try{ ref.navigate('MainApp'); }catch(e){}
-    await sleep(250);
+    // Reset the stack to a single route so previously-visited screens (and any
+    // ErrorBoundary fallback they left mounted) are fully unmounted. Plain
+    // navigate() keeps prior screens alive in a native-stack, which made one
+    // failure look like it contaminated every later screen.
+    try{ ref.reset({index:0,routes:[{name:'MainApp'}]}); }catch(e){}
+    await sleep(400);
     errors=[];
-    try{ ref.navigate(name, params||{}); }catch(e){ push('nav throw: '+e.message); }
+    try{ ref.reset({index:0,routes:[{name,params:params||{}}]}); }catch(e){ push('nav throw: '+e.message); }
     await sleep(1100);
     const n=root()?root().querySelectorAll('*').length:0;
     // A boundary hit renders this exact copy, so it is a reliable crash signal.

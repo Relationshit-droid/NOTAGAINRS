@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-import ScreenLayout from '../layout';
+import { ScreenLayout } from '../layout';
 import { Typography, SquishyButton, GlassCard } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../theme';
 

@@ -94,6 +94,20 @@ export default function DreamDecoder({ route, navigation }: any) {
 
   const options = DREAMS.map(d => d.dream).sort(() => Math.random() - 0.5);
 
+  // Declared before any early return: hooks must run in the same order on
+  // every render, and the loading branch below returns early.
+  const baseState = useMemo(() => ({
+    id: gameId,
+    title: 'Dream Decoder',
+    description: 'Find the dream within the conflict',
+    category: 'emotional' as const,
+    difficulty: 'hard' as const,
+    xpReward: 400,
+    currentStep: index,
+    totalTime: 60,
+    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
+  }), [gameId, index]);
+
   // Loading state
   if (isLoading) {
     return (
@@ -127,17 +141,6 @@ export default function DreamDecoder({ route, navigation }: any) {
     </View>
   );
 
-  const baseState = useMemo(() => ({
-    id: gameId,
-    title: 'Dream Decoder',
-    description: 'Find the dream within the conflict',
-    category: 'emotional' as const,
-    difficulty: 'hard' as const,
-    xpReward: 400,
-    currentStep: index,
-    totalTime: 60,
-    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
-  }), [gameId, index]);
 
   return (
     <ScreenLayout showHeader={false} scrollable={true}>

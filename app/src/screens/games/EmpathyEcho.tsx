@@ -89,6 +89,20 @@ export default function EmpathyEcho({ route, navigation }: any) {
     );
   };
 
+  // Declared before any early return: hooks must run in the same order on
+  // every render, and the loading branch below returns early.
+  const baseState = useMemo(() => ({
+    id: gameId,
+    title: 'Empathy Echo',
+    description: 'Validate without fixing',
+    category: 'emotional' as const,
+    difficulty: 'hard' as const,
+    xpReward: 300,
+    currentStep: 0,
+    totalTime: 60,
+    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
+  }), [gameId]);
+
   // Loading state
   if (isLoading) {
     return (
@@ -129,17 +143,6 @@ export default function EmpathyEcho({ route, navigation }: any) {
     </View>
   );
 
-  const baseState = useMemo(() => ({
-    id: gameId,
-    title: 'Empathy Echo',
-    description: 'Validate without fixing',
-    category: 'emotional' as const,
-    difficulty: 'hard' as const,
-    xpReward: 300,
-    currentStep: 0,
-    totalTime: 60,
-    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
-  }), [gameId]);
 
   return <GameContainer state={baseState} inputs={[]} inputArea={inputArea} onComplete={() => check()} />;
 }

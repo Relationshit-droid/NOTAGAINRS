@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { FlatList, RefreshControl, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
@@ -318,5 +318,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-import { RefreshControl } from 'react-native';

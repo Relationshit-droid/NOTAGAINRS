@@ -47,6 +47,20 @@ export default function LoveMapGapQuest({ route, navigation }: any) {
     Alert.alert("Quest Logged", "You identified a gap.", [{ text: "Done", onPress: () => navigation.goBack() }]);
   }
 
+  // Declared before any early return: hooks must run in the same order on
+  // every render, and the loading branch below returns early.
+  const baseState = useMemo(() => ({
+    id: gameId,
+    title: 'Love Map Gap Quest',
+    description: 'Fill in the blanks of your partner knowledge',
+    category: 'romance' as const,
+    difficulty: 'easy' as const,
+    xpReward: 150,
+    currentStep: 0,
+    totalTime: 60,
+    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
+  }), [gameId]);
+
   // Loading state
   if (isLoading) {
     return (
@@ -91,17 +105,6 @@ export default function LoveMapGapQuest({ route, navigation }: any) {
     </View>
   );
 
-  const baseState = useMemo(() => ({
-    id: gameId,
-    title: 'Love Map Gap Quest',
-    description: 'Fill in the blanks of your partner knowledge',
-    category: 'romance' as const,
-    difficulty: 'easy' as const,
-    xpReward: 150,
-    currentStep: 0,
-    totalTime: 60,
-    playerData: { vulnerabilityScore: 0, honestyScore: 0, completionTime: 0, partnerSync: 0 },
-  }), [gameId]);
 
   return (
     <ScreenLayout showHeader={false} scrollable={false}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
@@ -164,7 +164,6 @@ export default function SOSPostRepairQuestionnaire({ navigation, route }: SOSPos
   );
 }
 
-import { TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
