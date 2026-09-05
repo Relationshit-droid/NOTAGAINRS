@@ -67,7 +67,7 @@ export default function LoveArcadeSettingsScreen() {
           <SettingsToggle 
             label="Show Hints" 
             description="Display helpful hints during games"
-            icon="lightbulb"
+            icon="bulb"
             value={settings.showHints}
             onChange={value => updateSetting('showHints', value)}
           />
@@ -120,7 +120,7 @@ export default function LoveArcadeSettingsScreen() {
           <SettingsToggle 
             label="Haptic Feedback" 
             description="Vibration for actions and achievements"
-            icon="vibrate"
+            icon="phone-portrait"
             value={settings.hapticFeedback}
             onChange={value => updateSetting('hapticFeedback', value)}
           />

@@ -150,7 +150,7 @@ export default function LoveLanguageDashboardScreen() {
         <GlassCard style={[styles.sectionCard, styles.focusCard]}>
           <View style={styles.focusHeader}>
             <LinearGradient colors={GRADIENTS.romanceHub.colors} style={styles.focusIcon}>
-              <Ionicons name="target" size={24} color={COLORS.textPrimary} />
+              <Ionicons name="locate" size={24} color={COLORS.textPrimary} />
             </LinearGradient>
             <View>
               <Typography variant="label" style={styles.focusTitle}>THIS WEEK'S FOCUS</Typography>

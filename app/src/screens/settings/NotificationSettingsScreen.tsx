@@ -155,7 +155,7 @@ export default function NotificationSettingsScreen() {
           <View style={styles.notificationItem}>
             <View style={styles.itemLeft}>
               <LinearGradient colors={GRADIENTS.primary.colors} style={styles.itemIcon}>
-                <Ionicons name="vibrate" size={20} color={COLORS.textPrimary} />
+                <Ionicons name="phone-portrait" size={20} color={COLORS.textPrimary} />
               </LinearGradient>
               <View style={styles.itemText}>
                 <Typography variant="label" style={styles.itemLabel}>Vibration</Typography>

@@ -147,7 +147,7 @@ export default function ConsequenceSettingsScreen() {
           <View style={styles.masterToggle}>
             <View style={styles.masterInfo}>
               <LinearGradient colors={settings.enabled ? GRADIENTS.primary.colors : [COLORS.textHint, COLORS.textHint]} style={styles.masterIcon}>
-                <Ionicons name={settings.enabled ? 'shield-checkmark' : 'shield-off'} size={24} color={COLORS.textPrimary} />
+                <Ionicons name={settings.enabled ? 'shield-checkmark' : 'shield-half'} size={24} color={COLORS.textPrimary} />
               </LinearGradient>
               <View>
                 <Typography variant="label" style={styles.masterTitle}>CONSEQUENCE ENGINE</Typography>

@@ -161,7 +161,7 @@ export default function SOSResultsSummary({ navigation, route }: SOSResultsSumma
               <GlassCard style={styles.learningCard} padding="large">
                 <View style={styles.learningRow}>
                   <View style={[styles.learningIcon, { backgroundColor: `${COLORS.aquaTeal}20` }]}>
-                    <Ionicons name="lightbulb" size={28} color={COLORS.aquaTeal} />
+                    <Ionicons name="bulb" size={28} color={COLORS.aquaTeal} />
                   </View>
                   <View style={styles.learningContent}>
                     <Typography variant="label" style={styles.learningTitle}>THE CORE ISSUE</Typography>

@@ -123,7 +123,7 @@ export default function RecommendedGamesScreen() {
       </View>
 
       <View style={styles.recReason}>
-        <Ionicons name="lightbulb" size={14} color={COLORS.vibrantPink} />
+        <Ionicons name="bulb" size={14} color={COLORS.vibrantPink} />
         <Typography variant="caption" style={{ flex: 1, color: COLORS.textSecondary }}>{item.matchReason}</Typography>
       </View>
 

@@ -321,7 +321,7 @@ export default function WeeklyReportScreen() {
         <GlassCard style={[styles.sectionCard, styles.suggestionCard]}>
           <View style={styles.suggestionHeader}>
             <LinearGradient colors={[COLORS.mintGreen, COLORS.aquaTeal]} style={styles.suggestionIcon}>
-              <Ionicons name="lightbulb" size={24} color={COLORS.textPrimary} />
+              <Ionicons name="bulb" size={24} color={COLORS.textPrimary} />
             </LinearGradient>
             <Typography variant="label" style={styles.suggestionTitle}>NEXT WEEK</Typography>
           </View>

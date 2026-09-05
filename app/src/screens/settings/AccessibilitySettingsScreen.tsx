@@ -7,8 +7,22 @@ import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../the
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
+
+type AccessibilitySettings = {
+  highContrast: boolean;
+  reducedMotion: boolean;
+  largeText: boolean;
+  fontScale: number;
+  screenReader: boolean;
+  hapticFeedback: boolean;
+  colorBlindMode: 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia';
+  autoPlayVideo: boolean;
+  simplifyUI: boolean;
+  voiceOver: boolean;
+};
+
 export default function AccessibilitySettingsScreen() {
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<AccessibilitySettings>({
     highContrast: false,
     reducedMotion: false,
     largeText: false,
@@ -26,7 +40,12 @@ export default function AccessibilitySettingsScreen() {
     setLoading(false);
   };
 
-  const updateSetting = (key: string, value: any) => {
+  // Keying to the real state shape means a typo in a setting name is a
+  // compile error rather than a silently-ignored write.
+  const updateSetting = <K extends keyof AccessibilitySettings>(
+    key: K,
+    value: AccessibilitySettings[K]
+  ) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
@@ -62,7 +81,7 @@ export default function AccessibilitySettingsScreen() {
           <AccessibilityToggle 
             label="Large Text" 
             description="Increase text size across the app"
-            icon="text-size"
+            icon="resize"
             value={settings.largeText}
             onChange={value => updateSetting('largeText', value)}
           />
@@ -76,7 +95,7 @@ export default function AccessibilitySettingsScreen() {
                 maximumValue={2.0}
                 step={0.1}
                 value={settings.fontScale}
-                onValueChange={value => updateSetting('fontScale', value)}
+                onValueChange={(value: number) => updateSetting('fontScale', value)}
                 minimumTrackTintColor={COLORS.vibrantPink}
                 maximumTrackTintColor={COLORS.borderSubtle}
               />
@@ -133,7 +152,7 @@ export default function AccessibilitySettingsScreen() {
           <AccessibilityToggle 
             label="Haptic Feedback" 
             description="Vibration feedback for actions"
-            icon="vibrate"
+            icon="phone-portrait"
             value={settings.hapticFeedback}
             onChange={value => updateSetting('hapticFeedback', value)}
           />
@@ -182,7 +201,15 @@ export default function AccessibilitySettingsScreen() {
   );
 }
 
-const AccessibilityToggle = ({ label, description, icon, value, onChange }: any) => (
+type AccessibilityToggleProps = {
+  label: string;
+  description: string;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  value: boolean;
+  onChange: (value: boolean) => void;
+};
+
+const AccessibilityToggle = ({ label, description, icon, value, onChange }: AccessibilityToggleProps) => (
   <View style={styles.toggleItem}>
     <View style={styles.toggleLeft}>
       <LinearGradient colors={GRADIENTS.primary.colors} style={styles.toggleIcon}>

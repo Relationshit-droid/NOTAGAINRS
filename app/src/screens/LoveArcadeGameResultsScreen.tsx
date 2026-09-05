@@ -168,7 +168,7 @@ export default function LoveArcadeGameResultsScreen() {
             onPress={() => navigation.navigate('LoveArcadeHub')}
             style={styles.actionButtonPrimary}
           >
-            <Ionicons name="replay" size={18} color={COLORS.textPrimary} style={{ marginRight: SPACING.small }} />
+            <Ionicons name="refresh" size={18} color={COLORS.textPrimary} style={{ marginRight: SPACING.small }} />
             <Typography variant="button">PLAY AGAIN</Typography>
           </SquishyButton>
         </View>
