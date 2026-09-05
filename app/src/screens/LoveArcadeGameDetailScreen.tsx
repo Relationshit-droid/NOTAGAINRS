@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,7 +17,7 @@ interface GameDetailRouteParams {
 }
 
 export default function LoveArcadeGameDetailScreen() {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const route = useRoute<GameDetailRouteParams>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);

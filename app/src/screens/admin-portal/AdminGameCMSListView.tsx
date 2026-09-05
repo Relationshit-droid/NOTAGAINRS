@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Image } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../lib/firebaseClient';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
@@ -16,7 +16,7 @@ type CmsGame = {
 
 const AdminGameCMSListView = () => {
   const [games, setGames] = useState<CmsGame[]>([]);
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   useEffect(() => {
     const fetchGames = async () => {

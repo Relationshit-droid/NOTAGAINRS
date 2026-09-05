@@ -11,7 +11,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions, Alert } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 
 // Backend integration
 import { useGameSession } from '../../hooks/useGameSession';
@@ -80,7 +81,7 @@ const SURVEY_QUESTIONS: SurveyQuestion[] = [
 ];
 
 const IntimacyFeud: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useAppNavigation();
     const route = useRoute();
     
     // Backend session

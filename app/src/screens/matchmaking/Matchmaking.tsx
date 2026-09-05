@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   TextInput,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { collection, addDoc, doc, onSnapshot, getDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../lib/firebaseClient';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,7 +18,7 @@ const MatchmakingScreen = () => {
   const [partnerCode, setPartnerCode] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [statusMessage, setStatusMessage] = useState('Generate a code to share with your partner, or enter their code to connect.');
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const currentUser = auth.currentUser;
 
   let lobbyListener: any = null;

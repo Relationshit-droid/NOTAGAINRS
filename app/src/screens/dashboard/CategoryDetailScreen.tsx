@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, RefreshControl, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { gamesApi, GameCategory, GameDetails } from '../../lib/api';
@@ -13,7 +14,7 @@ interface CategoryDetailRouteParams {
 }
 
 export default function CategoryDetailScreen() {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const route = useRoute<CategoryDetailRouteParams>();
   const { categoryId, category: passedCategory } = route.params || {};
 

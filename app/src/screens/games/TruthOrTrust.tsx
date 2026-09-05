@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../components/ui';
 import { Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -51,7 +51,7 @@ const TRUTH_OR_TRUST_QUESTIONS = [
 ];
 
 export default function TruthOrTrust({ route, navigation }: any) {
-    const navigationHook = useNavigation();
+    const navigationHook = useAppNavigation();
     const { user } = useAuth();
     const { gameId: routeGameId } = route.params || {};
     

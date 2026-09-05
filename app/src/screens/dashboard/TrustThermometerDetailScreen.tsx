@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import TrustThermometer from '../../components/ui/TrustThermometer';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
@@ -13,7 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function TrustThermometerDetailScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const [trustData, setTrustData] = useState({
     current: 65,
     weeklyChange: 5,

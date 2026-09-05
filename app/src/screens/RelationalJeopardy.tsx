@@ -8,7 +8,8 @@ import {
   Dimensions,
   TextInput
 } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
 import { ScreenLayout } from '../layout';
 import { Typography, SquishyButton, GlassCard } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
@@ -46,7 +47,7 @@ const jeopardyCategories = [
 const pointValues = [100, 200, 300, 400, 500];
 
 const RelationalJeopardyScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const route = useRoute();
   const { user } = useAuth();
   const { updateGameProgress, currentGameSession } = useGameStore();

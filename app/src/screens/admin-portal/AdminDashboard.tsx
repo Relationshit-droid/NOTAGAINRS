@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { View, StyleSheet, ScrollView, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { useAppStore } from '../../state/store';
 import { auth } from '../../lib/firebaseClient';
 import { ScreenLayout } from '../../layout';
@@ -9,7 +9,7 @@ import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
 const AdminDashboard = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const setAdmin = useAppStore((s) => s.setAdmin);
 
   const handleLogout = () => {

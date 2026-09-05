@@ -11,7 +11,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 
@@ -226,7 +226,7 @@ const SOSButton = ({ onPress }: { onPress?: () => void }) => {
 };
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   
   const [user, setUser] = useState<User | null>(null);
   const [couple, setCouple] = useState<Couple | null>(null);

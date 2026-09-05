@@ -11,7 +11,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, Alert, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 
 // Backend integration
 import { useGameSession } from '../../hooks/useGameSession';
@@ -69,7 +70,7 @@ const PUZZLES: Puzzle[] = [
 ];
 
 const EscapeEchoChamber: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useAppNavigation();
     const route = useRoute();
     
     // Backend session

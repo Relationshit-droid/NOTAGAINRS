@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, Alert } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../components/ui';
 
 // Backend integration
@@ -37,7 +37,7 @@ type Transaction = {
 };
 
 const TrustBank: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useAppNavigation();
     
     // Backend session
     const { 

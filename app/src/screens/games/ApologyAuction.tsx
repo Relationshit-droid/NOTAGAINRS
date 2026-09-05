@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions, Animated } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
@@ -21,7 +21,7 @@ const APOLOGY_CARDS = [
 ];
 
 export default function ApologyAuction({ route, navigation }: any) {
-  const navigationHook = useNavigation();
+  const navigationHook = useAppNavigation();
   const { gameId: routeGameId } = route.params || {};
   
   // Get game info from registry

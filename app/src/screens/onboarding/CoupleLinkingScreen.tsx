@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { BlurView } from 'expo-blur';
@@ -19,7 +19,7 @@ import { COLORS, GRADIENTS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '
 const CoupleLinkingScreen = () => {
   const [partnerCode, setPartnerCode] = useState('');
   const { user } = useAuth();
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   const handleLinkCouple = async () => {
     if (!partnerCode.trim()) {

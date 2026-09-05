@@ -59,7 +59,10 @@ const OnboardingAttachmentStyleScreen = () => {
     navigation.navigate('OnboardingCurrentVibe');
   };
 
-  const styles = [
+  // Renamed from `styles`, which shadowed the StyleSheet below - every
+  // styles.* lookup in this screen resolved to this array and was undefined,
+  // so the screen rendered completely unstyled.
+  const attachmentStyles = [
     { id: 'secure', title: 'Communicate Openly', subtitle: 'I talk about my feelings calmly', color: COLORS.mintGreen, icon: 'chatbubbles' },
     { id: 'anxious', title: 'Seek Reassurance', subtitle: 'I need constant signs of love', color: COLORS.brightYellow, icon: 'heart' },
     { id: 'avoidant', title: 'Create Distance', subtitle: 'I withdraw to protect myself', color: COLORS.rosePink, icon: 'shield' },
@@ -83,7 +86,7 @@ const OnboardingAttachmentStyleScreen = () => {
           <Typography variant="caption" style={styles.questionSubtitle}>Select the response that feels most natural to you</Typography>
 
           <View style={styles.optionsGrid}>
-            {styles.map(style => (
+            {attachmentStyles.map(style => (
               <AttachmentStyleOption 
                 key={style.id}
                 {...style}

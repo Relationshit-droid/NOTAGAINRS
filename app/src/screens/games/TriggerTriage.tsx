@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../components/ui';
 import { Typography, GlassCard, SquishyButton } from '../../components/ui';
 import Slider from '@react-native-community/slider';
@@ -11,7 +11,7 @@ import { useGameSession } from '../../hooks/useGameSession';
 import { getGameByScreen } from '../../lib/gameRegistry';
 
 export default function TriggerTriage({ route, navigation }: any) {
-  const navigationHook = useNavigation();
+  const navigationHook = useAppNavigation();
   
   // Get game info from registry
   const gameInfo = getGameByScreen('TriggerTriage');

@@ -33,7 +33,7 @@ const WelcomeAndDisclaimer = () => {
                     <BouncyCheckbox
                         size={25}
                         fillColor={COLORS.vibrantPink}
-                        unfillColor={COLORS.textPrimary}
+                        unFillColor={COLORS.textPrimary}
                         text="I UNDERSTAND AND AGREE TO THE TERMS"
                         iconStyle={{ borderColor: COLORS.vibrantPink }}
                         innerIconStyle={{ borderWidth: 2 }}

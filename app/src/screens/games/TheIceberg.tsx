@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SPACING, BORDER_RADIUS, GRADIENTS } from '../../theme';
@@ -43,7 +43,7 @@ const ICEBERG_QUESTIONS = [
 ];
 
 export default function TheIceberg({ route, navigation }: any) {
-  const navigationHook = useNavigation();
+  const navigationHook = useAppNavigation();
   
   // Get game info from registry
   const gameInfo = getGameByScreen('TheIceberg');

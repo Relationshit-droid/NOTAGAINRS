@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Camera } from 'expo-camera';
+// expo-camera v16: the legacy `Camera` component and Camera.Constants were
+// removed; CameraView + useCameraPermissions are the current API.
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScreenLayout, GlassCard, Typography, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS } from '../../theme';
 
 const RoleSwapRoastArGame = () => {
-    const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+    const [permission, requestPermission] = useCameraPermissions();
     const [isRecording, setIsRecording] = useState(false);
 
     useEffect(() => {
-        (async () => {
-            const { status } = await Camera.requestCameraPermissionsAsync();
-            setHasPermission(status === 'granted');
-        })();
-    }, []);
+        if (permission && !permission.granted && permission.canAskAgain) {
+            requestPermission();
+        }
+    }, [permission, requestPermission]);
+
+    const hasPermission = permission ? permission.granted : null;
 
     if (hasPermission === null) {
         return (
@@ -41,7 +44,7 @@ const RoleSwapRoastArGame = () => {
                 <Typography variant="h1" center style={styles.headerTitle}>Role-Swap Roast</Typography>
 
                 <View style={styles.cameraContainer}>
-                    <Camera style={styles.camera} type={Camera.Constants.Type.front}>
+                    <CameraView style={styles.camera} facing="front">
                         {/* AR Overlays */}
                         <View style={styles.arHudTop}>
                             <GlassCard style={styles.hudItem}>
@@ -52,7 +55,7 @@ const RoleSwapRoastArGame = () => {
                             <Typography variant="h2" style={styles.marcieScore}>88/100</Typography>
                             <Typography variant="caption" style={styles.marcieComment}>"Ooh, that was particularly petty!"</Typography>
                         </View>
-                    </Camera>
+                    </CameraView>
                 </View>
 
                 <View style={styles.controlsContainer}>

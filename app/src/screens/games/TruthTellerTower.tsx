@@ -18,7 +18,8 @@ import { View, StyleSheet, Alert, ScrollView, Animated as RNAnimated } from 'rea
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../components/ui';
 
 // Backend integration
@@ -119,7 +120,7 @@ interface Lifelines {
  type GameOverlayState = 'intro' | 'playing' | 'thinking' | 'correct' | 'wrong' | 'results';
 
 const TruthTellerTower: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useAppNavigation();
     const route = useRoute();
     const { gameId: routeGameId } = (route.params ?? {}) as { gameId?: string };
     

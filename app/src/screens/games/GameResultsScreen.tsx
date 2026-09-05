@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, GRADIENTS } from '../../theme';
@@ -8,7 +9,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { gamesApi } from '../../lib/api';
 
 export default function GameResultsScreen() {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const route = useRoute();
   const { user } = useAuth();
   

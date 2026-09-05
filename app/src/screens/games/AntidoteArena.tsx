@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useAppNavigation } from "../../hooks/useAppNavigation";
 
 import { ScreenLayout, Typography, SquishyButton } from "../../components/ui";
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS, ANIMATIONS, GRADIENTS } from "../../theme";
@@ -14,7 +14,7 @@ import { db } from "../../lib/firebaseClient";
 
 const AntidoteArena = ({ route }: { route: any }) => {
   const { gameId } = route.params ?? {};
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   const [gameState, setGameState] = useState<any>(null);
   const [selectedAntidote, setSelectedAntidote] = useState<string | null>(null);

@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, ScrollView, Image } from 'react-native';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebaseClient';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
 const AdminGameEditorScreen = () => {
   const route = useRoute();
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const { game } = route.params ?? {};
   const [title, setTitle] = useState(game.title);
   const [instructions, setInstructions] = useState(game.instructions);
