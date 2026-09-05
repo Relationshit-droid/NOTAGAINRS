@@ -10,6 +10,8 @@ import { useAppStore } from '../state/store';
 import { loveArcadeApi, LoveArcadeGame } from '../lib/api';
 
 export default function LoveArcadeHubScreen() {
+  // useNavigation was imported but never called; `navigation` was undefined.
+  const navigation = useNavigation<any>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const [games, setGames] = useState<LoveArcadeGame[]>([]);

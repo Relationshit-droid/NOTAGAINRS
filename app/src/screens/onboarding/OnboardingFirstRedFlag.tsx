@@ -4,6 +4,7 @@ import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { useAppStore } from '../../state/store';
@@ -33,6 +34,9 @@ const RedFlagTile = ({ text, icon, color, isSelected, onPress }: any) => (
 );
 
 const OnboardingRedFlagScreen = () => {
+  // These screens referenced a bare `navigation` identifier that was never a
+  // prop or an import, so navigating away threw ReferenceError.
+  const navigation = useNavigation<any>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const [selectedFlags, setSelectedFlags] = useState<string[]>([]);

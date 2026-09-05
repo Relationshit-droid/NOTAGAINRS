@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { speakMarcie } from '../../lib/voice-engine';
-import { getSecureAiAnalysis } from '../../lib/ai-engine';
+import { getSecureAiAnalysis, analyzeFight, generateQuestions } from '../../lib/ai-engine';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { useAppStore } from '../../state/store';

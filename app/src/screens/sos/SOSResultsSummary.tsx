@@ -177,7 +177,7 @@ export default function SOSResultsSummary({ navigation, route }: SOSResultsSumma
                   </View>
                   <View style={styles.learningContent}>
                     <Typography variant="label" style={styles.learningTitle}>YOUR PATTERN</Typography>
-                    <Typography variant="body" style={styles.learningText}>{isPositive ? 'You\'re learning to communicate needs clearly' : 'Work on expressing feelings without blame'}</Typography>
+                    <Typography variant="body" style={styles.learningText}>{mutualAgreement ? 'You\'re learning to communicate needs clearly' : 'Work on expressing feelings without blame'}</Typography>
                   </View>
                 </View>
               </GlassCard>

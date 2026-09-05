@@ -53,7 +53,7 @@ export default function GameSearchScreen() {
 
     if (selectedFilters.length > 0) {
       results = results.filter(game => 
-        game.category_id && selectedFilters.includes(game.category_id)
+        game.category && selectedFilters.includes(game.category)
       );
     }
 
@@ -83,10 +83,10 @@ export default function GameSearchScreen() {
   const renderGame = ({ item }: { item: GameDetails }) => (
     <TouchableOpacity
       style={styles.gameItem}
-      onPress={() => navigation.navigate('GameLobbyScreen', { gameId: item.id, categoryId: item.category_id })}
+      onPress={() => navigation.navigate('GameLobbyScreen', { gameId: item.id, categoryId: item.category })}
     >
       <LinearGradient 
-        colors={getCategoryGradient(item.category_id)} 
+        colors={getCategoryGradient(item.category)} 
         style={styles.gameIcon}
       >
         <Ionicons name="game-controller" size={20} color={COLORS.textPrimary} />
@@ -94,7 +94,7 @@ export default function GameSearchScreen() {
       <View style={styles.gameInfo}>
         <Typography variant="header" style={styles.gameName} numberOfLines={1}>{item.name}</Typography>
         <Typography variant="caption" style={styles.gameCategory} numberOfLines={1}>
-          {getCategoryName(item.category_id)} • {item.estimated_time}min • {item.max_score}pts
+          {getCategoryName(item.category)} • {item.estimated_time}min • {item.max_score}pts
         </Typography>
       </View>
       <Ionicons name="chevron-forward" size={20} color={COLORS.textHint} />

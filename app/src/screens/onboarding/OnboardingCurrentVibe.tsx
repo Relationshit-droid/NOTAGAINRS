@@ -3,11 +3,15 @@ import { View, StyleSheet } from 'react-native';
 import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { useAppStore } from '../../state/store';
 
 const OnboardingVibeScreen = () => {
+  // These screens referenced a bare `navigation` identifier that was never a
+  // prop or an import, so navigating away threw ReferenceError.
+  const navigation = useNavigation<any>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const [sliderValue, setSliderValue] = useState(0.65);
