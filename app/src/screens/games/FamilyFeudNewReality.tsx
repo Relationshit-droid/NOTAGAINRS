@@ -18,7 +18,7 @@ const ROUNDS = [
 ];
 
 export default function FamilyFeudNewReality({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [round, setRound] = useState(0);
     const [guess, setGuess] = useState<number | null>(null);
     const sessionId = useRef<string | null>(null);

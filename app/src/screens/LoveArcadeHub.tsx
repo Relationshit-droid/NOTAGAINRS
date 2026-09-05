@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
-import { loveArcadeApi, LoveArcadeGame } from '../../lib/api';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
+import { loveArcadeApi, LoveArcadeGame } from '../lib/api';
 
 export default function LoveArcadeHubScreen() {
   const { user } = useAuth();

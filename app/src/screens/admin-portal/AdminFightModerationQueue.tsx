@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList, Image } from 'react-native';
 import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase/firebaseConfig';
+import { db } from '../../lib/firebaseClient';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
@@ -56,7 +56,7 @@ const AdminFightModerationQueue = () => {
     <ScreenLayout showHeader={false} scrollable={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" center style={styles.title}>
           SOS Fight Queue

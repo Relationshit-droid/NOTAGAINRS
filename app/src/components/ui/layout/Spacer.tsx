@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { SPACING } from '../../theme';
+import { SPACING } from '../../../theme';
 
 interface SpacerProps {
   size?: number;

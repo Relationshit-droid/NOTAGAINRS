@@ -23,8 +23,8 @@ export default function GameSearchScreen() {
         gamesApi.getCategories(),
         gamesApi.getRegistry(),
       ]);
-      setCategories(cats.categories);
-      setAllGames(Object.values(registry.games));
+      setCategories(cats?.categories ?? []);
+      setAllGames(Object.values(registry?.games ?? {}));
     } catch (error) {
       console.error('Failed to fetch search data:', error);
     } finally {

@@ -72,7 +72,7 @@ const AdminDashboardOverview = () => {
           Cosmic Overview
         </Typography>
         <Typography variant="body" color={COLORS.textSecondary} style={{ marginTop: SPACING.tiny }}>
-          Real-time performance tracking for Love Actually system nodes.
+          Real-time performance tracking for RELATIONSHIT! system nodes.
         </Typography>
       </View>
 

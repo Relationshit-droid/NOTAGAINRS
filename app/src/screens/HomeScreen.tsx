@@ -17,6 +17,8 @@ import { BlurView } from 'expo-blur';
 
 import { userApi, coupleApi, gamesApi, User, Couple, GameCategory } from '../lib/api';
 import { auth } from '../lib/firebaseClient';
+import { ENV } from '../lib/env';
+import { DEMO_USER, DEMO_COUPLE, DEMO_CATEGORIES } from '../lib/demoData';
 
 import TrustThermometer from '../components/ui/TrustThermometer';
 import Typography from '../components/ui/Typography';
@@ -233,6 +235,16 @@ const HomeScreen = () => {
         setLoading(true);
         setError(null);
 
+        // DEMO_MODE (or no Firebase project configured): serve local demo data so
+        // the dashboard, categories and Trust Thermometer are fully explorable.
+        if (ENV.DEMO_MODE) {
+          setUser(DEMO_USER);
+          setCouple(DEMO_COUPLE);
+          setCategories(DEMO_CATEGORIES);
+          setLoading(false);
+          return;
+        }
+
         const currentUser = auth.currentUser;
         if (!currentUser) {
           setError('Not authenticated');
@@ -281,11 +293,13 @@ const HomeScreen = () => {
         console.error('❌ Error fetching data:', err);
         setError(err.message || 'Failed to load data');
         
-        Alert.alert(
-          'Connection Error',
-          'Could not connect to the game server. Please try again.',
-          [{ text: 'Retry', onPress: fetchData }, { text: 'OK' }]
-        );
+        if (!ENV.DEMO_MODE) {
+          Alert.alert(
+            'Connection Error',
+            'Could not connect to the game server. Please try again.',
+            [{ text: 'Retry', onPress: fetchData }, { text: 'OK' }]
+          );
+        }
       } finally {
         setLoading(false);
       }

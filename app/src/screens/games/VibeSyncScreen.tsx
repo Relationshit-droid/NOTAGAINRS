@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import { GlassCard, Typography, ScreenLayout } from '../../components/ui';
-import GlobalMarcieOverlay from '../../components/ai-host/GlobalMarcieOverlay';
+import GlobalMarcieOverlay from '../../components/DrMarcieOverlay';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, ANIMATIONS } from '../../theme';
 
 const VibeSyncScreen = () => {

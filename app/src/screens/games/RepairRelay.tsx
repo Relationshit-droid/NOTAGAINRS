@@ -11,7 +11,7 @@ const ROUNDS = [
 ];
 
 export default function RepairRelay({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [index, setIndex] = useState(0);
 
   function choose(idx: number) {

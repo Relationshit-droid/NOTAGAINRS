@@ -13,7 +13,7 @@ const COMBOS = [
 ];
 
 export default function RitualRoulette({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [result, setResult] = useState('');
   const [spinning, setSpinning] = useState(false);
 

@@ -14,7 +14,7 @@ const ARTICLES = [
 const GameScreenLoveTreaty = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const { gameId, coupleId } = route.params as { gameId?: string; coupleId?: string } || {};
+  const { gameId, coupleId } = (route.params ?? {}) as { gameId?: string; coupleId?: string };
   
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
   const [player1Stance, setPlayer1Stance] = useState('');

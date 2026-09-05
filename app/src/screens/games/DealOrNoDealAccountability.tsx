@@ -7,7 +7,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, ANIMATIONS } from '../../theme';
 
 export default function DealOrNoDealAccountability({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [round, setRound] = useState(0);
     const sessionId = useRef<string | null>(null);
 

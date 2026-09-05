@@ -5,7 +5,7 @@ import { Typography, GlassCard, SquishyButton, RadialGradientBackground } from '
 import { ScreenLayout } from '../../layout';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { COLORS, GRADIENTS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';

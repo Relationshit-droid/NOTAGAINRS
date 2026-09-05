@@ -8,7 +8,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, BORDER_RADIUS } from '../../theme';
 
 export default function TrustBingo({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [marked, setMarked] = useState<number[]>([]);
     const [sessionId, setSessionId] = useState<string | undefined>(undefined);
 

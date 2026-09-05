@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import { GlassCard, Typography, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { resetPassword } from '../../lib/supabase';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 

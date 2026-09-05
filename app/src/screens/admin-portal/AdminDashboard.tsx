@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAppStore } from '../../state/store';
-import { auth } from '../../firebase/firebaseConfig';
+import { auth } from '../../lib/firebaseClient';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
     <ScreenLayout showHeader={false} scrollable={true}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" center style={styles.title}>
           Puppet Master Portal

@@ -1,5 +1,5 @@
 /**
- * LOVE ACTUALLY - Design System v2.0
+ * RELATIONSHIT! - Design System v2.0
  * Centralized Design Tokens based on COMPLETE UI_UX DESIGN SPECIFICATION 2.0
  * 
  * NON-NEGOTIABLE: All colors, gradients, typography, spacing must use these tokens.
@@ -34,8 +34,8 @@ export const COLORS = {
   gradientEnd: '#F05D68',
   
   // Background Colors
-  backgroundPrimary: '#0F0A0C',
-  backgroundSecondary: '#1A0A1F',
+  backgroundPrimary: '#1A0B2E',
+  backgroundSecondary: '#2D1B45',
   backgroundCard: '#2D1B45',
   backgroundModal: '#0F0A1F',
   backgroundInput: 'rgba(255, 255, 255, 0.05)',
@@ -113,6 +113,20 @@ export const COLORS = {
   progress: ['#EF1B6E', '#C41E77', '#A22AC4', '#9056EF'] as const,
   primaryAction: ['#DB147C', '#F05D68'] as const,
   connection: ['#FCC738', '#EA031F', '#C60AB3'] as const,
+
+  // Aliases kept for older screens/tests that referenced the previous theme file.
+  surface: '#2D1B45',
+  innerLineStart: '#EF1B6E',
+  innerLineEnd: '#9056EF',
+  accentRose: '#E16BA9',
+  accentOrange: '#FF7600',
+  accentPink: '#FC0C84',
+  accentViolet: '#A16BF2',
+  accentYellow: '#FFEF1F',
+  accentTeal: '#00D4AA',
+  connectionGradientStart: '#FCC738',
+  connectionGradientMid: '#EA031F',
+  connectionGradientEnd: '#C60AB3',
 };
 
 // ============================================
@@ -122,13 +136,13 @@ export const GRADIENTS = {
   // Primary Button Gradient
   primary: {
     colors: [COLORS.gradientStart, COLORS.gradientEnd] as const,
-    start: { x: 0, y: 0 },
-    end: { x: 1, y: 1 },
+    start: { x: 0, y: 0.5 },
+    end: { x: 1, y: 0.5 },
   },
   
   // Background Gradient
   background: {
-    colors: ['#5C1459', '#FA1F63'] as const,
+    colors: ['#1A0B2E', '#3D2A5C'] as const,
     start: { x: 0.5, y: 0.2 },
     end: { x: 0.5, y: 1 },
   },
@@ -154,6 +168,13 @@ export const GRADIENTS = {
     end: { x: 1, y: 1 },
   },
   
+  // Romance Hub Gradient (category color #BE1980 -> vibrant pink)
+  romanceHub: {
+    colors: ['#BE1980', '#FC0C84'] as const,
+    start: { x: 0, y: 0 },
+    end: { x: 1, y: 1 },
+  },
+
   // Marcie Bubble Gradient
   marcieBubble: {
     colors: ['#FA1F63', 'rgba(250, 31, 99, 0)'] as const,
@@ -226,6 +247,8 @@ export const TYPOGRAPHY = {
 export const SPACING = {
   // Base unit (4px)
   unit: 4,
+  none: 0,
+  safeTop: 44,
   
   // Scale
   micro: 2,
@@ -257,6 +280,7 @@ export const SPACING = {
 // BORDER RADIUS TOKENS
 // ============================================
 export const BORDER_RADIUS = {
+  none: 0,
   small: 4,
   medium: 8,
   large: 12,
@@ -276,6 +300,23 @@ export const BORDER_RADIUS = {
 // SHADOW TOKENS
 // ============================================
 export const SHADOWS = {
+  // Cosmic / retro glows (referenced by ThemeMapper)
+  cosmic: {
+    shadowColor: COLORS.cosmicGlow,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.4,
+    shadowRadius: 18,
+    elevation: 7,
+  },
+
+  retro: {
+    shadowColor: COLORS.retroShadow,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    elevation: 5,
+  },
+
   // Neon Glow
   neon: {
     shadowColor: COLORS.glowPink,
@@ -349,6 +390,13 @@ export const SHADOWS = {
 // ANIMATION TOKENS
 // ============================================
 export const ANIMATIONS = {
+  // Named presets (referenced by ThemeMapper)
+  fadeIn: { duration: 300, from: { opacity: 0 }, to: { opacity: 1 } },
+  slideUp: { duration: 300, from: { translateY: 24, opacity: 0 }, to: { translateY: 0, opacity: 1 } },
+  scaleIn: { duration: 200, from: { scale: 0.92, opacity: 0 }, to: { scale: 1, opacity: 1 } },
+  pulseNeon: { duration: 1600, from: { opacity: 0.6 }, to: { opacity: 1 }, loop: true },
+  liquidFill: { duration: 800, from: { width: '0%' }, to: { width: '100%' } },
+
   // Timing
   duration: {
     instant: 100,

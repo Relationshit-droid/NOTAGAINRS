@@ -7,7 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS, GRADIENTS } from '../../theme';
 
 export default function ConnectionConundrum({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [round, setRound] = useState(1);
   const [score, setScore] = useState(0);
 

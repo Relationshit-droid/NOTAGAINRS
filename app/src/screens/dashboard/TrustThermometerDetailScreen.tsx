@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { TrustThermometer } from '../../components/ui/TrustThermometer';
+import TrustThermometer from '../../components/ui/TrustThermometer';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';

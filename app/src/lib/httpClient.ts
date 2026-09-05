@@ -1,5 +1,5 @@
 /**
- * HTTP Client for Love Actually - The Game API
+ * HTTP Client for RELATIONSHIT! - The Game API
  * 
  * This client automatically adds Firebase Auth tokens to all requests
  * and handles common error scenarios.

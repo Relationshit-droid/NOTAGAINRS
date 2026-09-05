@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
 
 export default function LoveArcadeSettingsScreen() {
   const { user } = useAuth();
@@ -211,7 +211,7 @@ export default function LoveArcadeSettingsScreen() {
           onPress={() => Alert.alert('Reset Settings', 'Reset all arcade settings to defaults?', [
             { text: 'Cancel' },
             { text: 'Reset', onPress: () => Alert.alert('Settings Reset', 'All arcade settings have been restored to defaults.') }
-          ]), 
+          ])}
           style={styles.resetButton}
         >
           <Ionicons name="refresh" size={18} color={COLORS.textSecondary} style={{ marginRight: SPACING.small }} />

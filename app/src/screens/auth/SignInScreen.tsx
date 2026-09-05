@@ -96,7 +96,7 @@ export default function SignInScreen({ navigation }: any) {
             <SquishyButton onPress={() => navigation.navigate('LegalDisclaimer')} variant="secondary">
               <Typography variant="caption" style={styles.footerLink}>Legal Disclaimer</Typography>
             </SquishyButton>
-            <Typography variant="caption" style={styles.footerText}>© 2026 Love Actually</Typography>
+            <Typography variant="caption" style={styles.footerText}>© 2026 RELATIONSHIT!</Typography>
             <SquishyButton onPress={() => navigation.navigate('HelpAndFaq')} variant="secondary">
               <Typography variant="caption" style={styles.footerLink}>Help & FAQ</Typography>
             </SquishyButton>

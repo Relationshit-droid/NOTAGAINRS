@@ -18,7 +18,7 @@ const SURVEYS = [
 ];
 
 export default function FamilyFeudSafety({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [round, setRound] = useState(0);
     const sessionId = useRef<string | null>(null);
 

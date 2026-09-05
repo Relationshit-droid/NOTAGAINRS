@@ -37,7 +37,7 @@ const AdminLoginScreen = () => {
       >
         <LinearGradient colors={[COLORS.backgroundPrimary, COLORS.backgroundSecondary]} style={styles.container}>
           <View style={styles.header}>
-            <Typography variant="header" style={styles.headerText}>Love Actually... The Game</Typography>
+            <Typography variant="header" style={styles.headerText}>RELATIONSHIT!</Typography>
           </View>
           <View style={styles.content}>
             <Typography variant="gameTitle" style={styles.title}>Admin Console</Typography>
@@ -69,7 +69,7 @@ const AdminLoginScreen = () => {
             </GlassCard>
           </View>
           <View style={styles.footer}>
-            <Typography variant="caption" style={styles.footerText}>© 2024 Love Actually... Cosmic Entertainment. All rights reserved.</Typography>
+            <Typography variant="caption" style={styles.footerText}>© 2024 RELATIONSHIT! Cosmic Entertainment. All rights reserved.</Typography>
           </View>
         </LinearGradient>
       </KeyboardAvoidingView>

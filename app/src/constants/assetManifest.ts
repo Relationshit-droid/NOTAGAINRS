@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-export const INTRO_VIDEO: number[] = [require('../../assets/animations/marcie-intro.webm')];
+export const INTRO_VIDEO: number[] = [require('../assets/animations/marcie-intro.webm')];
 
 export const CRITICAL_LOGOS: number[] = [
   require('../../assets/logo/mainlogoone.png'),

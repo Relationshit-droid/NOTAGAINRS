@@ -29,7 +29,7 @@ const AdminPushComposer = () => {
     <ScreenLayout showHeader={false} scrollable={true}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" style={styles.title}>Push Composer</Typography>
         <GlassCard style={styles.formCard} variant="elevated" padding="large">

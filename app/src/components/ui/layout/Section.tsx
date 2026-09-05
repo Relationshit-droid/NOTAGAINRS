@@ -3,7 +3,7 @@ import { StyleProp, ViewStyle } from 'react-native';
 import { GlassCard } from '../GlassCard';
 import { Typography } from '../Typography';
 import { VStack } from './VStack';
-import { SPACING } from '../../theme';
+import { SPACING } from '../../../theme';
 
 interface SectionProps {
   title?: string;

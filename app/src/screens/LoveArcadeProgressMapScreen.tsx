@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
 
 export default function LoveArcadeProgressMapScreen() {
   const { user } = useAuth();
@@ -204,8 +204,9 @@ const PhaseDetailCard = ({ phase, index }: any) => {
               </View>
             ))}
           </View>
-        )}
-      </GlassCard>
+        </View>
+      )}
+    </GlassCard>
   );
 };
 

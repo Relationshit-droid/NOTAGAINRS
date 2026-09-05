@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { userApi } from '../../lib/api';
 import { encryptSensitive } from '../../lib/encryption';
 import { Ionicons } from '@expo/vector-icons';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 
 type OriginStoryScreenProps = {
@@ -132,7 +132,7 @@ export default function OriginStoryScreen({ onComplete }: OriginStoryScreenProps
           <View style={styles.header}>
             <View style={styles.logoRow}>
               <Ionicons name="infinite" size={24} color={COLORS.vibrantPink} />
-              <Typography variant="header">Love Actually...</Typography>
+              <Typography variant="header">RELATIONSHIT!</Typography>
             </View>
           </View>
 

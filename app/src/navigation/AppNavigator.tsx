@@ -86,6 +86,7 @@ import EyeContactChallenge from '../screens/games/EyeContactChallenge';
 import MemoryLaneMap from '../screens/games/MemoryLaneMap';
 import VibeSync from '../screens/games/VibeSync';
 import GratitudeGraffiti from '../screens/games/GratitudeGraffiti';
+import GratitudeGraffitiMural from '../screens/GratitudeGraffitiMural';
 import SlapOfTruth from '../screens/games/SlapOfTruth';
 import ApologyAuction from '../screens/games/ApologyAuction';
 import DefensivenessDetox from '../screens/games/DefensivenessDetox';
@@ -98,6 +99,7 @@ import GifTheFeels from '../screens/games/GifTheFeels';
 import KaraokeConfessional from '../screens/games/KaraokeConfessional';
 import RansomNoteRomance from '../screens/games/RansomNoteRomance';
 import DateNightRoulette from '../screens/games/DateNightRoulette';
+import BedroomBingoCard from '../screens/games/BedroomBingoCard';
 import BedroomBingoGame1 from '../screens/games/BedroomBingoGame1';
 import SixSecondKiss from '../screens/games/SixSecondKiss';
 import ForeplayForecast from '../screens/games/ForeplayForecast';
@@ -148,7 +150,7 @@ const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <Stack.Navigator 
-      initialRouteName="MainGameLibrary" 
+      initialRouteName="MainApp" 
       screenOptions={{ 
         headerShown: false,
         animation: 'slide_from_right',
@@ -354,7 +356,9 @@ const AppNavigator = () => {
           presentation: 'modal',
           animation: 'slide_from_bottom'
         }} />
-        <Stack.Screen name="SOSVerdict" component={VerdictScreen} options={{ 
+        {/* Legacy fight-based verdict screen (takes `fightId`), distinct from
+            SOSVerdict above which takes `sessionId`. */}
+        <Stack.Screen name="FightVerdict" component={VerdictScreen} options={{ 
           presentation: 'modal',
           animation: 'slide_from_bottom'
         }} />
@@ -381,6 +385,10 @@ const AppNavigator = () => {
           animation: 'slide_from_right'
         }} />
         <Stack.Screen name="VibeSync" component={VibeSync} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GratitudeGraffitiMural" component={GratitudeGraffitiMural} options={{
           presentation: 'card',
           animation: 'slide_from_right'
         }} />
@@ -439,6 +447,10 @@ const AppNavigator = () => {
 
         {/* Romance Hub Games */}
         <Stack.Screen name="DateNightRoulette" component={DateNightRoulette} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="BedroomBingoCard" component={BedroomBingoCard} options={{
           presentation: 'card',
           animation: 'slide_from_right'
         }} />

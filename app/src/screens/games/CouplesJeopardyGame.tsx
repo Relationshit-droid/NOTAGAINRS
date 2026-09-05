@@ -290,7 +290,7 @@ const CouplesJeopardyGame: React.FC = () => {
                     <Typography variant="h1" style={styles.mainTitle}>Couple's Jeopardy</Typography>
                     <View style={styles.scoreDisplay}>
                         <Typography variant="h1" style={styles.scoreText}>${score}</Typography>
-                        {isSyncing && <Typography variant="caption">💾</Typography>
+                        {isSyncing && <Typography variant="caption">💾</Typography>}
                     </View>
                 </View>
 

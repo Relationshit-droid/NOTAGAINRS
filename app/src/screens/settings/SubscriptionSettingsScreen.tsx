@@ -267,13 +267,6 @@ const styles = StyleSheet.create({
     color: COLORS.mintGreen,
     marginTop: SPACING.tiny,
   },
-  planPrice: {
-    alignItems: 'flex-end',
-  },
-  planPeriod: {
-    color: COLORS.textHint,
-    marginTop: -4,
-  },
   currentPlanDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',

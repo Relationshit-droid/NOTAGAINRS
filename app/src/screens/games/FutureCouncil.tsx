@@ -7,7 +7,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, BORDER_RADIUS } from '../../theme';
 
 export default function FutureCouncil({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [round, setRound] = useState(0);
   const sessionId = useRef<string | null>(null);
 

@@ -20,6 +20,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { gamesApi, GameSession, GameAnswer } from '../lib/api';
 import { auth } from '../lib/firebaseClient';
+import { ENV } from '../lib/env';
 import { Alert } from 'react-native';
 
 interface UseGameSessionReturn {
@@ -73,8 +74,24 @@ export function useGameSession(
         setIsLoading(true);
         setError(null);
 
+        // In DEMO_MODE there is no signed-in Firebase user; run the game with a
+        // local session so it stays playable instead of erroring out.
         const currentUser = auth.currentUser;
         if (!currentUser) {
+          if (ENV.DEMO_MODE) {
+            if (isMounted.current) {
+              setSession({
+                id: `demo-${gameId}-${Date.now()}`,
+                game_id: gameId,
+                category_id: categoryId,
+                user_id: 'demo-user-1',
+                couple_id: coupleId ?? 'demo-couple-1',
+                score: 0,
+                status: 'in_progress',
+              } as unknown as GameSession);
+            }
+            return;
+          }
           throw new Error('User not authenticated');
         }
 

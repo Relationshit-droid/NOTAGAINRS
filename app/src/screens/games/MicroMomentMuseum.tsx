@@ -7,7 +7,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 
 export default function MicroMomentMuseum({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [caption, setCaption] = useState('');
   const [hasPhoto, setHasPhoto] = useState(false);
 

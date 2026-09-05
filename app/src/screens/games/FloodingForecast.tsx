@@ -6,7 +6,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS } from '../../theme';
 
 export default function FloodingForecast({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [bpm, setBpm] = useState(80);
 
   useEffect(() => {

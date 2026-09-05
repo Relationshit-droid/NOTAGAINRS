@@ -8,6 +8,31 @@ import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { useAppStore } from '../../state/store';
 
+/**
+ * Builds the list of "played" day keys (YYYY-MM-DD) for the given month.
+ * Used as demo seed data until real streak history is fetched from Firestore.
+ */
+function generateMockMonthlyData(date: Date): string[] {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  const days: string[] = [];
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const d = new Date(year, month, day);
+    if (d > today) continue;
+    // Deterministic pseudo-pattern so the calendar looks lived-in but stable
+    // across renders (no Math.random, which would flicker on every re-render).
+    if ((day * 7 + month * 3) % 10 < 6) {
+      const mm = String(month + 1).padStart(2, '0');
+      const dd = String(day).padStart(2, '0');
+      days.push(`${year}-${mm}-${dd}`);
+    }
+  }
+  return days;
+}
+
 export default function StreakCalendarScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);

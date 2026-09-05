@@ -9,7 +9,7 @@ const TONES = ["Sarcastic", "Anxious", "Warm", "Playful"];
 const SENTENCE = "We need to talk about the budget.";
 
 export default function ToneShiftChallenge({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [currentTone, setCurrentTone] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
 

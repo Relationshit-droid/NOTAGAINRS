@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "relationshit",
+    "name": "RELATIONSHIT!",
     "slug": "relationshit",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -38,14 +38,6 @@
         "@sentry/react-native",
         {
           "enableInExpoDevelopment": false
-        }
-      ],
-      [
-        "@stripe/stripe-react-native",
-        {
-          "merchantIdentifier": "merchant.com.relationshit.app",
-          "enableGooglePay": true,
-          "enableApplePay": true
         }
       ],
       "expo-secure-store"

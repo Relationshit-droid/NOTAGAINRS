@@ -8,7 +8,7 @@ import { COLORS, SPACING, BORDER_RADIUS, COMPONENTS } from '../../theme';
 const RISKY_TEXT = "Fine. Do whatever you want.";
 
 export default function TextToneTranslator({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [rewrite, setRewrite] = useState('');
 
   function check() {

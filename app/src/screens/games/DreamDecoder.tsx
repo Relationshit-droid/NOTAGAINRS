@@ -16,7 +16,7 @@ const DREAMS = [
 ];
 
 export default function DreamDecoder({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [responses, setResponses] = useState<Record<string, any>>({});

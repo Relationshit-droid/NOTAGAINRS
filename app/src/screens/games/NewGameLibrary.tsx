@@ -7,11 +7,11 @@ import { MarcieHost } from '../../components/ai-host';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../theme';
 
 const ALL_GAMES: Game[] = [
-    { id: '1', name: 'Lie Detector: Lite™', category: 'conflict', difficulty: 'Easy', xp: 50, description: 'Async voice response + AI prosody analysis', mechanics: 'Partner records ≤10-sec answer. Marcie measures fluency, vocal steadiness.', marcieIntro: 'Ooh—24/25. Only slipped on 'uh' once.' },
-    { id: '2', name: 'Transparency Toss', category: 'conflict', difficulty: 'Easy', xp: 50, description: 'Real-time text relay', mechanics: 'Each "toss" = low-stakes truth. Partner must tap ✅ to verify.', marcieIntro: 'You tossed 'I scrolled TikTok while you talked'… and they confirmed? Bold.' },
-    { id: '3', name: 'Boundary Bingo', category: 'conflict', difficulty: 'Medium', xp: 100, description: 'Async shared grid', mechanics: 'Auto-generated 4×4 grid. Mark only after mutual ✅.', marcieIntro: 'BINGO on 'I asked for space and didn't feel guilty'? Someone upgraded their firmware.' },
-    { id: '4', name: 'The Apology Olympics', category: 'conflict', difficulty: 'Hard', xp: 150, description: 'Speed rewrite + AI rubric', mechanics: 'Rewrite "Sorry you felt that way" in <60s. Avoid: but, if, you, however.', marcieIntro: ''I shut down and it made you feel abandoned—I'll pause next time'? Gold and my respect.' },
-    { id: '5', name: 'Vibe Sync', category: 'emotional', difficulty: 'Medium', xp: 75, description: 'Synchronous slider', mechanics: 'A sets emotional battery (0–100) → B guesses.', marcieIntro: 'You guessed 68… they're at 69. Psychic or just that in love?' },
+    { id: '1', name: 'Lie Detector: Lite™', category: 'conflict', difficulty: 'Easy', xp: 50, description: 'Async voice response + AI prosody analysis', mechanics: 'Partner records ≤10-sec answer. Marcie measures fluency, vocal steadiness.', marcieIntro: "Ooh—24/25. Only slipped on 'uh' once." },
+    { id: '2', name: 'Transparency Toss', category: 'conflict', difficulty: 'Easy', xp: 50, description: 'Real-time text relay', mechanics: "Each \"toss\" = low-stakes truth. Partner must tap ✅ to verify.", marcieIntro: "You tossed 'I scrolled TikTok while you talked'… and they confirmed? Bold." },
+    { id: '3', name: 'Boundary Bingo', category: 'conflict', difficulty: 'Medium', xp: 100, description: 'Async shared grid', mechanics: 'Auto-generated 4×4 grid. Mark only after mutual ✅.', marcieIntro: "BINGO on 'I asked for space and didn't feel guilty'? Someone upgraded their firmware." },
+    { id: '4', name: 'The Apology Olympics', category: 'conflict', difficulty: 'Hard', xp: 150, description: 'Speed rewrite + AI rubric', mechanics: "Rewrite \"Sorry you felt that way\" in <60s. Avoid: but, if, you, however.", marcieIntro: "'I shut down and it made you feel abandoned—I'll pause next time'? Gold and my respect." },
+    { id: '5', name: 'Vibe Sync', category: 'emotional', difficulty: 'Medium', xp: 75, description: 'Synchronous slider', mechanics: 'A sets emotional battery (0–100) → B guesses.', marcieIntro: "You guessed 68… they're at 69. Psychic or just that in love?" },
 ];
 
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: SPACING.xlarge,
-    alignItems: 'center',
+    alignItems: "center",
   },
   subtitle: {
     marginTop: SPACING.small,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     paddingTop: SPACING.xlarge,
   },
   gameCardWrapper: { 
-    width: '100%', 
+    width: "100%", 
     marginBottom: SPACING.regular 
   },
   gameCard: {

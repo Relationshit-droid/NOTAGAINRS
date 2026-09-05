@@ -10,7 +10,7 @@ import { useGameSession } from '../../hooks/useGameSession';
 import { getGameByScreen } from '../../lib/gameRegistry';
 
 export default function LayersOfHurt({ route, navigation }: any) {
-	const { gameId } = route.params;
+	const { gameId } = route.params ?? {};
 	const [box, setBox] = useState(1);
 	const [score, setScore] = useState(0);
 

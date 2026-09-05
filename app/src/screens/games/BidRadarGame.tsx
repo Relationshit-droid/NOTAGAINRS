@@ -176,7 +176,6 @@ const styles = StyleSheet.create({
         borderRadius: BORDER_RADIUS.medium,
     },
     bidInput: { 
-        backgroundColor: 'transparent', 
         borderWidth: 2, 
         borderColor: 'rgba(219, 20, 124, 0.3)', 
         borderRadius: BORDER_RADIUS.large,
@@ -235,7 +234,6 @@ const styles = StyleSheet.create({
     },
     marcieContainer: { 
         borderLeftWidth: 4, 
-        borderColor: COLORS.textPrimary,
         borderWidth: 2,
         borderColor: COLORS.borderSubtle,
         ...SHADOWS.card,

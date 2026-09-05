@@ -21,7 +21,7 @@ const CHALLENGES = [
 ];
 
 export default function TrustWiring({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [round, setRound] = useState(0);
     const sessionId = useRef<string | null>(null);
 

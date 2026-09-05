@@ -5,7 +5,7 @@ import { ScreenLayout } from '../layout';
 import { Typography, GlassCard, SquishyButton } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../lib/firebaseClient';
+import { auth } from '../lib/firebaseClient';
 
 const LoginAndSignUpScreen = ({ navigation }: any) => {
     const [authMode, setAuthMode] = useState<'Login' | 'SignUp'>('Login');

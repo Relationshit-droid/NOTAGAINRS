@@ -13,7 +13,7 @@ import { getGameByScreen } from '../../lib/gameRegistry';
 const PROMPTS = ["One value for our kids?", "What will they say at our funeral?", "Our signature tradition?"];
 
 export default function LegacyDice({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [rolled, setRolled] = useState(false);

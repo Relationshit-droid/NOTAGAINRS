@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../utils/haptics';
 import { auth } from './firebaseClient';
 import { gamesApi } from './api';
 import { gameRegistry } from './gameRegistry';

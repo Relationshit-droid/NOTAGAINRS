@@ -1,5 +1,5 @@
 /**
- * API Functions for Love Actually - The Game
+ * API Functions for RELATIONSHIT! - The Game
  * 
  * This module exports all API functions organized by domain:
  * - userApi: User management
@@ -318,7 +318,7 @@ export const coupleApi = {
       turning_point: string;
       current_status: string;
     },
-    firstRedFlag?: string,
+    firstRedFlag: string | undefined,
     token: string
   ): Promise<Couple> => {
     return put<Couple>(

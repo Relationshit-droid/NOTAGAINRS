@@ -1,7 +1,7 @@
 import { View, StyleSheet, ScrollView, Image } from 'react-native';
 import { Typography, GlassCard, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
@@ -27,7 +27,7 @@ export default function LegalDisclaimerScreen({ onContinue }: Props) {
       <RadialGradientBackground />
       <View style={styles.header}>
         <Image source={require('../../../assets/logo/mainlogoone.png')} style={styles.logo} resizeMode="contain" />
-        <Typography variant="header">Love Actually...</Typography>
+        <Typography variant="header">RELATIONSHIT!</Typography>
       </View>
 
       <View style={styles.contentContainer}>
@@ -43,7 +43,7 @@ export default function LegalDisclaimerScreen({ onContinue }: Props) {
             </View>
             <ScrollView style={styles.scrollArea} persistentScrollbar showsVerticalScrollIndicator={true}>
               <Typography variant="body" style={styles.disclaimerText}>
-                This game, Love Actually... The Game, is designed exclusively for entertainment and connection purposes between consenting adults. It provides a structured framework for dialogue and shared experiences.{'\n\n'}
+                This game, RELATIONSHIT!, is designed exclusively for entertainment and connection purposes between consenting adults. It provides a structured framework for dialogue and shared experiences.{'\n\n'}
                 Important: This experience is NOT a replacement for professional clinical therapy, medical advice, psychological diagnosis, or mental health counseling. If you or your partner are experiencing significant distress or require clinical intervention, please consult a licensed professional.{'\n\n'}
                 By proceeding, you acknowledge that you are participating voluntarily and that the creators of this game are not liable for any interpersonal outcomes or emotional responses triggered during gameplay.
               </Typography>

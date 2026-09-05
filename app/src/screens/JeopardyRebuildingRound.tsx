@@ -13,7 +13,7 @@ import { useGameStore } from '../lib/game-store';
 import { vertexAIService } from '../lib/vertex-ai-service';
 import { JeopardyCategory, JeopardyClue, GameState } from '../lib/game-types';
 import GameRunner from '../components/games/GameRunner';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../utils/haptics';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, GRADIENTS } from '../theme';
 import Typography from '../components/ui/Typography';
 import SquishyButton from '../components/ui/SquishyButton';

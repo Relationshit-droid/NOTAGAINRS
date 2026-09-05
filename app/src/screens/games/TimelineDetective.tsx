@@ -7,7 +7,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, BORDER_RADIUS, ANIMATIONS } from '../../theme';
 
 export default function TimelineDetective({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [evidence, setEvidence] = useState<string[]>([]);
     const sessionId = useRef<string | null>(null);
 

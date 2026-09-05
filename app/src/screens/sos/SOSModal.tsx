@@ -223,7 +223,9 @@ export default function SOSModal({ visible, onClose, navigation }: any) {
                   size="large"
                   disabled={!formData[currentStepData.field as keyof typeof formData]}
                 >
-                  {currentStep === steps.length - 1 ? 'Submit SOS' : 'Next'}
+                  <Typography variant="button">
+                    {currentStep === steps.length - 1 ? 'Submit SOS' : 'Next'}
+                  </Typography>
                 </SquishyButton>
                 
                 <SquishyButton 
@@ -231,7 +233,7 @@ export default function SOSModal({ visible, onClose, navigation }: any) {
                   variant="ghost"
                   size="medium"
                 >
-                  Cancel
+                  <Typography variant="button">Cancel</Typography>
                 </SquishyButton>
               </View>
             </SafeAreaView>

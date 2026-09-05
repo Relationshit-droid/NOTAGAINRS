@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, ScrollView, Image } from 'react-native';
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase/firebaseConfig';
+import { db } from '../../lib/firebaseClient';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
@@ -11,7 +11,7 @@ import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 const AdminGameEditorScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const { game } = route.params;
+  const { game } = route.params ?? {};
   const [title, setTitle] = useState(game.title);
   const [instructions, setInstructions] = useState(game.instructions);
   const [gradingKeys, setGradingKeys] = useState(JSON.stringify(game.grading_keys, null, 2));
@@ -34,7 +34,7 @@ const AdminGameEditorScreen = () => {
     <ScreenLayout showHeader={false} scrollable={true}>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" center style={styles.title}>
           Edit Game

@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { GlobalMarcieOverlay } from '../../components/GlobalMarcieOverlay';
-import { functions } from '../../services/firebase';
+import { GlobalMarcieOverlay } from '../../components/DrMarcieOverlay';
+import { functions } from '../../lib/firebaseClient';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';

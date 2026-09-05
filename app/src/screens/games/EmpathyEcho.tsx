@@ -12,7 +12,7 @@ import { getGameByScreen } from '../../lib/gameRegistry';
 const WORRY = "I feel overwhelmed by my job insecurity right now.";
 
 export default function EmpathyEcho({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [response, setResponse] = useState('');
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);

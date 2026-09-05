@@ -132,7 +132,7 @@ export { default as GuiltShameSort } from './GuiltShameSort';
 // INFIDELITY RECOVERY GAMES
 // ============================================================================
 export { default as LieDetector } from './LieDetector';
-export { default as LieDetectorLite } from './LieDetectorLite';
+export { default as LieDetectorLite } from '../LieDetectorLite';
 export { default as DenialDetector } from './DenialDetector';
 export { default as MicroBetrayalGolf } from './MicroBetrayalGolf';
 export { default as MicroMomentMuseum } from './MicroMomentMuseum';

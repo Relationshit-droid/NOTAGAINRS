@@ -13,7 +13,7 @@ import { getGameByScreen } from '../../lib/gameRegistry';
 const GAPS = ["Hobbies: Pottery", "Childhood Friend: ?", "Dream Vacation: ?"];
 
 export default function LoveMapGapQuest({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [question, setQuestion] = useState('');
 
   // Get game info from registry (LoveMapGapQuest is part of memory-lane-map)

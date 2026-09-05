@@ -29,7 +29,7 @@ import { useWebSocket } from '../../hooks/useWebSocket';
 
 // Components
 import { GlassCard, Typography, SquishyButton } from '../../components/ui';
-import GlobalMarcieOverlay, { MarcieAnimationType } from '../../components/ai-host/GlobalMarcieOverlay';
+import GlobalMarcieOverlay, { MarcieAnimationType } from '../../components/DrMarcieOverlay';
 
 // Theme
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, ANIMATIONS, GRADIENTS } from '../../theme';
@@ -121,7 +121,7 @@ interface Lifelines {
 const TruthTellerTower: React.FC = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { gameId: routeGameId } = route.params as { gameId?: string } || {};
+    const { gameId: routeGameId } = (route.params ?? {}) as { gameId?: string };
     
     // Backend session
     const { 

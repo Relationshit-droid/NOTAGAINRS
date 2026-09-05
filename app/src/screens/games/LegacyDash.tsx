@@ -7,7 +7,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, BORDER_RADIUS } from '../../theme';
 
 export default function LegacyDash({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [stage, setStage] = useState(1);
     const [puzzle, setPuzzle] = useState<string[]>([]);
     const sessionId = useRef<string | null>(null);

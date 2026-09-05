@@ -32,17 +32,30 @@ interface UseWebSocketReturn {
   reconnect: () => void;
 }
 
-export function useWebSocket({
-  coupleId,
-  userId,
-  onMessage,
-  onConnect,
-  onDisconnect,
-  onError,
-  reconnectInterval = 3000,
-  maxReconnectAttempts = 10,
-  heartbeatInterval = 30000,
-}: UseWebSocketOptions): UseWebSocketReturn {
+export function useWebSocket(
+  optionsOrCoupleId?: UseWebSocketOptions | string | null,
+  maybeUserId?: string | null,
+): UseWebSocketReturn {
+  // Call sites use both shapes: useWebSocket({ coupleId, userId }) and the
+  // positional useWebSocket(coupleId, userId). Normalise before destructuring,
+  // otherwise a null argument throws "Cannot destructure property 'coupleId'
+  // of 'object null'" and takes the whole screen down.
+  const options: UseWebSocketOptions =
+    optionsOrCoupleId && typeof optionsOrCoupleId === 'object'
+      ? optionsOrCoupleId
+      : ({ coupleId: (optionsOrCoupleId as string) ?? '', userId: maybeUserId ?? '' } as UseWebSocketOptions);
+
+  const {
+    coupleId,
+    userId,
+    onMessage,
+    onConnect,
+    onDisconnect,
+    onError,
+    reconnectInterval = 3000,
+    maxReconnectAttempts = 10,
+    heartbeatInterval = 30000,
+  } = options;
   const [isConnected, setIsConnected] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [lastMessage, setLastMessage] = useState<WebSocketMessage | null>(null);

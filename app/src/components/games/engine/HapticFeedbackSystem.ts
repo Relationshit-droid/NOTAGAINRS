@@ -1,4 +1,4 @@
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../../utils/haptics';
 
 export function success() {
   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);

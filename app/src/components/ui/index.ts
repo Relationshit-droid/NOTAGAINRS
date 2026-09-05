@@ -1,4 +1,4 @@
-// UI Components - Love Actually Design System v2.0
+// UI Components - RELATIONSHIT! Design System v2.0
 export { default as GlassCard } from './GlassCard';
 export { default as TrustThermometer } from './TrustThermometer';
 export { default as SquishyButton } from './SquishyButton';

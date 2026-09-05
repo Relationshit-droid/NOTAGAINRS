@@ -6,7 +6,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Eas
 import { GlassCard, Typography, RadialGradientBackground, SquishyButton } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SplashScreenProps = {
@@ -17,7 +17,7 @@ type SplashScreenProps = {
 export default function SplashScreen({ onStart, onLogin }: SplashScreenProps) {
   const [videoFinished, setVideoFinished] = useState(false);
   const videoRef = useRef<Video>(null);
-  const marcieVideoAsset = Asset.fromModule(require('../../../public/animations/marcie-intro.webm'));
+  const marcieVideoAsset = Asset.fromModule(require('../../assets/animations/marcie-intro.webm'));
 
   const pulse = useSharedValue(1);
   const float = useSharedValue(0);
@@ -32,6 +32,11 @@ export default function SplashScreen({ onStart, onLogin }: SplashScreenProps) {
         setVideoFinished(true);
       }
     })();
+
+    // Safety net: if the intro video cannot load or play (web autoplay policies,
+    // codec support), never trap the user on a blank splash.
+    const introTimeout = setTimeout(() => setVideoFinished(true), 4000);
+    return () => clearTimeout(introTimeout);
   }, []);
 
   const handleVideoEnd = async () => {
@@ -63,15 +68,15 @@ export default function SplashScreen({ onStart, onLogin }: SplashScreenProps) {
       ) : (
         <Animated.View style={styles.contentContainer} entering={FadeIn.duration(1000)}>
             <View style={styles.header}>
-                <Image source={require('../../../public/logos/logo-light.png')} style={styles.headerLogo} resizeMode="contain" />
+                <Image source={require('../../../assets/logo/mainlogo.png')} style={styles.headerLogo} resizeMode="contain" />
             </View>
 
             <View style={styles.centerContent}>
                 <Animated.View style={[styles.logoContainer, animatedFloatStyle]}>
-                    <Image source={require('../../../public/logos/logo-symbol-glow.png')} style={styles.logo} resizeMode="contain" />
+                    <Image source={require('../../../assets/logo/mainlogoone.png')} style={styles.logo} resizeMode="contain" />
                 </Animated.View>
-                <Typography variant="gameTitle" style={styles.gameTitle}>LOVE ACTUALLY...</Typography>
-                <Typography variant="body" style={styles.tagline}>The game for couples who want to fight better.</Typography>
+                <Typography variant="gameTitle" style={styles.gameTitle}>RELATIONSHIT!</Typography>
+                <Typography variant="body" style={styles.tagline}>Who said therapy?</Typography>
             </View>
 
             <SquishyButton onPress={() => { Haptics.selectionAsync(); onStart(); }} style={styles.startButton}>

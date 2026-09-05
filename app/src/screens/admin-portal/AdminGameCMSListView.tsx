@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Image } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase/firebaseConfig';
+import { db } from '../../lib/firebaseClient';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard } from '../../components/ui';
@@ -37,7 +37,7 @@ const AdminGameCMSListView = () => {
     <ScreenLayout showHeader={false} scrollable={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" center style={styles.title}>
           Game CMS

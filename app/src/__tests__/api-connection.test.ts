@@ -29,7 +29,7 @@ const shouldRunIntegrationTests = process.env.RUN_INTEGRATION_TESTS === 'true';
     it('should return health status', async () => {
       const health = await healthApi.check();
       expect(health.status).toBe('healthy');
-      expect(health.app).toBe('Love Actually - The Game');
+      expect(health.app).toBe('RELATIONSHIT! - The Game');
       expect(health.version).toBeDefined();
       expect(health.timestamp).toBeDefined();
     });

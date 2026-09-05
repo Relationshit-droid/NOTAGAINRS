@@ -9,7 +9,7 @@ import DrMarcieOverlay from '../DrMarcieOverlay';
 import GameHeader from '../layout/GameHeader';
 import GameFeedback from './GameFeedback';
 import ResultsScreen from './ResultsScreen';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 import { Typography, SquishyButton } from '../ui';
 

@@ -1,6 +1,6 @@
 import { ReactNode, useRef } from 'react';
 import { Pressable, ViewStyle, Platform, Animated, StyleProp } from 'react-native';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, GRADIENTS, BORDER_RADIUS, SPACING, SHADOWS, ANIMATIONS } from '../../theme';
 

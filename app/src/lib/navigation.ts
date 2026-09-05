@@ -4,6 +4,11 @@ import { useAppStore } from '../state/store';
 
 export const navigationRef = createNavigationContainerRef<any>();
 
+// Expose the ref on web so the preview/smoke tests can drive real navigation.
+if (typeof globalThis !== 'undefined') {
+  (globalThis as any).__navigationRef = navigationRef;
+}
+
 export function navigate(name: string, params?: any) {
   if (navigationRef.isReady()) navigationRef.dispatch(CommonActions.navigate({ name, params }));
 }
