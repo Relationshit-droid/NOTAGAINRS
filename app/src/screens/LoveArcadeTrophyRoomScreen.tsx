@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../hooks/useAuth';
 import { useAppStore } from '../state/store';
 
+type TrophyRarity = 'common' | 'uncommon' | 'rare' | 'legendary';
+
+type Trophy = {
+  id?: string;
+  name: string;
+  description?: string;
+  rarity: TrophyRarity;
+  earned?: boolean;
+  icon?: string;
+  points?: number;
+  date?: string;
+};
+
 export default function LoveArcadeTrophyRoomScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
-  const [trophies, setTrophies] = useState<any[]>([]);
+  const [trophies, setTrophies] = useState<Trophy[]>([]);
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'earned' | 'locked'>('all');
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +44,7 @@ export default function LoveArcadeTrophyRoomScreen() {
         { id: '8', name: 'Week Warrior', description: 'Complete 4 games in one week', icon: 'calendar', rarity: 'uncommon', earned: true, date: '2025-02-28', points: 30 },
         { id: '9', name: 'Date Night Pro', description: 'Complete 10 Date Night Roulette spins', icon: 'wine', rarity: 'uncommon', earned: false, points: 25 },
         { id: '10', name: 'SOS Survivor', description: 'Complete 3 SOS Fight Solver sessions', icon: 'alert-circle', rarity: 'rare', earned: false, points: 40 },
-      ];
+      ] as Trophy[];
       setTrophies(mockTrophies);
     } catch (error) {
       console.error('Failed to fetch trophies:', error);
@@ -54,7 +67,7 @@ export default function LoveArcadeTrophyRoomScreen() {
   const stats = {
     total: trophies.length,
     earned: trophies.filter(t => t.earned).length,
-    points: trophies.filter(t => t.earned).reduce((sum, t) => sum + t.points, 0),
+    points: trophies.filter(t => t.earned).reduce((sum, t) => sum + (t.points ?? 0), 0),
   };
 
   const rarityColors = {
@@ -64,7 +77,7 @@ export default function LoveArcadeTrophyRoomScreen() {
     legendary: COLORS.brightYellow,
   };
 
-  const rarityGradients = {
+  const rarityGradients: Record<TrophyRarity, GradientColors> = {
     common: [COLORS.textHint, COLORS.textHint + '80'],
     uncommon: [COLORS.aquaTeal, COLORS.aquaTeal + '80'],
     rare: [COLORS.vibrantPink, COLORS.vibrantPink + '80'],
@@ -132,7 +145,7 @@ export default function LoveArcadeTrophyRoomScreen() {
                 item.earned ? { borderColor: rarityColors[item.rarity] } : { borderColor: COLORS.borderSubtle, opacity: 0.5 },
               ]}>
                 <LinearGradient colors={rarityGradients[item.rarity]} style={styles.trophyIcon}>
-                  <Ionicons name={item.icon} size={32} color={COLORS.textPrimary} />
+                  <Ionicons name={(item.icon ?? 'trophy') as React.ComponentProps<typeof Ionicons>['name']} size={32} color={COLORS.textPrimary} />
                 </LinearGradient>
                 {!item.earned && (
                   <View style={styles.lockOverlay}>
@@ -213,7 +226,7 @@ const StatItem = ({ label, value, color, icon }: any) => (
   </View>
 );
 
-const LegendItem = ({ color, label }: any) => (
+const LegendItem = ({ color, label }: { color: string; label: string }) => (
   <View style={styles.legendItem}>
     <View style={[styles.legendDot, { backgroundColor: color }]}>
       <Ionicons name="trophy" size={14} color={COLORS.textPrimary} />
@@ -409,6 +422,22 @@ const styles = StyleSheet.create({
   legendItems: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  // LegendItem referenced these three keys but they were never defined, so
+  // the rarity legend rendered with no styling at all.
+  legendItem: {
+    alignItems: 'center',
+    gap: SPACING.tiny,
+  },
+  legendDot: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  legendLabel: {
+    color: COLORS.textSecondary,
   },
 });
 

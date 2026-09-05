@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { View, Image, StyleSheet, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
-import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
+import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, GradientColors } from '../../theme';
 import { Typography, SquishyButton } from '../ui';
 import * as Haptics from '../../utils/haptics';
 
 const loveActuallyLogo = require('../../../assets/logo/mainlogoone.png');
 
 // Enhanced cosmic retro arcade color mapping
-const cosmicGlowColors = {
+const cosmicGlowColors: Record<string, GradientColors> = {
   "Physical Connection": [COLORS.emotionalConnection, COLORS.brightYellow, COLORS.warmOrange],
   "Vulnerability": [COLORS.softViolet, COLORS.lavenderPurple, COLORS.lavenderPurple],
   "Empathy": [COLORS.mintGreen, COLORS.aquaTeal, COLORS.aquaTeal],
@@ -44,7 +44,8 @@ const GameCard = ({
   players = '2 players',
 }: GameCardProps) => {
   const [scaleValue] = useState(new Animated.Value(1));
-  const glowColors = cosmicGlowColors[category] || [COLORS.emotionalConnection, COLORS.brightYellow, COLORS.warmOrange];
+  const glowColors: GradientColors =
+    cosmicGlowColors[category] || [COLORS.emotionalConnection, COLORS.brightYellow, COLORS.warmOrange];
   
   const handlePressIn = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -84,13 +85,13 @@ const GameCard = ({
         {/* Multi-layered cosmic glow effect */}
         <View style={styles.glowContainer}>
           <LinearGradient
-            colors={[...glowColors, 'transparent']}
+            colors={[...glowColors, 'transparent'] as unknown as GradientColors}
             start={{ x: 0.5, y: 0 }}
             end={{ x: 0.5, y: 1 }}
             style={[styles.glowOuter, { shadowColor: glowColors[0] }]}
           />
           <LinearGradient
-            colors={[glowColors[0], glowColors[1], 'transparent']}
+            colors={[glowColors[0], glowColors[1], 'transparent'] as GradientColors}
             start={{ x: 0.5, y: 0 }}
             end={{ x: 0.5, y: 1 }}
             style={[styles.glowMiddle, { shadowColor: glowColors[1] }]}

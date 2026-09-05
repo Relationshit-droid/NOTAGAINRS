@@ -549,3 +549,10 @@ export const THEME = {
 };
 
 export default THEME;
+
+/**
+ * expo-linear-gradient requires at least two colours and types its `colors`
+ * prop as a tuple, so a plain `string[]` is rejected. Helpers that build
+ * gradients dynamically should return this type.
+ */
+export type GradientColors = readonly [string, string, ...string[]];

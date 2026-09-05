@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../../hooks/useAuth';
@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function getCategoryGradient(key: string) {
+function getCategoryGradient(key: string): GradientColors {
   const gradients: Record<string, string[]> = {
     gameReminders: [COLORS.vibrantPink, COLORS.vibrantPink + '80'],
     partnerActivity: [COLORS.aquaTeal, COLORS.aquaTeal + '80'],

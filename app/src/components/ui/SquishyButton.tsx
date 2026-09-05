@@ -11,6 +11,10 @@ type SquishyButtonProps = {
   // idiom (which yields false) and nested arrays; ViewStyle[] does not.
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;
+  /** Called in addition to the built-in squish animation. */
+  onPressIn?: () => void;
+  /** Called in addition to the built-in squish animation. */
+  onPressOut?: () => void;
   accessibilityLabel?: string;
   disabled?: boolean;
   variant?: 'primary' | 'secondary' | 'ghost';
@@ -21,6 +25,8 @@ export default function SquishyButton({
   children, 
   style, 
   onPress, 
+  onPressIn, 
+  onPressOut, 
   accessibilityLabel, 
   disabled = false,
   variant = 'primary',
@@ -52,6 +58,7 @@ export default function SquishyButton({
 
   const handlePressIn = () => {
     if (disabled) return;
+    onPressIn && onPressIn();
     Animated.parallel([
       Animated.spring(scale, { 
         toValue: 0.96, 
@@ -69,6 +76,7 @@ export default function SquishyButton({
 
   const handlePressOut = () => {
     if (disabled) return;
+    onPressOut && onPressOut();
     Animated.parallel([
       Animated.spring(scale, { 
         toValue: 1, 

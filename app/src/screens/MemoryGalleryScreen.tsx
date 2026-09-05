@@ -7,12 +7,24 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../hooks/useAuth';
 import { useAppStore } from '../state/store';
 
+type MemoryType = 'photo' | 'video' | 'note' | 'milestone';
+
+type Memory = {
+  id: string;
+  type: MemoryType;
+  title: string;
+  caption?: string;
+  date: string;
+  favorite?: boolean;
+  tags?: string[];
+};
+
 export default function MemoryGalleryScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
-  const [memories, setMemories] = useState<any[]>([]);
+  const [memories, setMemories] = useState<Memory[]>([]);
   const [filter, setFilter] = useState<'all' | 'photos' | 'videos' | 'notes' | 'milestones'>('all');
-  const [selectedMemory, setSelectedMemory] = useState<any | null>(null);
+  const [selectedMemory, setSelectedMemory] = useState<Memory | null>(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 

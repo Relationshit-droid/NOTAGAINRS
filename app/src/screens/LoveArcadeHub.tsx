@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
@@ -510,7 +510,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function getPhaseGradient(phase?: string) {
+function getPhaseGradient(phase?: string): GradientColors {
   const gradients: Record<string, string[]> = {
     awakening: [COLORS.rosePink, COLORS.rosePink + '80'],
     deconstruction: [COLORS.vibrantPink, COLORS.vibrantPink + '80'],

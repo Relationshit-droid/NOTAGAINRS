@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../../hooks/useAuth';
@@ -138,7 +138,7 @@ export default function StreakCalendarScreen() {
             subtitle="played together"
             icon="calendar"
             color={COLORS.mintGreen}
-            gradient={[COLORS.mintGreen, COLORS.aquaTeal]}
+            gradient={[COLORS.mintGreen, COLORS.aquaTeal] as const}
           />
           <StreakCard 
             title="This Week" 
@@ -201,7 +201,7 @@ export default function StreakCalendarScreen() {
               <CalendarDay 
                 key={index} 
                 day={day} 
-                today={day.isToday}
+                today={day.isToday ?? false}
               />
             ))}
           </View>
@@ -249,14 +249,14 @@ const StreakCard = ({ title, value, subtitle, icon, color, gradient }: {
   title: string; 
   value: string | number; 
   subtitle: string; 
-  icon: string; 
+  icon: React.ComponentProps<typeof Ionicons>['name']; 
   color: string; 
   /** Either a raw colour array or a design-system gradient token. */
-  gradient: string[] | { colors: string[] } 
+  gradient: GradientColors | { colors: GradientColors } 
 }) => (
   <TouchableOpacity style={styles.streakCard}>
     <LinearGradient
-      colors={Array.isArray(gradient) ? gradient : gradient.colors}
+      colors={'colors' in gradient ? gradient.colors : gradient}
       style={styles.cardIcon}
     >
       <Ionicons name={icon} size={24} color={COLORS.textPrimary} />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../../hooks/useAuth';
@@ -775,7 +775,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function getCategoryGradient(category: string) {
+function getCategoryGradient(category: string): GradientColors {
   const colors: Record<string, string[]> = {
     'Emotional Connection': [COLORS.rosePink, COLORS.rosePink + '80'],
     'Conflict Resolution': [COLORS.vibrantPink, COLORS.vibrantPink + '80'],

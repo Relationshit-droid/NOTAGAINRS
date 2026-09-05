@@ -222,6 +222,17 @@ const styles = StyleSheet.create({
   phaseNode: {
     marginBottom: SPACING.regular,
   },
+  // The three node state styles were referenced but never defined, so
+  // completed / current / locked phases all looked identical on the map.
+  nodeCompleted: {
+    opacity: 1,
+  },
+  nodeCurrent: {
+    transform: [{ scale: 1.08 }],
+  },
+  nodeLocked: {
+    opacity: 0.4,
+  },
   nodeInner: {
     width: 60,
     height: 60,

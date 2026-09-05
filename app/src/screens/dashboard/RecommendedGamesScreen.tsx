@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { gamesApi, GameDetails, GameCategory } from '../../lib/api';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -394,9 +394,9 @@ function getCategoryColor(categoryId: string) {
   return colors[categoryId] || COLORS.vibrantPink;
 }
 
-function getCategoryGradient(categoryId?: string) {
+function getCategoryGradient(categoryId?: string): GradientColors {
   const color = getCategoryColor(categoryId || '');
-  return [color, color + '80'];
+  return [color, color + '80'] as const;
 }
 
 function getMatchColor(score: number) {
