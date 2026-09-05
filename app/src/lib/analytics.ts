@@ -83,14 +83,18 @@ class PostHogClient {
   capture(event: AnalyticsEvent) {
     try {
       const posthog = require('posthog-react-native').default;
+      // Top-level game_id/category_id are optional on the event and are
+      // normally carried inside `properties`. Listing them after the spread
+      // used to overwrite the real values with undefined, so every event
+      // reached PostHog with its identifiers stripped.
       posthog.capture(event.event_type, {
         distinct_id: event.user_id,
-        ...event.properties,
         couple_id: event.couple_id,
-        game_id: event.game_id,
-        category_id: event.category_id,
         platform: event.platform,
         app_version: event.app_version,
+        ...(event.game_id ? { game_id: event.game_id } : {}),
+        ...(event.category_id ? { category_id: event.category_id } : {}),
+        ...event.properties,
       });
     } catch (err) {
       if (!this.initialized) {

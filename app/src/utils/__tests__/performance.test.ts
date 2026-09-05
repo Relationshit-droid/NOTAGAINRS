@@ -120,20 +120,20 @@ describe('preloadImage', () => {
     
     mockImage.onerror();
     
-    await expect(preloadPromise).rejects.toBeUndefined();
+    await expect(preloadPromise).rejects.toThrow(/Failed to preload image/);
   });
 });
 
 describe('preloadImages', () => {
-  let mockImage: any;
+  let created: any[];
 
   beforeEach(() => {
-    mockImage = {
-      onload: null,
-      onerror: null,
-      src: '',
-    };
-    global.Image = jest.fn(() => mockImage) as any;
+    created = [];
+    global.Image = jest.fn(() => {
+      const img = { onload: null as any, onerror: null as any, src: '' };
+      created.push(img);
+      return img;
+    }) as any;
   });
 
   it('should preload multiple images', async () => {
@@ -144,11 +144,10 @@ describe('preloadImages', () => {
     ];
     
     const preloadPromise = preloadImages(urls);
-    
-    // Resolve all images
-    const images = (global.Image as jest.Mock).mock.results;
-    images.forEach(() => mockImage.onload());
-    
+
+    // Each URL gets its own Image instance; fire onload on every one.
+    created.forEach(img => img.onload());
+
     await expect(preloadPromise).resolves.toBeUndefined();
     expect(global.Image).toHaveBeenCalledTimes(3);
   });
