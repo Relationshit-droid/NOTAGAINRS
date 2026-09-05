@@ -6,7 +6,7 @@ import TrustBank from '../screens/games/TrustBank';
 import TheIceberg from '../screens/games/TheIceberg';
 import SecrecyAudit from '../screens/games/SecrecyAudit';
 
-jest.mock('../lib/supabaseClient', () => ({
+jest.mock('../lib/supabase', () => ({
   supabase: { auth: { getSession: jest.fn().mockResolvedValue({ data: { session: { user: { id: 'u' } } } }) } },
   createGameSession: jest.fn().mockResolvedValue({ id: 's1' }),
   updateGameSession: jest.fn().mockResolvedValue({}),

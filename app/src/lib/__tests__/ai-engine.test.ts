@@ -1,14 +1,19 @@
 import { analyzeFight } from '../ai-engine';
+import { vertexAIService } from '../vertex-ai-service';
 
-// Mock the ENV module
-jest.mock('../env', () => ({
-  ENV: {
-    OPENAI_API_KEY: 'mock-openai-key',
-    ANTHROPIC_API_KEY: 'mock-anthropic-key',
+/**
+ * analyzeFight delegates to Vertex AI (Gemini) through the app's Cloud
+ * Functions. The previous version of this test asserted a direct fetch to
+ * openai.com with an Anthropic fallback -- both prohibited by the
+ * Gemini-only mandate, and neither present in the implementation any more.
+ */
+jest.mock('../vertex-ai-service', () => ({
+  vertexAIService: {
+    analyzeUserInput: jest.fn(),
   },
 }));
 
-global.fetch = jest.fn();
+const mockedAnalyze = vertexAIService.analyzeUserInput as jest.Mock;
 
 describe('analyzeFight', () => {
   const mockInput = {
@@ -24,29 +29,47 @@ describe('analyzeFight', () => {
     jest.clearAllMocks();
   });
 
-  it('should use OpenAI if key is present', async () => {
-    // Mock OpenAI success
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ choices: [{ message: { content: '{"right":[]}' } }] }),
+  it('routes analysis through the Vertex AI (Gemini) service', async () => {
+    mockedAnalyze.mockResolvedValue({
+      sentiment: 'negative',
+      confidence: 0.9,
+      marcieResponse: 'You are both avoiding the real issue.',
+      triggers: ['avoidance'],
     });
 
-    const result = await analyzeFight(mockInput);
-    expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining('openai.com'), expect.any(Object));
-    expect(result).toEqual({ right: [] });
+    const result = await analyzeFight(mockInput as any);
+
+    expect(mockedAnalyze).toHaveBeenCalledTimes(1);
+    expect(mockedAnalyze).toHaveBeenCalledWith(
+      mockInput.partner_a_input,
+      expect.objectContaining({ origin_story: mockInput.origin_story })
+    );
+    expect(result).toBeDefined();
   });
 
-  it('should fallback to Anthropic if OpenAI fails', async () => {
-    // OpenAI fail
-    (global.fetch as jest.Mock).mockResolvedValueOnce({ ok: false, status: 500 });
-    // Anthropic success
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ content: [{ text: '{"right":["ant"]}' }] }),
+  it('returns a usable result when the AI service fails', async () => {
+    mockedAnalyze.mockRejectedValue(new Error('service unavailable'));
+
+    const result = await analyzeFight(mockInput as any);
+
+    // The engine degrades to fallback prompts rather than throwing, so the
+    // SOS flow stays usable when the model is unreachable.
+    expect(result).toBeDefined();
+  });
+
+  it('never calls a third-party AI provider directly', async () => {
+    const fetchSpy = jest.fn();
+    (global as any).fetch = fetchSpy;
+
+    mockedAnalyze.mockResolvedValue({
+      sentiment: 'neutral',
+      confidence: 0.5,
+      marcieResponse: 'Tell me more.',
+      triggers: [],
     });
 
-    const result = await analyzeFight(mockInput);
-    expect(global.fetch).toHaveBeenCalledTimes(2);
-    expect(result).toEqual({ right: ['ant'] });
+    await analyzeFight(mockInput as any);
+
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
 });
