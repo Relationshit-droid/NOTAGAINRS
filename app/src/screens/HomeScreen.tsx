@@ -16,7 +16,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 
 import { userApi, coupleApi, gamesApi, User, Couple, GameCategory } from '../lib/api';
-import { auth } from '../lib/firebaseClient';
+import { auth, db } from '../lib/firebaseClient';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { ENV } from '../lib/env';
 import { DEMO_USER, DEMO_COUPLE, DEMO_CATEGORIES } from '../lib/demoData';
 
@@ -312,6 +313,28 @@ const HomeScreen = () => {
 
     fetchData();
   }, []);
+
+  // Trust Thermometer must reflect changes in real time. fetchData() above only
+  // reads the couple document once, so subscribe to it and push live updates
+  // into the same state the thermometer renders from.
+  useEffect(() => {
+    if (ENV.DEMO_MODE) return;
+    const coupleId = user?.couple_id;
+    if (!coupleId) return;
+
+    const unsubscribe = onSnapshot(
+      doc(db, 'couples', coupleId),
+      snapshot => {
+        if (snapshot.exists()) {
+          setCouple(prev => ({ ...(prev || {}), id: snapshot.id, ...snapshot.data() } as Couple));
+        }
+      },
+      err => console.error('Trust Thermometer subscription failed:', err)
+    );
+
+    return unsubscribe;
+  }, [user?.couple_id]);
+
 
   const handleCategoryPress = (category: GameCategory) => {
     // 'GameLibrary' is not registered in AppNavigator; CategoryDetail is the
