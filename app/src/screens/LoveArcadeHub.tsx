@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { IoniconName } from '../types/icons';
 import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../theme';
@@ -48,11 +49,11 @@ export default function LoveArcadeHubScreen() {
   }, [user, userId]);
 
   const phases = [
-    { id: 'awakening', name: 'THE AWAKENING', subtitle: 'Face the truth of your relationship', color: COLORS.rosePink, icon: 'eye', gamesCount: 8 },
-    { id: 'deconstruction', name: 'THE DECONSTRUCTION', subtitle: 'Break down walls, rebuild trust', color: COLORS.vibrantPink, icon: 'hammer', gamesCount: 8 },
-    { id: 'bridge', name: 'THE BRIDGE', subtitle: 'Connect through vulnerability', color: COLORS.warmOrange, icon: 'link', gamesCount: 8 },
-    { id: 'fortress', name: 'THE FORTRESS', subtitle: 'Build unshakeable foundations', color: COLORS.mintGreen, icon: 'shield', gamesCount: 8 },
-    { id: 'ascension', name: 'THE ASCENSION', subtitle: 'Transcend to legendary love', color: COLORS.brightYellow, icon: 'trending-up', gamesCount: 10 },
+    { id: 'awakening', name: 'THE AWAKENING', subtitle: 'Face the truth of your relationship', color: COLORS.rosePink, icon: 'eye' as IoniconName, gamesCount: 8 },
+    { id: 'deconstruction', name: 'THE DECONSTRUCTION', subtitle: 'Break down walls, rebuild trust', color: COLORS.vibrantPink, icon: 'hammer' as IoniconName, gamesCount: 8 },
+    { id: 'bridge', name: 'THE BRIDGE', subtitle: 'Connect through vulnerability', color: COLORS.warmOrange, icon: 'link' as IoniconName, gamesCount: 8 },
+    { id: 'fortress', name: 'THE FORTRESS', subtitle: 'Build unshakeable foundations', color: COLORS.mintGreen, icon: 'shield' as IoniconName, gamesCount: 8 },
+    { id: 'ascension', name: 'THE ASCENSION', subtitle: 'Transcend to legendary love', color: COLORS.brightYellow, icon: 'trending-up' as IoniconName, gamesCount: 10 },
   ];
 
   const filteredGames = selectedPhase 

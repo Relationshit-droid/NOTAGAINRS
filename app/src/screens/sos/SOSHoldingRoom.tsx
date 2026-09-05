@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import type { IoniconName } from '../../types/icons';
 import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
@@ -109,9 +110,9 @@ export default function SOSHoldingRoom({ navigation, route }: SOSHoldingRoomProp
   };
 
   const miniGames = [
-    { id: 'breathing', name: 'Guided Breathing', icon: 'leaf', color: COLORS.mintGreen, description: 'Sync your breath with the circle' },
-    { id: 'gratitude', name: 'Gratitude Prompt', icon: 'heart', color: COLORS.vibrantPink, description: 'Name 3 things you appreciate' },
-    { id: 'memory', name: 'Happy Memory', icon: 'image', color: COLORS.brightYellow, description: 'Recall a good moment together' },
+    { id: 'breathing', name: 'Guided Breathing', icon: 'leaf' as IoniconName, color: COLORS.mintGreen, description: 'Sync your breath with the circle' },
+    { id: 'gratitude', name: 'Gratitude Prompt', icon: 'heart' as IoniconName, color: COLORS.vibrantPink, description: 'Name 3 things you appreciate' },
+    { id: 'memory', name: 'Happy Memory', icon: 'image' as IoniconName, color: COLORS.brightYellow, description: 'Recall a good moment together' },
   ];
 
   const startMiniGame = (gameId: string) => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { IoniconName } from '../../types/icons';
 import { Alert, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
@@ -241,12 +242,12 @@ export default function DataPrivacySettingsScreen() {
           
           <View style={styles.breakdownList}>
             {[
-              { category: 'Game History', size: '145 MB', count: '47 games', icon: 'game-controller', color: COLORS.vibrantPink },
-              { category: 'Weekly Reports', size: '32 MB', count: '52 reports', icon: 'document-text', color: COLORS.aquaTeal },
-              { category: 'Analytics', size: '28 MB', count: '12 months', icon: 'analytics', color: COLORS.brightYellow },
-              { category: 'Media Cache', size: '67 MB', count: '1,240 files', icon: 'images', color: COLORS.mintGreen },
-              { category: 'Voice Recordings', size: '18 MB', count: '89 clips', icon: 'mic', color: COLORS.warmOrange },
-              { category: 'Preferences', size: '2 MB', count: '1 config', icon: 'settings', color: COLORS.lavenderPurple },
+              { category: 'Game History', size: '145 MB', count: '47 games', icon: 'game-controller' as IoniconName, color: COLORS.vibrantPink },
+              { category: 'Weekly Reports', size: '32 MB', count: '52 reports', icon: 'document-text' as IoniconName, color: COLORS.aquaTeal },
+              { category: 'Analytics', size: '28 MB', count: '12 months', icon: 'analytics' as IoniconName, color: COLORS.brightYellow },
+              { category: 'Media Cache', size: '67 MB', count: '1,240 files', icon: 'images' as IoniconName, color: COLORS.mintGreen },
+              { category: 'Voice Recordings', size: '18 MB', count: '89 clips', icon: 'mic' as IoniconName, color: COLORS.warmOrange },
+              { category: 'Preferences', size: '2 MB', count: '1 config', icon: 'settings' as IoniconName, color: COLORS.lavenderPurple },
             ].map((item, index) => (
               <View key={index} style={styles.breakdownItem}>
                 <LinearGradient colors={[item.color, item.color + '80']} style={styles.breakdownIcon}>

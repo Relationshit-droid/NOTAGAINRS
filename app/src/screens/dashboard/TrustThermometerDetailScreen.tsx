@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { IoniconName } from '../../types/icons';
 import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
@@ -297,7 +298,7 @@ const MilestoneItem = ({ milestone, currentTrust, isLast }: { milestone: any; cu
   );
 };
 
-const InsightItem = ({ insight }: { insight: { icon: string; text: string; color: string } }) => (
+const InsightItem = ({ insight }: { insight: { icon: IoniconName; text: string; color: string } }) => (
   <View style={styles.insightItem}>
     <View style={[styles.insightIcon, { backgroundColor: insight.color + '20' }]}>
       <Ionicons name={insight.icon} size={20} color={insight.color} />

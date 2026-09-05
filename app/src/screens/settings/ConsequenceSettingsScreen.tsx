@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { IoniconName } from '../../types/icons';
 import { Alert, ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
@@ -86,7 +87,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'romanceLockout',
       label: 'Romance Lockout',
       description: 'Blocks romance games until repair completed',
-      icon: 'lock-closed',
+      icon: 'lock-closed' as IoniconName,
       color: COLORS.error,
       severity: 'HIGH',
       default: true,
@@ -95,7 +96,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'notificationSpam',
       label: 'Notification Spam',
       description: 'Hourly "Do Better" reminders',
-      icon: 'notifications',
+      icon: 'notifications' as IoniconName,
       color: COLORS.warmOrange,
       severity: 'MEDIUM',
       default: true,
@@ -104,7 +105,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'hubLockout',
       label: 'Romance Hub Lockout',
       description: 'Denies access to Romance Hub until tasks done',
-      icon: 'heart-broken',
+      icon: 'heart-broken' as IoniconName,
       color: COLORS.vibrantPink,
       severity: 'HIGH',
       default: true,
@@ -113,7 +114,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'publicShame',
       label: 'Public Shame',
       description: '"Timeout" hat on leaderboard avatar',
-      icon: 'person-circle',
+      icon: 'person-circle' as IoniconName,
       color: COLORS.lavenderPurple,
       severity: 'LOW',
       default: false,
@@ -122,7 +123,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'wallpaperSwap',
       label: 'Wallpaper Swap',
       description: 'Partner\'s disappointed face as wallpaper',
-      icon: 'image',
+      icon: 'image' as IoniconName,
       color: COLORS.warmOrange,
       severity: 'LOW',
       default: false,

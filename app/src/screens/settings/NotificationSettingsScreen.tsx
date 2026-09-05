@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { IoniconName } from '../../types/icons';
 import { ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
@@ -45,23 +46,23 @@ export default function NotificationSettingsScreen() {
     {
       title: 'GAME ACTIVITY',
       items: [
-        { key: 'gameReminders', label: 'Game Reminders', description: 'Reminders to play scheduled games', icon: 'game-controller' },
-        { key: 'partnerActivity', label: 'Partner Activity', description: 'When your partner completes a game', icon: 'person' },
-        { key: 'dailyPrompt', label: 'Daily Prompts', description: 'Daily relationship check-in prompts', icon: 'sunny' },
+        { key: 'gameReminders', label: 'Game Reminders', description: 'Reminders to play scheduled games', icon: 'game-controller' as IoniconName },
+        { key: 'partnerActivity', label: 'Partner Activity', description: 'When your partner completes a game', icon: 'person' as IoniconName },
+        { key: 'dailyPrompt', label: 'Daily Prompts', description: 'Daily relationship check-in prompts', icon: 'sunny' as IoniconName },
       ],
     },
     {
       title: 'PROGRESS & INSIGHTS',
       items: [
-        { key: 'weeklyReport', label: 'Weekly Report', description: 'Your weekly relationship summary', icon: 'document-text' },
-        { key: 'streakReminders', label: 'Streak Reminders', description: 'Don\'t break your streak!', icon: 'flame' },
-        { key: 'achievementUnlocks', label: 'Achievement Unlocks', description: 'Celebrate your milestones', icon: 'trophy' },
+        { key: 'weeklyReport', label: 'Weekly Report', description: 'Your weekly relationship summary', icon: 'document-text' as IoniconName },
+        { key: 'streakReminders', label: 'Streak Reminders', description: 'Don\'t break your streak!', icon: 'flame' as IoniconName },
+        { key: 'achievementUnlocks', label: 'Achievement Unlocks', description: 'Celebrate your milestones', icon: 'trophy' as IoniconName },
       ],
     },
     {
       title: 'EMERGENCY',
       items: [
-        { key: 'sosAlerts', label: 'SOS Alerts', description: 'Emergency fight resolution requests', icon: 'alert-circle' },
+        { key: 'sosAlerts', label: 'SOS Alerts', description: 'Emergency fight resolution requests', icon: 'alert-circle' as IoniconName },
       ],
     },
   ];
