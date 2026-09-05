@@ -239,7 +239,12 @@ export const TYPOGRAPHY = {
     wide: 0.02,
     button: 0.05,
   },
-};
+  // `as const` keeps fontWeight values as the string literals React Native's
+  // TextStyle expects ('600'), instead of widening them to `string`. Without
+  // it, any StyleSheet.create() containing a fontWeight from this token failed
+  // to type-check as a TextStyle, which degraded EVERY entry in that sheet to
+  // `ViewStyle | TextStyle | ImageStyle` and produced ~100 cascading errors.
+} as const;
 
 // ============================================
 // SPACING TOKENS
