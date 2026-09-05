@@ -52,8 +52,9 @@ export const ENV = {
   APP_VERSION: getEnv('EXPO_PUBLIC_APP_VERSION') || '2.0.0',
 
   // Backend API
-  BACKEND_URL: getEnv('EXPO_PUBLIC_API_URL') || getEnv('REACT_APP_BACKEND_URL') || 'http://localhost:8001',
-  WS_URL: getEnv('EXPO_PUBLIC_WS_URL') || 'ws://localhost:8001',
+  // Retained only for legacy call sites; data is served from Firestore.
+  BACKEND_URL: getEnv('EXPO_PUBLIC_API_URL') || '',
+  WS_URL: getEnv('EXPO_PUBLIC_WS_URL') || '',
 
   // Firebase Configuration
   FIREBASE_API_KEY: getEnv('EXPO_PUBLIC_FIREBASE_API_KEY'),
