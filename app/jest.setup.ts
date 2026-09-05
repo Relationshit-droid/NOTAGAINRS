@@ -6,6 +6,62 @@
 import '@testing-library/jest-native/extend-expect';
 
 // Mock Expo modules
+// expo-asset's PlatformUtils reads a native global that Jest does not define,
+// so anything importing it (expo-av, @expo/vector-icons, direct Asset use)
+// fails at import time. Mock the module itself.
+jest.mock('expo-asset', () => ({
+  Asset: {
+    fromModule: (mod: any) => ({
+      uri: 'mock-asset',
+      localUri: 'mock-asset',
+      downloadAsync: jest.fn(async () => {}),
+      mod,
+    }),
+    fromURI: (uri: string) => ({
+      uri,
+      localUri: uri,
+      downloadAsync: jest.fn(async () => {}),
+    }),
+    loadAsync: jest.fn(async () => []),
+  },
+  useAssets: () => [null, null],
+}));
+
+// @expo/vector-icons loads expo-asset, whose platform utils read a native
+// global Jest does not define. Render icons as inert placeholders.
+jest.mock('@expo/vector-icons', () => {
+  const React = require('react');
+  const makeIcon = (name: string) => {
+    const Icon = (props: any) => React.createElement(name, props, props?.children);
+    Icon.displayName = name;
+    return Icon;
+  };
+  return new Proxy(
+    {},
+    {
+      get: (_target, prop: string) => (prop === '__esModule' ? false : makeIcon(prop)),
+    }
+  );
+});
+
+// expo-linking's createURL touches native Expo constants that Jest lacks.
+jest.mock('expo-linking', () => ({
+  createURL: (path: string) => `relationshit://${String(path).replace(/^\//, '')}`,
+  openURL: jest.fn(async () => true),
+  canOpenURL: jest.fn(async () => true),
+  getInitialURL: jest.fn(async () => null),
+  addEventListener: jest.fn(() => ({ remove: jest.fn() })),
+  parse: (url: string) => ({ path: url, queryParams: {} }),
+}));
+
+// react-native Settings is iOS-only and its TurboModule is absent in Jest.
+jest.mock('react-native/Libraries/Settings/Settings', () => ({
+  get: jest.fn(),
+  set: jest.fn(),
+  watchKeys: jest.fn(),
+  clearWatch: jest.fn(),
+}));
+
 // expo-av pulls in expo-asset, whose platform utils touch a native global
 // that Jest does not provide.
 jest.mock('expo-av', () => {
@@ -138,8 +194,14 @@ console.error = (...args: any[]) => {
   originalConsoleError(...args);
 };
 
-// Cleanup after each test
+// Cleanup after each test.
+//
+// clearAllMocks() resets call history, which is what tests want between
+// cases. resetAllMocks() additionally strips every mock *implementation*,
+// which broke any suite that declares its mocks once at module scope via
+// jest.mock(...) factories -- by the second test those mocks returned
+// undefined and the suite failed with errors like
+// "Cannot read properties of undefined (reading 'then')".
 afterEach(() => {
   jest.clearAllMocks();
-  jest.resetAllMocks();
 });
