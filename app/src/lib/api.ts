@@ -33,6 +33,10 @@ export interface User {
   plan: string;
   created_at: string;
   updated_at?: string;
+  // Onboarding origin-story answers, stored encrypted on the user document.
+  origin_story?: string;
+  first_red_flag?: string;
+  relationship_score?: number;
 }
 
 export interface Couple {

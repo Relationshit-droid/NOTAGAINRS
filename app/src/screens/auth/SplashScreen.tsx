@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { View, Image, StyleSheet, Platform } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import { Asset } from 'expo-asset';
@@ -10,11 +11,12 @@ import * as Haptics from '../../utils/haptics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SplashScreenProps = {
-  onStart: () => void;
+  onStart?: () => void;
   onLogin?: () => void;
 };
 
 export default function SplashScreen({ onStart, onLogin }: SplashScreenProps) {
+  const navigation = useAppNavigation();
   const [videoFinished, setVideoFinished] = useState(false);
   const videoRef = useRef<Video>(null);
   const marcieVideoAsset = Asset.fromModule(require('../../assets/animations/marcie-intro.webm'));
@@ -79,7 +81,7 @@ export default function SplashScreen({ onStart, onLogin }: SplashScreenProps) {
                 <Typography variant="body" style={styles.tagline}>Who said therapy?</Typography>
             </View>
 
-            <SquishyButton onPress={() => { Haptics.selectionAsync(); onStart(); }} style={styles.startButton}>
+            <SquishyButton onPress={() => { Haptics.selectionAsync(); (onStart ? onStart() : navigation.navigate('MainApp')); }} style={styles.startButton}>
                 <Animated.View style={animatedPulseStyle}>
                     <Typography variant="button" style={styles.pressStart}>PRESS TO START</Typography>
                 </Animated.View>

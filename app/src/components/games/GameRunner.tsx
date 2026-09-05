@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useGameStore } from '../../lib/game-store';
 import { vertexAIService } from '../../lib/vertex-ai-service';
 import { GameTemplateProps, GameState, MarcieAnimation } from '../../lib/game-types';
-import type { Couple } from '../../lib/api';
+import type { Couple } from '../../lib/game-types';
 import DrMarcieOverlay from '../DrMarcieOverlay';
 import GameHeader from '../layout/GameHeader';
 import GameFeedback from './GameFeedback';

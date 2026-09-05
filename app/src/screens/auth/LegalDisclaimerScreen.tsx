@@ -1,4 +1,5 @@
 import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
 import * as Haptics from '../../utils/haptics';
@@ -7,16 +8,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
 type Props = {
-  onContinue: () => void;
+  onContinue?: () => void;
 };
 
 export default function LegalDisclaimerScreen({ onContinue }: Props) {
+  const navigation = useAppNavigation();
   const [agreed, setAgreed] = useState(false);
 
   const handleContinue = () => {
     if (agreed) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      onContinue();
+      (onContinue ? onContinue() : navigation.goBack());
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }

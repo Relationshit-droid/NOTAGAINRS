@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { View, TextInput, StyleSheet, PanResponder, GestureResponderHandlers, ScrollView, KeyboardAvoidingView, Platform, Alert, ActivityIndicator } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { GlassCard, Typography, SquishyButton, RadialGradientBackground } from '../../components/ui';
@@ -11,12 +12,13 @@ import * as Haptics from '../../utils/haptics';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 
 type OriginStoryScreenProps = {
-  onComplete: (diagnoses: Diagnosis[]) => void;
+  onComplete?: (diagnoses: Diagnosis[]) => void;
 };
 
 type Diagnosis = { title: string; description: string };
 
 export default function OriginStoryScreen({ onComplete }: OriginStoryScreenProps) {
+  const navigation = useAppNavigation();
   const { user, signUp } = useAuth();
   const [step, setStep] = useState(0);
   const [story, setStory] = useState('');
@@ -63,7 +65,8 @@ export default function OriginStoryScreen({ onComplete }: OriginStoryScreenProps
           sarcasm_level: 1,
         }, token);
       }
-      onComplete(generateDiagnoses(story, flag, score));
+      const diagnoses = generateDiagnoses(story, flag, score);
+      if (onComplete) { onComplete(diagnoses); } else { navigation.navigate('MainApp'); }
     } catch (e: any) {
       Alert.alert('Error', e.message);
     } finally {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { View, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import { GlassCard, Typography, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
@@ -7,10 +8,11 @@ import { resetPassword } from '../../lib/supabase';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
 type Props = {
-  onSent: () => void;
+  onSent?: () => void;
 };
 
 export default function PasswordResetScreen({ onSent }: Props) {
+  const navigation = useAppNavigation();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +28,7 @@ export default function PasswordResetScreen({ onSent }: Props) {
       }
       await resetPassword(email, typeof window !== 'undefined' ? window.location.origin : undefined);
       Haptics.selectionAsync();
-      onSent();
+      (onSent ? onSent() : navigation.goBack());
     } catch (e: any) {
       setError(e?.message || 'Failed to send reset email. Try again.');
     } finally {
