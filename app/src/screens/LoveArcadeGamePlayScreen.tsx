@@ -222,7 +222,7 @@ export default function LoveArcadeGamePlayScreen() {
                 maximumValue={currentQ.max || 10}
                 step={1}
                 value={parseFloat(currentResponse) || (currentQ.min || 1)}
-                onValueChange={value => setCurrentResponse(value.toString())}
+                onValueChange={(value: number) => setCurrentResponse(value.toString())}
                 minimumTrackTintColor={COLORS.vibrantPink}
                 maximumTrackTintColor={COLORS.borderSubtle}
                 disabled={showFeedback}

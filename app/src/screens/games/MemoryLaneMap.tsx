@@ -46,7 +46,7 @@ export default function MemoryLaneMap({ route, navigation }: any) {
         sessionId.current = gameSession.id;
         supabase
           .channel('memory_lane_sync')
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'game_sessions', filter: `couple_id=eq.${couple_id}` }, (payload) => {
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'game_sessions', filter: `couple_id=eq.${couple_id}` }, (payload: any) => {
             const row: any = payload.new;
             if (row && row.game_id === GAME_ID && row.id !== sessionId.current) {
               try {

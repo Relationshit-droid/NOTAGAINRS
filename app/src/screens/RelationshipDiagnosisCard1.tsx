@@ -8,7 +8,9 @@ import SquishyButton from '../components/ui/SquishyButton';
 import GlassCard from '../components/ui/GlassCard';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../theme';
 
-const StarRating = ({ rating, setRating }) => (
+type StarRatingProps = { rating: number; setRating: (rating: number) => void };
+
+const StarRating = ({ rating, setRating }: StarRatingProps) => (
     <View style={styles.starContainer}>
         {[1, 2, 3, 4, 5].map(i => (
             <SquishyButton 
@@ -24,7 +26,13 @@ const StarRating = ({ rating, setRating }) => (
     </View>
 );
 
-const OptionButtons = ({ options, selected, setSelected }) => (
+type OptionButtonsProps = {
+    options: string[];
+    selected: string | null;
+    setSelected: (option: string) => void;
+};
+
+const OptionButtons = ({ options, selected, setSelected }: OptionButtonsProps) => (
     <View style={styles.optionsContainer}>
         {options.map(option => (
             <SquishyButton

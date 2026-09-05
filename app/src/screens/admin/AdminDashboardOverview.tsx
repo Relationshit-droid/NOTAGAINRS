@@ -26,7 +26,7 @@ const activityData = [
 
 const AdminDashboardOverview = () => {
 
-  const renderKpiItem = ({ item }) => (
+  const renderKpiItem = ({ item }: { item: (typeof kpiData)[number] }) => (
     <GlassCard style={[styles.kpiCard, { borderTopColor: item.color }]}>
       <Typography variant="label" color={COLORS.textSecondary}>
         {item.title}
@@ -40,7 +40,7 @@ const AdminDashboardOverview = () => {
     </GlassCard>
   );
 
-  const renderActivityItem = ({ item }) => (
+  const renderActivityItem = ({ item }: { item: (typeof activityData)[number] }) => (
       <GlassCard style={styles.activityItem}>
         <View style={[styles.activityIcon, { backgroundColor: `${item.color}1A` }]}>
             {/* Using a text placeholder for icon */}

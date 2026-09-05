@@ -7,8 +7,15 @@ import ScreenLayout from '../../layout/ScreenLayout';
 import { Typography, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
+type AdminUser = {
+  id: string;
+  trust_thermometer?: number;
+  subscription_status?: string;
+};
+
+
 const AdminUserManagement = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<AdminUser[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -19,7 +26,7 @@ const AdminUserManagement = () => {
     fetchUsers();
   }, []);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: AdminUser }) => (
     <GlassCard style={styles.userItem} variant="elevated" padding="medium">
       <Typography variant="body" color={COLORS.textPrimary}>UID: {item.id}</Typography>
       <Typography variant="body" color={COLORS.textSecondary}>Trust: {item.trust_thermometer}</Typography>

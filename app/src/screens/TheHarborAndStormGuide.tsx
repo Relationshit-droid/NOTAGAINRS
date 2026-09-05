@@ -7,7 +7,9 @@ import SquishyButton from '../components/ui/SquishyButton';
 import GlassCard from '../components/ui/GlassCard';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
 
-const ToolCard = ({ icon, title, description }) => (
+type ToolCardProps = { icon: string; title: string; description: string };
+
+const ToolCard = ({ icon, title, description }: ToolCardProps) => (
     <SquishyButton variant="ghost" style={styles.toolCard}>
         <Typography style={{fontSize: TYPOGRAPHY.fontSize.headerLarge, marginBottom: SPACING.small}}>{icon}</Typography>
         <Typography variant="h4" style={styles.toolTitle}>{title}</Typography>

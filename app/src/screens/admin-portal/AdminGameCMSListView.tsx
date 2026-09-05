@@ -8,8 +8,14 @@ import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
+type CmsGame = {
+  id: string;
+  title: string;
+};
+
+
 const AdminGameCMSListView = () => {
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState<CmsGame[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -21,7 +27,7 @@ const AdminGameCMSListView = () => {
     fetchGames();
   }, []);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: CmsGame }) => (
     <GlassCard
       onPress={() => navigation.navigate('AdminGameEditor', { game: item })}
       padding="medium"

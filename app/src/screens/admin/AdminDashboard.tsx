@@ -5,7 +5,7 @@ import { ScreenLayout } from "../../layout";
 import { Typography, SquishyButton } from "../../components/ui";
 import { COLORS, SPACING } from "../../theme";
 
-const AdminDashboard = ({ navigation }) => {
+const AdminDashboard = ({ navigation }: { navigation: any }) => {
   return (
     <ScreenLayout
       showHeader={true}

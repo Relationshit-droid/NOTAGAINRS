@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { db as firestore } from '../lib/firebaseClient';
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 
-export const useGameContent = (coupleId, gameSessionId) => {
+export const useGameContent = (coupleId?: string, gameSessionId?: string) => {
   const [gameContent, setGameContent] = useState(null);
   const [sessionState, setSessionState] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

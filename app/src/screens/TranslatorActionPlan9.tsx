@@ -8,7 +8,15 @@ import SquishyButton from '../components/ui/SquishyButton';
 import GlassCard from '../components/ui/GlassCard';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../theme';
 
-const PartnerCard = ({ partner, answer, color, avatar, align }) => (
+type PartnerCardProps = {
+    partner: string;
+    answer: string;
+    color: string;
+    avatar: string;
+    align: 'left' | 'right';
+};
+
+const PartnerCard = ({ partner, answer, color, avatar, align }: PartnerCardProps) => (
     <View style={styles.cardContainer}>
         <GlassCard style={[styles.card, { borderColor: `${color}80`, alignItems: align === 'left' ? 'flex-start' : 'flex-end' }]}>
             <Image source={{ uri: avatar }} style={styles.avatar} />

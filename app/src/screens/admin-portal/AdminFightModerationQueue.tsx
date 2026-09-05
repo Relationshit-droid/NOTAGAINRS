@@ -7,8 +7,15 @@ import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
+type ModeratedFight = {
+  id: string;
+  couple_id: string;
+  status: string;
+};
+
+
 const AdminFightModerationQueue = () => {
-  const [fights, setFights] = useState([]);
+  const [fights, setFights] = useState<ModeratedFight[]>([]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'fights'), (snapshot) => {
@@ -18,7 +25,7 @@ const AdminFightModerationQueue = () => {
     return () => unsubscribe();
   }, []);
 
-  const resolveFight = async (fightId) => {
+  const resolveFight = async (fightId: string) => {
     const fightRef = doc(db, 'fights', fightId);
     try {
       await updateDoc(fightRef, {
@@ -30,7 +37,7 @@ const AdminFightModerationQueue = () => {
     }
   };
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: ModeratedFight }) => (
     <GlassCard style={styles.fightItem} padding="medium">
       <Typography variant="body" style={styles.fightInfo}>
         Couple ID: {item.couple_id}

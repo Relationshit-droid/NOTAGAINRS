@@ -262,7 +262,17 @@ const PersonalityCard = ({ personality, selected, onPress }: any) => (
   </TouchableOpacity>
 );
 
-const PreferenceSlider = ({ label, description, value, minLabel, maxLabel, onChange, currentLabel }: any) => (
+type PreferenceSliderProps = {
+  label: string;
+  description: string;
+  value: number;
+  minLabel: string;
+  maxLabel: string;
+  onChange: (value: number) => void;
+  currentLabel: string;
+};
+
+const PreferenceSlider = ({ label, description, value, minLabel, maxLabel, onChange, currentLabel }: PreferenceSliderProps) => (
   <View style={styles.sliderContainer}>
     <View style={styles.sliderHeader}>
       <View>

@@ -341,7 +341,17 @@ export default function ConsequenceSettingsScreen() {
   );
 }
 
-const TimingInput = ({ label, description, value, unit, min, max, onChange }: any) => (
+type TimingInputProps = {
+  label: string;
+  description: string;
+  value: number;
+  unit: string;
+  min: number;
+  max: number;
+  onChange: (value: number) => void;
+};
+
+const TimingInput = ({ label, description, value, unit, min, max, onChange }: TimingInputProps) => (
   <View style={styles.timingInput}>
     <View>
       <Typography variant="label" style={styles.timingLabel}>{label}</Typography>

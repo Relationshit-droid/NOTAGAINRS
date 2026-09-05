@@ -26,6 +26,15 @@ export default function SOSRepairSelection({ navigation, route }: SOSRepairSelec
   const [marcieQuote, setMarcieQuote] = useState("Pick your poison. Er, cure. Pick your cure.");
 
   // Default repair options if none provided
+type RepairOption = {
+  id: string;
+  title: string;
+  description: string;
+  duration: number;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  color: string;
+};
+
   const defaultRepairs: RepairStep[] = [
     {
       id: 'appreciations',
@@ -61,7 +70,7 @@ export default function SOSRepairSelection({ navigation, route }: SOSRepairSelec
     },
   ];
 
-  const repairs = repairSteps?.map((step: string, index: number) => ({
+  const repairs: RepairOption[] = repairSteps?.map((step: string, index: number) => ({
     id: `repair_${index}`,
     title: step,
     description: 'Tap to select this repair attempt',

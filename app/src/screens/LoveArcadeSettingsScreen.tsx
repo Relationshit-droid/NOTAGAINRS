@@ -7,10 +7,27 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../hooks/useAuth';
 import { useAppStore } from '../state/store';
 
+
+type ArcadeSettings = {
+  autoPlayLifelines: boolean;
+  showHints: boolean;
+  celebrateAchievements: boolean;
+  arcadeMusic: boolean;
+  arcadeSoundEffects: boolean;
+  hapticFeedback: boolean;
+  reducedMotion: boolean;
+  highContrast: boolean;
+  autoAdvancePhase: boolean;
+  shareProgress: boolean;
+  competitiveMode: boolean;
+  dailyReminder: boolean;
+  reminderTime: string;
+};
+
 export default function LoveArcadeSettingsScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<ArcadeSettings>({
     autoPlayLifelines: false,
     showHints: true,
     celebrateAchievements: true,
@@ -31,7 +48,10 @@ export default function LoveArcadeSettingsScreen() {
     setLoading(false);
   };
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = <K extends keyof ArcadeSettings>(
+    key: K,
+    value: ArcadeSettings[K]
+  ) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
@@ -83,7 +103,7 @@ export default function LoveArcadeSettingsScreen() {
           <SettingsToggle 
             label="Auto-advance Phase" 
             description="Automatically unlock next phase when ready"
-            icon="forward"
+            icon="play-forward"
             value={settings.autoAdvancePhase}
             onChange={value => updateSetting('autoAdvancePhase', value)}
           />
@@ -222,7 +242,15 @@ export default function LoveArcadeSettingsScreen() {
   );
 }
 
-const SettingsToggle = ({ label, description, icon, value, onChange }: any) => (
+type SettingsToggleProps = {
+  label: string;
+  description: string;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  value: boolean;
+  onChange: (value: boolean) => void;
+};
+
+const SettingsToggle = ({ label, description, icon, value, onChange }: SettingsToggleProps) => (
   <View style={styles.toggleItem}>
     <View style={styles.toggleLeft}>
       <LinearGradient colors={GRADIENTS.primary.colors} style={styles.toggleIcon}>
@@ -242,7 +270,15 @@ const SettingsToggle = ({ label, description, icon, value, onChange }: any) => (
   </View>
 );
 
-const SettingsAction = ({ label, description, icon, color, onPress }: any) => (
+type SettingsActionProps = {
+  label: string;
+  description: string;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  color: string;
+  onPress: () => void;
+};
+
+const SettingsAction = ({ label, description, icon, color, onPress }: SettingsActionProps) => (
   <TouchableOpacity 
     style={[styles.actionButton, { borderColor: color }]}
     onPress={onPress}

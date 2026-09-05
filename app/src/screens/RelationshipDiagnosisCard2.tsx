@@ -26,7 +26,13 @@ const verdictData = {
     stingMeter: '9.8/10'
 };
 
-const PerspectiveCard = ({ person, data, color }) => (
+type PerspectiveCardProps = {
+    person: string;
+    data: { lens: string; quote: string; emotions: string[] };
+    color: string;
+};
+
+const PerspectiveCard = ({ person, data, color }: PerspectiveCardProps) => (
     <GlassCard style={[styles.panelGlass, { borderLeftWidth: 4, borderLeftColor: color }]}>
         <Typography variant="h3" style={styles.personName}>{person}'S LENS</Typography>
         <Typography variant="label" style={[styles.personLens, { color }]}>{data.lens}</Typography>

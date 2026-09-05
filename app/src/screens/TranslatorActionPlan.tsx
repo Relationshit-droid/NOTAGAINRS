@@ -31,7 +31,15 @@ const actionSteps = [
     },
 ];
 
-const ActionCard = ({ step }) => (
+type ActionStep = {
+    category: string;
+    color: string;
+    description: string;
+    icon: string;
+    title: string;
+};
+
+const ActionCard = ({ step }: { step: ActionStep }) => (
     <GlassCard style={[styles.card, { borderColor: `${step.color}80` }]}>
         <View style={styles.cardHeader}>
             <View style={[styles.iconContainer, { backgroundColor: `${step.color}20` }]}>

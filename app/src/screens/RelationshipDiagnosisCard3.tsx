@@ -14,7 +14,21 @@ const repairOptions = [
     { id: 'humor', title: 'SILLY HUMOR', description: 'Crack the tension with an inside joke or a lighthearted observation.', category: 'PLAYFULNESS', icon: '😜', color: COLORS.lavenderPurple },
 ];
 
-const ChoiceCard = ({ option, isSelected, onSelect }) => (
+type ChoiceOption = {
+    id: string;
+    color: string;
+    icon: string;
+    title: string;
+    description: string;
+};
+
+type ChoiceCardProps = {
+    option: ChoiceOption;
+    isSelected: boolean;
+    onSelect: (id: string) => void;
+};
+
+const ChoiceCard = ({ option, isSelected, onSelect }: ChoiceCardProps) => (
     <SquishyButton 
         variant={isSelected ? 'primary' : 'ghost'}
         onPress={() => onSelect(option.id)}

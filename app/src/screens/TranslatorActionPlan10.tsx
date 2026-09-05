@@ -10,7 +10,13 @@ import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../theme';
 const categories = ['OUR FIRSTS', 'PET PEEVES', 'DREAM VACAY', 'DEEP SECRETS', 'FUTURE US'];
 const values = [100, 200, 300, 400, 500];
 
-const JeopardyTile = ({ value, category, onSelect }) => {
+type JeopardyTileProps = {
+    value: number;
+    category: string;
+    onSelect: (category: string, value: number) => void;
+};
+
+const JeopardyTile = ({ value, category, onSelect }: JeopardyTileProps) => {
     const [selected, setSelected] = useState(false);
     
     const handlePress = () => {
@@ -31,7 +37,9 @@ const JeopardyTile = ({ value, category, onSelect }) => {
     );
 };
 
-const PlayerPod = ({ name, score, color }) => (
+type PlayerPodProps = { name: string; score: number; color: string };
+
+const PlayerPod = ({ name, score, color }: PlayerPodProps) => (
     <GlassCard style={[styles.pod, {borderColor: color}]}>
         <Typography variant="h3" style={styles.playerName}>{name}</Typography>
         <Typography variant="h1" style={styles.playerScore}>${score}</Typography>
@@ -42,7 +50,7 @@ const TranslatorActionPlan10 = () => {
     const [scores, setScores] = useState({ alex: 1200, jordan: 800 });
     const [currentPlayer, setCurrentPlayer] = useState('alex');
 
-    const handleSelect = (category, value) => {
+    const handleSelect = (category: string, value: number) => {
         setScores(prev => ({...prev, [currentPlayer]: prev[currentPlayer] + value}));
     };
 

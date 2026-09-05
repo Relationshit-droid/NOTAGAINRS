@@ -174,7 +174,7 @@ const shouldRunIntegrationTests = process.env.RUN_INTEGRATION_TESTS === 'true';
       expect(games).toBeDefined();
       expect(Array.isArray(games)).toBe(true);
       
-      const truthTellerTower = games.find(g => g.id === 'truth-teller-tower');
+      const truthTellerTower = games.find((g: any) => g.id === 'truth-teller-tower');
       expect(truthTellerTower).toBeDefined();
       expect(truthTellerTower?.max_score).toBeDefined();
     });
