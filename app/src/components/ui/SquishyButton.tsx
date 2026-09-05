@@ -7,7 +7,9 @@ import { COLORS, GRADIENTS, BORDER_RADIUS, SPACING, SHADOWS, ANIMATIONS } from '
 
 type SquishyButtonProps = {
   children: ReactNode;
-  style?: ViewStyle | ViewStyle[];
+  // StyleProp<ViewStyle> also admits the standard `cond && styles.x` array
+  // idiom (which yields false) and nested arrays; ViewStyle[] does not.
+  style?: StyleProp<ViewStyle>;
   onPress?: () => void;
   accessibilityLabel?: string;
   disabled?: boolean;
