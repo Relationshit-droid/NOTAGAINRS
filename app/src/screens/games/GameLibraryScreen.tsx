@@ -151,7 +151,7 @@ export default function GameLibraryScreen({ navigation }: any) {
                 payload: { game_id: g.id }
               });
 
-              if (g.name === 'Truth or Trust') navigation.navigate('PlayTruthOrTrust', { gameId: g.id, demo: true });
+              if (g.name === 'Truth or Trust') navigation.navigate('TruthOrTrust', { gameId: g.id, demo: true });
             }
           },
           { text: 'Cancel', style: 'cancel' }
@@ -162,7 +162,7 @@ export default function GameLibraryScreen({ navigation }: any) {
 
     // Dynamic navigation based on mapping
     const map: Record<string, string> = {
-      'Truth or Trust': 'PlayTruthOrTrust',
+      'Truth or Trust': 'TruthOrTrust',
       'Apology Auction': 'PlayApologyAuction',
       'Gratitude Cloud': 'PlayGratitudeCloud',
       'Eye Contact Challenge': 'PlayEyeContactChallenge',

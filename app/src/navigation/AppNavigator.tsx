@@ -133,6 +133,10 @@ import TrustBingo from '../screens/games/TrustBingo';
 import TruthTellerTower from '../screens/games/TruthTellerTower';
 import BPDPatternDetective from '../screens/games/BPDPatternDetective';
 import GameResultsScreen from '../screens/games/GameResultsScreen';
+import GameLobbyScreen from '../screens/game/GameLobbyScreen';
+import GamePlayScreen from '../screens/game/GamePlayScreen';
+import RepairReportCard from '../screens/games/RepairReportCard';
+import CoupleCodeScreen from '../screens/auth/CoupleCodeScreen';
 
 // Additional screens
 import TranslationReveal from '../screens/TranslationReveal';
@@ -646,6 +650,61 @@ const AppNavigator = () => {
             gestureEnabled: false 
           }} 
         />
+
+        {/*
+          Route aliases.
+
+          Many screens navigate to these names, but only the canonical screens
+          below were registered, so those transitions failed at runtime with
+          "not handled by any navigator" -- most importantly GameResults, which
+          is the completion destination for 25 game screens. Registering the
+          aliases repairs every caller without touching each call site.
+        */}
+        <Stack.Screen name="GameResults" component={GameResultsScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="Results" component={GameResultsScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GameLobbyScreen" component={GameLobbyScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GameLobby" component={GameLobbyScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GamePlayScreen" component={GamePlayScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GamePlay" component={GamePlayScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="SOS" component={SOSModal} options={{
+          presentation: 'modal',
+          animation: 'slide_from_bottom'
+        }} />
+        <Stack.Screen name="Login" component={LoginAndSignUp} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        {/* Screens that existed but were never registered. */}
+        <Stack.Screen name="RepairReportCard" component={RepairReportCard} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="CoupleCode" component={CoupleCodeScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="SixSecondKissResults" component={GameResultsScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
       </Stack.Navigator>
   );
 };

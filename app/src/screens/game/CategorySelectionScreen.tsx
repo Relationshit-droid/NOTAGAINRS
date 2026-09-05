@@ -35,7 +35,7 @@ const CategorySelectionScreen = ({ navigation }: any) => {
               <GlassCard 
                 key={category.id} 
                 style={styles.categoryCard}
-                onPress={() => navigation?.navigate('GameLibrary', { category: category.id })}
+                onPress={() => navigation?.navigate('CategoryDetail', { categoryId: category.id })}
               >
                 <View style={[styles.iconContainer, { backgroundColor: `${category.color}20` }]}>
                   <Ionicons name={category.icon as any} size={32} color={category.color} />

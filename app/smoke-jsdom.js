@@ -24,6 +24,15 @@ const w = dom.window;
 
 w.matchMedia = w.matchMedia || (q => ({ matches: false, media: q, addListener(){}, removeListener(){}, addEventListener(){}, removeEventListener(){} }));
 w.scrollTo = () => {};
+process.on('unhandledRejection', () => {});
+w.FontFace = w.FontFace || class { constructor(){ this.status='loaded'; } load(){ return Promise.resolve(this); } };
+w.document.fonts = { ready: Promise.resolve(), load: () => Promise.resolve([]), add(){}, check: () => true, forEach(){}, values: () => [][Symbol.iterator]() };
+
+w.CSSFontFaceRule = w.CSSFontFaceRule || class CSSFontFaceRule {};
+
+w.ResizeObserver = class { observe(){} unobserve(){} disconnect(){} };
+w.IntersectionObserver = class { observe(){} unobserve(){} disconnect(){} takeRecords(){return[];} };
+
 w.fetch = () => Promise.resolve({ ok: true, status: 200, json: async () => ({}), text: async () => '', headers: { get: () => null } });
 w.requestAnimationFrame = cb => setTimeout(() => cb(Date.now()), 16);
 w.cancelAnimationFrame = id => clearTimeout(id);

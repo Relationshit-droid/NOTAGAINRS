@@ -314,9 +314,11 @@ const HomeScreen = () => {
   }, []);
 
   const handleCategoryPress = (category: GameCategory) => {
-    navigation.navigate('GameLibrary', {
+    // 'GameLibrary' is not registered in AppNavigator; CategoryDetail is the
+    // screen that lists the games for a category.
+    navigation.navigate('CategoryDetail', {
       categoryId: category.id,
-      categoryName: category.name,
+      category,
     });
   };
 
@@ -413,7 +415,9 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.questSection}>
-          <DailyQuestCard onPress={() => navigation.navigate('DailyQuest')} />
+          {/* No standalone DailyQuest screen exists; recommended games is the
+              closest real destination for "complete today's quest". */}
+          <DailyQuestCard onPress={() => navigation.navigate('RecommendedGames')} />
         </View>
 
         <View style={styles.categoriesSection}>

@@ -46,7 +46,7 @@ const AntidoteArena = ({ route }: { route: any }) => {
 
     // Navigate to next round or results
     setTimeout(() => {
-      navigation.navigate("NextRound", { gameId });
+      navigation.navigate("AntidoteArena", { gameId });
     }, ANIMATIONS.duration.slow);
   };
 
