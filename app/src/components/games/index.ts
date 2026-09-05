@@ -10,11 +10,11 @@ export { default as GameConnector } from './GameConnector';
 export { default as GameFeedback } from './GameFeedback';
 export { default as GameRunner } from './GameRunner';
 export { default as ResultsScreen } from './ResultsScreen';
-export { DailyChallengeCard } from './DailyChallengeCard';
+export { default as DailyChallengeCard } from './DailyChallengeCard';
 
 // Engine exports
-export { GameContainer } from './engine/GameContainer';
-export { ResultsScreen as EngineResultsScreen } from './engine/ResultsScreen';
-export { InputHandler } from './engine/InputHandler';
-export { DrMarcieCommentary } from './engine/DrMarcieCommentary';
+export { default as GameContainer } from './engine/GameContainer';
+export { default as EngineResultsScreen } from './engine/ResultsScreen';
+export { default as InputHandler } from './engine/InputHandler';
+export { default as DrMarcieCommentary } from './engine/DrMarcieCommentary';
 export * from './engine/types';

@@ -1,6 +1,6 @@
 
 import { doc, onSnapshot, updateDoc, DocumentData, Unsubscribe } from 'firebase/firestore';
-import { firestore } from './firebaseClient'; // Assuming you have this configured
+import { db as firestore } from './firebaseClient';
 import { useGameStore, GameSession } from './game-store';
 
 let unsubscribe: Unsubscribe | null = null;

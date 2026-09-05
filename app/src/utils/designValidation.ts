@@ -62,17 +62,22 @@ export function checkAccessibility(color1: string, color2: string): {
 /**
  * Validate Design Bible color combinations
  */
+type ContrastResult = { aa: boolean; aaa: boolean; ratio: number };
+
 export function validateDesignBibleColors(): {
-  textOnBackground: boolean;
-  textOnSurface: boolean;
-  primaryAction: boolean;
-  allCombinations: Record<string, any>;
+  // These are checkAccessibility() results, not booleans. The previous
+  // annotation claimed `boolean`, so every `.aa` / `.aaa` read downstream was
+  // a type error even though the code was correct at runtime.
+  textOnBackground: ContrastResult;
+  textOnSurface: ContrastResult;
+  primaryAction: ContrastResult;
+  allCombinations: Record<string, ContrastResult>;
 } {
   const results = {
     textOnBackground: checkAccessibility(COLORS.textPrimary, COLORS.deepCosmicPurple),
     textOnSurface: checkAccessibility(COLORS.textPrimary, COLORS.richPlum),
     primaryAction: checkAccessibility(COLORS.textPrimary, COLORS.primaryGradientStart),
-    allCombinations: {} as Record<string, any>
+    allCombinations: {} as Record<string, ContrastResult>
   };
 
   // Test all accent colors on backgrounds
@@ -87,10 +92,12 @@ export function validateDesignBibleColors(): {
   accentColors.forEach(accent => {
     backgrounds.forEach(background => {
       const key = `${accent}On${background}`;
-      results.allCombinations[key] = checkAccessibility(
-        COLORS[accent as keyof typeof COLORS],
-        COLORS[background as keyof typeof COLORS]
-      );
+      // COLORS also holds gradient tuples, so a bare keyof index widens to
+      // `string | readonly string[]`. Every name in these two lists is a plain
+      // colour string, so narrow to that.
+      const accentValue = COLORS[accent as keyof typeof COLORS] as string;
+      const backgroundValue = COLORS[background as keyof typeof COLORS] as string;
+      results.allCombinations[key] = checkAccessibility(accentValue, backgroundValue);
     });
   });
 

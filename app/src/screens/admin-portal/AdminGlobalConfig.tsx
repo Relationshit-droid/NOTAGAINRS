@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Slider, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
+// Slider was removed from react-native core; use the community package.
+import Slider from '@react-native-community/slider';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebaseClient';
 import { ScreenLayout } from '../../layout';

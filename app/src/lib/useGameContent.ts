@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { firestore } from '../lib/firebaseClient'; // Your initialized Firebase client
+import { db as firestore } from '../lib/firebaseClient';
 import { doc, onSnapshot } from 'firebase/firestore';
 
 export const useGameContent = (coupleId, gameSessionId) => {

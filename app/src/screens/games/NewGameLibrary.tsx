@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, TextInput, Alert, ImageBackground } from 
 import { ScreenLayout, GlassCard, SquishyButton, Typography } from '../../components/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { Game } from '../../lib/supabase';
-import { MarcieHost } from '../../components/ai-host';
+import MarcieHost from '../../components/gameplay/MarcieHost';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../theme';
 
 const ALL_GAMES: Game[] = [
@@ -63,7 +63,7 @@ export default function NewGameLibrary({ navigation }: any) {
             </View>
           ))}
         </ScrollView>
-        <MarcieHost mode={'idle'} size={180} float position={{ x: 0, y: 150 }} />
+        <MarcieHost state={'idle'} />
       </ImageBackground>
     </ScreenLayout>
   );

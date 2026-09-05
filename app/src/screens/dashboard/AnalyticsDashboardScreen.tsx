@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, StyleSheet, ScrollView, SegmentedControlIOS, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -127,13 +127,26 @@ export default function AnalyticsDashboardScreen() {
         {/* Time Range Selector */}
         <GlassCard style={styles.timeRangeCard}>
           <Typography variant="label" style={styles.timeRangeLabel}>TIME RANGE</Typography>
-          <SegmentedControlIOS
-            values={timeRangeOptions.map(o => o.label)}
-            selectedIndex={timeRangeOptions.findIndex(o => o.value === timeRange)}
-            onChange={(e) => setTimeRange(timeRangeOptions[e.nativeEvent.selectedSegmentIndex].value as any)}
-            selectedSegmentTintColor={COLORS.vibrantPink}
-            backgroundColor={COLORS.backgroundSecondary}
-          />
+          {/* SegmentedControlIOS was removed from react-native core and was
+              iOS-only regardless; this row behaves identically on all platforms. */}
+          <View style={styles.segmentedRow}>
+            {timeRangeOptions.map(option => {
+              const selected = option.value === timeRange;
+              return (
+                <TouchableOpacity
+                  key={option.value}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected }}
+                  onPress={() => setTimeRange(option.value as any)}
+                  style={[styles.segment, selected && styles.segmentSelected]}
+                >
+                  <Typography variant="label" color={selected ? COLORS.textPrimary : COLORS.textSecondary}>
+                    {option.label}
+                  </Typography>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
         </GlassCard>
 
         {/* Overview Metrics */}
@@ -418,6 +431,22 @@ const styles = StyleSheet.create({
   },
   timeRangeCard: {
     marginBottom: SPACING.xlarge,
+  },
+  segmentedRow: {
+    flexDirection: 'row',
+    backgroundColor: COLORS.backgroundSecondary,
+    borderRadius: BORDER_RADIUS.medium,
+    padding: SPACING.micro,
+    gap: SPACING.micro,
+  },
+  segment: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: SPACING.small,
+    borderRadius: BORDER_RADIUS.small,
+  },
+  segmentSelected: {
+    backgroundColor: COLORS.vibrantPink,
   },
   timeRangeLabel: {
     textTransform: 'uppercase',

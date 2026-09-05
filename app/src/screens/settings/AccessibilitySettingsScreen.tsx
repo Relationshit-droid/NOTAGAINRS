@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Switch, Slider } from 'react-native';
+import { View, StyleSheet, ScrollView, Switch } from 'react-native';
+// Slider was removed from react-native core; use the community package.
+import Slider from '@react-native-community/slider';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';

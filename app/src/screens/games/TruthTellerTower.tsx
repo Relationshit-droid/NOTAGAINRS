@@ -29,7 +29,7 @@ import { useWebSocket } from '../../hooks/useWebSocket';
 
 // Components
 import { GlassCard, Typography, SquishyButton } from '../../components/ui';
-import GlobalMarcieOverlay, { MarcieAnimationType } from '../../components/DrMarcieOverlay';
+import GlobalMarcieOverlay, { MarcieAnimation } from '../../components/DrMarcieOverlay';
 
 // Theme
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, ANIMATIONS, GRADIENTS } from '../../theme';
@@ -159,7 +159,7 @@ const TruthTellerTower: React.FC = () => {
     const currentQuestion = QUESTIONS[qIndex];
 
     // Map game overlay state to Marcie animation
-    const getMarcieAnimation = (state: GameOverlayState): MarcieAnimationType => {
+    const getMarcieAnimation = (state: GameOverlayState): MarcieAnimation => {
         switch (state) {
             case 'intro':
                 return 'intro';

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Slider, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+// Slider was removed from react-native core; use the community package.
+import Slider from '@react-native-community/slider';
 import { GlassCard, Typography, SquishyButton, ScreenLayout } from '../../components/ui';
 import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, GRADIENTS } from '../../theme';
