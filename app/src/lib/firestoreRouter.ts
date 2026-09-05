@@ -46,6 +46,14 @@ function useDemo(): boolean {
   return ENV.DEMO_MODE || !isFirebaseConfigured;
 }
 
+/** 'Relational Jeopardy!' -> 'relational-jeopardy' */
+function slugifyGameName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 /** Splits 'games/categories/emotional?foo=1' into path parts and query params. */
 function parse(endpoint: string): { parts: string[]; params: URLSearchParams } {
   const clean = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
@@ -90,7 +98,19 @@ function demoRoute(method: Method, parts: string[], params: URLSearchParams, bod
     if (rest[0] === 'categories' && rest.length === 1) return { categories: DEMO_CATEGORIES };
     if (rest[0] === 'categories') {
       const cat = DEMO_CATEGORIES.find(c => c.id === rest[1]) ?? DEMO_CATEGORIES[0];
-      return { ...cat, games_detail: [] };
+      // Each demo category lists its games by name. Project them into the
+      // GameDetails shape the UI expects; returning [] here made every
+      // category render an empty "No Games Yet" state.
+      const games_detail = (cat.games ?? []).map(name => ({
+        id: slugifyGameName(name),
+        name,
+        max_score: 100,
+        min_players: 2,
+        estimated_time: 10,
+        category: cat.id,
+        category_name: cat.name,
+      }));
+      return { ...cat, games_detail };
     }
     if (rest[0] === 'registry') {
       return { games: {}, total_games: 0, categories: DEMO_CATEGORIES.length };
