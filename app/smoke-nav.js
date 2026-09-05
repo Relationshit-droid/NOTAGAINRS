@@ -1,3 +1,19 @@
+/**
+ * End-to-end journey smoke test (headless, no browser binary required).
+ *
+ * Drives the real Metro web bundle inside jsdom through the critical path:
+ *   splash -> dashboard -> category detail -> game lobby -> gameplay
+ * and reports any console errors raised along the way.
+ *
+ * The jsdom polyfills below (ResizeObserver, CSSFontFaceRule, document.fonts)
+ * stand in for browser APIs jsdom lacks; they are test scaffolding, not app
+ * workarounds.
+ *
+ * Usage:
+ *   npx expo start --web --port 8081 --offline --clear
+ *   curl -s -o /tmp/bundle.js "http://localhost:8081/index.bundle?platform=web&dev=true&minify=false"
+ *   node smoke-nav.js
+ */
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
 const bundle = fs.readFileSync('/tmp/bundle.js', 'utf8');
@@ -59,12 +75,19 @@ const wait = ms => new Promise(r=>setTimeout(r,ms));
   }
 
   const before = txt();
-  const opened = click(/PLAY|START|BEGIN|Phase|Foundation/i);
-  await wait(7000);
+  const opened = click(/^PLAY$/i);
+  await wait(10000);
   console.log('[4 game] clicked=' + opened + ' nodes=' + w.document.querySelectorAll('#root *').length);
   const after = txt();
   console.log('  changed=' + (after !== before));
-  console.log('  ' + after.slice(0,500));
+  console.log('  TAIL: ' + after.slice(-450));
+
+  const b5 = txt();
+  console.log('  clicked Start Game =', click(/^Start Game$/i));
+  await wait(10000);
+  const a5 = txt();
+  console.log('[5 play] nodes=' + w.document.querySelectorAll('#root *').length + ' changed=' + (a5!==b5));
+  console.log('  TAIL: ' + a5.slice(-450));
 
   console.log('--- ERRLIST ---');
   console.log([...new Set(errors)].slice(0,5).join('\n=====\n').slice(0,1500));
