@@ -8,7 +8,7 @@ import InputHandler from './InputHandler';
 import DrMarcieCommentary from './DrMarcieCommentary';
 import { selection, warning, success } from './HapticFeedbackSystem';
 import { speakMarcie } from '../../../lib/voice-engine';
-import { enforceSkipPenalty } from '../../../lib/consequence-engine';
+import { enforceSkipPenaltyLegacy } from '../../../lib/consequence-engine';
 import { auth } from '../../../lib/firebaseClient';
 import { gamesApi } from '../../../lib/api';
 
@@ -75,7 +75,13 @@ export default function GameContainer({ state, inputs, onComplete, onSkip, input
 
   async function skip() {
     warning();
-    await enforceSkipPenalty(1);
+    // Applies the local cooldown. Deliberately never blocks the callback: a
+    // failure to record the penalty must not swallow the user's Skip press.
+    try {
+      await enforceSkipPenaltyLegacy(1);
+    } catch (error) {
+      console.warn('[GameContainer] Could not record skip penalty:', error);
+    }
     onSkip && onSkip();
   }
 
