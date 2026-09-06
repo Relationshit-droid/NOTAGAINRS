@@ -17,6 +17,25 @@
  */
 import { useNavigation } from '@react-navigation/native';
 
+/**
+ * No-op stand-in used when a screen renders outside a NavigationContainer
+ * (App.tsx shows the splash before the container mounts). Returning this
+ * instead of throwing keeps such screens renderable; their callback props
+ * drive navigation in that mode.
+ */
+const detachedNavigation: AppNavigation = {
+  navigate: () => {},
+  goBack: () => {},
+  push: () => {},
+  replace: () => {},
+  popToTop: () => {},
+  canGoBack: () => false,
+  setOptions: () => {},
+  addListener: () => () => {},
+  reset: () => {},
+  dispatch: () => {},
+};
+
 export type AppNavigation = {
   navigate: (screen: string, params?: Record<string, unknown>) => void;
   goBack: () => void;
@@ -31,7 +50,14 @@ export type AppNavigation = {
 };
 
 export function useAppNavigation(): AppNavigation {
-  return useNavigation<any>();
+  // useNavigation throws when there is no container above it. Screens such as
+  // the splash are mounted both inside and outside the navigator, so degrade
+  // to a no-op rather than crashing the render.
+  try {
+    return useNavigation<any>();
+  } catch {
+    return detachedNavigation;
+  }
 }
 
 export default useAppNavigation;
