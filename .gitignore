@@ -10,3 +10,28 @@ node_modules/
 .expo/
 dist/
 build/
+
+# ============================================================================
+# TEMP: vendored dependencies upload (app/node_modules)
+# Normally node_modules/ above keeps this folder out of git. It is being
+# committed on purpose for one manual upload, so ONLY app/node_modules is
+# re-opened here. Delete this whole block (and uncomment node_modules/ in
+# app/.gitignore) to go back to the standard setup: `rm -rf app/node_modules`
+# + `npm ci` rebuilds the folder, so it never needs to live in git.
+#
+# The dist/build re-inclusion lines matter: the unanchored 'dist/' and
+# 'build/' rules above would otherwise skip every package's own dist/ and
+# build/ folder, silently committing a broken, half-empty node_modules.
+# ============================================================================
+!app/node_modules/
+!app/node_modules/**
+!app/node_modules/**/dist/
+!app/node_modules/**/build/
+!app/node_modules/**/node_modules/
+
+# ...and secrets stay excluded even inside the vendored folder
+app/node_modules/**/.env
+app/node_modules/**/.env.*
+app/node_modules/**/*.pem
+app/node_modules/**/*.key
+app/node_modules/**/service-account*.json
