@@ -268,7 +268,7 @@ export default function GameLibraryScreen({ navigation }: any) {
       'The Amazing Race: Crossroads': 'PlayAmazingRaceCrossroads',
     };
 
-    const route = map[g.name];
+    const route = g.name ? map[g.name] : undefined;
     if (route) {
       // @ts-ignore
       navigation.navigate(route, { gameId: g.id });

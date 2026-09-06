@@ -48,7 +48,7 @@ const PlayerPod = ({ name, score, color }: PlayerPodProps) => (
 
 const TranslatorActionPlan10 = () => {
     const [scores, setScores] = useState({ alex: 1200, jordan: 800 });
-    const [currentPlayer, setCurrentPlayer] = useState('alex');
+    const [currentPlayer, setCurrentPlayer] = useState<'alex' | 'jordan'>('alex');
 
     const handleSelect = (category: string, value: number) => {
         setScores(prev => ({...prev, [currentPlayer]: prev[currentPlayer] + value}));

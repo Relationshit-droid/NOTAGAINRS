@@ -35,6 +35,9 @@ export interface User {
   updated_at?: string;
   // Onboarding origin-story answers, stored encrypted on the user document.
   origin_story?: string;
+  avatar_url?: string;
+  bio?: string;
+  timezone?: string;
   first_red_flag?: string;
   relationship_score?: number;
 }
@@ -127,7 +130,15 @@ export interface SOSSession {
   started_at: string;
   completed_at?: string;
   submissions: Record<string, SOSBoothSubmission>;
+  /** Dr. Marcie's direct call-out of the core issue. */
   verdict?: string;
+  root_cause?: string;
+  pattern?: string;
+  repairs_a?: string[];
+  repairs_b?: string[];
+  trust_delta?: number;
+  vulnerability_delta?: number;
+  marcie_commentary?: string;
   expires_at: string;
 }
 

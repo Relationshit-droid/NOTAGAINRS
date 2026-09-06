@@ -226,8 +226,8 @@ export const analyzeSosSession = functions.runWith({ memory: '512MB', timeoutSec
                 callout: string;
                 rootCause: string;
                 patternIdentified: string;
-                repairsA: string;
-                repairsB: string;
+                repairsA: string[];
+                repairsB: string[];
                 trustDelta: number;
                 vulnerabilityDelta: number;
                 marcieCommentary: string;

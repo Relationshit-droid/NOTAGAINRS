@@ -542,8 +542,8 @@ function getStyleColor(id: string) {
 
 function getPreviewText(settings: any) {
   const sarcasm = ['Mild', 'Sharp', 'Cutting', 'Prophetic'][settings.sarcasmLevel - 1];
-  const personality = { warm: 'warmly', balanced: 'directly', clinical: 'analytically', oracle: 'mystically' }[settings.marciePersonality];
-  const style = { playful: 'playfully', direct: 'directly', supportive: 'supportively' }[settings.notificationStyle];
+  const personality = { warm: 'warmly', balanced: 'directly', clinical: 'analytically', oracle: 'mystically' }[settings.marciePersonality as 'warm' | 'balanced' | 'clinical' | 'oracle'];
+  const style = { playful: 'playfully', direct: 'directly', supportive: 'supportively' }[settings.notificationStyle as 'playful' | 'direct' | 'supportive'];
   
   return `"Listen up, darling. I'm feeling ${sarcasm.toLowerCase()} today and I'll speak to you ${personality}, but ${style}. Your trust is at ${Math.round(65 + Math.random() * 20)}% — let's fix what's broken."`;
 }

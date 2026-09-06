@@ -8,7 +8,7 @@ import {
   Couple 
 } from './game-types';
 
-const functions = getFunctions(app);
+const functions = getFunctions(app ?? undefined);
 
 // Enhanced AI service with Vertex AI integration
 export class VertexAIService {
@@ -196,7 +196,7 @@ Format as JSON with categories containing clues with question, answer, value, an
       gratitude: `Generate gratitude prompts specific to their relationship history and current challenges. ${baseContext}`,
     };
 
-    return prompts[gameType] || `Generate personalized content for ${gameType} game. ${baseContext}`;
+    return prompts[gameType as keyof typeof prompts] || `Generate personalized content for ${gameType} game. ${baseContext}`;
   }
 
   private getDefaultJeopardyCategories(): JeopardyCategory[] {
@@ -235,7 +235,7 @@ Format as JSON with categories containing clues with question, answer, value, an
       game_loss: "Don't worry, darling. Every loss is just preparation for future victories.",
     };
 
-    return fallbacks[event] || "Well, that was... interesting, darling.";
+    return fallbacks[event as keyof typeof fallbacks] || "Well, that was... interesting, darling.";
   }
 }
 

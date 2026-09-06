@@ -8,7 +8,9 @@ const animations = {
   judging: require('../../../assets/lottie/marcie_judging.json'),
 };
 
-const MarcieHost = ({ state = 'idle' }) => {
+type MarcieHostState = keyof typeof animations;
+
+const MarcieHost = ({ state = 'idle' }: { state?: MarcieHostState }) => {
   const animationRef = useRef(null);
 
   useEffect(() => {

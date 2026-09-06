@@ -26,6 +26,7 @@ export default function ConsequenceSettingsScreen() {
     inactivityNotifications: 5,
     betaMode: false,
   });
+  type SettingsKey = keyof typeof settings;
   const [loading, setLoading] = useState(true);
   const [romanceLocked, setRomanceLocked] = useState(false);
 
@@ -44,7 +45,7 @@ export default function ConsequenceSettingsScreen() {
     }
   };
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = (key: SettingsKey, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
     // In real app, save to backend
   };
@@ -221,14 +222,14 @@ export default function ConsequenceSettingsScreen() {
             
             <View style={styles.consequenceControls}>
               <Switch
-                value={settings[consequence.key] && settings.enabled}
+                value={!!settings[consequence.key as SettingsKey] && settings.enabled}
                 onValueChange={value => {
                   if (settings.enabled) {
-                    updateSetting(consequence.key, value);
+                    updateSetting(consequence.key as SettingsKey, value);
                   }
                 }}
                 disabled={!settings.enabled || settings.betaMode}
-                thumbColor={settings[consequence.key] ? consequence.color : COLORS.textHint}
+                thumbColor={settings[consequence.key as SettingsKey] ? consequence.color : COLORS.textHint}
                 trackColor={{ false: COLORS.borderSubtle, true: consequence.color + '40' }}
               />
               {!settings.betaMode && (

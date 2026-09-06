@@ -1,7 +1,8 @@
 
 import { doc, onSnapshot, updateDoc, DocumentData, Unsubscribe } from 'firebase/firestore';
 import { db as firestore } from './firebaseClient';
-import { useGameStore, GameSession } from './game-store';
+import { useGameStore } from './game-store';
+import type { GameSession } from './game-types';
 
 let unsubscribe: Unsubscribe | null = null;
 
@@ -56,7 +57,7 @@ export function unsubscribeFromGame() {
  * @param currentUserId The UID of the user attempting the update.
  */
 export async function updateGameState(gameSessionId: string, newState: Partial<GameSession>, currentUserId: string) {
-  const session = useGameStore.getState().session;
+  const session = useGameStore.getState().currentSession;
 
   // Frontend validation: Only the player whose turn it is can update the state.
   if (!session || session.current_turn !== currentUserId) {

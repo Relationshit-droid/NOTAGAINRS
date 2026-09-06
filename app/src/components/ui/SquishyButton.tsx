@@ -6,7 +6,13 @@ import Typography from './Typography';
 import { COLORS, GRADIENTS, BORDER_RADIUS, SPACING, SHADOWS, ANIMATIONS } from '../../theme';
 
 type SquishyButtonProps = {
-  children: ReactNode;
+  /** Optional when `title` is supplied. */
+  children?: ReactNode;
+  /**
+   * Convenience label used by call sites written as
+   * <SquishyButton title="Save" />. Rendered as button Typography.
+   */
+  title?: string;
   // StyleProp<ViewStyle> also admits the standard `cond && styles.x` array
   // idiom (which yields false) and nested arrays; ViewStyle[] does not.
   style?: StyleProp<ViewStyle>;
@@ -23,6 +29,7 @@ type SquishyButtonProps = {
 
 export default function SquishyButton({ 
   children, 
+  title, 
   style, 
   onPress, 
   onPressIn, 
@@ -39,11 +46,12 @@ export default function SquishyButton({
    * string/number children into <Typography> here rather than patching every
    * call site individually.
    */
+  const label = children ?? title;
   const content =
-    typeof children === 'string' || typeof children === 'number' ? (
-      <Typography variant="button">{children}</Typography>
+    typeof label === 'string' || typeof label === 'number' ? (
+      <Typography variant="button">{label}</Typography>
     ) : (
-      children
+      label
     );
 
   const scale = useRef(new Animated.Value(1)).current;

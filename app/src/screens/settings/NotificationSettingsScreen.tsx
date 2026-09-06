@@ -26,6 +26,7 @@ export default function NotificationSettingsScreen() {
     quietHoursStart: '22:00',
     quietHoursEnd: '08:00',
   });
+  type SettingsKey = keyof typeof settings;
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = async () => {
@@ -33,7 +34,7 @@ export default function NotificationSettingsScreen() {
     setLoading(false);
   };
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = (key: SettingsKey, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
     // In real app, save to backend
   };
@@ -121,10 +122,10 @@ export default function NotificationSettingsScreen() {
                   </View>
                 </View>
                 <Switch
-                  value={settings[item.key]}
-                  onValueChange={value => updateSetting(item.key, value)}
+                  value={!!settings[item.key as SettingsKey]}
+                  onValueChange={value => updateSetting(item.key as SettingsKey, value)}
                   disabled={!settings.pushEnabled}
-                  thumbColor={settings[item.key] ? COLORS.vibrantPink : COLORS.textHint}
+                  thumbColor={settings[item.key as SettingsKey] ? COLORS.vibrantPink : COLORS.textHint}
                   trackColor={{ false: COLORS.borderSubtle, true: COLORS.vibrantPink + '40' }}
                 />
               </View>
@@ -357,5 +358,5 @@ function getCategoryGradient(key: string): GradientColors {
     sosAlerts: [COLORS.error, COLORS.error + '80'],
     default: [COLORS.vibrantPink, COLORS.vibrantPink + '80'],
   };
-  return gradients[key] || gradients.default;
+  return (gradients[key as keyof typeof gradients] || gradients.default) as GradientColors;
 }

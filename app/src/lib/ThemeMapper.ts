@@ -6,5 +6,5 @@ const themeColors = {
 };
 
 export const getThemeColor = (theme: keyof typeof themeColors | string) => {
-  return themeColors[theme] || '#FFFFFF';
+  return themeColors[theme as keyof typeof themeColors] || '#FFFFFF';
 };
