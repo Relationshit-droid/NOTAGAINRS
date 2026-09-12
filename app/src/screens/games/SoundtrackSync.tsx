@@ -6,7 +6,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, BORDER_RADIUS, COMPONENTS } from '../../theme';
 
 export default function SoundtrackSync({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [song, setSong] = useState('');
 
   function submit() {

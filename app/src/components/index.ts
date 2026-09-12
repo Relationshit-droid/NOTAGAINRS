@@ -5,8 +5,8 @@ export { default as GameFeedback } from './games/GameFeedback';
 export { default as ResultsScreen } from './games/ResultsScreen';
 
 // AI Host Components
-export { default as EnhancedMarcieHost } from './ai-host/EnhancedMarcieHost';
-export { default as MarcieHost } from './ai-host/MarcieHost'; // Keep original for backward compatibility
+export { default as EnhancedMarcieHost } from './DrMarcieOverlay';
+export { default as MarcieHost } from './DrMarcieOverlay'; // Consolidated into DrMarcieOverlay
 
 // Layout Components
 export { default as GlobalHeader } from './layout/GlobalHeader';

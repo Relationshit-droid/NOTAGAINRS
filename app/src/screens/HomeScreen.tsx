@@ -11,12 +11,15 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 
 import { userApi, coupleApi, gamesApi, User, Couple, GameCategory } from '../lib/api';
-import { auth } from '../lib/firebaseClient';
+import { auth, db } from '../lib/firebaseClient';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { ENV } from '../lib/env';
+import { DEMO_USER, DEMO_COUPLE, DEMO_CATEGORIES } from '../lib/demoData';
 
 import TrustThermometer from '../components/ui/TrustThermometer';
 import Typography from '../components/ui/Typography';
@@ -67,11 +70,14 @@ const AnimatedCard = ({ children, delay = 0 }: { children: React.ReactNode; dela
 const AvatarWithRing = ({ 
   imageUrl, 
   size = SPACING.xxxlarge + SPACING.large, 
-  isOnline = false 
+  isOnline = false,
+  name,
 }: { 
   imageUrl?: string; 
   size?: number;
   isOnline?: boolean;
+  /** Falls back to this person's initial when there is no avatar image. */
+  name?: string;
 }) => {
   return (
     <View style={[styles.avatarContainer, { width: size, height: size }]}>
@@ -102,7 +108,9 @@ const AvatarWithRing = ({
           />
         ) : (
           <View style={[styles.avatarPlaceholder, { backgroundColor: COLORS.midPurple }]}>
-            <Typography variant="h3" color={COLORS.textPrimary}>?</Typography>
+            <Typography variant="h3" color={COLORS.textPrimary}>
+              {name?.trim()?.charAt(0)?.toUpperCase() || '?'}
+            </Typography>
           </View>
         )}
       </View>
@@ -218,7 +226,7 @@ const SOSButton = ({ onPress }: { onPress?: () => void }) => {
 };
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   
   const [user, setUser] = useState<User | null>(null);
   const [couple, setCouple] = useState<Couple | null>(null);
@@ -232,6 +240,16 @@ const HomeScreen = () => {
       try {
         setLoading(true);
         setError(null);
+
+        // DEMO_MODE (or no Firebase project configured): serve local demo data so
+        // the dashboard, categories and Trust Thermometer are fully explorable.
+        if (ENV.DEMO_MODE) {
+          setUser(DEMO_USER);
+          setCouple(DEMO_COUPLE);
+          setCategories(DEMO_CATEGORIES);
+          setLoading(false);
+          return;
+        }
 
         const currentUser = auth.currentUser;
         if (!currentUser) {
@@ -281,11 +299,13 @@ const HomeScreen = () => {
         console.error('❌ Error fetching data:', err);
         setError(err.message || 'Failed to load data');
         
-        Alert.alert(
-          'Connection Error',
-          'Could not connect to the game server. Please try again.',
-          [{ text: 'Retry', onPress: fetchData }, { text: 'OK' }]
-        );
+        if (!ENV.DEMO_MODE) {
+          Alert.alert(
+            'Connection Error',
+            'Could not connect to the game server. Please try again.',
+            [{ text: 'Retry', onPress: fetchData }, { text: 'OK' }]
+          );
+        }
       } finally {
         setLoading(false);
       }
@@ -294,10 +314,34 @@ const HomeScreen = () => {
     fetchData();
   }, []);
 
+  // Trust Thermometer must reflect changes in real time. fetchData() above only
+  // reads the couple document once, so subscribe to it and push live updates
+  // into the same state the thermometer renders from.
+  useEffect(() => {
+    if (ENV.DEMO_MODE) return;
+    const coupleId = user?.couple_id;
+    if (!coupleId) return;
+
+    const unsubscribe = onSnapshot(
+      doc(db, 'couples', coupleId),
+      snapshot => {
+        if (snapshot.exists()) {
+          setCouple(prev => ({ ...(prev || {}), id: snapshot.id, ...snapshot.data() } as Couple));
+        }
+      },
+      err => console.error('Trust Thermometer subscription failed:', err)
+    );
+
+    return unsubscribe;
+  }, [user?.couple_id]);
+
+
   const handleCategoryPress = (category: GameCategory) => {
-    navigation.navigate('GameLibrary', {
+    // 'GameLibrary' is not registered in AppNavigator; CategoryDetail is the
+    // screen that lists the games for a category.
+    navigation.navigate('CategoryDetail', {
       categoryId: category.id,
-      categoryName: category.name,
+      category,
     });
   };
 
@@ -351,13 +395,18 @@ const HomeScreen = () => {
               <Typography variant="body" color={COLORS.textSecondary}>Welcome back,</Typography>
               <Typography variant="h2" color={COLORS.textPrimary}>{user?.display_name || 'Player'}!</Typography>
             </View>
-            <AvatarWithRing size={SPACING.xxxlarge + SPACING.large} isOnline={true} />
+            <AvatarWithRing
+              size={SPACING.xxxlarge + SPACING.large}
+              isOnline={true}
+              name={user?.display_name}
+             
+            />
           </View>
           
           {couple ? (
             <GlassCard variant="outlined" style={styles.coupleInfo} padding="medium">
               <View style={styles.coupleAvatars}>
-                <AvatarWithRing size={SPACING.xxlarge} />
+                <AvatarWithRing size={SPACING.xxlarge} name={user?.display_name} />
                 <View style={styles.connectionLine}>
                   <Typography variant="body">💕</Typography>
                 </View>
@@ -389,7 +438,9 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.questSection}>
-          <DailyQuestCard onPress={() => navigation.navigate('DailyQuest')} />
+          {/* No standalone DailyQuest screen exists; recommended games is the
+              closest real destination for "complete today's quest". */}
+          <DailyQuestCard onPress={() => navigation.navigate('RecommendedGames')} />
         </View>
 
         <View style={styles.categoriesSection}>

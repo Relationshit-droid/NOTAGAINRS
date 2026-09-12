@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -13,8 +14,8 @@ interface GameResultsRouteParams {
 }
 
 export default function LoveArcadeGameResultsScreen() {
-  const navigation = useNavigation();
-  const route = useRoute<GameResultsRouteParams>();
+  const navigation = useAppNavigation();
+  const route = useRoute<RouteProp<Record<string, GameResultsRouteParams | undefined>, string>>();
   const { gameId, score, sessionId } = route.params || {};
 
   const [results, setResults] = useState<any>(null);
@@ -168,7 +169,7 @@ export default function LoveArcadeGameResultsScreen() {
             onPress={() => navigation.navigate('LoveArcadeHub')}
             style={styles.actionButtonPrimary}
           >
-            <Ionicons name="replay" size={18} color={COLORS.textPrimary} style={{ marginRight: SPACING.small }} />
+            <Ionicons name="refresh" size={18} color={COLORS.textPrimary} style={{ marginRight: SPACING.small }} />
             <Typography variant="button">PLAY AGAIN</Typography>
           </SquishyButton>
         </View>

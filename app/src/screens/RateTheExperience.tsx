@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-import ScreenLayout from '../layout';
+import { ScreenLayout } from '../layout';
 import { Typography, SquishyButton, GlassCard } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
 

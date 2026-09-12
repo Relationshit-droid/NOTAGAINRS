@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
+import type { IoniconName } from '../../types/icons';
+import { Alert, ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -25,6 +26,7 @@ export default function ConsequenceSettingsScreen() {
     inactivityNotifications: 5,
     betaMode: false,
   });
+  type SettingsKey = keyof typeof settings;
   const [loading, setLoading] = useState(true);
   const [romanceLocked, setRomanceLocked] = useState(false);
 
@@ -43,7 +45,7 @@ export default function ConsequenceSettingsScreen() {
     }
   };
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = (key: SettingsKey, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
     // In real app, save to backend
   };
@@ -86,7 +88,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'romanceLockout',
       label: 'Romance Lockout',
       description: 'Blocks romance games until repair completed',
-      icon: 'lock-closed',
+      icon: 'lock-closed' as IoniconName,
       color: COLORS.error,
       severity: 'HIGH',
       default: true,
@@ -95,7 +97,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'notificationSpam',
       label: 'Notification Spam',
       description: 'Hourly "Do Better" reminders',
-      icon: 'notifications',
+      icon: 'notifications' as IoniconName,
       color: COLORS.warmOrange,
       severity: 'MEDIUM',
       default: true,
@@ -104,7 +106,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'hubLockout',
       label: 'Romance Hub Lockout',
       description: 'Denies access to Romance Hub until tasks done',
-      icon: 'heart-broken',
+      icon: 'heart-broken' as IoniconName,
       color: COLORS.vibrantPink,
       severity: 'HIGH',
       default: true,
@@ -113,7 +115,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'publicShame',
       label: 'Public Shame',
       description: '"Timeout" hat on leaderboard avatar',
-      icon: 'person-circle',
+      icon: 'person-circle' as IoniconName,
       color: COLORS.lavenderPurple,
       severity: 'LOW',
       default: false,
@@ -122,7 +124,7 @@ export default function ConsequenceSettingsScreen() {
       key: 'wallpaperSwap',
       label: 'Wallpaper Swap',
       description: 'Partner\'s disappointed face as wallpaper',
-      icon: 'image',
+      icon: 'image' as IoniconName,
       color: COLORS.warmOrange,
       severity: 'LOW',
       default: false,
@@ -147,7 +149,7 @@ export default function ConsequenceSettingsScreen() {
           <View style={styles.masterToggle}>
             <View style={styles.masterInfo}>
               <LinearGradient colors={settings.enabled ? GRADIENTS.primary.colors : [COLORS.textHint, COLORS.textHint]} style={styles.masterIcon}>
-                <Ionicons name={settings.enabled ? 'shield-checkmark' : 'shield-off'} size={24} color={COLORS.textPrimary} />
+                <Ionicons name={settings.enabled ? 'shield-checkmark' : 'shield-half'} size={24} color={COLORS.textPrimary} />
               </LinearGradient>
               <View>
                 <Typography variant="label" style={styles.masterTitle}>CONSEQUENCE ENGINE</Typography>
@@ -220,14 +222,14 @@ export default function ConsequenceSettingsScreen() {
             
             <View style={styles.consequenceControls}>
               <Switch
-                value={settings[consequence.key] && settings.enabled}
+                value={!!settings[consequence.key as SettingsKey] && settings.enabled}
                 onValueChange={value => {
                   if (settings.enabled) {
-                    updateSetting(consequence.key, value);
+                    updateSetting(consequence.key as SettingsKey, value);
                   }
                 }}
                 disabled={!settings.enabled || settings.betaMode}
-                thumbColor={settings[consequence.key] ? consequence.color : COLORS.textHint}
+                thumbColor={settings[consequence.key as SettingsKey] ? consequence.color : COLORS.textHint}
                 trackColor={{ false: COLORS.borderSubtle, true: consequence.color + '40' }}
               />
               {!settings.betaMode && (
@@ -341,7 +343,17 @@ export default function ConsequenceSettingsScreen() {
   );
 }
 
-const TimingInput = ({ label, description, value, unit, min, max, onChange }: any) => (
+type TimingInputProps = {
+  label: string;
+  description: string;
+  value: number;
+  unit: string;
+  min: number;
+  max: number;
+  onChange: (value: number) => void;
+};
+
+const TimingInput = ({ label, description, value, unit, min, max, onChange }: TimingInputProps) => (
   <View style={styles.timingInput}>
     <View>
       <Typography variant="label" style={styles.timingLabel}>{label}</Typography>
@@ -360,6 +372,18 @@ const TimingInput = ({ label, description, value, unit, min, max, onChange }: an
 );
 
 const styles = StyleSheet.create({
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: SPACING.small,
+  },
+  sectionTitle: {
+    color: COLORS.textPrimary,
+  },
+  clearAllButton: {
+    alignSelf: 'flex-end',
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',

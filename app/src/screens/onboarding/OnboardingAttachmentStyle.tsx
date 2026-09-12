@@ -4,6 +4,7 @@ import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { useAppStore } from '../../state/store';
@@ -21,6 +22,9 @@ const AttachmentStyleOption = ({ title, subtitle, color, icon, onPress, isSelect
 );
 
 const OnboardingAttachmentStyleScreen = () => {
+  // These screens referenced a bare `navigation` identifier that was never a
+  // prop or an import, so navigating away threw ReferenceError.
+  const navigation = useNavigation<any>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const [selectedStyle, setSelectedStyle] = useState<string | null>(null);
@@ -55,7 +59,10 @@ const OnboardingAttachmentStyleScreen = () => {
     navigation.navigate('OnboardingCurrentVibe');
   };
 
-  const styles = [
+  // Renamed from `styles`, which shadowed the StyleSheet below - every
+  // styles.* lookup in this screen resolved to this array and was undefined,
+  // so the screen rendered completely unstyled.
+  const attachmentStyles = [
     { id: 'secure', title: 'Communicate Openly', subtitle: 'I talk about my feelings calmly', color: COLORS.mintGreen, icon: 'chatbubbles' },
     { id: 'anxious', title: 'Seek Reassurance', subtitle: 'I need constant signs of love', color: COLORS.brightYellow, icon: 'heart' },
     { id: 'avoidant', title: 'Create Distance', subtitle: 'I withdraw to protect myself', color: COLORS.rosePink, icon: 'shield' },
@@ -79,7 +86,7 @@ const OnboardingAttachmentStyleScreen = () => {
           <Typography variant="caption" style={styles.questionSubtitle}>Select the response that feels most natural to you</Typography>
 
           <View style={styles.optionsGrid}>
-            {styles.map(style => (
+            {attachmentStyles.map(style => (
               <AttachmentStyleOption 
                 key={style.id}
                 {...style}

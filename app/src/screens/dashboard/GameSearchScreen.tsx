@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, StyleSheet, ScrollView, TextInput, TouchableOpacity, FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { gamesApi, GameDetails, GameCategory } from '../../lib/api';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function GameSearchScreen() {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const [query, setQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [categories, setCategories] = useState<GameCategory[]>([]);
@@ -23,8 +23,8 @@ export default function GameSearchScreen() {
         gamesApi.getCategories(),
         gamesApi.getRegistry(),
       ]);
-      setCategories(cats.categories);
-      setAllGames(Object.values(registry.games));
+      setCategories(cats?.categories ?? []);
+      setAllGames(Object.values(registry?.games ?? {}));
     } catch (error) {
       console.error('Failed to fetch search data:', error);
     } finally {
@@ -53,7 +53,7 @@ export default function GameSearchScreen() {
 
     if (selectedFilters.length > 0) {
       results = results.filter(game => 
-        game.category_id && selectedFilters.includes(game.category_id)
+        game.category && selectedFilters.includes(game.category)
       );
     }
 
@@ -83,10 +83,10 @@ export default function GameSearchScreen() {
   const renderGame = ({ item }: { item: GameDetails }) => (
     <TouchableOpacity
       style={styles.gameItem}
-      onPress={() => navigation.navigate('GameLobbyScreen', { gameId: item.id, categoryId: item.category_id })}
+      onPress={() => navigation.navigate('GameLobbyScreen', { gameId: item.id, categoryId: item.category })}
     >
       <LinearGradient 
-        colors={getCategoryGradient(item.category_id)} 
+        colors={getCategoryGradient(item.category)} 
         style={styles.gameIcon}
       >
         <Ionicons name="game-controller" size={20} color={COLORS.textPrimary} />
@@ -94,7 +94,7 @@ export default function GameSearchScreen() {
       <View style={styles.gameInfo}>
         <Typography variant="header" style={styles.gameName} numberOfLines={1}>{item.name}</Typography>
         <Typography variant="caption" style={styles.gameCategory} numberOfLines={1}>
-          {getCategoryName(item.category_id)} • {item.estimated_time}min • {item.max_score}pts
+          {getCategoryName(item.category)} • {item.estimated_time}min • {item.max_score}pts
         </Typography>
       </View>
       <Ionicons name="chevron-forward" size={20} color={COLORS.textHint} />
@@ -150,7 +150,7 @@ export default function GameSearchScreen() {
               onSubmitEditing={handleSearchSubmit}
               placeholderTextColor={COLORS.textHint}
             />
-            {query && (
+            {!!query && (
               <TouchableOpacity onPress={() => setQuery('')} style={styles.clearButton}>
                 <Ionicons name="close-circle" size={24} color={COLORS.textHint} />
               </TouchableOpacity>
@@ -443,9 +443,9 @@ function getCategoryColor(categoryId?: string) {
   return colors[categoryId || ''] || COLORS.vibrantPink;
 }
 
-function getCategoryGradient(categoryId?: string) {
+function getCategoryGradient(categoryId?: string): GradientColors {
   const color = getCategoryColor(categoryId);
-  return [color, color + '80'];
+  return [color, color + '80'] as const;
 }
 
 function getCategoryName(categoryId?: string) {

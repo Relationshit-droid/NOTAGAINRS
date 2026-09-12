@@ -12,7 +12,7 @@ import {
   Easing,
   Image,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../lib/firebaseClient';
 import { BlurView } from 'expo-blur';
@@ -29,7 +29,7 @@ const LoginAndSignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   const logoScale = useRef(new RNAnimated.Value(0.8)).current;
   const logoGlow = useRef(new RNAnimated.Value(0.5)).current;

@@ -4,9 +4,11 @@
  */
 import { storage } from '../lib/firebaseClient';
 import { ref, getDownloadURL } from 'firebase/storage';
+import { ENV } from '../lib/env';
 
-// Base storage bucket URL (updated based on firebaseClient.ts storageBucket)
-const STORAGE_BUCKET = "love-actually-thegame.appspot.com"; 
+// Storage bucket comes from the environment so a different Firebase project
+// does not require a code change. Falls back to the default project bucket.
+const STORAGE_BUCKET = ENV.FIREBASE_STORAGE_BUCKET || 'love-actually-thegame.appspot.com';
 
 /**
  * Get a Firebase Storage URL for a given path

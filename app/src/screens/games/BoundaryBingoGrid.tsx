@@ -96,6 +96,9 @@ const BoundaryBingoGridScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  sidebarButtonText: {
+    color: COLORS.textPrimary,
+  },
     container: { 
         flex: 1, 
         backgroundColor: COLORS.backgroundPrimary 

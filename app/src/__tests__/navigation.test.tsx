@@ -6,10 +6,30 @@
  */
 
 import React from 'react';
+import { Text } from 'react-native';
 import { render, waitFor } from '@testing-library/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppNavigator from '../navigation/AppNavigator';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+// Reads the routes actually registered in AppNavigator so these tests verify the
+// real navigator instead of a throwaway stack built inside the test.
+const APP_NAVIGATOR_SOURCE = readFileSync(
+  join(__dirname, '..', 'navigation', 'AppNavigator.tsx'),
+  'utf8'
+);
+const REGISTERED_ROUTES = new Set(
+  Array.from(APP_NAVIGATOR_SOURCE.matchAll(/<Stack\.Screen[^>]*?\bname=["'{`]([A-Za-z0-9_]+)["'}`]/g)).map(
+    (m) => m[1]
+  )
+);
+
+function expectRoutesRegistered(routes: string[]) {
+  const missing = routes.filter((r) => !REGISTERED_ROUTES.has(r));
+  expect(missing).toEqual([]);
+}
 
 // Mock all screen components to avoid import issues
 jest.mock('../screens/HomeScreen', () => 'HomeScreen');
@@ -64,28 +84,7 @@ describe('Navigation System Tests', () => {
       'HelpAndFaq'
     ];
 
-    // Create a test navigator to verify routes
-    const TestStack = createNativeStackNavigator();
-    
-    const TestNavigator = () => (
-      <NavigationContainer>
-        <TestStack.Navigator>
-          {expectedMainRoutes.map(routeName => (
-            <TestStack.Screen 
-              key={routeName} 
-              name={routeName} 
-              component={() => <Text>{routeName}</Text>} 
-            />
-          ))}
-        </TestStack.Navigator>
-      </NavigationContainer>
-    );
-
-    const { getByText } = render(<TestNavigator />);
-    
-    expectedMainRoutes.forEach(routeName => {
-      expect(getByText(routeName)).toBeDefined();
-    });
+    expectRoutesRegistered(expectedMainRoutes);
   });
 
   test('should have all auth routes configured', () => {
@@ -99,9 +98,7 @@ describe('Navigation System Tests', () => {
       'PasswordReset'
     ];
 
-    expectedAuthRoutes.forEach(routeName => {
-      expect(routeName).toBeDefined();
-    });
+    expectRoutesRegistered(expectedAuthRoutes);
   });
 
   test('should have all game routes configured', () => {
@@ -161,9 +158,7 @@ describe('Navigation System Tests', () => {
       'BPDPatternDetective'
     ];
 
-    expectedGameRoutes.forEach(routeName => {
-      expect(routeName).toBeDefined();
-    });
+    expectRoutesRegistered(expectedGameRoutes);
   });
 
   test('should have SOS emergency routes configured', () => {
@@ -174,9 +169,7 @@ describe('Navigation System Tests', () => {
       'SOSVerdict'
     ];
 
-    expectedSOSRoutes.forEach(routeName => {
-      expect(routeName).toBeDefined();
-    });
+    expectRoutesRegistered(expectedSOSRoutes);
   });
 
   test('should have proper mobile-specific navigation options', () => {

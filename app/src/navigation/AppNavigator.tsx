@@ -85,7 +85,9 @@ import GratitudeCloud from '../screens/games/GratitudeCloud';
 import EyeContactChallenge from '../screens/games/EyeContactChallenge';
 import MemoryLaneMap from '../screens/games/MemoryLaneMap';
 import VibeSync from '../screens/games/VibeSync';
+import ErrorBoundary from '../components/ErrorBoundary';
 import GratitudeGraffiti from '../screens/games/GratitudeGraffiti';
+import GratitudeGraffitiMural from '../screens/GratitudeGraffitiMural';
 import SlapOfTruth from '../screens/games/SlapOfTruth';
 import ApologyAuction from '../screens/games/ApologyAuction';
 import DefensivenessDetox from '../screens/games/DefensivenessDetox';
@@ -98,6 +100,7 @@ import GifTheFeels from '../screens/games/GifTheFeels';
 import KaraokeConfessional from '../screens/games/KaraokeConfessional';
 import RansomNoteRomance from '../screens/games/RansomNoteRomance';
 import DateNightRoulette from '../screens/games/DateNightRoulette';
+import BedroomBingoCard from '../screens/games/BedroomBingoCard';
 import BedroomBingoGame1 from '../screens/games/BedroomBingoGame1';
 import SixSecondKiss from '../screens/games/SixSecondKiss';
 import ForeplayForecast from '../screens/games/ForeplayForecast';
@@ -130,6 +133,10 @@ import TrustBingo from '../screens/games/TrustBingo';
 import TruthTellerTower from '../screens/games/TruthTellerTower';
 import BPDPatternDetective from '../screens/games/BPDPatternDetective';
 import GameResultsScreen from '../screens/games/GameResultsScreen';
+import GameLobbyScreen from '../screens/game/GameLobbyScreen';
+import GamePlayScreen from '../screens/game/GamePlayScreen';
+import RepairReportCard from '../screens/games/RepairReportCard';
+import CoupleCodeScreen from '../screens/auth/CoupleCodeScreen';
 
 // Additional screens
 import TranslationReveal from '../screens/TranslationReveal';
@@ -148,7 +155,13 @@ const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <Stack.Navigator 
-      initialRouteName="MainGameLibrary" 
+      initialRouteName="MainApp" 
+      /* Every screen renders inside its own ErrorBoundary, so a crash in one
+         screen shows a recoverable message instead of unmounting the navigator
+         and blanking the entire app. */
+      screenLayout={({ children, route }) => (
+        <ErrorBoundary resetKey={route?.key}>{children}</ErrorBoundary>
+      )}
       screenOptions={{ 
         headerShown: false,
         animation: 'slide_from_right',
@@ -354,7 +367,9 @@ const AppNavigator = () => {
           presentation: 'modal',
           animation: 'slide_from_bottom'
         }} />
-        <Stack.Screen name="SOSVerdict" component={VerdictScreen} options={{ 
+        {/* Legacy fight-based verdict screen (takes `fightId`), distinct from
+            SOSVerdict above which takes `sessionId`. */}
+        <Stack.Screen name="FightVerdict" component={VerdictScreen} options={{ 
           presentation: 'modal',
           animation: 'slide_from_bottom'
         }} />
@@ -381,6 +396,10 @@ const AppNavigator = () => {
           animation: 'slide_from_right'
         }} />
         <Stack.Screen name="VibeSync" component={VibeSync} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GratitudeGraffitiMural" component={GratitudeGraffitiMural} options={{
           presentation: 'card',
           animation: 'slide_from_right'
         }} />
@@ -439,6 +458,10 @@ const AppNavigator = () => {
 
         {/* Romance Hub Games */}
         <Stack.Screen name="DateNightRoulette" component={DateNightRoulette} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="BedroomBingoCard" component={BedroomBingoCard} options={{
           presentation: 'card',
           animation: 'slide_from_right'
         }} />
@@ -627,6 +650,61 @@ const AppNavigator = () => {
             gestureEnabled: false 
           }} 
         />
+
+        {/*
+          Route aliases.
+
+          Many screens navigate to these names, but only the canonical screens
+          below were registered, so those transitions failed at runtime with
+          "not handled by any navigator" -- most importantly GameResults, which
+          is the completion destination for 25 game screens. Registering the
+          aliases repairs every caller without touching each call site.
+        */}
+        <Stack.Screen name="GameResults" component={GameResultsScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="Results" component={GameResultsScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GameLobbyScreen" component={GameLobbyScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GameLobby" component={GameLobbyScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GamePlayScreen" component={GamePlayScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="GamePlay" component={GamePlayScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="SOS" component={SOSModal} options={{
+          presentation: 'modal',
+          animation: 'slide_from_bottom'
+        }} />
+        <Stack.Screen name="Login" component={LoginAndSignUp} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        {/* Screens that existed but were never registered. */}
+        <Stack.Screen name="RepairReportCard" component={RepairReportCard} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="CoupleCode" component={CoupleCodeScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
+        <Stack.Screen name="SixSecondKissResults" component={GameResultsScreen} options={{
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} />
       </Stack.Navigator>
   );
 };

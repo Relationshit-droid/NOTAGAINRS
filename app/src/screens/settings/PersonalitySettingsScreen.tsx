@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Slider } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+// Slider was removed from react-native core; use the community package.
+import Slider from '@react-native-community/slider';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -260,7 +262,17 @@ const PersonalityCard = ({ personality, selected, onPress }: any) => (
   </TouchableOpacity>
 );
 
-const PreferenceSlider = ({ label, description, value, minLabel, maxLabel, onChange, currentLabel }: any) => (
+type PreferenceSliderProps = {
+  label: string;
+  description: string;
+  value: number;
+  minLabel: string;
+  maxLabel: string;
+  onChange: (value: number) => void;
+  currentLabel: string;
+};
+
+const PreferenceSlider = ({ label, description, value, minLabel, maxLabel, onChange, currentLabel }: PreferenceSliderProps) => (
   <View style={styles.sliderContainer}>
     <View style={styles.sliderHeader}>
       <View>
@@ -530,8 +542,8 @@ function getStyleColor(id: string) {
 
 function getPreviewText(settings: any) {
   const sarcasm = ['Mild', 'Sharp', 'Cutting', 'Prophetic'][settings.sarcasmLevel - 1];
-  const personality = { warm: 'warmly', balanced: 'directly', clinical: 'analytically', oracle: 'mystically' }[settings.marciePersonality];
-  const style = { playful: 'playfully', direct: 'directly', supportive: 'supportively' }[settings.notificationStyle];
+  const personality = { warm: 'warmly', balanced: 'directly', clinical: 'analytically', oracle: 'mystically' }[settings.marciePersonality as 'warm' | 'balanced' | 'clinical' | 'oracle'];
+  const style = { playful: 'playfully', direct: 'directly', supportive: 'supportively' }[settings.notificationStyle as 'playful' | 'direct' | 'supportive'];
   
   return `"Listen up, darling. I'm feeling ${sarcasm.toLowerCase()} today and I'll speak to you ${personality}, but ${style}. Your trust is at ${Math.round(65 + Math.random() * 20)}% — let's fix what's broken."`;
 }

@@ -52,8 +52,9 @@ export const ENV = {
   APP_VERSION: getEnv('EXPO_PUBLIC_APP_VERSION') || '2.0.0',
 
   // Backend API
-  BACKEND_URL: getEnv('EXPO_PUBLIC_API_URL') || getEnv('REACT_APP_BACKEND_URL') || 'http://localhost:8001',
-  WS_URL: getEnv('EXPO_PUBLIC_WS_URL') || 'ws://localhost:8001',
+  // Retained only for legacy call sites; data is served from Firestore.
+  BACKEND_URL: getEnv('EXPO_PUBLIC_API_URL') || '',
+  WS_URL: getEnv('EXPO_PUBLIC_WS_URL') || '',
 
   // Firebase Configuration
   FIREBASE_API_KEY: getEnv('EXPO_PUBLIC_FIREBASE_API_KEY'),
@@ -68,14 +69,11 @@ export const ENV = {
   POSTHOG_API_KEY: getEnv('EXPO_PUBLIC_POSTHOG_API_KEY'),
   POSTHOG_HOST: getEnv('EXPO_PUBLIC_POSTHOG_HOST') || 'https://app.posthog.com',
   GEMINI_API_KEY: getEnv('EXPO_PUBLIC_GEMINI_API_KEY'),
-  ELEVENLABS_API_KEY: getEnv('EXPO_PUBLIC_ELEVENLABS_API_KEY'),
-  ELEVENLABS_VOICE_ID_MARCIE: getEnv('EXPO_PUBLIC_ELEVENLABS_VOICE_ID_MARCIE'),
+
+  // Demo mode: run the preview without a live Firebase project.
+  DEMO_MODE: getEnv('EXPO_PUBLIC_DEMO_MODE') === 'true',
   GIPHY_API_KEY: getEnv('EXPO_PUBLIC_GIPHY_API_KEY'),
   MAPBOX_API_KEY: getEnv('EXPO_PUBLIC_MAPBOX_API_KEY'),
-
-  // Supabase (if still used)
-  SUPABASE_URL: getEnv('EXPO_PUBLIC_SUPABASE_URL'),
-  SUPABASE_ANON_KEY: getEnv('EXPO_PUBLIC_SUPABASE_ANON_KEY'),
 
   // Security
   ENCRYPTION_PEPPER: getEnv('EXPO_PUBLIC_ENCRYPTION_PEPPER'),

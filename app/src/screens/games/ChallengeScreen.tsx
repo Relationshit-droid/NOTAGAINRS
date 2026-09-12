@@ -4,7 +4,7 @@ import { ScreenLayout, GlassCard, Typography, SquishyButton } from '../../compon
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
 import ConfettiBurst from '../../components/effects/ConfettiBurst';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { useAppStore } from '../../state/store';
 import { COLORS, SPACING, BORDER_RADIUS, ANIMATIONS } from '../../theme';
 
@@ -280,7 +280,6 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS.large,
     padding: SPACING.regular,
   },
-},
   container: {
     flex: 1,
     padding: SPACING.regular,

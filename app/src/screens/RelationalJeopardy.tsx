@@ -8,8 +8,9 @@ import {
   Dimensions,
   TextInput
 } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import ScreenLayout from '../layout';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
+import { ScreenLayout } from '../layout';
 import { Typography, SquishyButton, GlassCard } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
 import { useGameStore } from '../lib/game-store';
@@ -46,7 +47,7 @@ const jeopardyCategories = [
 const pointValues = [100, 200, 300, 400, 500];
 
 const RelationalJeopardyScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const route = useRoute();
   const { user } = useAuth();
   const { updateGameProgress, currentGameSession } = useGameStore();
@@ -122,10 +123,12 @@ const RelationalJeopardyScreen = () => {
       setGameState(prev => ({ ...prev, isLoading: true }));
 
       // Create game session with backend
+      const token = await user.getIdToken();
       const session = await gamesApi.createSession(
         user.uid,
         'relational-jeopardy',
-        'game-show'
+        'game-show',
+        token
       );
 
       setGameState(prev => ({
@@ -153,6 +156,10 @@ const RelationalJeopardyScreen = () => {
   };
 
   const handleTilePress = async (category: string, points: number) => {
+    if (!user) {
+      Alert.alert('Authentication Required', 'Please log in to play this game.');
+      return;
+    }
     const tileKey = `${category}-${points}`;
     
     if (gameState.answeredTiles.includes(tileKey)) {
@@ -167,11 +174,13 @@ const RelationalJeopardyScreen = () => {
       
       // Get Dr. Marcie's introduction for this challenge
       const context = `Relational Jeopardy - ${category} for $${points}`;
+      const tileToken = await user.getIdToken();
       const marcieResponse = await marcieApi.chat(
         user.uid,
         context,
         question,
-        3 // Radical Truth Wizard level for deep insights
+        3, // Radical Truth Wizard level for deep insights
+        tileToken
       );
 
       setGameState(prev => ({
@@ -200,16 +209,22 @@ const RelationalJeopardyScreen = () => {
   };
 
   const submitAnswer = async (answer: string) => {
+    if (!user) {
+      Alert.alert('Authentication Required', 'Please log in to play this game.');
+      return;
+    }
     try {
       setGameState(prev => ({ ...prev, isLoading: true }));
 
       // Get Dr. Marcie's feedback on the answer
       const context = `Relational Jeopardy answer evaluation - ${gameState.currentCategory} for $${gameState.currentPoints}`;
+      const answerToken = await user.getIdToken();
       const marcieResponse = await marcieApi.chat(
         user.uid,
         context,
         answer,
-        2 // Reality Check Specialist level
+        2, // Reality Check Specialist level
+        answerToken
       );
 
       // Calculate points (simplified - in real app, this would be more sophisticated)
@@ -217,20 +232,25 @@ const RelationalJeopardyScreen = () => {
       const newScore = gameState.score + points;
 
       // Update game session
+      // updateSession takes (sessionId, data, token).
+      const updateToken = await user.getIdToken();
       await gamesApi.updateSession(
         gameState.sessionId,
-        newScore,
-        false,
-        [
-          {
-            category: gameState.currentCategory,
-            points: gameState.currentPoints,
-            question: gameState.activeChallenge,
-            answer: answer,
-            daily_double: gameState.dailyDouble,
-            timestamp: new Date().toISOString()
-          }
-        ]
+        {
+          score: newScore,
+          completed: false,
+          responses: [
+            {
+              category: gameState.currentCategory,
+              points: gameState.currentPoints,
+              question: gameState.activeChallenge,
+              answer: answer,
+              daily_double: gameState.dailyDouble,
+              timestamp: new Date().toISOString()
+            }
+          ]
+        },
+        updateToken
       );
 
       setGameState(prev => ({

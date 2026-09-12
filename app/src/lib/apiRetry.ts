@@ -87,9 +87,16 @@ export async function fetchWithRetry(
         signal: fetchConfig.signal || createTimeoutSignal(30000).signal,
       });
       
-      // Check if response status is retryable
+      // Check if response status is retryable.
+      // isRetryable() inspects error.status, so it must be attached here --
+      // a bare Error carried the code only in its message, which meant
+      // retryable HTTP statuses (503, 429, ...) were never actually retried.
       if (!response.ok && retryConfig.retryableStatuses.includes(response.status)) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        const httpError = new Error(`HTTP ${response.status}: ${response.statusText}`) as Error & {
+          status?: number;
+        };
+        httpError.status = response.status;
+        throw httpError;
       }
       
       return response;

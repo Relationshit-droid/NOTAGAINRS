@@ -13,7 +13,7 @@ const QUESTIONS = [
 ];
 
 export default function LoveMapSpeedrun({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
 

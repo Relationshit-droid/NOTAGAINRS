@@ -76,10 +76,12 @@ const HeartToHeartNewlywedGameScreen = () => {
       setGameState(prev => ({ ...prev, isLoading: true }));
 
       // Create game session with backend
+      const token = await user.getIdToken();
       const session = await gamesApi.createSession(
         user.uid,
         'heart-to-heart-newlywed',
-        'emotional-connection'
+        'emotional-connection',
+        token
       );
 
       setGameState(prev => ({
@@ -109,6 +111,10 @@ const HeartToHeartNewlywedGameScreen = () => {
   };
 
   const handleAnswerSubmit = async (partner: 'A' | 'B', answer: string) => {
+    if (!user) {
+      Alert.alert('Authentication Required', 'Please log in to play this game.');
+      return;
+    }
     try {
       setGameState(prev => ({
         ...prev,
@@ -118,11 +124,13 @@ const HeartToHeartNewlywedGameScreen = () => {
 
       // Get Dr. Marcie's feedback
       const context = `Heart to Heart Newlywed game - Partner ${partner} answer`;
+      const chatToken = await user.getIdToken();
       const marcieResponse = await marcieApi.chat(
         user.uid,
         context,
         answer,
-        1 // Tough Love Rookie level for gentle feedback
+        1, // Tough Love Rookie level for gentle feedback
+        chatToken
       );
 
       setGameState(prev => ({
@@ -207,22 +215,31 @@ const HeartToHeartNewlywedGameScreen = () => {
   };
 
   const finishGame = async () => {
+    if (!user) {
+      Alert.alert('Authentication Required', 'Please log in to play this game.');
+      return;
+    }
     try {
       setGameState(prev => ({ ...prev, isLoading: true }));
 
       // Update game session with final results
+      // updateSession takes (sessionId, data, token).
+      const updateToken = await user.getIdToken();
       await gamesApi.updateSession(
         gameState.sessionId,
-        gameState.score,
-        true,
-        [
-          {
-            question: gameState.currentQuestion,
-            partnerA_answer: gameState.partnerAAnswer,
-            partnerB_answer: gameState.partnerBAnswer,
-            timestamp: new Date().toISOString()
-          }
-        ]
+        {
+          score: gameState.score,
+          completed: true,
+          responses: [
+            {
+              question: gameState.currentQuestion,
+              partnerA_answer: gameState.partnerAAnswer,
+              partnerB_answer: gameState.partnerBAnswer,
+              timestamp: new Date().toISOString()
+            }
+          ]
+        },
+        updateToken
       );
 
       // Update global game state
@@ -555,7 +572,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.xl,
   },
   answerInput: {
-    ...TYPOGRAPHY.fontFamily.regular,
+    fontFamily: TYPOGRAPHY.fontFamily.regular,
     backgroundColor: COLORS.backgroundInput,
     borderWidth: 1,
     borderColor: COLORS.borderSubtle,

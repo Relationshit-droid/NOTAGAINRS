@@ -8,7 +8,7 @@ import { COLORS, SPACING, BORDER_RADIUS } from '../../theme';
 const INGREDIENTS = ["Coffee", "Tea", "News", "Music", "Cuddles", "Walk", "Silence", "Podcast"];
 
 export default function RitualBuilder({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [selected, setSelected] = useState<string[]>([]);
 
   function toggle(item: string) {

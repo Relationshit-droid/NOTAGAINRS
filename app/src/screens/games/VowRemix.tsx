@@ -10,7 +10,7 @@ import { useGameSession } from '../../hooks/useGameSession';
 import { getGameByScreen } from '../../lib/gameRegistry';
 
 export default function VowRemix({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [vow, setVow] = useState('');
   const [score, setScore] = useState(0);
 

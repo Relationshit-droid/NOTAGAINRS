@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, TextInput, Alert } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { Alert, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
-import { useGameSession } from '../../hooks/useGameSession';
-import { getGameByScreen } from '../../lib/gameRegistry';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
+import { useGameSession } from '../hooks/useGameSession';
+import { getGameByScreen } from '../lib/gameRegistry';
 
 interface GamePlayRouteParams {
   gameId: string;
@@ -17,8 +18,8 @@ interface GamePlayRouteParams {
 }
 
 export default function LoveArcadeGamePlayScreen() {
-  const navigation = useNavigation();
-  const route = useRoute<GamePlayRouteParams>();
+  const navigation = useAppNavigation();
+  const route = useRoute<RouteProp<Record<string, GamePlayRouteParams | undefined>, string>>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const { gameId, gameName, game } = route.params || {};
@@ -222,7 +223,7 @@ export default function LoveArcadeGamePlayScreen() {
                 maximumValue={currentQ.max || 10}
                 step={1}
                 value={parseFloat(currentResponse) || (currentQ.min || 1)}
-                onValueChange={value => setCurrentResponse(value.toString())}
+                onValueChange={(value: number) => setCurrentResponse(value.toString())}
                 minimumTrackTintColor={COLORS.vibrantPink}
                 maximumTrackTintColor={COLORS.borderSubtle}
                 disabled={showFeedback}

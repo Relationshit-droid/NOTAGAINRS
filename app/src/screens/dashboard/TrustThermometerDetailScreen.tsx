@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import type { IoniconName } from '../../types/icons';
 import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { TrustThermometer } from '../../components/ui/TrustThermometer';
+import TrustThermometer from '../../components/ui/TrustThermometer';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
@@ -13,7 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function TrustThermometerDetailScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const [trustData, setTrustData] = useState({
     current: 65,
     weeklyChange: 5,
@@ -297,7 +298,7 @@ const MilestoneItem = ({ milestone, currentTrust, isLast }: { milestone: any; cu
   );
 };
 
-const InsightItem = ({ insight }: { insight: { icon: string; text: string; color: string } }) => (
+const InsightItem = ({ insight }: { insight: { icon: IoniconName; text: string; color: string } }) => (
   <View style={styles.insightItem}>
     <View style={[styles.insightIcon, { backgroundColor: insight.color + '20' }]}>
       <Ionicons name={insight.icon} size={20} color={insight.color} />

@@ -12,7 +12,7 @@ const LOTS = [
 ];
 
 export default function AppreciationAuction({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [index, setIndex] = useState(0);
   const [coins, setCoins] = useState(100);
 

@@ -1,10 +1,10 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react-native';
 import { useBetaAccess } from '../useBetaAccess';
-import { isBetaActive } from '../../../lib/gating';
+import { isBetaActive } from '../../../../lib/gating';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Mock dependencies
-jest.mock('../../../lib/gating', () => ({
+jest.mock('../../../../lib/gating', () => ({
   isBetaActive: jest.fn(),
 }));
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -20,12 +20,14 @@ describe('useBetaAccess', () => {
     (isBetaActive as jest.Mock).mockResolvedValue(false);
     (AsyncStorage.getItem as jest.Mock).mockResolvedValue(null);
 
-    const { result, waitForNextUpdate } = renderHook(() => useBetaAccess());
+    const { result } = renderHook(() => useBetaAccess());
 
     expect(result.current.isBeta).toBe(false);
     expect(result.current.features.unlockedGames).toBe(false);
 
-    await waitForNextUpdate();
+    await waitFor(() => {
+      expect(isBetaActive).toHaveBeenCalled();
+    });
 
     expect(result.current.isBeta).toBe(false);
   });
@@ -34,10 +36,11 @@ describe('useBetaAccess', () => {
     (isBetaActive as jest.Mock).mockResolvedValue(true);
     (AsyncStorage.getItem as jest.Mock).mockResolvedValue('SOME_CODE');
 
-    const { result, waitForNextUpdate } = renderHook(() => useBetaAccess());
-    await waitForNextUpdate();
+    const { result } = renderHook(() => useBetaAccess());
+    await waitFor(() => {
+      expect(result.current.isBeta).toBe(true);
+    });
 
-    expect(result.current.isBeta).toBe(true);
     expect(result.current.features.unlockedGames).toBe(true);
   });
 
@@ -45,18 +48,20 @@ describe('useBetaAccess', () => {
     (isBetaActive as jest.Mock).mockResolvedValue(true);
     (AsyncStorage.getItem as jest.Mock).mockResolvedValue('LOVEBETA2025');
 
-    const { result, waitForNextUpdate } = renderHook(() => useBetaAccess());
-    await waitForNextUpdate();
-
-    expect(result.current.features.adminPanelAccess).toBe(true);
+    const { result } = renderHook(() => useBetaAccess());
+    await waitFor(() => {
+      expect(result.current.features.adminPanelAccess).toBe(true);
+    });
   });
 
   it('should NOT unlock admin panel with wrong code', async () => {
     (isBetaActive as jest.Mock).mockResolvedValue(true);
     (AsyncStorage.getItem as jest.Mock).mockResolvedValue('REGULAR_CODE');
 
-    const { result, waitForNextUpdate } = renderHook(() => useBetaAccess());
-    await waitForNextUpdate();
+    const { result } = renderHook(() => useBetaAccess());
+    await waitFor(() => {
+      expect(result.current.isBeta).toBe(true);
+    });
 
     expect(result.current.features.adminPanelAccess).toBe(false);
   });

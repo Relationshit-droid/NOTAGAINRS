@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import type { IoniconName } from '../../types/icons';
+import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY, ANIMATIONS } from '../../theme';
@@ -24,6 +25,18 @@ export default function SOSHoldingRoom({ navigation, route }: SOSHoldingRoomProp
 
   const breathAnim = useSharedValue(0);
   const floatAnim = useSharedValue(0);
+
+  // Reanimated styles must be declared inside the component so they can close
+  // over the shared values and follow the rules of hooks.
+  const animatedOrbOuterStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: 1 + breathAnim.value * 0.3 }],
+    opacity: 0.15 + breathAnim.value * 0.15,
+  }));
+
+  const animatedOrbMiddleStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: 1 + breathAnim.value * 0.2 }],
+    opacity: 0.3 + breathAnim.value * 0.2,
+  }));
 
   useEffect(() => {
     // Breathing animation
@@ -97,9 +110,9 @@ export default function SOSHoldingRoom({ navigation, route }: SOSHoldingRoomProp
   };
 
   const miniGames = [
-    { id: 'breathing', name: 'Guided Breathing', icon: 'leaf', color: COLORS.mintGreen, description: 'Sync your breath with the circle' },
-    { id: 'gratitude', name: 'Gratitude Prompt', icon: 'heart', color: COLORS.vibrantPink, description: 'Name 3 things you appreciate' },
-    { id: 'memory', name: 'Happy Memory', icon: 'image', color: COLORS.brightYellow, description: 'Recall a good moment together' },
+    { id: 'breathing', name: 'Guided Breathing', icon: 'leaf' as IoniconName, color: COLORS.mintGreen, description: 'Sync your breath with the circle' },
+    { id: 'gratitude', name: 'Gratitude Prompt', icon: 'heart' as IoniconName, color: COLORS.vibrantPink, description: 'Name 3 things you appreciate' },
+    { id: 'memory', name: 'Happy Memory', icon: 'image' as IoniconName, color: COLORS.brightYellow, description: 'Recall a good moment together' },
   ];
 
   const startMiniGame = (gameId: string) => {
@@ -215,17 +228,6 @@ export default function SOSHoldingRoom({ navigation, route }: SOSHoldingRoomProp
   );
 }
 
-const animatedOrbOuterStyle = useAnimatedStyle(() => ({
-  transform: [{ scale: 1 + breathAnim.value * 0.3 }],
-  opacity: 0.15 + breathAnim.value * 0.15,
-}));
-
-const animatedOrbMiddleStyle = useAnimatedStyle(() => ({
-  transform: [{ scale: 1 + breathAnim.value * 0.2 }],
-  opacity: 0.3 + breathAnim.value * 0.2,
-}));
-
-import { TouchableOpacity, useAnimatedStyle } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

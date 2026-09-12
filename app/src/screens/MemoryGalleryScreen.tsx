@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity, Modal } from 'react-native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { Alert, FlatList, Modal, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
+
+type MemoryType = 'photo' | 'video' | 'note' | 'milestone';
+
+type Memory = {
+  id: string;
+  type: MemoryType;
+  title: string;
+  caption?: string;
+  date: string;
+  favorite?: boolean;
+  tags?: string[];
+  thumbnail?: string | null;
+};
 
 export default function MemoryGalleryScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
-  const [memories, setMemories] = useState<any[]>([]);
-  const [filter, setFilter] = useState<'all' | 'photos' | 'videos' | 'notes' | 'milestones'>('all');
-  const [selectedMemory, setSelectedMemory] = useState<any | null>(null);
+  const [memories, setMemories] = useState<Memory[]>([]);
+  const [filter, setFilter] = useState<'all' | MemoryType>('all');
+  const [selectedMemory, setSelectedMemory] = useState<Memory | null>(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
@@ -30,7 +43,7 @@ export default function MemoryGalleryScreen() {
         { id: '6', type: 'milestone', title: '1 Year!', date: '2025-03-15', caption: 'One whole year together', thumbnail: null, tags: ['anniversary', 'year'], favorite: true },
         { id: '7', type: 'photo', title: 'Cooking Together', date: '2025-01-10', caption: 'Burnt pasta but perfect memory', thumbnail: null, tags: ['cooking', 'funny'], favorite: false },
         { id: '8', type: 'note', title: 'Future Dreams', date: '2025-02-14', caption: 'Where we see ourselves in 5 years', thumbnail: null, tags: ['valentine', 'dreams'], favorite: true },
-      ];
+      ] satisfies Memory[];
       setMemories(mockMemories);
     } catch (error) {
       console.error('Failed to fetch memories:', error);
@@ -56,7 +69,7 @@ export default function MemoryGalleryScreen() {
     fetchMemories();
   }, [user]);
 
-  const typeIcons = {
+  const typeIcons: Record<MemoryType, React.ComponentProps<typeof Ionicons>['name']> = {
     photo: 'image',
     video: 'videocam',
     note: 'create',
@@ -83,7 +96,7 @@ export default function MemoryGalleryScreen() {
     );
   }
 
-  const renderMemory = ({ item }: { item: any }) => (
+  const renderMemory = ({ item }: { item: Memory }) => (
     <TouchableOpacity 
       style={styles.memoryCard}
       onPress={() => setSelectedMemory(item)}
@@ -109,7 +122,7 @@ export default function MemoryGalleryScreen() {
         <Typography variant="caption" style={styles.memoryDate}>{new Date(item.date).toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' })}</Typography>
         <Typography variant="caption" style={styles.memoryCaption} numberOfLines={2}>{item.caption}</Typography>
         <View style={styles.memoryTags}>
-          {item.tags.slice(0, 3).map((tag: string, index: number) => (
+          {(item.tags ?? []).slice(0, 3).map((tag: string, index: number) => (
             <View key={index} style={styles.tag}>
               <Typography variant="caption" style={styles.tagText}>#{tag}</Typography>
             </View>
@@ -198,24 +211,25 @@ export default function MemoryGalleryScreen() {
 
         {/* Memory Detail Modal */}
         <Modal visible={!!selectedMemory} animationType="slide" transparent onRequestClose={() => setSelectedMemory(null)}>
+          {selectedMemory && (
           <View style={styles.modalOverlay}>
             <View style={styles.modalContent}>
               <View style={styles.modalHeader}>
-                <LinearGradient colors={[typeColors[selectedMemory?.type], typeColors[selectedMemory?.type] + '80']} style={styles.modalTypeBadge}>
-                  <Ionicons name={typeIcons[selectedMemory?.type as keyof typeof typeIcons] || 'image'} size={20} color={COLORS.textPrimary} />
+                <LinearGradient colors={[typeColors[selectedMemory.type], typeColors[selectedMemory.type] + '80']} style={styles.modalTypeBadge}>
+                  <Ionicons name={typeIcons[selectedMemory.type] || 'image'} size={20} color={COLORS.textPrimary} />
                 </LinearGradient>
-                <Typography variant="label" style={styles.modalTitle}>{selectedMemory?.title}</Typography>
+                <Typography variant="label" style={styles.modalTitle}>{selectedMemory.title}</Typography>
                 <TouchableOpacity onPress={() => setSelectedMemory(null)} style={styles.closeButton}>
                   <Ionicons name="close" size={24} color={COLORS.textPrimary} />
                 </TouchableOpacity>
               </View>
               
               <ScrollView style={styles.modalBody}>
-                <Typography variant="caption" style={styles.modalDate}>{new Date(selectedMemory?.date).toLocaleDateString('default', { month: 'long', day: 'numeric', year: 'numeric' })}</Typography>
-                <Typography variant="body" style={styles.modalCaption}>{selectedMemory?.caption}</Typography>
+                <Typography variant="caption" style={styles.modalDate}>{new Date(selectedMemory.date).toLocaleDateString('default', { month: 'long', day: 'numeric', year: 'numeric' })}</Typography>
+                <Typography variant="body" style={styles.modalCaption}>{selectedMemory.caption}</Typography>
                 
                 <View style={styles.modalTags}>
-                  {selectedMemory?.tags.map((tag: string, index: number) => (
+                  {(selectedMemory.tags ?? []).map((tag: string, index: number) => (
                     <View key={index} style={styles.tag}>
                       <Typography variant="caption" style={styles.tagText}>#{tag}</Typography>
                     </View>
@@ -239,6 +253,7 @@ export default function MemoryGalleryScreen() {
               </ScrollView>
             </View>
           </View>
+          )}
         </Modal>
       </ScrollView>
     </ScreenLayout>
@@ -256,6 +271,19 @@ const StatItem = ({ label, value, color, icon }: any) => (
 );
 
 const styles = StyleSheet.create({
+  statItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  statIcon: {
+    marginBottom: SPACING.tiny,
+  },
+  statValue: {
+    color: COLORS.textPrimary,
+  },
+  statLabel: {
+    color: COLORS.textSecondary,
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',

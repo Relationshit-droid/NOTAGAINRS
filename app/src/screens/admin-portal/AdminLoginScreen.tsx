@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Image } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../../firebase/firebaseConfig';
+import { auth, db } from '../../lib/firebaseClient';
 import { useAppStore } from '../../state/store';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
@@ -37,7 +37,7 @@ const AdminLoginScreen = () => {
     <ScreenLayout showHeader={false} scrollable={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" center style={styles.title}>
           Admin Console

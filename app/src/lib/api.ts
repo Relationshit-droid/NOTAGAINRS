@@ -1,5 +1,5 @@
 /**
- * API Functions for Love Actually - The Game
+ * API Functions for RELATIONSHIT! - The Game
  * 
  * This module exports all API functions organized by domain:
  * - userApi: User management
@@ -33,6 +33,13 @@ export interface User {
   plan: string;
   created_at: string;
   updated_at?: string;
+  // Onboarding origin-story answers, stored encrypted on the user document.
+  origin_story?: string;
+  avatar_url?: string;
+  bio?: string;
+  timezone?: string;
+  first_red_flag?: string;
+  relationship_score?: number;
 }
 
 export interface Couple {
@@ -123,7 +130,15 @@ export interface SOSSession {
   started_at: string;
   completed_at?: string;
   submissions: Record<string, SOSBoothSubmission>;
+  /** Dr. Marcie's direct call-out of the core issue. */
   verdict?: string;
+  root_cause?: string;
+  pattern?: string;
+  repairs_a?: string[];
+  repairs_b?: string[];
+  trust_delta?: number;
+  vulnerability_delta?: number;
+  marcie_commentary?: string;
   expires_at: string;
 }
 
@@ -318,7 +333,7 @@ export const coupleApi = {
       turning_point: string;
       current_status: string;
     },
-    firstRedFlag?: string,
+    firstRedFlag: string | undefined,
     token: string
   ): Promise<Couple> => {
     return put<Couple>(

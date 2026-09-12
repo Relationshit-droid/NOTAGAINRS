@@ -29,7 +29,7 @@ const shouldRunIntegrationTests = process.env.RUN_INTEGRATION_TESTS === 'true';
     it('should return health status', async () => {
       const health = await healthApi.check();
       expect(health.status).toBe('healthy');
-      expect(health.app).toBe('Love Actually - The Game');
+      expect(health.app).toBe('RELATIONSHIT! - The Game');
       expect(health.version).toBeDefined();
       expect(health.timestamp).toBeDefined();
     });
@@ -174,7 +174,7 @@ const shouldRunIntegrationTests = process.env.RUN_INTEGRATION_TESTS === 'true';
       expect(games).toBeDefined();
       expect(Array.isArray(games)).toBe(true);
       
-      const truthTellerTower = games.find(g => g.id === 'truth-teller-tower');
+      const truthTellerTower = games.find((g: any) => g.id === 'truth-teller-tower');
       expect(truthTellerTower).toBeDefined();
       expect(truthTellerTower?.max_score).toBeDefined();
     });

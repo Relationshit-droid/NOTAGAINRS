@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { Alert, ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
+
+
+type ArcadeSettings = {
+  autoPlayLifelines: boolean;
+  showHints: boolean;
+  celebrateAchievements: boolean;
+  arcadeMusic: boolean;
+  arcadeSoundEffects: boolean;
+  hapticFeedback: boolean;
+  reducedMotion: boolean;
+  highContrast: boolean;
+  autoAdvancePhase: boolean;
+  shareProgress: boolean;
+  competitiveMode: boolean;
+  dailyReminder: boolean;
+  reminderTime: string;
+};
 
 export default function LoveArcadeSettingsScreen() {
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<ArcadeSettings>({
     autoPlayLifelines: false,
     showHints: true,
     celebrateAchievements: true,
@@ -31,7 +48,10 @@ export default function LoveArcadeSettingsScreen() {
     setLoading(false);
   };
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = <K extends keyof ArcadeSettings>(
+    key: K,
+    value: ArcadeSettings[K]
+  ) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
@@ -67,7 +87,7 @@ export default function LoveArcadeSettingsScreen() {
           <SettingsToggle 
             label="Show Hints" 
             description="Display helpful hints during games"
-            icon="lightbulb"
+            icon="bulb"
             value={settings.showHints}
             onChange={value => updateSetting('showHints', value)}
           />
@@ -83,7 +103,7 @@ export default function LoveArcadeSettingsScreen() {
           <SettingsToggle 
             label="Auto-advance Phase" 
             description="Automatically unlock next phase when ready"
-            icon="forward"
+            icon="play-forward"
             value={settings.autoAdvancePhase}
             onChange={value => updateSetting('autoAdvancePhase', value)}
           />
@@ -120,7 +140,7 @@ export default function LoveArcadeSettingsScreen() {
           <SettingsToggle 
             label="Haptic Feedback" 
             description="Vibration for actions and achievements"
-            icon="vibrate"
+            icon="phone-portrait"
             value={settings.hapticFeedback}
             onChange={value => updateSetting('hapticFeedback', value)}
           />
@@ -211,7 +231,7 @@ export default function LoveArcadeSettingsScreen() {
           onPress={() => Alert.alert('Reset Settings', 'Reset all arcade settings to defaults?', [
             { text: 'Cancel' },
             { text: 'Reset', onPress: () => Alert.alert('Settings Reset', 'All arcade settings have been restored to defaults.') }
-          ]), 
+          ])}
           style={styles.resetButton}
         >
           <Ionicons name="refresh" size={18} color={COLORS.textSecondary} style={{ marginRight: SPACING.small }} />
@@ -222,7 +242,15 @@ export default function LoveArcadeSettingsScreen() {
   );
 }
 
-const SettingsToggle = ({ label, description, icon, value, onChange }: any) => (
+type SettingsToggleProps = {
+  label: string;
+  description: string;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  value: boolean;
+  onChange: (value: boolean) => void;
+};
+
+const SettingsToggle = ({ label, description, icon, value, onChange }: SettingsToggleProps) => (
   <View style={styles.toggleItem}>
     <View style={styles.toggleLeft}>
       <LinearGradient colors={GRADIENTS.primary.colors} style={styles.toggleIcon}>
@@ -242,7 +270,15 @@ const SettingsToggle = ({ label, description, icon, value, onChange }: any) => (
   </View>
 );
 
-const SettingsAction = ({ label, description, icon, color, onPress }: any) => (
+type SettingsActionProps = {
+  label: string;
+  description: string;
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  color: string;
+  onPress: () => void;
+};
+
+const SettingsAction = ({ label, description, icon, color, onPress }: SettingsActionProps) => (
   <TouchableOpacity 
     style={[styles.actionButton, { borderColor: color }]}
     onPress={onPress}

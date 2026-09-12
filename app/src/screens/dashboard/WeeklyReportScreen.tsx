@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { gamesApi } from '../../lib/api';
 import { useAppStore } from '../../state/store';
-import { TrustThermometer } from '../../components/ui/TrustThermometer';
+import TrustThermometer from '../../components/ui/TrustThermometer';
 
 export default function WeeklyReportScreen() {
   const { user } = useAuth();
@@ -321,7 +321,7 @@ export default function WeeklyReportScreen() {
         <GlassCard style={[styles.sectionCard, styles.suggestionCard]}>
           <View style={styles.suggestionHeader}>
             <LinearGradient colors={[COLORS.mintGreen, COLORS.aquaTeal]} style={styles.suggestionIcon}>
-              <Ionicons name="lightbulb" size={24} color={COLORS.textPrimary} />
+              <Ionicons name="bulb" size={24} color={COLORS.textPrimary} />
             </LinearGradient>
             <Typography variant="label" style={styles.suggestionTitle}>NEXT WEEK</Typography>
           </View>
@@ -775,7 +775,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function getCategoryGradient(category: string) {
+function getCategoryGradient(category: string): GradientColors {
   const colors: Record<string, string[]> = {
     'Emotional Connection': [COLORS.rosePink, COLORS.rosePink + '80'],
     'Conflict Resolution': [COLORS.vibrantPink, COLORS.vibrantPink + '80'],

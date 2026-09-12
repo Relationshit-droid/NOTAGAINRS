@@ -7,4 +7,5 @@
 export { useAuth } from './useAuth';
 export { useGameSession } from './useGameSession';
 export { usePartnerPresence } from './usePartnerPresence';
-export { useWebSocket, ConnectionState } from './useWebSocket';
+// useWebSocket exports no ConnectionState symbol; nothing imports it either.
+export { useWebSocket } from './useWebSocket';

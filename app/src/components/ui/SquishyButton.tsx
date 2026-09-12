@@ -1,13 +1,26 @@
 import { ReactNode, useRef } from 'react';
 import { Pressable, ViewStyle, Platform, Animated, StyleProp } from 'react-native';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { LinearGradient } from 'expo-linear-gradient';
+import Typography from './Typography';
 import { COLORS, GRADIENTS, BORDER_RADIUS, SPACING, SHADOWS, ANIMATIONS } from '../../theme';
 
 type SquishyButtonProps = {
-  children: ReactNode;
-  style?: ViewStyle | ViewStyle[];
+  /** Optional when `title` is supplied. */
+  children?: ReactNode;
+  /**
+   * Convenience label used by call sites written as
+   * <SquishyButton title="Save" />. Rendered as button Typography.
+   */
+  title?: string;
+  // StyleProp<ViewStyle> also admits the standard `cond && styles.x` array
+  // idiom (which yields false) and nested arrays; ViewStyle[] does not.
+  style?: StyleProp<ViewStyle>;
   onPress?: () => void;
+  /** Called in addition to the built-in squish animation. */
+  onPressIn?: () => void;
+  /** Called in addition to the built-in squish animation. */
+  onPressOut?: () => void;
   accessibilityLabel?: string;
   disabled?: boolean;
   variant?: 'primary' | 'secondary' | 'ghost';
@@ -16,13 +29,31 @@ type SquishyButtonProps = {
 
 export default function SquishyButton({ 
   children, 
+  title, 
   style, 
   onPress, 
+  onPressIn, 
+  onPressOut, 
   accessibilityLabel, 
   disabled = false,
   variant = 'primary',
   size = 'medium'
 }: SquishyButtonProps) {
+  /**
+   * react-native-web throws "Unexpected text node" when a bare string is a
+   * direct child of a <View>. Buttons are written as
+   * <SquishyButton>Save</SquishyButton> throughout the app, so normalise
+   * string/number children into <Typography> here rather than patching every
+   * call site individually.
+   */
+  const label = children ?? title;
+  const content =
+    typeof label === 'string' || typeof label === 'number' ? (
+      <Typography variant="button">{label}</Typography>
+    ) : (
+      label
+    );
+
   const scale = useRef(new Animated.Value(1)).current;
   const shadow = useRef(new Animated.Value(0.2)).current;
 
@@ -35,6 +66,7 @@ export default function SquishyButton({
 
   const handlePressIn = () => {
     if (disabled) return;
+    onPressIn && onPressIn();
     Animated.parallel([
       Animated.spring(scale, { 
         toValue: 0.96, 
@@ -52,6 +84,7 @@ export default function SquishyButton({
 
   const handlePressOut = () => {
     if (disabled) return;
+    onPressOut && onPressOut();
     Animated.parallel([
       Animated.spring(scale, { 
         toValue: 1, 
@@ -183,7 +216,7 @@ export default function SquishyButton({
               minHeight: sizeStyle.minHeight,
             }}
           >
-            {children}
+            {content}
           </Pressable>
         </LinearGradient>
       ) : (
@@ -211,7 +244,7 @@ export default function SquishyButton({
             width: '100%',
           }}
         >
-          {children}
+          {content}
         </Pressable>
       )}
     </Animated.View>

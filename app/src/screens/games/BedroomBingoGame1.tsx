@@ -122,6 +122,32 @@ const BedroomBingoGame1Screen = () => {
 };
 
 const styles = StyleSheet.create({
+  freeIcon: {
+    marginBottom: SPACING.micro,
+  },
+  tileText: {
+    color: COLORS.textPrimary,
+  },
+  hostName: {
+    color: COLORS.vibrantPink,
+  },
+  hostQuote: {
+    color: COLORS.textSecondary,
+    fontStyle: 'italic',
+  },
+  multiplierTitle: {
+    color: COLORS.brightYellow,
+  },
+  multiplierText: {
+    color: COLORS.textSecondary,
+  },
+  footerTitle: {
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.small,
+  },
+  submitButtonText: {
+    color: COLORS.textPrimary,
+  },
     container: { 
         flex: 1, 
         backgroundColor: COLORS.backgroundSecondary 

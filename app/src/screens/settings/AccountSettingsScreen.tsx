@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Switch } from 'react-native';
+import { ScrollView, StyleSheet, Switch, TextInput, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -108,20 +108,20 @@ export default function AccountSettingsScreen() {
         <GlassCard style={styles.sectionCard}>
           <Typography variant="label" style={styles.sectionTitle}>BASIC INFO</Typography>
           
+          <Typography variant="caption" style={styles.selectLabel}>DISPLAY NAME</Typography>
           <TextInput
             style={styles.input}
             placeholder="Display Name"
             value={profile.displayName}
             onChangeText={text => setProfile(prev => ({ ...prev, displayName: text }))}
-            label="DISPLAY NAME"
           />
           
+          <Typography variant="caption" style={styles.selectLabel}>BIO</Typography>
           <TextInput
             style={styles.input}
             placeholder="Bio"
             value={profile.bio}
             onChangeText={text => setProfile(prev => ({ ...prev, bio: text }))}
-            label="BIO"
             multiline
             numberOfLines={3}
           />

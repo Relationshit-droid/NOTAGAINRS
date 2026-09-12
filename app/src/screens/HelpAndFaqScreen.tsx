@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.borderSubtle,
   },
   searchInput: {
-    ...TYPOGRAPHY.fontFamily.regular,
+    fontFamily: TYPOGRAPHY.fontFamily.regular,
     flex: 1,
     color: COLORS.textPrimary,
     height: SPACING.xxlarge + SPACING.md,

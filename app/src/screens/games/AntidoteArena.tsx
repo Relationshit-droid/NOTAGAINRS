@@ -1,31 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useAppNavigation } from "../../hooks/useAppNavigation";
 
 import { ScreenLayout, Typography, SquishyButton } from "../../components/ui";
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS, ANIMATIONS, GRADIENTS } from "../../theme";
 
-import firestore from "@react-native-firebase/firestore";
+// Uses the modular `firebase` web SDK (works on web + native via Expo);
+// @react-native-firebase is native-only and crashed the web bundle with
+// "No Firebase App '[DEFAULT]' has been created".
+import { doc, onSnapshot, updateDoc, increment } from "firebase/firestore";
+import { db } from "../../lib/firebaseClient";
 
 const AntidoteArena = ({ route }: { route: any }) => {
-  const { gameId } = route.params;
-  const navigation = useNavigation();
+  const { gameId } = route.params ?? {};
+  const navigation = useAppNavigation();
 
   const [gameState, setGameState] = useState<any>(null);
   const [selectedAntidote, setSelectedAntidote] = useState<string | null>(null);
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    const unsub = firestore()
-      .collection("active_games")
-      .doc(gameId)
-      .onSnapshot((doc) => {
-        const data = doc.data();
+    if (!gameId) return;
+    const unsub = onSnapshot(
+      doc(db, "active_games", gameId),
+      (snap) => {
+        const data = snap.data();
         if (data) {
           setGameState(data);
         }
-      });
+      },
+      (err) => console.warn("[AntidoteArena] snapshot unavailable:", err?.message),
+    );
 
     return () => unsub();
   }, [gameId]);
@@ -34,16 +40,13 @@ const AntidoteArena = ({ route }: { route: any }) => {
     setSelectedAntidote(antidote);
     const isCorrect = antidote === gameState.correctAntidote;
 
-    firestore()
-      .collection("active_games")
-      .doc(gameId)
-      .update({
-        score: firestore.FieldValue.increment(isCorrect ? 100 : -50),
-      });
+    updateDoc(doc(db, "active_games", gameId), {
+      score: increment(isCorrect ? 100 : -50),
+    }).catch((err) => console.warn("[AntidoteArena] score update failed:", err?.message));
 
     // Navigate to next round or results
     setTimeout(() => {
-      navigation.navigate("NextRound", { gameId });
+      navigation.navigate("AntidoteArena", { gameId });
     }, ANIMATIONS.duration.slow);
   };
 

@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from 'react-native-reanimated';
 import { GlassCard, Text, SquishyButton } from '../ui';
 import { COLORS, SPACING, BORDER_RADIUS } from '../../theme';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 
 type DailyChallengeCardProps = {
   title: string;

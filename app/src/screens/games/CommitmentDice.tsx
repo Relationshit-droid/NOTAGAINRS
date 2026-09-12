@@ -16,7 +16,7 @@ const MAX_SCORE = 100;
 const PROMPTS = ["Text one reason you chose them today", "Send a photo of your favorite memory", "Commit to one chore this week"];
 
 export default function CommitmentDice({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
   const [rolled, setRolled] = useState(false);

@@ -7,7 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS, GRADIENTS } from '../../theme';
 
 export default function CompromiseJenga({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [blocks, setBlocks] = useState<string[]>([]);
   const [offer, setOffer] = useState('');
 

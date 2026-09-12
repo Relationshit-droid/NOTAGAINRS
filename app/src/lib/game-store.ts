@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../utils/haptics';
 import { auth } from './firebaseClient';
 import { gamesApi } from './api';
 import { gameRegistry } from './gameRegistry';
@@ -41,7 +41,13 @@ interface GameStore {
   hideMarcie: () => void;
   showMarcie: () => void;
   
+  // Per-game progress (0-100), keyed by game id
+  gameProgress: Record<string, number>;
+  updateGameProgress: (gameId: string, progress: number) => void;
+
   // Utility methods
+  /** Replaces the current session wholesale (used by the Firestore listener). */
+  setSession: (session: GameSession | null) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   resetGame: () => void;
@@ -54,6 +60,7 @@ async function getToken(): Promise<string | undefined> {
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
+  gameProgress: {},
   currentSession: null,
   gameState: 'waiting_for_partner',
   loading: false,
@@ -135,7 +142,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     try {
       const token = await getToken();
-      await gamesApi.updateSession(currentSession.id, { game_state: newGameState }, token);
+      if (token) {
+        await gamesApi.updateSession(currentSession.id, { game_state: newGameState }, token);
+      }
     } catch (error) {
       console.error('Failed to sync game state to backend:', error);
     }
@@ -147,6 +156,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     try {
       const token = await getToken();
+      if (!token) return;
       await gamesApi.submitAnswer(
         currentSession.id,
         {
@@ -220,6 +230,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     try {
       const token = await getToken();
       const finalScore = Math.max(finalScores.player1 || 0, finalScores.player2 || 0);
+      if (!token) return;
       await gamesApi.completeSession(
         currentSession.id,
         {
@@ -276,6 +287,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set({ marcieVisible: true });
   },
 
+  setSession: (session: GameSession | null) => {
+    set({ currentSession: session, loading: false, error: null });
+  },
+
   setLoading: (loading: boolean) => {
     set({ loading });
   },
@@ -284,8 +299,20 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set({ error });
   },
 
+  // Several game screens call this on start/midpoint/completion. It was
+  // referenced but never defined on the store, so those calls threw.
+  updateGameProgress: (gameId: string, progress: number) => {
+    set(state => ({
+      gameProgress: {
+        ...state.gameProgress,
+        [gameId]: Math.max(0, Math.min(100, progress)),
+      },
+    }));
+  },
+
   resetGame: () => {
     set({
+      gameProgress: {},
       currentSession: null,
       gameState: 'waiting_for_partner',
       loading: false,

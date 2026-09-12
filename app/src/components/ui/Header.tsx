@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import Text from './Typography';
@@ -23,9 +23,14 @@ const Header = ({ showNav = true, onNavPress, variant = 'default' }: HeaderProps
       variant === 'transparent' && styles.transparentHeader
     ]}>
       <View style={styles.logoContainer}>
-        <Ionicons name="sparkles-sharp" size={24} color={COLORS.vibrantPink} />
+        <Image
+          source={require('../../../assets/logo/mainlogo.png')}
+          style={styles.logoMark}
+          resizeMode="contain"
+          accessibilityLabel="RELATIONSHIT! logo"
+        />
         <Text variant="header" style={styles.logoText}>
-          Love Actually...
+          RELATIONSHIT!
         </Text>
       </View>
       
@@ -62,6 +67,10 @@ const styles = StyleSheet.create({
   transparentHeader: {
     backgroundColor: 'transparent',
     borderBottomWidth: 0,
+  },
+  logoMark: {
+    width: 28,
+    height: 28,
   },
   logoContainer: {
     flexDirection: 'row',

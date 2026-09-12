@@ -10,7 +10,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions, TouchableOpacity, Alert, TextInput } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 
 // Backend integration
 import { useGameSession } from '../../hooks/useGameSession';
@@ -96,7 +97,7 @@ const JEOPARDY_CATEGORIES: Category[] = [
 ];
 
 const RelationalJeopardy: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useAppNavigation();
     const route = useRoute();
     
     // Backend session

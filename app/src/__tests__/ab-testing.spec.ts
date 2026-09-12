@@ -1,6 +1,6 @@
 import { getVariant, getFlag } from '../lib/ab-testing';
 
-jest.mock('../lib/supabaseClient', () => ({ supabase: { from: jest.fn().mockReturnValue({ select: jest.fn().mockReturnThis(), eq: jest.fn().mockReturnThis(), single: jest.fn().mockResolvedValue({ data: null, error: null }) }) } }));
+jest.mock('../lib/supabase', () => ({ supabase: { from: jest.fn().mockReturnValue({ select: jest.fn().mockReturnThis(), eq: jest.fn().mockReturnThis(), single: jest.fn().mockResolvedValue({ data: null, error: null }) }) } }));
 
 test('A/B getVariant is stable and respects weights', async () => {
   const v1 = await getVariant('user-1', 'translator_v2');

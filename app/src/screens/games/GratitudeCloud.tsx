@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { SquishyButton } from '../../components/ui';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from 'react-native-reanimated';
 import { Typography, GlassCard, ScreenLayout } from '../../components/ui';
@@ -15,7 +15,7 @@ const { width } = Dimensions.get('window');
 type CloudWord = { text: string; weight: number; left: number; top: number; size: number };
 
 export default function GratitudeCloud({ route, navigation }: any) {
-  const navigationHook = useNavigation();
+  const navigationHook = useAppNavigation();
   
   // Get game info from registry
   const gameInfo = getGameByScreen('GratitudeCloud');

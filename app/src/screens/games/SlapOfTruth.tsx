@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, StyleSheet, PanResponder, GestureResponderHandlers } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { HapticFeedbackSystem } from '../../components/games/engine';
@@ -21,7 +21,7 @@ const SCENARIOS: Scenario[] = [
 ];
 
 export default function SlapOfTruth({ route, navigation }: any) {
-  const navigationHook = useNavigation();
+  const navigationHook = useAppNavigation();
   
   // Get game info from registry
   const gameInfo = getGameByScreen('SlapOfTruth');

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import type { IoniconName } from '../../types/icons';
+import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
@@ -25,9 +26,9 @@ const QUESTIONS: Question[] = [
 ];
 
 const ANSWER_OPTIONS = [
-  { value: 'yes', label: 'Yes', color: COLORS.success, icon: 'checkmark-circle' },
-  { value: 'maybe', label: 'Maybe', color: COLORS.warning, icon: 'help-circle' },
-  { value: 'no', label: 'No', color: COLORS.error, icon: 'close-circle' },
+  { value: 'yes', label: 'Yes', color: COLORS.success, icon: 'checkmark-circle' as IoniconName },
+  { value: 'maybe', label: 'Maybe', color: COLORS.warning, icon: 'help-circle' as IoniconName },
+  { value: 'no', label: 'No', color: COLORS.error, icon: 'close-circle' as IoniconName },
 ];
 
 export default function SOSPostRepairQuestionnaire({ navigation, route }: SOSPostRepairQuestionnaireProps) {
@@ -164,7 +165,6 @@ export default function SOSPostRepairQuestionnaire({ navigation, route }: SOSPos
   );
 }
 
-import { TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

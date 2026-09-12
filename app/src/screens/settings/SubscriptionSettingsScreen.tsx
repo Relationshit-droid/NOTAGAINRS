@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -266,13 +266,6 @@ const styles = StyleSheet.create({
   planStatus: {
     color: COLORS.mintGreen,
     marginTop: SPACING.tiny,
-  },
-  planPrice: {
-    alignItems: 'flex-end',
-  },
-  planPeriod: {
-    color: COLORS.textHint,
-    marginTop: -4,
   },
   currentPlanDetails: {
     flexDirection: 'row',

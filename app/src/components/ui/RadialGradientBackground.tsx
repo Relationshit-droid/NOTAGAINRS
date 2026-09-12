@@ -1,6 +1,6 @@
 import { Platform, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { GRADIENTS } from '../../theme';
+import { COLORS, GRADIENTS } from '../../theme';
 
 type RadialGradientBackgroundProps = {
   noiseDensity?: number;

@@ -35,7 +35,7 @@ export default function CoolDownRoom({ route, navigation }: CoolDownRoomProps) {
             content: { title: 'Partner joined SOS', body: 'Ready for verdict.' }, 
             trigger: null 
           });
-          navigation.replace('SOSVerdict', { fightId });
+          navigation.replace('FightVerdict', { fightId });
         }
       }).then((s: any) => sub = s);
       useAppStore.getState().setSOSSessionId(fightId);
@@ -48,7 +48,7 @@ export default function CoolDownRoom({ route, navigation }: CoolDownRoomProps) {
   }, [fightId]);
 
   useEffect(() => {
-    if (remaining <= 0 && fightId) navigation.replace('SOSVerdict', { fightId, timeout: true });
+    if (remaining <= 0 && fightId) navigation.replace('FightVerdict', { fightId, timeout: true });
   }, [remaining]);
 
   const circleStyle = useAnimatedStyle(() => ({
@@ -85,7 +85,7 @@ export default function CoolDownRoom({ route, navigation }: CoolDownRoomProps) {
           </GlassCard>
 
           <SquishyButton 
-            onPress={() => navigation.replace('SOSVerdict', { fightId })}
+            onPress={() => navigation.replace('FightVerdict', { fightId })}
             variant="ghost"
             size="medium"
           >

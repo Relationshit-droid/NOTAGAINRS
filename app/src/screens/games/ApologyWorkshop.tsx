@@ -7,7 +7,7 @@ import { speakMarcie } from '../../lib/voice-engine';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../theme';
 
 export default function ApologyWorkshop({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [station, setStation] = useState<'forge' | 'altar'>('forge');
     const [pillar, setPillar] = useState(1);
     const sessionId = useRef<string | null>(null);

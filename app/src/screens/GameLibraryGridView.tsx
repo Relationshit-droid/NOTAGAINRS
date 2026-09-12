@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   searchInput: {
-    ...TYPOGRAPHY.fontFamily.regular,
+    fontFamily: TYPOGRAPHY.fontFamily.regular,
     backgroundColor: COLORS.backgroundInput,
     borderWidth: 1,
     borderColor: COLORS.borderSubtle,

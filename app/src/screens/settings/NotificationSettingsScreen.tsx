@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Switch } from 'react-native';
+import type { IoniconName } from '../../types/icons';
+import { ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../../hooks/useAuth';
@@ -25,6 +26,7 @@ export default function NotificationSettingsScreen() {
     quietHoursStart: '22:00',
     quietHoursEnd: '08:00',
   });
+  type SettingsKey = keyof typeof settings;
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = async () => {
@@ -32,7 +34,7 @@ export default function NotificationSettingsScreen() {
     setLoading(false);
   };
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = (key: SettingsKey, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
     // In real app, save to backend
   };
@@ -45,23 +47,23 @@ export default function NotificationSettingsScreen() {
     {
       title: 'GAME ACTIVITY',
       items: [
-        { key: 'gameReminders', label: 'Game Reminders', description: 'Reminders to play scheduled games', icon: 'game-controller' },
-        { key: 'partnerActivity', label: 'Partner Activity', description: 'When your partner completes a game', icon: 'person' },
-        { key: 'dailyPrompt', label: 'Daily Prompts', description: 'Daily relationship check-in prompts', icon: 'sunny' },
+        { key: 'gameReminders', label: 'Game Reminders', description: 'Reminders to play scheduled games', icon: 'game-controller' as IoniconName },
+        { key: 'partnerActivity', label: 'Partner Activity', description: 'When your partner completes a game', icon: 'person' as IoniconName },
+        { key: 'dailyPrompt', label: 'Daily Prompts', description: 'Daily relationship check-in prompts', icon: 'sunny' as IoniconName },
       ],
     },
     {
       title: 'PROGRESS & INSIGHTS',
       items: [
-        { key: 'weeklyReport', label: 'Weekly Report', description: 'Your weekly relationship summary', icon: 'document-text' },
-        { key: 'streakReminders', label: 'Streak Reminders', description: 'Don\'t break your streak!', icon: 'flame' },
-        { key: 'achievementUnlocks', label: 'Achievement Unlocks', description: 'Celebrate your milestones', icon: 'trophy' },
+        { key: 'weeklyReport', label: 'Weekly Report', description: 'Your weekly relationship summary', icon: 'document-text' as IoniconName },
+        { key: 'streakReminders', label: 'Streak Reminders', description: 'Don\'t break your streak!', icon: 'flame' as IoniconName },
+        { key: 'achievementUnlocks', label: 'Achievement Unlocks', description: 'Celebrate your milestones', icon: 'trophy' as IoniconName },
       ],
     },
     {
       title: 'EMERGENCY',
       items: [
-        { key: 'sosAlerts', label: 'SOS Alerts', description: 'Emergency fight resolution requests', icon: 'alert-circle' },
+        { key: 'sosAlerts', label: 'SOS Alerts', description: 'Emergency fight resolution requests', icon: 'alert-circle' as IoniconName },
       ],
     },
   ];
@@ -120,10 +122,10 @@ export default function NotificationSettingsScreen() {
                   </View>
                 </View>
                 <Switch
-                  value={settings[item.key]}
-                  onValueChange={value => updateSetting(item.key, value)}
+                  value={!!settings[item.key as SettingsKey]}
+                  onValueChange={value => updateSetting(item.key as SettingsKey, value)}
                   disabled={!settings.pushEnabled}
-                  thumbColor={settings[item.key] ? COLORS.vibrantPink : COLORS.textHint}
+                  thumbColor={settings[item.key as SettingsKey] ? COLORS.vibrantPink : COLORS.textHint}
                   trackColor={{ false: COLORS.borderSubtle, true: COLORS.vibrantPink + '40' }}
                 />
               </View>
@@ -155,7 +157,7 @@ export default function NotificationSettingsScreen() {
           <View style={styles.notificationItem}>
             <View style={styles.itemLeft}>
               <LinearGradient colors={GRADIENTS.primary.colors} style={styles.itemIcon}>
-                <Ionicons name="vibrate" size={20} color={COLORS.textPrimary} />
+                <Ionicons name="phone-portrait" size={20} color={COLORS.textPrimary} />
               </LinearGradient>
               <View style={styles.itemText}>
                 <Typography variant="label" style={styles.itemLabel}>Vibration</Typography>
@@ -345,7 +347,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function getCategoryGradient(key: string) {
+function getCategoryGradient(key: string): GradientColors {
   const gradients: Record<string, string[]> = {
     gameReminders: [COLORS.vibrantPink, COLORS.vibrantPink + '80'],
     partnerActivity: [COLORS.aquaTeal, COLORS.aquaTeal + '80'],
@@ -356,5 +358,5 @@ function getCategoryGradient(key: string) {
     sosAlerts: [COLORS.error, COLORS.error + '80'],
     default: [COLORS.vibrantPink, COLORS.vibrantPink + '80'],
   };
-  return gradients[key] || gradients.default;
+  return (gradients[key as keyof typeof gradients] || gradients.default) as GradientColors;
 }

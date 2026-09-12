@@ -33,6 +33,8 @@ const SixSecondKissScreen = () => {
   const [challengeCompleted, setChallengeCompleted] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const timerAnimation = useRef(new Animated.Value(0)).current;
+  // Animated.Value has no stop(); the running animation does. Keep a handle.
+  const timerAnimationRef = useRef<Animated.CompositeAnimation | null>(null);
 
   const bothPlayersActive = player1Active && player2Active;
 
@@ -40,11 +42,12 @@ const SixSecondKissScreen = () => {
     let interval: NodeJS.Timeout | null = null;
     if (bothPlayersActive && !challengeCompleted) {
       setIsKissing(true);
-      Animated.timing(timerAnimation, {
+      timerAnimationRef.current = Animated.timing(timerAnimation, {
         toValue: 1,
         duration: SIX_SECONDS,
         useNativeDriver: false,
-      }).start();
+      });
+      timerAnimationRef.current.start();
 
       interval = setInterval(() => {
         setTimer(prev => {
@@ -59,7 +62,7 @@ const SixSecondKissScreen = () => {
       }, 10);
     } else {
       setIsKissing(false);
-      timerAnimation.stop();
+      timerAnimationRef.current?.stop();
       if(interval) clearInterval(interval);
     }
 
@@ -67,6 +70,7 @@ const SixSecondKissScreen = () => {
       if (interval) {
         clearInterval(interval);
       }
+      timerAnimationRef.current?.stop();
     };
   }, [bothPlayersActive, challengeCompleted]);
 

@@ -52,11 +52,26 @@ export default function SOSVerdictScreen({ navigation, route }: SOSVerdictScreen
         const session = await sosApi.getSession(sessionId, token);
         
         if (session.verdict) {
-          setVerdict(session.verdict);
-          
+          // The Cloud Function writes flat snake_case fields onto the session
+          // document; map them onto the per-partner shape this screen renders.
+          const mapped: VerdictData = {
+            whatRightA: session.repairs_a?.[0] ?? '',
+            whatRightB: session.repairs_b?.[0] ?? '',
+            callOutA: session.verdict,
+            callOutB: session.pattern ?? session.verdict,
+            realityCheck: session.root_cause ?? session.marcie_commentary ?? '',
+            whoApologizes:
+              (session.trust_delta ?? 0) < 0 ? 'both' : 'neither',
+            repairSteps: [
+              ...(session.repairs_a ?? []),
+              ...(session.repairs_b ?? []),
+            ],
+          };
+          setVerdict(mapped);
+
           // Speak the first call-out
-          if (session.verdict.callOutA) {
-            setTimeout(() => speakMarcie(session.verdict.callOutA), 500);
+          if (mapped.callOutA) {
+            setTimeout(() => speakMarcie(mapped.callOutA), 500);
           }
         } else {
           // Verdict not ready yet
@@ -259,7 +274,7 @@ export default function SOSVerdictScreen({ navigation, route }: SOSVerdictScreen
               </View>
             </View>
 
-            <Typography variant="body" style={styles.apologyText} textAlign="center">
+            <Typography variant="body" style={[styles.apologyText, { textAlign: 'center' }]}>
               {apologyDirection === 'neither' 
                 ? 'No apology needed. This was a misunderstanding.'
                 : apologyDirection === 'both'
@@ -283,7 +298,7 @@ export default function SOSVerdictScreen({ navigation, route }: SOSVerdictScreen
                   <View style={styles.repairNumber}>
                     <Typography variant="h3" color={COLORS.vibrantPink}>{index + 1}</Typography>
                   </View>
-                  <Typography variant="body" style={styles.repairText} flex={1}>
+                  <Typography variant="body" style={[styles.repairText, { flex: 1 }]}>
                     {step}
                   </Typography>
                 </View>

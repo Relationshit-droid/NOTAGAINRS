@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScreenLayout } from '../../layout';
@@ -18,7 +18,7 @@ import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme
 const AdminLoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   const handleLogin = () => {
     // Placeholder for admin authentication
@@ -37,7 +37,7 @@ const AdminLoginScreen = () => {
       >
         <LinearGradient colors={[COLORS.backgroundPrimary, COLORS.backgroundSecondary]} style={styles.container}>
           <View style={styles.header}>
-            <Typography variant="header" style={styles.headerText}>Love Actually... The Game</Typography>
+            <Typography variant="header" style={styles.headerText}>RELATIONSHIT!</Typography>
           </View>
           <View style={styles.content}>
             <Typography variant="gameTitle" style={styles.title}>Admin Console</Typography>
@@ -69,7 +69,7 @@ const AdminLoginScreen = () => {
             </GlassCard>
           </View>
           <View style={styles.footer}>
-            <Typography variant="caption" style={styles.footerText}>© 2024 Love Actually... Cosmic Entertainment. All rights reserved.</Typography>
+            <Typography variant="caption" style={styles.footerText}>© 2024 RELATIONSHIT! Cosmic Entertainment. All rights reserved.</Typography>
           </View>
         </LinearGradient>
       </KeyboardAvoidingView>

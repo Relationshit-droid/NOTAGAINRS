@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Switch, Alert } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Switch, TouchableOpacity, View } from 'react-native';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,13 +22,14 @@ export default function PrivacySettingsScreen() {
     partnerCanSeeMeters: true,
     partnerCanSeeGames: true,
   });
+  type SettingsKey = keyof typeof settings;
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = async () => {
     setLoading(false);
   };
 
-  const updateSetting = (key: string, value: any) => {
+  const updateSetting = (key: SettingsKey, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
@@ -128,16 +129,16 @@ export default function PrivacySettingsScreen() {
                 </View>
                 {item.type === 'switch' && (
                   <Switch
-                    value={settings[item.key]}
-                    onValueChange={value => updateSetting(item.key, value)}
-                    thumbColor={settings[item.key] ? COLORS.vibrantPink : COLORS.textHint}
+                    value={!!settings[item.key as SettingsKey]}
+                    onValueChange={value => updateSetting(item.key as SettingsKey, value)}
+                    thumbColor={settings[item.key as SettingsKey] ? COLORS.vibrantPink : COLORS.textHint}
                     trackColor={{ false: COLORS.borderSubtle, true: COLORS.vibrantPink + '40' }}
                   />
                 )}
                 {item.type === 'select' && (
                   <TouchableOpacity style={styles.selectButton}>
                     <Typography variant="body" style={styles.selectValue}>
-                      {item.options.find((o: any) => o.value === settings[item.key])?.label || 'Select'}
+                      {item.options.find((o: any) => o.value === settings[item.key as SettingsKey])?.label || 'Select'}
                     </Typography>
                     <Ionicons name="chevron-down" size={16} color={COLORS.textHint} />
                   </TouchableOpacity>

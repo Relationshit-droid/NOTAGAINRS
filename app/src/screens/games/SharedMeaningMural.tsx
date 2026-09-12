@@ -8,7 +8,7 @@ import { COLORS, SPACING, BORDER_RADIUS } from '../../theme';
 const SYMBOLS = ["🏔️ Mountains", "🌊 Ocean", "🏡 Home", "✈️ Travel", "🎨 Art", "👪 Family"];
 
 export default function SharedMeaningMural({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [selected, setSelected] = useState<string[]>([]);
 
   function toggle(sym: string) {

@@ -1,5 +1,5 @@
 import GameContainer from '../components/games/engine/GameContainer';
-import { render } from '@testing-library/react-native';
+import { render, waitFor } from '@testing-library/react-native';
 import React from 'react';
 import { fireEvent } from '@testing-library/react-native';
 
@@ -21,5 +21,6 @@ test('GameContainer skip triggers penalty and callback', async () => {
   const { getByText } = render(React.createElement(GameContainer, { state: baseState, inputs: ['text'], onComplete: () => {}, onSkip }));
   fireEvent.press(getByText('Start'));
   fireEvent.press(getByText('Skip'));
-  expect(onSkip).toHaveBeenCalled();
+  // skip() awaits the penalty write before invoking the callback.
+  await waitFor(() => expect(onSkip).toHaveBeenCalled());
 });

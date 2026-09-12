@@ -285,9 +285,9 @@ class NotificationService {
       'Play a game with your partner today to maintain your streak.',
       { type: 'streak_reminder' },
       {
+        type: Notifications.SchedulableTriggerInputTypes.DAILY,
         hour,
         minute,
-        repeats: true,
       }
     );
   }
@@ -301,9 +301,9 @@ class NotificationService {
       'A new couples challenge is available!',
       { type: 'daily_challenge' },
       {
+        type: Notifications.SchedulableTriggerInputTypes.DAILY,
         hour,
         minute,
-        repeats: true,
       }
     );
   }

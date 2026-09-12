@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { useAppNavigation } from '../hooks/useAppNavigation';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
-import { loveArcadeApi, LoveArcadeGame } from '../../lib/api';
-import { useGameSession } from '../../hooks/useGameSession';
-import { getGameByScreen } from '../../lib/gameRegistry';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
+import { loveArcadeApi, LoveArcadeGame } from '../lib/api';
+import { useGameSession } from '../hooks/useGameSession';
+import { getGameByScreen } from '../lib/gameRegistry';
 
 interface GameDetailRouteParams {
   gameId: string;
 }
 
 export default function LoveArcadeGameDetailScreen() {
-  const navigation = useNavigation();
-  const route = useRoute<GameDetailRouteParams>();
+  const navigation = useAppNavigation();
+  const route = useRoute<RouteProp<Record<string, GameDetailRouteParams | undefined>, string>>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const { gameId } = route.params || {};

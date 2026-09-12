@@ -31,7 +31,7 @@ const GratitudeGraffitiScreen = () => {
                         <Typography variant="label" style={styles.sidebarTitle}>
                             INSPIRATION PROMPTS
                         </Typography>
-                        <GraffitiPrompt text='"You\'re the guac to my toast."' />
+                        <GraffitiPrompt text={'"You\'re the guac to my toast."'} />
                         <GraffitiPrompt text='"The wifi signal to my heart."' />
                         <GraffitiPrompt text='"The anchor in my storm."' />
                     </View>

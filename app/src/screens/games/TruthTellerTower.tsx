@@ -18,7 +18,8 @@ import { View, StyleSheet, Alert, ScrollView, Animated as RNAnimated } from 'rea
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../components/ui';
 
 // Backend integration
@@ -29,7 +30,7 @@ import { useWebSocket } from '../../hooks/useWebSocket';
 
 // Components
 import { GlassCard, Typography, SquishyButton } from '../../components/ui';
-import GlobalMarcieOverlay, { MarcieAnimationType } from '../../components/ai-host/GlobalMarcieOverlay';
+import GlobalMarcieOverlay, { MarcieAnimation } from '../../components/DrMarcieOverlay';
 
 // Theme
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, ANIMATIONS, GRADIENTS } from '../../theme';
@@ -119,9 +120,9 @@ interface Lifelines {
  type GameOverlayState = 'intro' | 'playing' | 'thinking' | 'correct' | 'wrong' | 'results';
 
 const TruthTellerTower: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useAppNavigation();
     const route = useRoute();
-    const { gameId: routeGameId } = route.params as { gameId?: string } || {};
+    const { gameId: routeGameId } = (route.params ?? {}) as { gameId?: string };
     
     // Backend session
     const { 
@@ -159,7 +160,7 @@ const TruthTellerTower: React.FC = () => {
     const currentQuestion = QUESTIONS[qIndex];
 
     // Map game overlay state to Marcie animation
-    const getMarcieAnimation = (state: GameOverlayState): MarcieAnimationType => {
+    const getMarcieAnimation = (state: GameOverlayState): MarcieAnimation => {
         switch (state) {
             case 'intro':
                 return 'intro';

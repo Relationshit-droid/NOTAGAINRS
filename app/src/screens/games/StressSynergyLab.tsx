@@ -8,7 +8,7 @@ import { COLORS, SPACING, BORDER_RADIUS } from '../../theme';
 const STRESSORS = ["Work Deadlines", "Money", "Family Drama", "Health", "Chores", "Sleep"];
 
 export default function StressSynergyLab({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [selected, setSelected] = useState<string[]>([]);
 
   function toggle(s: string) {

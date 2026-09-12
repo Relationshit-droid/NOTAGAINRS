@@ -3,7 +3,8 @@ import { View, StyleSheet, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS } from '../../theme';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 
 const ARTICLES = [
   { title: "Article I: Communication Protocols", prompt: "When disagreements arise, we will..." },
@@ -13,8 +14,8 @@ const ARTICLES = [
 
 const GameScreenLoveTreaty = () => {
   const route = useRoute();
-  const navigation = useNavigation();
-  const { gameId, coupleId } = route.params as { gameId?: string; coupleId?: string } || {};
+  const navigation = useAppNavigation();
+  const { gameId, coupleId } = (route.params ?? {}) as { gameId?: string; coupleId?: string };
   
   const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
   const [player1Stance, setPlayer1Stance] = useState('');

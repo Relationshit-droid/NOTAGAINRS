@@ -8,7 +8,7 @@ import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS } from '../../theme';
 const CONFLICT = "I feel ignored when you game all night.";
 
 export default function RoleSwap({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [reply, setReply] = useState('');
 
   function submit() {

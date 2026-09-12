@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../../theme';
 import { gamesApi, GameDetails, GameCategory } from '../../lib/api';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -16,7 +16,7 @@ interface RecommendedGame extends GameDetails {
 }
 
 export default function RecommendedGamesScreen() {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const [recommendations, setRecommendations] = useState<RecommendedGame[]>([]);
@@ -66,14 +66,14 @@ export default function RecommendedGamesScreen() {
         let reason = 'Great for your relationship stage';
 
         // Boost based on diagnosis
-        if (diagnosis.includes('trust') && game.category_id === 'growth-repair') score += 30;
-        if (diagnosis.includes('communication') && game.category_id === 'emotional-connection') score += 30;
-        if (diagnosis.includes('intimacy') && game.category_id === 'intimacy-romance') score += 30;
-        if (diagnosis.includes('conflict') && game.category_id === 'conflict-resolution') score += 30;
+        if (diagnosis.includes('trust') && game.category === 'growth-repair') score += 30;
+        if (diagnosis.includes('communication') && game.category === 'emotional-connection') score += 30;
+        if (diagnosis.includes('intimacy') && game.category === 'intimacy-romance') score += 30;
+        if (diagnosis.includes('conflict') && game.category === 'conflict-resolution') score += 30;
 
         // Boost based on trust level
-        if (trustMeter < 0.4 && game.category_id === 'growth-repair') score += 20;
-        if (trustMeter > 0.7 && game.category_id === 'intimacy-romance') score += 15;
+        if (trustMeter < 0.4 && game.category === 'growth-repair') score += 20;
+        if (trustMeter > 0.7 && game.category === 'intimacy-romance') score += 15;
 
         // Boost newer games
         if (game.id.includes('new') || game.id.includes('arcade')) score += 10;
@@ -90,7 +90,7 @@ export default function RecommendedGamesScreen() {
 
   const filteredRecommendations = selectedCategory === 'all'
     ? recommendations
-    : recommendations.filter(g => g.category_id === selectedCategory);
+    : recommendations.filter(g => g.category === selectedCategory);
 
   const renderRecommendation = ({ item, index }: { item: RecommendedGame; index: number }) => (
     <View style={styles.recommendationCard}>
@@ -99,7 +99,7 @@ export default function RecommendedGamesScreen() {
           <Typography variant="header" style={{ color: getMatchColor(item.matchScore) }}>#{index + 1}</Typography>
           <Typography variant="caption" style={{ color: getMatchColor(item.matchScore) }}>{item.matchScore}% Match</Typography>
         </View>
-        <LinearGradient colors={getCategoryGradient(item.category_id)} style={styles.recIcon}>
+        <LinearGradient colors={getCategoryGradient(item.category)} style={styles.recIcon}>
           <Ionicons name="sparkles" size={24} color={COLORS.textPrimary} />
         </LinearGradient>
       </View>
@@ -123,12 +123,12 @@ export default function RecommendedGamesScreen() {
       </View>
 
       <View style={styles.recReason}>
-        <Ionicons name="lightbulb" size={14} color={COLORS.vibrantPink} />
+        <Ionicons name="bulb" size={14} color={COLORS.vibrantPink} />
         <Typography variant="caption" style={{ flex: 1, color: COLORS.textSecondary }}>{item.matchReason}</Typography>
       </View>
 
       <SquishyButton 
-        onPress={() => navigation.navigate('GameLobbyScreen', { gameId: item.id, categoryId: item.category_id })}
+        onPress={() => navigation.navigate('GameLobbyScreen', { gameId: item.id, categoryId: item.category })}
         style={styles.recPlayButton}
       >
         <Typography variant="button">PLAY NOW</Typography>
@@ -394,9 +394,9 @@ function getCategoryColor(categoryId: string) {
   return colors[categoryId] || COLORS.vibrantPink;
 }
 
-function getCategoryGradient(categoryId?: string) {
+function getCategoryGradient(categoryId?: string): GradientColors {
   const color = getCategoryColor(categoryId || '');
-  return [color, color + '80'];
+  return [color, color + '80'] as const;
 }
 
 function getMatchColor(score: number) {

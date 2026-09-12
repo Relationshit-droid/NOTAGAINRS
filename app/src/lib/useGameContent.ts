@@ -1,13 +1,21 @@
 
 import { useState, useEffect } from 'react';
-import { firestore } from '../lib/firebaseClient'; // Your initialized Firebase client
-import { doc, onSnapshot } from 'firebase/firestore';
+import { db as firestore } from '../lib/firebaseClient';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 
-export const useGameContent = (coupleId, gameSessionId) => {
-  const [gameContent, setGameContent] = useState(null);
-  const [sessionState, setSessionState] = useState(null);
+type GameContent = {
+  id: string;
+  marcie_tips?: string[];
+  [key: string]: unknown;
+};
+
+export const useGameContent = (coupleId?: string, gameSessionId?: string) => {
+  // useState(null) infers the literal type `null`, so every later setState
+  // with real data was a type error and the values were unusable.
+  const [gameContent, setGameContent] = useState<GameContent | null>(null);
+  const [sessionState, setSessionState] = useState<Record<string, unknown> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!coupleId) return;
@@ -60,8 +68,9 @@ export const useGameContent = (coupleId, gameSessionId) => {
     if (!gameContent || !gameContent.marcie_tips || gameContent.marcie_tips.length === 0) {
       return "Let's get on with it, shall we?"; // Default fallback
     }
-    const randomIndex = Math.floor(Math.random() * gameContent.marcie_tips.length);
-    return gameContent.marcie_tips[randomIndex];
+    const tips = gameContent.marcie_tips;
+    const randomIndex = Math.floor(Math.random() * tips.length);
+    return tips[randomIndex];
   };
 
   return { gameContent, sessionState, isLoading, error, getMarcieCommentary };

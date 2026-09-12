@@ -1,23 +1,42 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import * as admin from 'firebase-admin';
-import { VertexAI, FunctionDeclarationSchemaType, HarmCategory, HarmBlockThreshold } from '@google-cloud/vertexai';
+import { VertexAI, FunctionDeclarationSchemaType, HarmCategory, HarmBlockThreshold, Tool } from '@google-cloud/vertexai';
 import { getStorage } from 'firebase-admin/storage';
 import { TextToSpeechClient } from '@google-cloud/text-to-speech';
 
-admin.initializeApp();
+// Initialised once in index.ts; guard in case this module is loaded directly.
+if (admin.apps.length === 0) {
+  admin.initializeApp();
+}
+
+// --- Runtime configuration ---
+// Everything below is overridable via environment variables (functions/.env or
+// `firebase functions:secrets`). Defaults preserve the previous hardcoded
+// behaviour so deployments without a .env keep working.
+const GCP_PROJECT =
+  process.env.GCLOUD_PROJECT || process.env.GOOGLE_CLOUD_PROJECT || 'love-actually-game';
+const VERTEX_LOCATION = process.env.VERTEX_AI_LOCATION || 'us-central1';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-1.5-pro-001';
+const TTS_LANGUAGE_CODE = process.env.TTS_LANGUAGE_CODE || 'en-US';
+const TTS_DEFAULT_VOICE = process.env.TTS_VOICE_NAME || 'en-US-Neural2-F';
+const TTS_SIGNED_URL_TTL_MS = Number(process.env.TTS_SIGNED_URL_TTL_MS || 15 * 60 * 1000);
+const STORAGE_BUCKET =
+  process.env.GCLOUD_STORAGE_BUCKET ||
+  process.env.FIREBASE_STORAGE_BUCKET ||
+  `${GCP_PROJECT}.appspot.com`;
 
 // Initialize Vertex AI
 const vertexAI = new VertexAI({
-  project: process.env.GCLOUD_PROJECT || 'love-actually-game',
-  location: 'us-central1',
+  project: GCP_PROJECT,
+  location: VERTEX_LOCATION,
 });
 
 // --- Gemini Model Configuration ---
 const MODEL_CONFIG = {
-  temperature: 0.8, 
-  topP: 0.8,
-  topK: 40,
-  maxOutputTokens: 4096,
+  temperature: Number(process.env.GEMINI_TEMPERATURE || 0.8),
+  topP: Number(process.env.GEMINI_TOP_P || 0.8),
+  topK: Number(process.env.GEMINI_TOP_K || 40),
+  maxOutputTokens: Number(process.env.GEMINI_MAX_OUTPUT_TOKENS || 4096),
 };
 
 const SAFETY_SETTINGS = [
@@ -65,21 +84,21 @@ const sosVerdictFunction = {
     }
 };
 
-const tools = [{ function_declarations: [analysisFunction] }];
-const sosTools = [{ function_declarations: [sosVerdictFunction] }];
+const tools = [{ function_declarations: [analysisFunction] }] as unknown as Tool[];
+const sosTools = [{ function_declarations: [sosVerdictFunction] }] as unknown as Tool[];
 
 // Initialize the generative models
 const generativeModel = vertexAI.getGenerativeModel({
-  model: 'gemini-1.5-pro-001',
-  generation_config: MODEL_CONFIG,
-  safety_settings: SAFETY_SETTINGS,
+  model: GEMINI_MODEL,
+  generationConfig: MODEL_CONFIG,
+  safetySettings: SAFETY_SETTINGS,
   tools: tools,
 });
 
 const sosModel = vertexAI.getGenerativeModel({
-  model: 'gemini-1.5-pro-001',
-  generation_config: { ...MODEL_CONFIG, temperature: 0.7 },
-  safety_settings: SAFETY_SETTINGS,
+  model: GEMINI_MODEL,
+  generationConfig: { ...MODEL_CONFIG, temperature: 0.7 },
+  safetySettings: SAFETY_SETTINGS,
   tools: sosTools,
 });
 
@@ -203,7 +222,16 @@ export const analyzeSosSession = functions.runWith({ memory: '512MB', timeoutSec
         const functionCall = response.candidates?.[0]?.content?.parts?.find(p => p.functionCall)?.functionCall;
 
         if (functionCall && functionCall.args) {
-            const verdict = functionCall.args;
+            const verdict = functionCall.args as {
+                callout: string;
+                rootCause: string;
+                patternIdentified: string;
+                repairsA: string[];
+                repairsB: string[];
+                trustDelta: number;
+                vulnerabilityDelta: number;
+                marcieCommentary: string;
+            };
             
             // Update SOS session in Firestore
             const db = admin.firestore();
@@ -235,18 +263,22 @@ export const analyzeSosSession = functions.runWith({ memory: '512MB', timeoutSec
  * Synthesizes speech for Marcie's responses using Google Cloud Text-to-Speech.
  * Returns a signed URL to the audio file in Firebase Storage.
  */
-export const synthesizeSpeech = functions.https.onCall(async (data, context) => {
-  if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated.');
-  }
-
+/**
+ * Shared TTS implementation. Kept separate from the callable wrapper so other
+ * functions can reuse it -- a callable returned by onCall() is an HTTP handler
+ * and cannot be invoked directly as a plain function.
+ */
+async function synthesizeSpeechImpl(
+  data: { text?: string; voiceSettings?: { voiceId?: string; speed?: number; pitch?: number; emotion?: string } },
+  uid: string
+): Promise<{ audioUrl: string; duration: number; text: string }> {
   const { text, voiceSettings } = data;
   if (!text) {
     throw new functions.https.HttpsError('invalid-argument', 'Text to synthesize is required.');
   }
   
   const storage = getStorage();
-  const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET || `${process.env.GCLOUD_PROJECT}.appspot.com`);
+  const bucket = storage.bucket(STORAGE_BUCKET);
 
   // Voice configuration based on emotion
   const emotion = voiceSettings?.emotion || 'sassy';
@@ -257,13 +289,13 @@ export const synthesizeSpeech = functions.https.onCall(async (data, context) => 
   const pitch = voiceSettings?.pitch ?? voiceConfig.pitch;
 
   // Generate a unique filename
-  const fileName = `marcie-audio/${context.auth.uid}/${Date.now()}.mp3`;
+  const fileName = `marcie-audio/${uid}/${Date.now()}.mp3`;
   const file = bucket.file(fileName);
 
   try {
     const [response] = await ttsClient.synthesizeSpeech({
       input: { text },
-      voice: { languageCode: 'en-US', name: voiceName },
+      voice: { languageCode: TTS_LANGUAGE_CODE, name: voiceName },
       audioConfig: { audioEncoding: 'MP3', speakingRate, pitch },
     });
 
@@ -277,7 +309,7 @@ export const synthesizeSpeech = functions.https.onCall(async (data, context) => 
     // Get a signed URL for the client to access the file
     const [signedUrl] = await file.getSignedUrl({
       action: 'read',
-      expires: Date.now() + 15 * 60 * 1000, // 15 minutes
+      expires: Date.now() + TTS_SIGNED_URL_TTL_MS,
     });
 
     const duration = Math.round((text.split(' ').length / speakingRate) * 600); // Estimated duration in ms
@@ -292,6 +324,13 @@ export const synthesizeSpeech = functions.https.onCall(async (data, context) => 
     console.error('Speech synthesis error:', error);
     throw new functions.https.HttpsError('internal', 'Failed to synthesize speech. Please try again later.');
   }
+}
+
+export const synthesizeSpeech = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError('unauthenticated', 'User must be authenticated.');
+  }
+  return synthesizeSpeechImpl(data, context.auth.uid);
 });
 
 /**
@@ -304,11 +343,11 @@ export const getTtsAudio = functions.https.onCall(async (data, context) => {
   if (!text) throw new functions.https.HttpsError('invalid-argument', 'Text is required.');
 
   // Delegate to synthesizeSpeech with default settings
-  const result = await synthesizeSpeech({ 
-    text, 
-    voiceSettings: { voiceId: voiceId || 'en-US-Neural2-F' }
-  }, context);
-  
+  const result = await synthesizeSpeechImpl(
+    { text, voiceSettings: { voiceId: voiceId || TTS_DEFAULT_VOICE } },
+    context.auth.uid
+  );
+
   return { url: result.audioUrl };
 });
 
@@ -349,11 +388,11 @@ export const getAiAnalysis = functions.runWith({ memory: '256MB', timeoutSeconds
 
 function getVoiceConfig(emotion: string) {
   const configs: Record<string, { voiceName: string; speakingRate: number; pitch: number }> = {
-    sassy: { voiceName: 'en-US-Neural2-F', speakingRate: 1.05, pitch: -2.0 },
-    serious: { voiceName: 'en-US-Neural2-F', speakingRate: 0.95, pitch: -4.0 },
-    playful: { voiceName: 'en-US-Neural2-F', speakingRate: 1.1, pitch: 0.0 },
-    concerned: { voiceName: 'en-US-Neural2-F', speakingRate: 0.9, pitch: -3.0 },
-    default: { voiceName: 'en-US-Neural2-F', speakingRate: 1.0, pitch: -2.0 },
+    sassy: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 1.05, pitch: -2.0 },
+    serious: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 0.95, pitch: -4.0 },
+    playful: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 1.1, pitch: 0.0 },
+    concerned: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 0.9, pitch: -3.0 },
+    default: { voiceName: TTS_DEFAULT_VOICE, speakingRate: 1.0, pitch: -2.0 },
   };
   return configs[emotion] || configs.default;
 }

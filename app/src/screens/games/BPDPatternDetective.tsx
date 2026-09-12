@@ -19,7 +19,7 @@ const CASES = [
 ];
 
 export default function BPDPatternDetective({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [step, setStep] = useState(0);
     const [mapped, setMapped] = useState<any>({});
     const sessionId = useRef<string | null>(null);
@@ -120,6 +120,16 @@ export default function BPDPatternDetective({ route, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+  scenarioText: {
+    color: COLORS.textSecondary,
+    marginTop: SPACING.small,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  submitButtonText: {
+    color: COLORS.textPrimary,
+  },
     gameTitle: {
         marginBottom: SPACING.small,
     },

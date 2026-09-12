@@ -2,15 +2,21 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Image } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase/firebaseConfig';
-import { useNavigation } from '@react-navigation/native';
+import { db } from '../../lib/firebaseClient';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
+type CmsGame = {
+  id: string;
+  title: string;
+};
+
+
 const AdminGameCMSListView = () => {
-  const [games, setGames] = useState([]);
-  const navigation = useNavigation();
+  const [games, setGames] = useState<CmsGame[]>([]);
+  const navigation = useAppNavigation();
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -21,7 +27,7 @@ const AdminGameCMSListView = () => {
     fetchGames();
   }, []);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: CmsGame }) => (
     <GlassCard
       onPress={() => navigation.navigate('AdminGameEditor', { game: item })}
       padding="medium"
@@ -37,7 +43,7 @@ const AdminGameCMSListView = () => {
     <ScreenLayout showHeader={false} scrollable={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" center style={styles.title}>
           Game CMS

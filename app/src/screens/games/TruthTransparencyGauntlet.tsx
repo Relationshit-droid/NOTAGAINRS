@@ -21,7 +21,7 @@ const ROUNDS = [
 ];
 
 export default function TruthTransparencyGauntlet({ route, navigation }: any) {
-    const { gameId } = route.params;
+    const { gameId } = route.params ?? {};
     const [round, setRound] = useState(0);
     const [choice, setChoice] = useState<string | null>(null);
     const sessionId = useRef<string | null>(null);

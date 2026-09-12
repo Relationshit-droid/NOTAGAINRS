@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import type { IoniconName } from '../../types/icons';
+import { FlatList, RefreshControl, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
 import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
 import { gamesApi, GameCategory, GameDetails } from '../../lib/api';
@@ -13,8 +15,8 @@ interface CategoryDetailRouteParams {
 }
 
 export default function CategoryDetailScreen() {
-  const navigation = useNavigation();
-  const route = useRoute<CategoryDetailRouteParams>();
+  const navigation = useAppNavigation();
+  const route = useRoute<RouteProp<Record<string, CategoryDetailRouteParams | undefined>, string>>();
   const { categoryId, category: passedCategory } = route.params || {};
 
   const [category, setCategory] = useState<GameCategory | null>(passedCategory || null);
@@ -60,7 +62,7 @@ export default function CategoryDetailScreen() {
   };
 
   const getCategoryIcon = (id: string) => {
-    const icons: Record<string, string> = {
+    const icons: Record<string, IoniconName> = {
       'emotional-connection': 'heart',
       'conflict-resolution': 'shield-checkmark',
       'creative-chaos': 'sparkles',
@@ -318,5 +320,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-import { RefreshControl } from 'react-native';

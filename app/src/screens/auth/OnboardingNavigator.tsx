@@ -5,7 +5,7 @@ import * as Linking from 'expo-linking';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SOSButton from '../../components/sos/SOSButton';
 import PreviewOverlay from '../../components/preview/PreviewOverlay';
-import { MarcieOverlay } from '../../components/ai-host';
+import { DrMarcieOverlay } from '../../components/ai-host';
 import FeedbackFab from '../../components/feedback/FeedbackFab';
 import { navigationRef, navigate, getCurrentState } from '../../lib/navigation';
 import { useAppStore } from '../../state/store';
@@ -426,7 +426,7 @@ export default function OnboardingNavigator() {
           <SOSButton onPress={() => navigate('SOSBooths')} />
           <FeedbackFab />
           <PreviewOverlay />
-          <MarcieOverlay visible={true} />
+          <DrMarcieOverlay visible={true} />
         </NavigationContainer>
       </Provider>
     </ErrorBoundary>

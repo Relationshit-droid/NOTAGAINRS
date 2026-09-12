@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { GlobalMarcieOverlay } from '../../components/GlobalMarcieOverlay';
-import { functions } from '../../services/firebase';
+import DrMarcieOverlay from '../../components/DrMarcieOverlay';
+import { app } from '../../lib/firebaseClient';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
@@ -10,7 +11,9 @@ import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme
 const AdminGlobalConfiguration = () => {
   const handleSaveChanges = async () => {
     try {
-      const saveConfig = functions.httpsCallable('saveConfig');
+      // firebaseClient exports no `functions` instance, and the namespaced
+      // `functions.httpsCallable` API is v8; this project uses modular v9.
+      const saveConfig = httpsCallable(getFunctions(app as any), 'saveConfig');
       await saveConfig({ sass_level: 'high' });
       console.log('Configuration saved.');
     } catch (error) {
@@ -25,7 +28,7 @@ const AdminGlobalConfiguration = () => {
         <SquishyButton onPress={handleSaveChanges}>
           <Typography variant="button">Save Changes</Typography>
         </SquishyButton>
-        <GlobalMarcieOverlay />
+        <DrMarcieOverlay />
       </View>
     </ScreenLayout>
   );

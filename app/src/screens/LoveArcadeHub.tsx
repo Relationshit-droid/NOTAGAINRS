@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import type { IoniconName } from '../types/icons';
 import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY, GradientColors } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
-import { loveArcadeApi, LoveArcadeGame } from '../../lib/api';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
+import { loveArcadeApi, LoveArcadeGame } from '../lib/api';
 
 export default function LoveArcadeHubScreen() {
+  // useNavigation was imported but never called; `navigation` was undefined.
+  const navigation = useNavigation<any>();
   const { user } = useAuth();
   const userId = useAppStore(state => state.user_id);
   const [games, setGames] = useState<LoveArcadeGame[]>([]);
@@ -46,11 +49,11 @@ export default function LoveArcadeHubScreen() {
   }, [user, userId]);
 
   const phases = [
-    { id: 'awakening', name: 'THE AWAKENING', subtitle: 'Face the truth of your relationship', color: COLORS.rosePink, icon: 'eye', gamesCount: 8 },
-    { id: 'deconstruction', name: 'THE DECONSTRUCTION', subtitle: 'Break down walls, rebuild trust', color: COLORS.vibrantPink, icon: 'hammer', gamesCount: 8 },
-    { id: 'bridge', name: 'THE BRIDGE', subtitle: 'Connect through vulnerability', color: COLORS.warmOrange, icon: 'link', gamesCount: 8 },
-    { id: 'fortress', name: 'THE FORTRESS', subtitle: 'Build unshakeable foundations', color: COLORS.mintGreen, icon: 'shield', gamesCount: 8 },
-    { id: 'ascension', name: 'THE ASCENSION', subtitle: 'Transcend to legendary love', color: COLORS.brightYellow, icon: 'trending-up', gamesCount: 10 },
+    { id: 'awakening', name: 'THE AWAKENING', subtitle: 'Face the truth of your relationship', color: COLORS.rosePink, icon: 'eye' as IoniconName, gamesCount: 8 },
+    { id: 'deconstruction', name: 'THE DECONSTRUCTION', subtitle: 'Break down walls, rebuild trust', color: COLORS.vibrantPink, icon: 'hammer' as IoniconName, gamesCount: 8 },
+    { id: 'bridge', name: 'THE BRIDGE', subtitle: 'Connect through vulnerability', color: COLORS.warmOrange, icon: 'link' as IoniconName, gamesCount: 8 },
+    { id: 'fortress', name: 'THE FORTRESS', subtitle: 'Build unshakeable foundations', color: COLORS.mintGreen, icon: 'shield' as IoniconName, gamesCount: 8 },
+    { id: 'ascension', name: 'THE ASCENSION', subtitle: 'Transcend to legendary love', color: COLORS.brightYellow, icon: 'trending-up' as IoniconName, gamesCount: 10 },
   ];
 
   const filteredGames = selectedPhase 
@@ -508,7 +511,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function getPhaseGradient(phase?: string) {
+function getPhaseGradient(phase?: string): GradientColors {
   const gradients: Record<string, string[]> = {
     awakening: [COLORS.rosePink, COLORS.rosePink + '80'],
     deconstruction: [COLORS.vibrantPink, COLORS.vibrantPink + '80'],

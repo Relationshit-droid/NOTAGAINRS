@@ -11,7 +11,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, TouchableOpacity, Alert, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS, ANIMATIONS, GRADIENTS } from '../../theme';
@@ -33,7 +33,7 @@ interface GameProps {
 }
 
 const SixSecondKissGame: React.FC<GameProps> = ({ session, updateScore, isSyncing }) => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
   const [player1Hold, setPlayer1Hold] = useState(false);
   const [player2Hold, setPlayer2Hold] = useState(false);
   const [countdown, setCountdown] = useState(6);
@@ -207,7 +207,7 @@ const SixSecondKissGame: React.FC<GameProps> = ({ session, updateScore, isSyncin
 
 // Main exported component wrapped with GameConnector
 const SixSecondKissChallenge1: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   const handleComplete = (score: number, session: GameSession) => {
     console.log('[SixSecondKissChallenge1] Game completed:', { score, sessionId: session.id });

@@ -7,6 +7,13 @@ import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
+type QueuedFight = {
+  id: string;
+  coupleId: string;
+  timestamp?: any;
+};
+
+
 const AdminFightModerationQueue = () => {
   const [activeFights, setActiveFights] = useState([]);
 
@@ -23,7 +30,7 @@ const AdminFightModerationQueue = () => {
     return () => unsubscribe();
   }, []);
 
-  const resolveFight = async (id) => {
+  const resolveFight = async (id: string) => {
     try {
       const fightRef = doc(db, "sos_alerts", id);
       await updateDoc(fightRef, {
@@ -36,7 +43,7 @@ const AdminFightModerationQueue = () => {
     }
   };
 
-  const renderFightItem = ({ item }) => (
+  const renderFightItem = ({ item }: { item: QueuedFight }) => (
     <GlassCard style={styles.fightItem}>
       <View style={styles.fightDetails}>
         <Typography variant="body" color={COLORS.textPrimary} style={{ fontWeight: TYPOGRAPHY.fontWeight.bold }}>

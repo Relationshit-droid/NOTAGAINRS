@@ -5,9 +5,16 @@ import { ScreenLayout } from "../../layout";
 import { Typography, SquishyButton, GlassCard } from "../../components/ui";
 import { COLORS, SPACING } from "../../theme";
 
-const AdminFightModeration = ({ fights }) => {
+type ModeratedFight = {
+  id: string;
+  user1: string;
+  user2: string;
+  issue: string;
+};
 
-  const renderItem = ({ item }) => (
+const AdminFightModeration = ({ fights }: { fights: ModeratedFight[] }) => {
+
+  const renderItem = ({ item }: { item: ModeratedFight }) => (
     <GlassCard style={styles.fightCard}>
       <Typography variant="h3" color={COLORS.textPrimary}>
         {item.user1} vs {item.user2}

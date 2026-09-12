@@ -2,13 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Image } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase/firebaseConfig';
+import { db } from '../../lib/firebaseClient';
 import ScreenLayout from '../../layout/ScreenLayout';
 import { Typography, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
 
+type AdminUser = {
+  id: string;
+  trust_thermometer?: number;
+  subscription_status?: string;
+};
+
+
 const AdminUserManagement = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<AdminUser[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -19,7 +26,7 @@ const AdminUserManagement = () => {
     fetchUsers();
   }, []);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: AdminUser }) => (
     <GlassCard style={styles.userItem} variant="elevated" padding="medium">
       <Typography variant="body" color={COLORS.textPrimary}>UID: {item.id}</Typography>
       <Typography variant="body" color={COLORS.textSecondary}>Trust: {item.trust_thermometer}</Typography>
@@ -31,7 +38,7 @@ const AdminUserManagement = () => {
     <ScreenLayout showHeader={false} scrollable={true}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../../../assets/mainlogoone.png')} style={styles.logo} />
+          <Image source={require('../../assets/logo/mainlogoone.png')} style={styles.logo} />
         </View>
         <Typography variant="h1" style={styles.title}>User Management</Typography>
         <FlatList

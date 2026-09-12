@@ -15,7 +15,7 @@ const HARSH_STARTUPS = [
 ];
 
 export default function GentleStartUpGauntlet({ route, navigation }: any) {
-  const { gameId } = route.params;
+  const { gameId } = route.params ?? {};
   const [input, setInput] = useState('');
   const [index, setIndex] = useState(0);
   const [attempts, setAttempts] = useState(0);

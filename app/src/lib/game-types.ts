@@ -29,6 +29,8 @@ export interface GameSession {
     player2: number;
   };
   completed: boolean;
+  /** UID of the player whose turn it is, for turn-based games. */
+  current_turn?: string;
   started_at: string;
   completed_at?: string;
   session_data: Record<string, any>;

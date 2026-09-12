@@ -9,7 +9,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ScreenLayout, Typography, SquishyButton } from '../';
 import { VStack, HStack, Spacer, Section } from './';
-import { SPACING, COLORS, BORDER_RADIUS } from '../../theme';
+import { SPACING, COLORS, BORDER_RADIUS } from '../../../theme';
 
 export const LayoutDemo: React.FC = () => {
   return (

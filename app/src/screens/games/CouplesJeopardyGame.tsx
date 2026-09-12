@@ -13,7 +13,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Alert, TextInput } from 'react-native';
 import { Typography } from '../../components/ui';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { ScreenLayout, GlassCard, SquishyButton } from '../../components/ui';
 import { COLORS, SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS, GRADIENTS } from '../../theme';
 
@@ -93,7 +93,7 @@ const JEOPARDY_DATA: Category[] = [
 ];
 
 const CouplesJeopardyGame: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useAppNavigation();
     
     // Backend session
     const { 
@@ -290,7 +290,7 @@ const CouplesJeopardyGame: React.FC = () => {
                     <Typography variant="h1" style={styles.mainTitle}>Couple's Jeopardy</Typography>
                     <View style={styles.scoreDisplay}>
                         <Typography variant="h1" style={styles.scoreText}>${score}</Typography>
-                        {isSyncing && <Typography variant="caption">💾</Typography>
+                        {isSyncing && <Typography variant="caption">💾</Typography>}
                     </View>
                 </View>
 

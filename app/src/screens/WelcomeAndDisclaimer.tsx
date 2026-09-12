@@ -25,7 +25,7 @@ const WelcomeAndDisclaimer = () => {
                 <View style={styles.disclaimerContent}>
                     <Typography variant="label" color={COLORS.vibrantPink} style={styles.disclaimerHeader}>LEGAL DISCLAIMER</Typography>
                     <Typography variant="body" color={COLORS.textSecondary} style={styles.disclaimerText}>
-                        This game, <Typography variant="body" style={{fontWeight: 'bold'}}>Love Actually... The Game</Typography>, is designed for entertainment and connection.
+                        This game, <Typography variant="body" style={{fontWeight: 'bold'}}>RELATIONSHIT!</Typography>, is designed for entertainment and connection.
                         It is NOT a replacement for professional therapy or medical advice.
                         By proceeding, you acknowledge that you are participating voluntarily.
                     </Typography>
@@ -33,7 +33,7 @@ const WelcomeAndDisclaimer = () => {
                     <BouncyCheckbox
                         size={25}
                         fillColor={COLORS.vibrantPink}
-                        unfillColor={COLORS.textPrimary}
+                        unFillColor={COLORS.textPrimary}
                         text="I UNDERSTAND AND AGREE TO THE TERMS"
                         iconStyle={{ borderColor: COLORS.vibrantPink }}
                         innerIconStyle={{ borderWidth: 2 }}

@@ -1,20 +1,22 @@
 import { useEffect, useState, useRef } from 'react';
+import { useAppNavigation } from '../../hooks/useAppNavigation';
 import { View, StyleSheet, TextInput, ScrollView, Animated as RNAnimated, Alert, ActivityIndicator } from 'react-native';
 import * as Clipboard from 'expo-clipboard';
 import { Typography, GlassCard, SquishyButton, RadialGradientBackground } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { COLORS, GRADIENTS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 
 type CoupleCodeScreenProps = {
-  onNext: (code: string) => void;
+  onNext?: (code: string) => void;
 };
 
 export default function CoupleCodeScreen({ onNext }: CoupleCodeScreenProps) {
+  const navigation = useAppNavigation();
   const { user } = useAuth();
   const [code, setCode] = useState<string>('');
   const [partnerCode, setPartnerCode] = useState(['', '', '', '', '', '']);
@@ -36,7 +38,7 @@ export default function CoupleCodeScreen({ onNext }: CoupleCodeScreenProps) {
           if (me && me.id) {
             setHasCouple(true);
             setCode(me.invite_code || newCode);
-            onNext(me.invite_code || newCode);
+            if (onNext) { onNext(me.invite_code || newCode); } else { navigation.navigate('MainApp'); }
           }
         } catch (e) {
           console.log('No existing couple, will create new code');
@@ -126,7 +128,7 @@ export default function CoupleCodeScreen({ onNext }: CoupleCodeScreenProps) {
       const result = await coupleApi.joinCouple(user.uid, fullCode, token);
       
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      onNext(fullCode);
+      if (onNext) { onNext(fullCode); } else { navigation.navigate('MainApp'); }
 
     } catch (e: any) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);

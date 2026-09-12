@@ -26,7 +26,7 @@ export default function StressTest({ route, navigation }: any) {
         sessionId.current = session.id;
         supabase
           .channel('stress_test_sync')
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'game_sessions', filter: `couple_id=eq.${couple_id}` }, (payload) => {
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'game_sessions', filter: `couple_id=eq.${couple_id}` }, (payload: any) => {
             const row: any = payload.new;
             if (row && row.game_id === gameId && row.id !== sessionId.current) {
               try {

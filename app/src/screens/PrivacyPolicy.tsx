@@ -78,7 +78,7 @@ const PrivacyPolicyScreen = () => {
           {/* Sections */}
           <Section id="intro" title="1. Introduction">
             <Typography variant="body" style={styles.paragraph}>
-              Welcome to Love Actually... The Game. We are committed to protecting your privacy 
+              Welcome to RELATIONSHIT!. We are committed to protecting your privacy 
               and providing a safe and secure environment for your therapeutic journey. This 
               Privacy Policy explains how we collect, use, and safeguard the information you provide.
             </Typography>

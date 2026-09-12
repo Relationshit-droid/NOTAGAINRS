@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "relationshit",
+    "name": "RELATIONSHIT!",
     "slug": "relationshit",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -32,20 +32,6 @@
           "image": "./assets/splash-icon.png",
           "backgroundColor": "#0f0a0c",
           "imageWidth": 200
-        }
-      ],
-      [
-        "@sentry/react-native",
-        {
-          "enableInExpoDevelopment": false
-        }
-      ],
-      [
-        "@stripe/stripe-react-native",
-        {
-          "merchantIdentifier": "merchant.com.relationshit.app",
-          "enableGooglePay": true,
-          "enableApplePay": true
         }
       ],
       "expo-secure-store"

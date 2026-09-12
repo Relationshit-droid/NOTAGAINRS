@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../utils/haptics';
 
 const loveActuallyLogo = require('../../../assets/logo/mainlogoone.png');
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Asset } from 'expo-asset';
-import { RadialGradient } from 'expo-linear-gradient'; 
+// expo-linear-gradient exports no RadialGradient; the project has its own.
+import RadialGradientBackground from '../../components/ui/RadialGradientBackground';
 import { useGameContent } from '../../lib/useGameContent';
 import GlobalHeader from '../../components/layout/GlobalHeader';
 import MarcieHost from '../../components/gameplay/MarcieHost';
@@ -65,12 +66,7 @@ const GameWrapper = ({ coupleId, gameSessionId }: GameWrapperProps) => {
 
   return (
     <ScreenLayout showHeader={false} scrollable={true}>
-      <RadialGradient
-        style={StyleSheet.absoluteFill}
-        colors={[`${themeColor}50`, COLORS.backgroundPrimary]}
-        stops={[0.1, 0.7]}
-        center={[0.5, 0.2]}
-      />
+      <RadialGradientBackground />
       <GlobalHeader progress={50} /> 
       <View style={styles.hostContainer}>
         <MarcieHost state={'talking'} />

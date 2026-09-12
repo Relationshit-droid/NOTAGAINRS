@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView, Image } from 'react-native';
 import { ScreenLayout } from '../../layout';
 import { Typography, GlassCard, SquishyButton, TrustThermometer, RadialGradientBackground } from '../../components/ui';
-import { Header } from '../../components/ui/Header';
+import Header from '../../components/ui/Header';
 import { COLORS, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 
 const CoupleLinkingDashboardScreen = () => {

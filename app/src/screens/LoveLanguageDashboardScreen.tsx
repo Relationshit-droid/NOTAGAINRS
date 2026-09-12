@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../../components/ui';
-import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../../theme';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Typography, GlassCard, SquishyButton, ScreenLayout } from '../components/ui';
+import { COLORS, GRADIENTS, SPACING, BORDER_RADIUS, TYPOGRAPHY } from '../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppStore } from '../../state/store';
-import { TrustThermometer } from '../../components/ui/TrustThermometer';
+import { useAuth } from '../hooks/useAuth';
+import { useAppStore } from '../state/store';
+import TrustThermometer from '../components/ui/TrustThermometer';
 
 export default function LoveLanguageDashboardScreen() {
   const { user } = useAuth();
@@ -150,7 +150,7 @@ export default function LoveLanguageDashboardScreen() {
         <GlassCard style={[styles.sectionCard, styles.focusCard]}>
           <View style={styles.focusHeader}>
             <LinearGradient colors={GRADIENTS.romanceHub.colors} style={styles.focusIcon}>
-              <Ionicons name="target" size={24} color={COLORS.textPrimary} />
+              <Ionicons name="locate" size={24} color={COLORS.textPrimary} />
             </LinearGradient>
             <View>
               <Typography variant="label" style={styles.focusTitle}>THIS WEEK'S FOCUS</Typography>
