@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import DrMarcieOverlay from '../../components/DrMarcieOverlay';
@@ -7,8 +6,9 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
+import { withAdminGuard } from '../../hoc/withAdminGuard';
 
-const AdminGlobalConfiguration = () => {
+const AdminGlobalConfigurationComponent = () => {
   const handleSaveChanges = async () => {
     try {
       // firebaseClient exports no `functions` instance, and the namespaced
@@ -34,6 +34,8 @@ const AdminGlobalConfiguration = () => {
   );
 };
 
+export default withAdminGuard(AdminGlobalConfigurationComponent);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,5 +48,3 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.large,
   },
 });
-
-export default AdminGlobalConfiguration;

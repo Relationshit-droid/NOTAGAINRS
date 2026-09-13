@@ -1,21 +1,24 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     View, StyleSheet, SafeAreaView, ScrollView, FlatList, TextInput 
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
+import { useAppStore } from '../../state/store';
+import { withAdminGuard } from '../../hoc/withAdminGuard';
 
-const users = [
-    { id: '#LA-9821-XP', username: '@stardust_lover', status: 'Active Now', tier: 'ETERNAL COSMOS', sos: '2h ago', progress: 0.75 },
-    { id: '#LA-4412-ZY', username: '@nebula_jumper', status: 'Idle', tier: 'STAR-CROSSED', sos: '14m ago (URGENT)', progress: 0.25 },
-    { id: '#LA-1029-QM', username: '@cosmic_queen', status: 'Active Now', tier: 'TRIAL PATHWAY', sos: 'Never', progress: 0.5 },
-    { id: '#LA-2256-PV', username: '@solar_luna', status: 'Active Now', tier: 'ETERNAL COSMOS', sos: '5d ago', progress: 0.9 },
-    { id: '#LA-0043-KX', username: '@void_zen', status: 'Offline', tier: 'STAR-CROSSED', sos: '1h ago', progress: 0.66 },
-];
+interface AdminUser {
+  id: string;
+  username: string;
+  status: string;
+  tier: string;
+  sos: string;
+  progress: number;
+  email?: string;
+  createdAt?: Date;
+}
 
 const StatCard = ({ title, value, change, color }: { title: string, value: string, change?: string, color: string }) => (
     <GlassCard style={[styles.statCard, { borderLeftColor: color }]}>
@@ -25,7 +28,7 @@ const StatCard = ({ title, value, change, color }: { title: string, value: strin
     </GlassCard>
 );
 
-const UserRow = ({ item }: { item: typeof users[0] }) => (
+const UserRow = ({ item }: { item: AdminUser }) => (
     <View style={styles.userRow}>
         <View style={styles.userInfo}>
             <View style={[styles.avatar, {backgroundColor: COLORS.richPlum}]}>
@@ -50,40 +53,117 @@ const UserRow = ({ item }: { item: typeof users[0] }) => (
     </View>
 );
 
-const AdminUserManagementList = () => {
-    return (
-        <ScreenLayout scrollable={false} showHeader={false}>
-            <SafeAreaView style={styles.safeArea}>
-                <LinearGradient colors={[COLORS.backgroundSecondary, COLORS.backgroundPrimary]} style={styles.container}>
-                    <View style={styles.header}>
-                        <TextInput 
-                            style={styles.searchInput} 
-                            placeholder="Search User ID, Username..." 
-                            placeholderTextColor={COLORS.textHint}
-                        />
-                    </View>
-                    
-                    <ScrollView contentContainerStyle={styles.scrollView}>
-                        <View style={styles.statsGrid}>
-                            <StatCard title="Total Users" value="24,592" change="+4.2%" color={COLORS.vibrantPink} />
-                            <StatCard title="Active Now" value="1,842" change="Live" color={COLORS.info} />
-                            <StatCard title="Premium Tier" value="8,210" change="33%" color={COLORS.lavenderPurple} />
-                            <StatCard title="Pending SOS" value="12" change="Urgent" color={COLORS.error} />
-                        </View>
+const AdminUserManagementListComponent = () => {
+  const [users, setUsers] = useState<AdminUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const adminData = useAppStore(s => s.adminData);
 
-                        <GlassCard style={styles.tableContainer}>
-                            <FlatList
-                                data={users}
-                                renderItem={({item}) => <UserRow item={item} />}
-                                keyExtractor={item => item.id}
-                            />
-                        </GlassCard>
-                    </ScrollView>
-                </LinearGradient>
-            </SafeAreaView>
-        </ScreenLayout>
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  async function loadUsers() {
+    try {
+      if (adminData?.users?.length) {
+        // Use admin data from store
+        const mappedUsers: AdminUser[] = adminData.users.map((u: any) => ({
+          id: u.uid,
+          username: u.displayName || u.email?.split('@')[0] || 'Unknown',
+          status: u.isActive ? 'Active Now' : 'Offline',
+          tier: u.role === 'admin' ? 'ADMIN' : u.plan?.toUpperCase() || 'FREE',
+          sos: 'Never',
+          progress: 0,
+          email: u.email,
+          createdAt: u.createdAt,
+        }));
+        setUsers(mappedUsers);
+      } else {
+        // Fallback to mock data for DEMO_MODE
+        setUsers([
+          { id: '#LA-9821-XP', username: '@stardust_lover', status: 'Active Now', tier: 'ETERNAL COSMOS', sos: '2h ago', progress: 0.75 },
+          { id: '#LA-4412-ZY', username: '@nebula_jumper', status: 'Idle', tier: 'STAR-CROSSED', sos: '14m ago (URGENT)', progress: 0.25 },
+          { id: '#LA-1029-QM', username: '@cosmic_queen', status: 'Active Now', tier: 'TRIAL PATHWAY', sos: 'Never', progress: 0.5 },
+          { id: '#LA-2256-PV', username: '@solar_luna', status: 'Active Now', tier: 'ETERNAL COSMOS', sos: '5d ago', progress: 0.9 },
+          { id: '#LA-0043-KX', username: '@void_zen', status: 'Offline', tier: 'STAR-CROSSED', sos: '1h ago', progress: 0.66 },
+        ]);
+      }
+    } catch (error) {
+      console.error('[AdminUserManagement] Failed to load users:', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const filteredUsers = users.filter(user =>
+    user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.id.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  if (loading) {
+    return (
+      <ScreenLayout scrollable={false} showHeader={false}>
+        <SafeAreaView style={styles.safeArea}>
+          <View style={styles.center}>
+            <Typography variant="body">Loading users...</Typography>
+          </View>
+        </SafeAreaView>
+      </ScreenLayout>
     );
+  }
+
+  return (
+    <ScreenLayout scrollable={false} showHeader={false}>
+      <SafeAreaView style={styles.safeArea}>
+        <LinearGradient colors={[COLORS.backgroundSecondary, COLORS.backgroundPrimary]} style={styles.container}>
+          <View style={styles.header}>
+            <TextInput 
+              style={styles.searchInput} 
+              placeholder="Search User ID, Username..." 
+              placeholderTextColor={COLORS.textHint}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+          </View>
+          
+          <ScrollView contentContainerStyle={styles.scrollView}>
+            <View style={styles.statsGrid}>
+              <StatCard title="Total Users" value={adminData?.analytics?.totalUsers?.toLocaleString() || '24,592'} change="+4.2%" color={COLORS.vibrantPink} />
+              <StatCard title="Active Now" value={adminData?.analytics?.activeUsers?.toLocaleString() || '1,842'} change="Live" color={COLORS.info} />
+              <StatCard title="Premium Tier" value="8,210" change="33%" color={COLORS.lavenderPurple} />
+              <StatCard title="Pending SOS" value="12" change="Urgent" color={COLORS.error} />
+            </View>
+
+            <GlassCard style={styles.tableContainer}>
+              <FlatList
+                data={filteredUsers}
+                renderItem={({item}) => <UserRow item={item} />}
+                keyExtractor={item => item.id}
+                ListEmptyComponent={
+                  <View style={styles.emptyState}>
+                    <Typography variant="body" color={COLORS.textHint} center>
+                      No users found
+                    </Typography>
+                  </View>
+                }
+              />
+            </GlassCard>
+          </ScrollView>
+        </LinearGradient>
+      </SafeAreaView>
+    </ScreenLayout>
+  );
 };
+
+export default withAdminGuard(AdminUserManagementListComponent);
+
+const StatCard = ({ title, value, change, color }: { title: string, value: string, change?: string, color: string }) => (
+    <GlassCard style={[styles.statCard, { borderLeftColor: color }]}>
+        <Typography variant="caption" style={styles.statTitle}>{title}</Typography>
+        <Typography variant="header" style={styles.statValue}>{value}</Typography>
+        {change && <Typography variant="caption" style={[styles.statChange, {color}]}>{change}</Typography>}
+    </GlassCard>
+);
 
 const styles = StyleSheet.create({
     safeArea: { 
@@ -92,6 +172,11 @@ const styles = StyleSheet.create({
     },
     container: { 
         flex: 1 
+    },
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     header: { 
         padding: SPACING.regular, 
@@ -183,6 +268,8 @@ const styles = StyleSheet.create({
         overflow: 'hidden', 
         textAlign: 'center' 
     },
+    emptyState: {
+        padding: SPACING.xlarge,
+        alignItems: 'center',
+    },
 });
-
-export default AdminUserManagementList;

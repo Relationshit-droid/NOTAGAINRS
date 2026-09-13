@@ -24,7 +24,7 @@ const Header = ({ showNav = true, onNavPress, variant = 'default' }: HeaderProps
     ]}>
       <View style={styles.logoContainer}>
         <Image
-          source={require('../../../assets/logo/mainlogo.png')}
+          source={require('../../../assets/logo/RSICONNB.png')}
           style={styles.logoMark}
           resizeMode="contain"
           accessibilityLabel="RELATIONSHIT! logo"

@@ -4,7 +4,11 @@ import { ENV } from './env';
 
 export function getPepper() {
   const p = ENV.ENCRYPTION_PEPPER;
-  return p || 'PEPPER_REQUIRED';
+  if (!p) {
+    console.warn('[Encryption] No pepper set – data will be stored unencrypted.');
+    return '';
+  }
+  return p;
 }
 
 export function encryptSensitive(text: string, keySeed: string) {

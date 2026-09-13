@@ -86,12 +86,13 @@ export const ENV = {
   TERMS_OF_SERVICE_URL: getEnv('EXPO_PUBLIC_TERMS_OF_SERVICE_URL') || 'https://lovetrae.app/terms',
   SUPPORT_EMAIL: getEnv('EXPO_PUBLIC_SUPPORT_EMAIL') || 'support@lovetrae.app',
 
-  // Feature Flags
-  ENABLE_ANALYTICS: getEnv('EXPO_PUBLIC_ENABLE_ANALYTICS') !== 'false',
-  ENABLE_CRASH_REPORTING: getEnv('EXPO_PUBLIC_ENABLE_CRASH_REPORTING') !== 'false',
-  ENABLE_PUSH_NOTIFICATIONS: getEnv('EXPO_PUBLIC_ENABLE_PUSH_NOTIFICATIONS') !== 'false',
-  ENABLE_OFFLINE_MODE: getEnv('EXPO_PUBLIC_ENABLE_OFFLINE_MODE') !== 'false',
+  // Feature Flags — enabled ONLY when explicitly "true"
+  ENABLE_ANALYTICS: getEnv('EXPO_PUBLIC_ENABLE_ANALYTICS') === 'true',
+  ENABLE_CRASH_REPORTING: getEnv('EXPO_PUBLIC_ENABLE_CRASH_REPORTING') === 'true',
+  ENABLE_PUSH_NOTIFICATIONS: getEnv('EXPO_PUBLIC_ENABLE_PUSH_NOTIFICATIONS') === 'true',
+  ENABLE_OFFLINE_MODE: getEnv('EXPO_PUBLIC_ENABLE_OFFLINE_MODE') === 'true',
   ENABLE_BETA_FEATURES: getEnv('EXPO_PUBLIC_ENABLE_BETA_FEATURES') === 'true',
+  ENABLE_ADMIN_PANEL: getEnv('EXPO_PUBLIC_ENABLE_ADMIN_PANEL') === 'true',
 };
 
 // =============================================================================

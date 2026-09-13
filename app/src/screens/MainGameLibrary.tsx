@@ -1,41 +1,55 @@
-
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, ActivityIndicator, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScreenLayout } from '../layout';
-import { Typography, GlassCard, SquishyButton } from '../components/ui';
+import { Typography, SquishyButton } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
+import { gamesApi } from '../lib/api';
+import { ENV } from '../lib/env';
+import { DEMO_CATEGORIES } from '../lib/demoData';
 
-const categoriesData = [
-  {
-    id: "emotional-connection",
-    name: "EMOTIONAL CONNECTION",
-    description: "SEEN Method focused games",
-    icon: "❤️",
-    color: COLORS.vibrantPink,
-    games: ["truth-or-trust", "gratitude-cloud", "eye-contact-challenge", "memory-lane-map", "vibe-check"]
-  },
-  {
-    id: "love-arcade",
-    name: "THE LOVE ARCADE",
-    description: "Championship matches of honesty, wit, and emotional parkour",
-    icon: "🎮",
-    color: COLORS.brightYellow,
-    games: ["truth-teller-tower", "echo-chamber-escape", "intimacy-feud", "relational-jeopardy", "family-forge", "harbor-storm"]
-  }
-];
+interface Category {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  games: string[];
+}
 
 export default function MainGameLibrary({ navigation }: any) {
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setCategories(categoriesData);
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        if (ENV.DEMO_MODE) {
+          setCategories(DEMO_CATEGORIES);
+          setLoading(false);
+          return;
+        }
+
+        const categoriesData = await gamesApi.getCategories();
+        setCategories(categoriesData.categories);
+      } catch (err: any) {
+        setError(err.message || 'Failed to load categories');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
-  const renderCategory = ({ item }: { item: any }) => {
+  const renderCategory = ({ item }: { item: Category }) => {
     const isFeatured = item.id === 'love-arcade';
     return (
-      <SquishyButton 
+      <SquishyButton
         variant="ghost"
         size="large"
         onPress={() => navigation.navigate('CategorySelectionScreen', { categoryId: item.id, categoryName: item.name })}
@@ -72,23 +86,76 @@ export default function MainGameLibrary({ navigation }: any) {
     );
   };
 
+  if (loading) {
+    return (
+      <ScreenLayout showHeader={false} scrollable={false}>
+        <LinearGradient colors={[COLORS.deepCosmicPurple, COLORS.midPurple]} style={styles.container}>
+          <View style={styles.centerContent}>
+            <ActivityIndicator size="large" color={COLORS.vibrantPink} />
+            <Typography variant="body" color={COLORS.textPrimary} style={{ marginTop: SPACING.large }}>
+              Loading your arcade...
+            </Typography>
+          </View>
+        </LinearGradient>
+      </ScreenLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <ScreenLayout showHeader={false} scrollable={false}>
+        <LinearGradient colors={[COLORS.deepCosmicPurple, COLORS.midPurple]} style={styles.container}>
+          <View style={styles.centerContent}>
+            <Typography variant="h3" color={COLORS.error} center style={{ marginBottom: SPACING.large }}>
+              Failed to Load Games
+            </Typography>
+            <Typography variant="body" color={COLORS.textSecondary} center style={{ marginBottom: SPACING.xlarge }}>
+              {error}
+            </Typography>
+            <SquishyButton onPress={() => navigation.navigate('MainGameLibrary')}>
+              <Typography variant="button" color={COLORS.textPrimary}>Retry</Typography>
+            </SquishyButton>
+          </View>
+        </LinearGradient>
+      </ScreenLayout>
+    );
+  }
+
+  if (categories.length === 0) {
+    return (
+      <ScreenLayout showHeader={false} scrollable={false}>
+        <LinearGradient colors={[COLORS.deepCosmicPurple, COLORS.midPurple]} style={styles.container}>
+          <View style={styles.centerContent}>
+            <Typography variant="h3" color={COLORS.textPrimary} center style={{ marginBottom: SPACING.medium }}>
+              No Games Available
+            </Typography>
+            <Typography variant="body" color={COLORS.textSecondary} center style={{ marginBottom: SPACING.xlarge }}>
+              Check back soon for new content!
+            </Typography>
+          </View>
+        </LinearGradient>
+      </ScreenLayout>
+    );
+  }
+
+  const Header = () => (
+    <View style={styles.header}>
+      <Typography variant="gameTitle" style={styles.title}>THE LOVE ARCADE</Typography>
+      <Typography variant="label" style={styles.subtitle}>COUPLES THERAPY DISGUISED AS A GAME</Typography>
+    </View>
+  );
+
   return (
     <ScreenLayout showHeader={false} scrollable={false}>
       <LinearGradient colors={[COLORS.deepCosmicPurple, COLORS.midPurple]} style={styles.container}>
-        <View style={styles.header}>
-          <Typography variant="gameTitle" style={styles.title}>THE LOVE ARCADE</Typography>
-          <Typography variant="label" style={styles.subtitle}>COUPLES THERAPY DISGUISED AS A GAME</Typography>
-        </View>
-
-        <ScrollView style={styles.content}>
-          <FlatList
-            data={categories}
-            renderItem={renderCategory}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContent}
-          />
-        </ScrollView>
+        <FlatList
+          data={categories}
+          keyExtractor={(item) => item.id}
+          renderItem={renderCategory}
+          ListHeaderComponent={Header}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
       </LinearGradient>
     </ScreenLayout>
   );
@@ -97,6 +164,12 @@ export default function MainGameLibrary({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  centerContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: SPACING.screenPadding,
   },
   header: {
     padding: SPACING.screenPadding,
@@ -115,12 +188,9 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
     textAlign: 'center',
   },
-  content: {
-    flex: 1,
-    paddingHorizontal: SPACING.regular,
-  },
   listContent: {
     paddingBottom: SPACING.xlarge,
+    paddingHorizontal: SPACING.regular,
   },
   categoryCard: {
     marginBottom: SPACING.regular,

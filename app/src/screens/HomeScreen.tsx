@@ -20,6 +20,7 @@ import { auth, db } from '../lib/firebaseClient';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { ENV } from '../lib/env';
 import { DEMO_USER, DEMO_COUPLE, DEMO_CATEGORIES } from '../lib/demoData';
+import { logger } from '../utils/logger';
 
 import TrustThermometer from '../components/ui/TrustThermometer';
 import Typography from '../components/ui/Typography';
@@ -278,25 +279,25 @@ const HomeScreen = () => {
             throw err;
           }
         }
-        setUser(userData);
-        console.log('✅ User data fetched from backend:', userData.display_name);
+setUser(userData);
+        logger.debug('User data fetched from backend', { uid: userData.id?.slice(0, 6) });
 
         if (userData.couple_id) {
           try {
             const coupleData = await coupleApi.get(userData.couple_id, token);
             setCouple(coupleData);
-            console.log('✅ Couple data fetched from backend');
+            logger.debug('Couple data fetched from backend');
           } catch (coupleErr) {
-            console.error('Failed to fetch couple data:', coupleErr);
+            logger.error('Failed to fetch couple data', coupleErr);
           }
         }
 
         const categoriesData = await gamesApi.getCategories();
         setCategories(categoriesData.categories);
-        console.log(`✅ ${categoriesData.categories.length} game categories fetched from backend`);
+        logger.debug(`${categoriesData.categories.length} game categories fetched from backend`);
 
       } catch (err: any) {
-        console.error('❌ Error fetching data:', err);
+        logger.error('Error fetching data', err);
         setError(err.message || 'Failed to load data');
         
         if (!ENV.DEMO_MODE) {

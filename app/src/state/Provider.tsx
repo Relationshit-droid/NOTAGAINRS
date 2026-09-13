@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppStore } from './store';
 import { Platform } from 'react-native';
 import { ENV } from '../lib/env';
+import { adminApi } from '../api/adminApi';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const setSarcasm = useAppStore((s) => s.setSarcasm);
@@ -12,10 +13,27 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   const setPlan = useAppStore((s) => s.setPlan);
   const setBeta = useAppStore((s) => s.setBeta);
   const setPreviewMode = useAppStore((s) => s.setPreviewMode);
+  const setUser = useAppStore((s) => s.setUser);
+  const setAdminData = useAppStore((s) => s.setAdminData);
+  const setIsAdmin = useAppStore((s) => s.setIsAdmin);
+
   useEffect(() => {
     if (Platform.OS === 'web') return;
     supabase.auth.getSession().then(async ({ data }) => {
       const user = data.session?.user;
+      
+      // Set user with role detection
+      if (user) {
+        const userData = {
+          uid: user.id,
+          email: user.email,
+          displayName: user.user_metadata?.display_name || user.email?.split('@')[0],
+          role: user.user_metadata?.role || (user.email?.includes('admin') ? 'admin' : 'user'),
+        };
+        setUser(userData);
+        setIsAdmin(userData.role === 'admin');
+      }
+
       const p = await supabase.from('profiles').select('sarcasm_level, personality, couple_code, plan, beta_code, beta_active, preview_mode').eq('user_id', user?.id || '').single();
       if (p.data?.sarcasm_level) setSarcasm(p.data.sarcasm_level);
       if (p.data?.personality) setPersonality(p.data.personality);
@@ -37,5 +55,16 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       }
     });
   }, []);
+
+  // Admin data hydration - only fetch when user is admin
+  useEffect(() => {
+    const { isAdmin, user } = useAppStore.getState();
+    if (isAdmin && user) {
+      adminApi.fetchAll()
+        .then(data => setAdminData(data))
+        .catch(err => console.error('[Admin] fetchAll failed', err));
+    }
+  }, [useAppStore.getState().isAdmin, useAppStore.getState().user?.uid]);
+
   return children as any;
 }

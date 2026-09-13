@@ -8,21 +8,17 @@ import HomeScreen from '../screens/HomeScreen';
 import MainGameLibrary from '../screens/MainGameLibrary';
 import SOSScreen from '../screens/sos/SOSScreen';
 import PartnerTranslator from '../screens/dashboard/PartnerTranslator';
-import LoveArcadeHub from '../screens/LoveArcadeHub';
-import DateNightRoulette from '../screens/games/DateNightRoulette';
 import ProfileScreen from '../screens/dashboard/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
-type TabName = 'Home' | 'Games' | 'SOS' | 'Translator' | 'LoveArcade' | 'RomanceHub' | 'Profile';
+type TabName = 'Home' | 'Games' | 'SOS' | 'Translator' | 'Profile';
 
 const TAB_CONFIG: Record<TabName, { label: string; icon: string }> = {
   Home: { label: 'HOME', icon: '🏠' },
   Games: { label: 'GAMES', icon: '🎮' },
   SOS: { label: 'SOS', icon: '🆘' },
   Translator: { label: 'DECODER', icon: '🔍' },
-  LoveArcade: { label: 'ARCADE', icon: '🕹️' },
-  RomanceHub: { label: 'ROMANCE', icon: '💘' },
   Profile: { label: 'PROFILE', icon: '👤' },
 };
 
@@ -138,16 +134,6 @@ export default function BottomTabNavigator() {
         name="Translator"
         component={PartnerTranslator}
         options={{ title: 'DECODER' }}
-      />
-      <Tab.Screen
-        name="LoveArcade"
-        component={LoveArcadeHub}
-        options={{ title: 'ARCADE' }}
-      />
-      <Tab.Screen
-        name="RomanceHub"
-        component={DateNightRoulette}
-        options={{ title: 'ROMANCE' }}
       />
       <Tab.Screen
         name="Profile"

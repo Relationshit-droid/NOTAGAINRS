@@ -22,6 +22,7 @@ import { ScreenLayout } from '../../layout';
 import { userApi } from '../../lib/api';
 import { useAuth } from '../../hooks/useAuth';
 import { COLORS, GRADIENTS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, ANIMATIONS } from '../../theme';
+import { logger } from '../../utils/logger';
 
 const LoginAndSignUpScreen = () => {
   const { signInWithGoogle, signInWithApple, signIn, signUp } = useAuth();
@@ -44,7 +45,7 @@ const LoginAndSignUpScreen = () => {
       useNativeDriver: true,
     }).start();
 
-    RNAnimated.loop(
+    const pulseLoop = RNAnimated.loop(
       RNAnimated.sequence([
         RNAnimated.timing(logoGlow, {
           toValue: 1,
@@ -59,7 +60,8 @@ const LoginAndSignUpScreen = () => {
           useNativeDriver: true,
         }),
       ])
-    ).start();
+    );
+    pulseLoop.start();
 
     RNAnimated.timing(fadeIn, {
       toValue: 1,
@@ -74,6 +76,8 @@ const LoginAndSignUpScreen = () => {
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
+
+    return () => pulseLoop.stop();
   }, []);
 
   const handleEmailAuth = async () => {
@@ -87,7 +91,7 @@ const LoginAndSignUpScreen = () => {
         navigation.navigate('OnboardingMeetCute');
       }
     } catch (error: any) {
-      console.error('Authentication error:', error);
+      logger.error('Authentication error', error);
       Alert.alert(
         'Authentication Failed',
         error.message || 'An error occurred during authentication'
@@ -96,6 +100,11 @@ const LoginAndSignUpScreen = () => {
       setIsLoading(false);
     }
   };
+
+  // Input validation helpers
+  const isValidEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+  const isValidPassword = (pwd: string) => pwd.length >= 6;
+  const isFormValid = isValidEmail(email) && isValidPassword(password);
 
   const handleGoogleAuth = async () => {
     setIsLoading(true);
@@ -146,7 +155,7 @@ const LoginAndSignUpScreen = () => {
           >
             <View style={styles.logoGlow}>
               <Image
-                source={require('../../assets/logo/mainlogoone.png')}
+                source={require('../../assets/logo/RSTRANSPARENTICONNB.png')}
                 style={styles.logo}
                 resizeMode="contain"
               />
@@ -279,7 +288,7 @@ const LoginAndSignUpScreen = () => {
 
               <SquishyButton 
                 onPress={handleEmailAuth}
-                disabled={isLoading}
+                disabled={isLoading || !isFormValid}
                 style={styles.authButton}
               >
                 {isLoading ? (
@@ -377,7 +386,7 @@ const styles = StyleSheet.create({
   },
   dividerText: {
     color: COLORS.textHint,
-    whiteSpace: 'nowrap',
+    // whiteSpace is not supported in React Native – removed
   },
   socialButtons: {
     gap: SPACING.regular,

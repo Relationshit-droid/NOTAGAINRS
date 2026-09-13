@@ -17,12 +17,11 @@
     "primaryColor": "#db147c",
     "owner": "relationshit",
     "plugins": [
-      "expo-router",
       [
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/BarbieDream-Regular.ttf"
+            "./src/assets/fonts/BarbieDream-Regular.ttf"
           ]
         }
       ],

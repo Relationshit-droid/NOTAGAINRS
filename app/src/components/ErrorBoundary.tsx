@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Typography from './ui/Typography';
 import SquishyButton from './ui/SquishyButton';
 import { COLORS, SPACING } from '../theme';
+import { logger } from '../utils/logger';
 
 type Props = {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.error('[ErrorBoundary]', error?.message, info?.componentStack);
+    logger.errorAlways('ErrorBoundary caught error', { message: error?.message, stack: info?.componentStack });
   }
 
   componentDidUpdate(prev: Props) {

@@ -1,7 +1,5 @@
 import { Platform } from 'react-native';
 
-export const INTRO_VIDEO: number[] = [require('../assets/animations/marcie-intro.webm')];
-
 export const CRITICAL_LOGOS: number[] = [
   require('../../assets/logo/mainlogoone.png'),
 ];
@@ -12,7 +10,6 @@ export const LAZY_LOGOS: number[] = [
   require('../../assets/logo/logo2.png'),
   require('../../assets/logo/logo3.png'),
   require('../../assets/logo/logo4.png'),
-  require('../../assets/logo/logo5.png'),
   require('../../assets/logo/logo7.png'),
   require('../../assets/logo/logo8.png'),
   require('../../assets/logo/logo9.png'),

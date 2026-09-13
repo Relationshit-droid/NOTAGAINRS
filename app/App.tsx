@@ -8,12 +8,14 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import { auth, isFirebaseConfigured } from './src/lib/firebaseClient';
 import { ENV } from './src/lib/env';
+import Provider from './src/state/Provider';
 import AppNavigator from './src/navigation/AppNavigator';
 import LoginAndSignUpScreen from './src/screens/auth/LoginAndSignUp';
 import SplashScreen from './src/screens/auth/SplashScreen';
 import { COLORS } from './src/theme';
 import { navigationRef } from './src/lib/navigation';
 import ErrorBoundary from './src/components/ErrorBoundary';
+import { initSentry } from './src/config/sentry';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,9 @@ const Stack = createNativeStackNavigator();
  * the normal auth gate applies.
  */
 const DEMO_MODE = ENV.DEMO_MODE || !isFirebaseConfigured;
+
+// Initialize Sentry (respects feature flag)
+initSentry();
 
 const App = () => {
   const [user, setUser] = useState<any>(null);
@@ -83,7 +88,9 @@ const App = () => {
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: COLORS.backgroundPrimary }}>
       <SafeAreaProvider>
         <StatusBar style="light" />
-        {content()}
+        <Provider>
+          {content()}
+        </Provider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

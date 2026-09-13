@@ -7,13 +7,16 @@ import {
   User, 
   getIdToken,
   GoogleAuthProvider,
-  signInWithPopup,
   OAuthProvider,
-  linkWithPopup,
+  signInWithRedirect,
+  linkWithRedirect,
   updateProfile
 } from 'firebase/auth';
 import { useAppStore } from '../state/store';
 import { userApi } from '../lib/api';
+import * as Google from 'expo-auth-session/providers/google';
+import * as Apple from 'expo-auth-session/providers/apple';
+import { useAuthRequest, makeRedirectUri } from 'expo-auth-session';
 
 type AuthState = {
   user: User | null;
@@ -33,15 +36,45 @@ export const useAuth = (): AuthState => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const setUserId = useAppStore(state => state.setUserId);
-  
-  const googleProvider = new GoogleAuthProvider();
-  googleProvider.setCustomParameters({ prompt: 'select_account' });
-  googleProvider.addScope('email');
-  googleProvider.addScope('profile');
-  
-  const appleProvider = new OAuthProvider('apple.com');
-  appleProvider.addScope('email');
-  appleProvider.addScope('name');
+
+  // Google OAuth config
+  const [googleRequest, googleResponse, googlePromptAsync] = Google.useAuthRequest({
+    expoClientId: process.env.EXPO_PUBLIC_GOOGLE_EXPO_CLIENT_ID,
+    iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
+    androidClientId: process.env.EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID,
+    webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+  });
+
+  // Apple OAuth config
+  const [appleRequest, appleResponse, applePromptAsync] = Apple.useAuthRequest({
+    clientId: process.env.EXPO_PUBLIC_APPLE_CLIENT_ID,
+    redirectUri: makeRedirectUri({ useProxy: true }),
+  });
+
+  // Handle Google response
+  useEffect(() => {
+    if (googleResponse?.type === 'success') {
+      const { idToken } = googleResponse.authentication ?? {};
+      if (idToken) {
+        const credential = GoogleAuthProvider.credential(idToken);
+        signInWithRedirect(auth, new GoogleAuthProvider());
+      }
+    }
+  }, [googleResponse]);
+
+  // Handle Apple response
+  useEffect(() => {
+    if (appleResponse?.type === 'success') {
+      const { idToken, nonce } = appleResponse.authentication ?? {};
+      if (idToken) {
+        const credential = new OAuthProvider('apple.com').credential({
+          idToken,
+          rawNonce: nonce,
+        });
+        signInWithRedirect(auth, new OAuthProvider('apple.com'));
+      }
+    }
+  }, [appleResponse]);
 
   const syncUserToBackend = async (firebaseUser: User, displayName?: string) => {
     try {
@@ -57,7 +90,6 @@ export const useAuth = (): AuthState => {
     }
   };
 
-  // Fetch the backend user, or create them if this is the first login.
   const getOrCreateBackendUser = async (firebaseUser: User, displayName?: string) => {
     const token = await getIdToken(firebaseUser);
     try {
@@ -65,7 +97,6 @@ export const useAuth = (): AuthState => {
       setUserId(backendUser.id);
       return backendUser;
     } catch (error: any) {
-      // 404 = user exists in Firebase Auth but not yet in our backend.
       if (error?.statusCode === 404) {
         return await syncUserToBackend(firebaseUser, displayName);
       }
@@ -82,7 +113,6 @@ export const useAuth = (): AuthState => {
           const backendUser = await userApi.get(user.uid, token);
           setUserId(backendUser.id);
         } catch {
-          // User might not exist in backend yet; sync on next action.
         }
       } else {
         setUserId(undefined);
@@ -124,32 +154,18 @@ export const useAuth = (): AuthState => {
 
   const signInWithGoogle = async () => {
     setLoading(true);
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      setUser(result.user);
-      await getOrCreateBackendUser(result.user);
-    } catch (error) {
-      setLoading(false);
-      throw error;
-    }
+    await googlePromptAsync();
   };
 
   const signInWithApple = async () => {
     setLoading(true);
-    try {
-      const result = await signInWithPopup(auth, appleProvider);
-      setUser(result.user);
-      await getOrCreateBackendUser(result.user);
-    } catch (error) {
-      setLoading(false);
-      throw error;
-    }
+    await applePromptAsync();
   };
 
   const linkGoogle = async () => {
     if (!user) throw new Error('No user logged in');
     try {
-      await linkWithPopup(user, googleProvider);
+      await linkWithRedirect(user, new GoogleAuthProvider());
       setUser(auth.currentUser);
     } catch (error) {
       console.error('Failed to link Google:', error);
@@ -160,7 +176,7 @@ export const useAuth = (): AuthState => {
   const linkApple = async () => {
     if (!user) throw new Error('No user logged in');
     try {
-      await linkWithPopup(user, appleProvider);
+      await linkWithRedirect(user, new OAuthProvider('apple.com'));
       setUser(auth.currentUser);
     } catch (error) {
       console.error('Failed to link Apple:', error);

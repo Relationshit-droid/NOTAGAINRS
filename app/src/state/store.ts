@@ -1,6 +1,14 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export interface AdminData {
+  users: any[];
+  games: any[];
+  analytics: any;
+  flags: any[];
+  systemSettings: any;
+}
+
 type AppState = {
   sarcasmLevel: number;
   marciePersonality: string;
@@ -41,6 +49,13 @@ type AppState = {
   setPreviewRole: (r: 'free' | 'premium' | 'beta' | 'blocked' | null) => void;
   user_id?: string;
   setUserId: (id?: string) => void;
+  // Admin state
+  user?: { uid: string; email?: string; role?: string; displayName?: string };
+  setUser: (user: { uid: string; email?: string; role?: string; displayName?: string } | undefined) => void;
+  adminData: AdminData | null;
+  setAdminData: (data: AdminData) => void;
+  isAdmin: boolean;
+  setIsAdmin: (b: boolean) => void;
 };
 
 export const useAppStore = create<AppState>()(persist((set) => ({
@@ -81,6 +96,13 @@ export const useAppStore = create<AppState>()(persist((set) => ({
   setSOSSessionId: (id) => set({ sosSessionId: id }),
   previewRole: null,
   setPreviewRole: (r) => set({ previewRole: r }),
-  user_id: undefined, // Populated from Firebase Auth once the backend syncs
+  user_id: undefined,
   setUserId: (id) => set({ user_id: id }),
+  // Admin state
+  user: undefined,
+  setUser: (user) => set({ user, isAdmin: user?.role === 'admin' }),
+  adminData: null,
+  setAdminData: (data) => set({ adminData: data }),
+  isAdmin: false,
+  setIsAdmin: (b) => set({ isAdmin: b }),
 }), { name: 'app_state' }));

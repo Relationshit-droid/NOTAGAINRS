@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView, TextInput, KeyboardAvoidingView, Platform
 import { Typography, GlassCard, SquishyButton } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
+import { logger } from '../../utils/logger';
 
 export default function SignInScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ export default function SignInScreen({ navigation }: any) {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSignIn = () => {
-    console.log('Signing in with:', { email, password });
+    logger.debug('Sign in attempted', { email: email?.slice(0, 4) + '***' });
     navigation.navigate('MainGameLibrary');
   };
 

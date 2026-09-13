@@ -15,7 +15,8 @@
         "buildType": "apk"
       },
       "ios": {
-        "simulator": true
+        "simulator": true,
+        "buildNumber": "1"
       }
     },
     "development-device": {
@@ -26,7 +27,8 @@
         "EXPO_PUBLIC_WS_URL": "ws://192.168.1.100:8001"
       },
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "versionCode": 1
       }
     },
     "preview": {
@@ -36,10 +38,12 @@
         "EXPO_PUBLIC_WS_URL": "wss://lovetrae-backend-dev-xyz.a.run.app"
       },
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "versionCode": 1
       },
       "ios": {
-        "simulator": false
+        "simulator": false,
+        "buildNumber": "1"
       }
     },
     "production": {
@@ -48,10 +52,12 @@
         "EXPO_PUBLIC_WS_URL": "wss://lovetrae-backend-prod-xyz.a.run.app"
       },
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "app-bundle",
+        "versionCode": 1
       },
       "ios": {
-        "resourceClass": "m-medium"
+        "resourceClass": "m-medium",
+        "buildNumber": "1"
       }
     }
   },

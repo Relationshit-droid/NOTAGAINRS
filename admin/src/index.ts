@@ -1,4 +1,3 @@
-
 import * as admin from "firebase-admin";
 import * as crypto from "crypto";
 import Stripe from "stripe";
@@ -156,4 +155,124 @@ export const handleStripeWebhook = onRequest(async (req, res) => {
   }
 
   res.status(200).send();
+});
+
+// 4. Create Admin User Function (callable - requires existing admin)
+export const createAdminUser = onCall(async (request) => {
+  // Verify the caller is already an admin
+  if (!request.auth?.token?.admin) {
+    throw new HttpsError(
+      "permission-denied",
+      "Only existing admins can create new admin users."
+    );
+  }
+
+  const { email, password, displayName } = request.data;
+
+  if (!email || !password) {
+    throw new HttpsError(
+      "invalid-argument",
+      "Email and password are required."
+    );
+  }
+
+  try {
+    // 1. Create the user in Firebase Auth
+    const userRecord = await admin.auth().createUser({
+      email,
+      password,
+      displayName: displayName || "Admin User",
+    });
+
+    // 2. Set the custom claim 'admin: true'
+    await admin.auth().setCustomUserClaims(userRecord.uid, { admin: true });
+
+    // 3. Also store role in Firestore for easy querying
+    await db.collection("users").doc(userRecord.uid).set({
+      email,
+      displayName: displayName || "Admin User",
+      role: "admin",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+
+    console.log(`Successfully created admin user with UID: ${userRecord.uid}`);
+    return { success: true, uid: userRecord.uid, message: "Admin user created successfully." };
+  } catch (error: any) {
+    console.error('Error creating admin user:', error);
+    throw new HttpsError("internal", error.message || "Failed to create admin user");
+  }
+});
+
+// 5. Grant Admin Role to Existing User (callable - requires existing admin)
+export const grantAdminRole = onCall(async (request) => {
+  // Verify the caller is already an admin
+  if (!request.auth?.token?.admin) {
+    throw new HttpsError(
+      "permission-denied",
+      "Only existing admins can grant admin roles."
+    );
+  }
+
+  const { uid } = request.data;
+
+  if (!uid) {
+    throw new HttpsError(
+      "invalid-argument",
+      "User UID is required."
+    );
+  }
+
+  try {
+    // 1. Set the custom claim 'admin: true'
+    await admin.auth().setCustomUserClaims(uid, { admin: true });
+
+    // 2. Update Firestore
+    await db.collection("users").doc(uid).set({
+      role: "admin",
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+
+    console.log(`Successfully granted admin role to user: ${uid}`);
+    return { success: true, message: "Admin role granted successfully." };
+  } catch (error: any) {
+    console.error('Error granting admin role:', error);
+    throw new HttpsError("internal", error.message || "Failed to grant admin role");
+  }
+});
+
+// 6. Revoke Admin Role (callable - requires existing admin)
+export const revokeAdminRole = onCall(async (request) => {
+  // Verify the caller is already an admin
+  if (!request.auth?.token?.admin) {
+    throw new HttpsError(
+      "permission-denied",
+      "Only existing admins can revoke admin roles."
+    );
+  }
+
+  const { uid } = request.data;
+
+  if (!uid) {
+    throw new HttpsError(
+      "invalid-argument",
+      "User UID is required."
+    );
+  }
+
+  try {
+    // 1. Remove the custom claim
+    await admin.auth().setCustomUserClaims(uid, { admin: false });
+
+    // 2. Update Firestore
+    await db.collection("users").doc(uid).set({
+      role: "user",
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+
+    console.log(`Successfully revoked admin role from user: ${uid}`);
+    return { success: true, message: "Admin role revoked successfully." };
+  } catch (error: any) {
+    console.error('Error revoking admin role:', error);
+    throw new HttpsError("internal", error.message || "Failed to revoke admin role");
+  }
 });

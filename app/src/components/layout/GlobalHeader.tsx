@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
 import * as Haptics from '../../utils/haptics';
 
-const loveActuallyLogo = require('../../../assets/logo/mainlogoone.png');
+const loveActuallyLogo = require('../../assets/logo/RSTRANSPARENTICONNB.png');
 
 interface GlobalHeaderProps {
   progress?: number;

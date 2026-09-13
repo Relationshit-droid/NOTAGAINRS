@@ -2,6 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { COLORS } from '../theme';
+import { useAppStore } from '../state/store';
+import { ENV } from '../lib/env';
 import BottomTabNavigator from './BottomTabNavigator';
 
 // Main Screens
@@ -150,9 +152,20 @@ import LoadingMarcieIsThinking from '../screens/LoadingMarcieIsThinking';
 import RelationshipDiagnosisCard from '../screens/RelationshipDiagnosisCard';
 import IntimacyLevelSettings from '../screens/IntimacyLevelSettings';
 
+// Admin Screens (conditionally rendered based on role)
+import AdminPortalScreen from '../screens/admin/AdminPortal';
+import AdminDashboardScreen from '../screens/admin/AdminDashboard';
+import AdminUserManagementListScreen from '../screens/admin/AdminUserManagementList';
+import AdminAnalyticsDashboardScreen from '../screens/admin/AdminAnalyticsDashboard';
+import AdminGlobalConfigurationScreen from '../screens/admin/AdminGlobalConfiguration';
+import AdminFightModerationQueueScreen from '../screens/admin/AdminFightModerationQueue';
+
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
+  const isAdmin = useAppStore(state => state.isAdmin);
+  const enableAdminPanel = ENV.ENABLE_ADMIN_PANEL;
+
   return (
     <Stack.Navigator 
       initialRouteName="MainApp" 
@@ -185,12 +198,19 @@ const AppNavigator = () => {
         <Stack.Screen name="CategorySelectionScreen" component={CategorySelectionScreen} />
         <Stack.Screen name="GameLibraryGridView" component={GameLibraryGridView} />
 
+        {/* Admin Stack – only added when the user is an admin and feature flag is enabled */}
+        {isAdmin && enableAdminPanel && (
+          <>
+            <Stack.Screen name="AdminPortal" component={AdminPortalScreen} />
+            <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} />
+            <Stack.Screen name="AdminUsers" component={AdminUserManagementListScreen} />
+            <Stack.Screen name="AdminAnalytics" component={AdminAnalyticsDashboardScreen} />
+            <Stack.Screen name="AdminSettings" component={AdminGlobalConfigurationScreen} />
+            <Stack.Screen name="AdminFights" component={AdminFightModerationQueueScreen} />
+          </>
+        )}
+
         {/* Auth Flow */}
-        <Stack.Screen name="Splash" component={SplashScreen} options={{ 
-          statusBarStyle: 'dark',
-          statusBarBackgroundColor: COLORS.textPrimary,
-          animation: 'fade'
-        }} />
         <Stack.Screen name="WebSplash" component={WebSplash} options={{ 
           statusBarStyle: 'dark',
           statusBarBackgroundColor: COLORS.textPrimary,

@@ -7,6 +7,7 @@ import { ScreenLayout } from '../../layout';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from '../../utils/haptics';
+import { logger } from '../../utils/logger';
 import { useAuth } from '../../hooks/useAuth';
 import { coupleApi } from '../../lib/api';
 import { COLORS, GRADIENTS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../../theme';
@@ -41,7 +42,7 @@ export default function CoupleCodeScreen({ onNext }: CoupleCodeScreenProps) {
             if (onNext) { onNext(me.invite_code || newCode); } else { navigation.navigate('MainApp'); }
           }
         } catch (e) {
-          console.log('No existing couple, will create new code');
+          logger.debug('No existing couple, will create new code');
         }
       }
     };

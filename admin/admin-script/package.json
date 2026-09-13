@@ -1,0 +1,12 @@
+{
+  "name": "admin-script",
+  "version": "1.0.0",
+  "description": "Script to set admin custom claims",
+  "main": "make-admin.js",
+  "scripts": {
+    "make-admin": "node make-admin.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
+  }
+}

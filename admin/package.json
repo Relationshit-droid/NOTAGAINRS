@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "seed": "ts-node src/seed.ts"
+    "seed": "ts-node src/seed.ts",
+    "create-admin": "ts-node scripts/createAdminUser.ts"
   },
   "engines": {
     "node": "20"

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList, Alert } from 'react-native';
 import { collection, onSnapshot, query, where, doc, updateDoc } from 'firebase/firestore';
@@ -6,6 +5,7 @@ import { db } from '../../lib/firebaseClient';
 import { ScreenLayout } from '../../layout';
 import { Typography, SquishyButton, GlassCard } from '../../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS } from '../../theme';
+import { withAdminGuard } from '../../hoc/withAdminGuard';
 
 type QueuedFight = {
   id: string;
@@ -13,16 +13,15 @@ type QueuedFight = {
   timestamp?: any;
 };
 
-
-const AdminFightModerationQueue = () => {
-  const [activeFights, setActiveFights] = useState([]);
+const AdminFightModerationQueueComponent = () => {
+  const [activeFights, setActiveFights] = useState<QueuedFight[]>([]);
 
   useEffect(() => {
     const q = query(collection(db, "sos_alerts"), where("status", "==", "active"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const fights = [];
+      const fights: QueuedFight[] = [];
       querySnapshot.forEach((doc) => {
-        fights.push({ id: doc.id, ...doc.data() });
+        fights.push({ id: doc.id, ...doc.data() } as QueuedFight);
       });
       setActiveFights(fights);
     });
@@ -38,7 +37,7 @@ const AdminFightModerationQueue = () => {
         resolvedAt: new Date(),
       });
       Alert.alert("Fight Resolved", `SOS session ${id} has been marked as resolved.`);
-    } catch (error) {
+    } catch (error: any) {
       Alert.alert("Error", "Could not resolve the fight: " + error.message);
     }
   };
@@ -50,7 +49,7 @@ const AdminFightModerationQueue = () => {
           {item.coupleId}
         </Typography>
         <Typography variant="caption" color={COLORS.textSecondary}>
-          {new Date(item.timestamp.seconds * 1000).toLocaleTimeString()}
+          {new Date(item.timestamp?.seconds * 1000 || Date.now()).toLocaleTimeString()}
         </Typography>
       </View>
       <View style={styles.fightActions}>
@@ -89,6 +88,8 @@ const AdminFightModerationQueue = () => {
   );
 };
 
+export default withAdminGuard(AdminFightModerationQueueComponent);
+
 const styles = StyleSheet.create({
   fightItem: {
     marginBottom: SPACING.regular,
@@ -101,5 +102,3 @@ const styles = StyleSheet.create({
   },
   fightActions: {},
 });
-
-export default AdminFightModerationQueue;

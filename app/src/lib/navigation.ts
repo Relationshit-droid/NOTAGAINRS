@@ -1,6 +1,5 @@
 import { createNavigationContainerRef, CommonActions } from '@react-navigation/native';
 import { Alert } from 'react-native';
-import { useAppStore } from '../state/store';
 
 export const navigationRef = createNavigationContainerRef<any>();
 
@@ -23,27 +22,33 @@ export type NavigationState = {
 
 type NavigationOptions = { force?: boolean; transition?: 'fade' | 'slide' | 'none'; params?: any };
 
-export function getCurrentState(): NavigationState {
-  const s = useAppStore.getState();
+// Accept store state as parameter to avoid circular import
+export function getCurrentState(storeState: NavigationState): NavigationState {
   return {
-    currentScreen: s.navCurrentScreen,
-    previousScreen: s.navPreviousScreen,
-    onboardingStep: s.onboardingStep,
-    gameInProgress: s.gameInProgress,
-    sosSessionId: s.sosSessionId,
+    currentScreen: storeState.navCurrentScreen,
+    previousScreen: storeState.navPreviousScreen,
+    onboardingStep: storeState.onboardingStep,
+    gameInProgress: storeState.gameInProgress,
+    sosSessionId: storeState.sosSessionId,
   };
 }
 
-export function navigateTo(screenId: string, options?: NavigationOptions) {
-  const current = getCurrentState();
+// Accept store state and setters as parameters
+export function navigateTo(
+  screenId: string, 
+  options: NavigationOptions,
+  storeState: NavigationState,
+  setCurrentScreen: (id: string) => void
+) {
+  const current = getCurrentState(storeState);
   if (screenId === 'SOSBooths' && !options?.force && current.gameInProgress) {
     Alert.alert('Pause Game?', 'You have a game in progress. Open SOS now?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Open SOS', style: 'destructive', onPress: () => navigateTo(screenId, { ...options, force: true }) },
+      { text: 'Open SOS', style: 'destructive', onPress: () => navigateTo(screenId, { ...options, force: true }, storeState, setCurrentScreen) },
     ]);
     return;
   }
-  useAppStore.getState().setCurrentScreen(screenId);
+  setCurrentScreen(screenId);
   applyScreenTransition(screenId, options?.transition || 'fade');
   navigate(screenId, options?.params);
 }
