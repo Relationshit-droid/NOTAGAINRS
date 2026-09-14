@@ -1,0 +1,20 @@
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getAuth } = require('firebase-admin/auth');
+const serviceAccount = require('./service-account.json');
+
+initializeApp({
+  credential: cert(serviceAccount)
+});
+
+// Replace with the UID of the user you want to make an admin
+const uid = 'guicleW2AMS7XlerybPcW9l2fBr2'; 
+
+getAuth().setCustomUserClaims(uid, { admin: true })
+  .then(() => {
+    console.log(`Success! User ${uid} is now an admin.`);
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error('Error setting claim:', error);
+    process.exit(1);
+  });
