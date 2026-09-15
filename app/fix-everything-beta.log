@@ -1,0 +1,27 @@
+  PATH fix: prepended /home/c-jay69/.nvm/versions/node/v26.3.0/bin (node installed via nvm).
+fix-everything-beta starting at 2026-09-14 18:48:34 in /home/c-jay69/Documents/TAB/NOTAGAINRS/app
+[2026-09-14T18:48:34-0600] RUN_START flags=--no-start --skip-lint --skip-typecheck --skip-tests --skip-doctor --continue-on-error
+
+==================================================
+[STEP] 1-asset-repair
+==================================================
+[2026-09-14T18:48:34-0600] STEP_START name=1-asset-repair
+  OK: assets/logo/RSTRANSPARENTICONNB.png already exists (58641 bytes) - leaving it untouched.
+  OK: assets/logo/mainlogoone.png already exists (141624 bytes) - leaving it untouched.
+[2026-09-14T18:48:34-0600] STEP_PASS name=1-asset-repair
+
+==================================================
+[STEP] 2-expo-install-pins
+==================================================
+[2026-09-14T18:48:34-0600] STEP_START name=2-expo-install-pins
+npm warn Unknown global config "tmp". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+env: load .env
+env: export EXPO_PUBLIC_APP_NAME EXPO_PUBLIC_APP_VERSION EXPO_PUBLIC_DEMO_MODE EXPO_PUBLIC_ENABLE_ANALYTICS EXPO_PUBLIC_ENABLE_CRASH_REPORTING EXPO_PUBLIC_ENABLE_PUSH_NOTIFICATIONS EXPO_PUBLIC_ENABLE_OFFLINE_MODE EXPO_PUBLIC_ENABLE_BETA_FEATURES EXPO_PUBLIC_ENABLE_ADMIN_PANEL EXPO_PUBLIC_SUPPORT_EMAIL EXPO_PUBLIC_PRIVACY_POLICY_URL EXPO_PUBLIC_TERMS_OF_SERVICE_URL EXPO_PUBLIC_POSTHOG_HOST
+Dependencies are up to date
+[2026-09-14T18:48:42-0600] STEP_PASS name=2-expo-install-pins
+
+==================================================
+[STEP] 3-npm-install
+==================================================
+[2026-09-14T18:48:42-0600] STEP_START name=3-npm-install
+npm warn Unknown global config "tmp". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
