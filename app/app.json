@@ -41,7 +41,15 @@
       "backgroundColor": "#0f0a0c"
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/icon.png",
+      "assets/splash-icon.png",
+      "assets/adaptive-icon.png",
+      "assets/favicon.png",
+      "assets/fonts/*",
+      "assets/images/*",
+      "assets/logo/*",
+      "assets/lottie/*",
+      "assets/sounds/*.mp3"
     ],
     "ios": {
       "supportsTablet": false,

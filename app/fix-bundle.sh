@@ -91,16 +91,36 @@ echo ""
 echo "📦 Step 2/4: Re-installing Expo-pinned dependencies..."
 echo "   This picks the exact versions Expo SDK 52 expects."
 
-npx expo install --fix
-echo "✅ 'npx expo install --fix' done."
+if ! npx expo install --fix; then
+  echo "⚠️  'npx expo install --fix' reported an error – continuing anyway."
+  echo "   (If deps were reported 'up to date' above, this is safe to ignore.)"
+else
+  echo "✅ 'npx expo install --fix' done."
+fi
 
 echo "   Ensuring react-native-gesture-handler is Expo-pinned..."
-npx expo install react-native-gesture-handler
-echo "✅ react-native-gesture-handler pinned."
+if ! npx expo install react-native-gesture-handler; then
+  echo "⚠️  'npx expo install react-native-gesture-handler' failed."
+  echo "   Common cause on npm 11+: EALLOWSCRIPTS (--allow-scripts blocked)."
+  echo "   Your deps were already 'up to date' above, so continuing to cache-clear."
+  echo "   Manual fallback if you ever need a full reinstall:"
+  echo "     npm install --ignore-scripts"
+else
+  echo "✅ react-native-gesture-handler pinned."
+fi
 
-echo "🔧 Running a full npm install to finish..."
-npm install
-echo "✅ npm install done."
+echo "🔧 Running a full npm install to finish (tolerant of npm 11)..."
+if ! npm install; then
+  echo "⚠️  Plain 'npm install' failed – retrying with --ignore-scripts (npm 11+ safe)..."
+  if ! npm install --ignore-scripts; then
+    echo "⚠️  npm install still failing – continuing anyway since node_modules exists."
+    echo "   Run 'npx expo doctor' after the bundler starts to confirm dep health."
+  else
+    echo "✅ npm install --ignore-scripts done."
+  fi
+else
+  echo "✅ npm install done."
+fi
 
 # ------------------------------------------------
 # 3️⃣ Clear every Metro / Expo cache

@@ -44,7 +44,7 @@ const DateNightRouletteWheelScreen = () => {
             {/* Dr. Marcie Section */}
             <GlassCard style={styles.drMarcieSection} padding="medium">
                 <View style={styles.avatarContainer}>
-                    <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+                    <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
                 </View>
                 <View style={styles.quoteBox}>
                     <Typography variant="sass">Spin the wheel for unique date night ideas! Strengthen your connection with creative activities.</Typography>

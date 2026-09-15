@@ -155,7 +155,7 @@ const LoginAndSignUpScreen = () => {
           >
             <View style={styles.logoGlow}>
               <Image
-                source={require('../../assets/logo/RSTRANSPARENTICONNB.png')}
+                source={require('../../../assets/logo/RSTRANSPARENTICONNB.png')}
                 style={styles.logo}
                 resizeMode="contain"
               />

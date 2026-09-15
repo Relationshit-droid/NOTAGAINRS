@@ -45,7 +45,7 @@ const AppreciationAuctionGameScreen = () => {
         {/* Dr. Marcie Section */}
         <View style={styles.drMarcieSection}>
           <View style={styles.avatarContainer}>
-            <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+            <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
           </View>
           <View style={styles.quoteBox}>
             <Typography variant="body">Bid on authentic appreciation! Genuine compliments are worth their weight in gold.</Typography>

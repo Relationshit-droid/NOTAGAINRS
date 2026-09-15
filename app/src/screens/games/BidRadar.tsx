@@ -55,7 +55,7 @@ export default function BidRadar({ route, navigation }: any) {
         {/* Dr. Marcie Section */}
         <View style={styles.drMarcieSection}>
           <View style={styles.avatarContainer}>
-            <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+            <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
           </View>
           <View style={styles.quoteBox}>
             <Typography variant="sass">Log emotional bids to track connection attempts! Recognize when you make or receive bids for attention.</Typography>

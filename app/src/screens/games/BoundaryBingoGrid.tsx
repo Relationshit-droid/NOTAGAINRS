@@ -49,7 +49,7 @@ const BoundaryBingoGridScreen = () => {
                 {/* Dr. Marcie Section */}
                 <GlassCard style={styles.drMarcieSection} variant="outlined">
                     <View style={styles.avatarContainer}>
-                        <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+                        <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
                     </View>
                     <View style={styles.quoteBox}>
                         <Typography variant="body">Establish healthy boundaries! Clear communication protects both partners' wellbeing.</Typography>

@@ -15,8 +15,10 @@ import {
 import { useAppStore } from '../state/store';
 import { userApi } from '../lib/api';
 import * as Google from 'expo-auth-session/providers/google';
-import * as Apple from 'expo-auth-session/providers/apple';
 import { useAuthRequest, makeRedirectUri } from 'expo-auth-session';
+// NOTE: expo-auth-session SDK 52 ships only google + facebook providers.
+// Apple provider does not exist in this version – Apple sign-in goes via
+// expo-apple-authentication instead (see signInWithApple below).
 
 type AuthState = {
   user: User | null;
@@ -46,10 +48,14 @@ export const useAuth = (): AuthState => {
   });
 
   // Apple OAuth config
-  const [appleRequest, appleResponse, applePromptAsync] = Apple.useAuthRequest({
-    clientId: process.env.EXPO_PUBLIC_APPLE_CLIENT_ID,
-    redirectUri: makeRedirectUri({ useProxy: true }),
-  });
+  // expo-auth-session SDK 52 has no providers/apple module.
+  // Use expo-apple-authentication when adding native Apple sign-in.
+  // For now these are no-op placeholders so Metro can bundle.
+  const appleRequest = null as any;
+  const appleResponse = null as any;
+  const applePromptAsync = (async () => {
+    console.warn('Apple sign-in not configured (expo-apple-authentication missing).');
+  }) as any;
 
   // Handle Google response
   useEffect(() => {

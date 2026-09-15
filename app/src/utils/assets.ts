@@ -2,7 +2,9 @@
  * Asset management utility for Love Arcade app
  * Maps to public/appdocs folder structure as specified in Design Bible
  */
-import { storage } from '../lib/firebaseClient';
+import { ENV } from '../lib/env';
+
+const STORAGE_BUCKET = ENV.FIREBASE_STORAGE_BUCKET;
 
 /**
  * Get a Firebase Storage URL for a given path
@@ -34,4 +36,33 @@ export const ASSETS = {
     wrong: { uri: getStorageUrl('animations/marcie-wrong.webm') },
   },
 
-  // Dr. Marcie Images (Legacy require for static assets)
+  // Dr. Marcie Images (local static assets)
+  images: {
+    avatar: require('../../assets/images/MarcieAvatar.png'),
+    huggingCouple: require('../../assets/images/hugging_couple.png'),
+    truthSlapIcon: require('../../assets/images/truth_slap_icon.png'),
+  },
+
+  // App Logos
+  logos: {
+    icon: require('../../assets/logo/RSICONNB.png'),
+    transparent: require('../../assets/logo/RSTRANSPARENTICONNB.png'),
+    blackSquare: require('../../assets/logo/RSBLACKNBSQUARE.png'),
+    whiteSquare: require('../../assets/logo/RSWHITENBSQUARE.png'),
+    blackBanner: require('../../assets/logo/RSBLACKNBBANNER.png'),
+    whiteBanner: require('../../assets/logo/RSWHITENBBANNER.png'),
+  },
+
+  // Lottie animations
+  lottie: {
+    idle: require('../../assets/lottie/marcie_idle.json'),
+    talking: require('../../assets/lottie/marcie_talking.json'),
+    judging: require('../../assets/lottie/marcie_judging.json'),
+  },
+
+  // Video animations map (used by DrMarcieOverlay via ASSETS.videoAnimations)
+  videoAnimations: {} as Record<string, { uri: string }>,
+
+  // Default avatar
+  defaultAvatar: require('../../assets/images/MarcieAvatar.png'),
+};

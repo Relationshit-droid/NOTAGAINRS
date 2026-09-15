@@ -102,7 +102,7 @@ export default function ConflictDice({ route, navigation }: any) {
           {/* Dr. Marcie Section */}
           <View style={styles.drMarcieSection}>
             <View style={styles.avatarContainer}>
-              <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+              <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
             </View>
             <View style={styles.quoteBox}>
               <Typography variant="sass">Practice conflict resolution with random scenarios! Constraints make communication more creative.</Typography>

@@ -28,7 +28,7 @@ export default function LegalDisclaimerScreen({ onContinue }: Props) {
     <ScreenLayout showHeader={false} scrollable={false}>
       <RadialGradientBackground />
       <View style={styles.header}>
-        <Image source={require('../../assets/logo/RSTRANSPARENTICONNB.png')} style={styles.logo} resizeMode="contain" />
+        <Image source={require('../../../assets/logo/RSTRANSPARENTICONNB.png')} style={styles.logo} resizeMode="contain" />
         <Typography variant="header">RELATIONSHIT!</Typography>
       </View>
 

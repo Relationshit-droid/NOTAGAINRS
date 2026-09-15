@@ -35,7 +35,7 @@ export default function BlameFlip({ navigation }: any) {
           {/* Dr. Marcie Section */}
           <GlassCard style={styles.drMarcieSection} variant="outlined">
             <View style={styles.avatarContainer}>
-              <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+              <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
             </View>
             <View style={styles.quoteBox}>
               <Typography variant="body">Transform blame into ownership! Change "you" statements to "I" statements for better communication.</Typography>

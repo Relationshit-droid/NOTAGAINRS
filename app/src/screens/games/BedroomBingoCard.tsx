@@ -58,7 +58,7 @@ const BedroomBingoCardScreen = () => {
             {/* Dr. Marcie Section */}
             <View style={styles.drMarcieSection}>
                 <View style={styles.avatarContainer}>
-                    <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+                    <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
                 </View>
                 <View style={styles.quoteBox}>
                     <Typography variant="body">Connect intimately through shared experiences! Each tile represents a new way to deepen your bond.</Typography>

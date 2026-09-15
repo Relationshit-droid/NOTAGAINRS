@@ -78,7 +78,7 @@ export default function CommitmentDice({ route, navigation }: any) {
         {/* Dr. Marcie Section */}
         <View style={styles.drMarcieSection}>
           <View style={styles.avatarContainer}>
-            <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+            <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
           </View>
           <View style={styles.quoteBox}>
             <Typography variant="body">Roll the dice for random acts of commitment! Small gestures build lasting bonds.</Typography>

@@ -51,7 +51,7 @@ const CommitmentDiceGameScreen = () => {
                 {/* Dr. Marcie Section */}
                 <GlassCard style={styles.drMarcieSection} variant="outlined">
                     <View style={styles.avatarContainer}>
-                        <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+                        <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
                     </View>
                     <View style={styles.quoteBox}>
                         <Typography variant="body">Roll the dice for random acts of commitment! Small gestures build lasting bonds.</Typography>

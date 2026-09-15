@@ -57,7 +57,7 @@ export default function AppreciationAuction({ route, navigation }: any) {
         {/* Dr. Marcie Section */}
         <View style={styles.drMarcieSection}>
           <View style={styles.avatarContainer}>
-            <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+            <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
           </View>
           <View style={styles.quoteBox}>
             <Typography variant="sass">Bid on authentic appreciation! Distinguish genuine compliments from fake ones.</Typography>

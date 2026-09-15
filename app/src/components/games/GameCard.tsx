@@ -6,7 +6,7 @@ import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, GradientColors } f
 import { Typography, SquishyButton } from '../ui';
 import * as Haptics from '../../utils/haptics';
 
-const loveActuallyLogo = require('../../assets/logo/RSTRANSPARENTICONNB.png');
+const loveActuallyLogo = require('../../../assets/logo/RSTRANSPARENTICONNB.png');
 
 // Enhanced cosmic retro arcade color mapping
 const cosmicGlowColors: Record<string, GradientColors> = {

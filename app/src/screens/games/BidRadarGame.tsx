@@ -22,7 +22,7 @@ const BidRadarGameScreen = () => {
                 {/* Dr. Marcie Section */}
                 <GlassCard style={styles.drMarcieSection} variant="outlined">
                     <View style={styles.avatarContainer}>
-                        <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+                        <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
                     </View>
                     <View style={styles.quoteBox}>
                         <Typography variant="body">Log emotional bids to track connection attempts! Recognize when you make or receive bids for attention.</Typography>

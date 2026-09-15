@@ -157,14 +157,6 @@ const AdminUserManagementListComponent = () => {
 
 export default withAdminGuard(AdminUserManagementListComponent);
 
-const StatCard = ({ title, value, change, color }: { title: string, value: string, change?: string, color: string }) => (
-    <GlassCard style={[styles.statCard, { borderLeftColor: color }]}>
-        <Typography variant="caption" style={styles.statTitle}>{title}</Typography>
-        <Typography variant="header" style={styles.statValue}>{value}</Typography>
-        {change && <Typography variant="caption" style={[styles.statChange, {color}]}>{change}</Typography>}
-    </GlassCard>
-);
-
 const styles = StyleSheet.create({
     safeArea: { 
         flex: 1, 

@@ -26,7 +26,7 @@ export default function CommitmentCountdown({ navigation }: any) {
                     {/* Dr. Marcie Section */}
                     <GlassCard style={styles.drMarcieSection} variant="outlined">
                         <View style={styles.avatarContainer}>
-                            <Image source={require('../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
+                            <Image source={require('../../../assets/images/MarcieAvatar.png')} style={styles.avatar} />
                         </View>
                         <View style={styles.quoteBox}>
                             <Typography variant="body">Build lasting commitment through daily micro-actions! Consistency creates trust.</Typography>
