@@ -16,7 +16,11 @@ const { width, height } = Dimensions.get('window');
 const guidelineBaseWidth = 375;
 const guidelineBaseHeight = 812;
 
-export const scale = (size: number) => (width / guidelineBaseWidth) * size;
+// Phone-first scaling. Uncapped, a 1366px desktop window tripled every token
+// (1366/375 = 3.64x) and blew phone-designed layouts apart on web. Phones
+// (<= 600px) keep the exact 1:1 behaviour; larger screens cap the ratio.
+const widthRatio = Math.min(width / guidelineBaseWidth, 1.6);
+export const scale = (size: number) => widthRatio * size;
 export const verticalScale = (size: number) => (height / guidelineBaseHeight) * size;
 export const moderateScale = (size: number, factor = 0.5) => size + (scale(size) - size) * factor;
 

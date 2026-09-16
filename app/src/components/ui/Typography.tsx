@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
 import { FONT_FAMILIES, TYPOGRAPHY_ROLES } from '../../constants/fontFamilies';
-import { scaleFont } from '../../lib/typography';
 import { useAppStore } from '../../state/store';
 import { COLORS, TYPOGRAPHY } from '../../theme';
 
@@ -60,12 +59,16 @@ export default function Text({
     textShadowRadius: 2 
   } : {};
 
+  // TYPOGRAPHY tokens are already responsive-scaled once by the theme's
+  // scale(); multiplying again by window width (the old scaleFont call) made
+  // fontSize grow quadratically on web while lineHeights stayed 1x -> every
+  // wrapped line overlapped the previous one.
   const textStyle: TextStyle = {
     fontFamily: family,
-    fontSize: scaleFont(size * fontScale),
+    fontSize: Math.round(size * fontScale),
     fontWeight: weight as TextStyle['fontWeight'],
     color: textColor,
-    lineHeight: scaleFont(size * 1.5 * fontScale),
+    lineHeight: Math.round(size * 1.5 * fontScale),
     textAlign: center ? 'center' : 'left',
   };
 

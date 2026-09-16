@@ -396,12 +396,20 @@ repair_required_asset() {
 step "Required image assets (exact case-sensitive file names)"
 
 REQUIRED_ASSET_PATHS=(
+  "assets/logo/RSBLACKNBBANNER.png"
+  "assets/logo/RSBLACKNBSQUARE.png"
+  "assets/logo/RSICONNB.png"
   "assets/logo/RSTRANSPARENTICONNB.png"
-  "assets/logo/mainlogoone.png"
+  "assets/logo/RSWHITENBBANNER.png"
+  "assets/logo/RSWHITENBSQUARE.png"
 )
 REQUIRED_ASSET_USERS=(
-  "src/screens/auth/LoginAndSignUp.tsx, src/components/ui/Header.tsx, src/utils/assets.ts, src/constants/assetManifest.ts"
-  "brand artwork used by the splash / header layouts"
+  "src/constants/assetManifest.ts, src/utils/assets.ts"
+  "src/constants/assetManifest.ts, src/utils/assets.ts"
+  "src/constants/assetManifest.ts, src/utils/assets.ts, src/components/ui/Header.tsx"
+  "src/constants/assetManifest.ts, src/utils/assets.ts, src/screens/auth/LoginAndSignUp.tsx"
+  "src/constants/assetManifest.ts, src/utils/assets.ts"
+  "src/constants/assetManifest.ts, src/utils/assets.ts"
 )
 MISSING_REQUIRED=0
 for i in "${!REQUIRED_ASSET_PATHS[@]}"; do

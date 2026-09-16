@@ -14,15 +14,24 @@ import AppNavigator from '../navigation/AppNavigator';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-// Reads the routes actually registered in AppNavigator so these tests verify the
-// real navigator instead of a throwaway stack built inside the test.
-const APP_NAVIGATOR_SOURCE = readFileSync(
+// Reads the routes actually registered in the app's navigators so these tests
+// verify real navigation config instead of a throwaway stack built in the test.
+//
+// Two navigator files must be scanned: AppNavigator owns the main stack, while
+// the auth funnel (`Splash`, `AuthSignIn`, `AuthReset`, ...) is registered in
+// src/screens/auth/OnboardingNavigator.tsx. `Splash` is therefore a real route,
+// just not one declared in AppNavigator. (In the shipping entry point, App.tsx
+// renders <SplashScreen> directly as a pre-navigation gate.)
+const NAVIGATOR_FILES = [
   join(__dirname, '..', 'navigation', 'AppNavigator.tsx'),
-  'utf8'
-);
+  join(__dirname, '..', 'screens', 'auth', 'OnboardingNavigator.tsx'),
+];
+
 const REGISTERED_ROUTES = new Set(
-  Array.from(APP_NAVIGATOR_SOURCE.matchAll(/<Stack\.Screen[^>]*?\bname=["'{`]([A-Za-z0-9_]+)["'}`]/g)).map(
-    (m) => m[1]
+  NAVIGATOR_FILES.flatMap((file) =>
+    Array.from(
+      readFileSync(file, 'utf8').matchAll(/<Stack\.Screen[^>]*?\bname=["'{`]([A-Za-z0-9_]+)["'}`]/g)
+    ).map((m) => m[1])
   )
 );
 

@@ -838,9 +838,11 @@ export const RelationalJeopardyGame: React.FC<GameProps> = ({ onBack, onComplete
   );
 };
 
-export default {
+const ArcadeGames = {
   TruthTellerTowerGame,
   EchoChamberEscapeGame,
   IntimacyFeudGame,
   RelationalJeopardyGame,
 };
+
+export default ArcadeGames;

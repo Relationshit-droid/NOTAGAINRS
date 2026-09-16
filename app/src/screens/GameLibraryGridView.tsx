@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { ScreenLayout, Typography, GlassCard, SquishyButton } from '../components/ui';
 import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS } from '../theme';
-import { useGameStore } from '../lib/game-store';
 import { gamesApi } from '../lib/api';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -125,8 +124,9 @@ const GameCard = ({ item, onPress }: { item: Game; onPress: (game: Game) => void
 };
 
 const GameLibraryGridView = () => {
-  const { gamesProgress, userStats } = useGameStore();
-  
+  // NOTE: this screen previously destructured `gamesProgress` and `userStats`
+  // from useGameStore(). Neither field exists on GameStore (see
+  // src/lib/game-store.ts) and neither was ever used, so the call was removed.
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Star, TrendingUp, Trophy, Settings, Gamepad2, Users, Calendar, Lock, ChevronRight } from 'lucide-react';
+import { Heart, Star, Trophy, Settings, Gamepad2, Users, Calendar, Lock, ChevronRight } from 'lucide-react';
 
 interface DashboardProps {
   onNavigate: (screen: string, params?: any) => void;

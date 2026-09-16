@@ -48,6 +48,13 @@ export interface AnalyticsEvent {
 // Configuration
 // =============================================================================
 
+// NOTE: `ENV.ENABLE_ANALYTICS` is a boolean (env.ts maps it with
+// `getEnv(...) === 'true'`), so this `!== 'false'` comparison is always true
+// and the flag in .env is effectively ignored — analytics is "on unless the
+// flag is missing" rather than "off unless explicitly true".
+// Kept as-is deliberately: src/utils/__tests__/analytics.test.ts asserts
+// analytics IS enabled with no env set, so changing the semantic to respect
+// EXPO_PUBLIC_ENABLE_ANALYTICS=false requires updating that suite first.
 const ANALYTICS_ENABLED = ENV.ENABLE_ANALYTICS !== 'false';
 const POSTHOG_KEY = ENV.POSTHOG_API_KEY;
 const POSTHOG_HOST = ENV.POSTHOG_HOST || 'https://app.posthog.com';

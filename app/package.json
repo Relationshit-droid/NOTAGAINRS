@@ -7,8 +7,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "export:web": "expo export --platform web",
     "build:android": "expo build:android",
-    "build:ios": "expo build:ios"
+    "build:ios": "expo build:ios",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "doctor": "expo-doctor"
   },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.0",

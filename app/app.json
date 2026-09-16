@@ -4,7 +4,7 @@
     "slug": "relationshit",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo/RSICONNB.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "scheme": "relationshit",
@@ -28,7 +28,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/splash-icon.png",
+          "image": "./assets/logo/RSTRANSPARENTICONNB.png",
           "backgroundColor": "#0f0a0c",
           "imageWidth": 200
         }
@@ -36,15 +36,11 @@
       "expo-secure-store"
     ],
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/logo/RSTRANSPARENTICONNB.png",
       "resizeMode": "contain",
       "backgroundColor": "#0f0a0c"
     },
     "assetBundlePatterns": [
-      "assets/icon.png",
-      "assets/splash-icon.png",
-      "assets/adaptive-icon.png",
-      "assets/favicon.png",
       "assets/fonts/*",
       "assets/images/*",
       "assets/logo/*",
@@ -62,7 +58,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo/RSICONNB.png",
         "backgroundColor": "#0f0a0c"
       },
       "package": "com.relationshit.app",
@@ -79,7 +75,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./assets/logo/RSICONNB.png",
       "bundler": "metro"
     },
     "experiments": {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Platform } from 'react-native';
+import { View, Image, StyleSheet, Linking } from 'react-native';
 import { LOGO_IMAGES } from '../../constants/assetManifest';
 import { Typography, RadialGradientBackground, SquishyButton } from '../../components/ui';
 import { ScreenLayout } from '../../layout';
@@ -16,12 +16,17 @@ export default function SplashScreen({ onStart, onLogin }: SplashScreenProps) {
       <RadialGradientBackground />
       <View style={styles.content}>
         <Image source={LOGO_IMAGES[0]} style={styles.logo} resizeMode="contain" />
-        <Typography variant="header" style={styles.title}>Love, Actually... The Game</Typography>
+        <Typography variant="header" style={styles.title}>RELATIONSHIT!</Typography>
         <Typography variant="body" style={styles.subtitle}>How About We Don't Break Up?</Typography>
         
         <View style={styles.buttons}>
-          <SquishyButton onPress={() => Linking.openURL('https://trae.ai')}>
-            <Typography variant="button">Download App</Typography>
+          {/* App.tsx gates all navigation on onStart; without calling it this
+              screen could never be dismissed. The external link stays as the
+              fallback for the standalone web route where no onStart is passed. */}
+          <SquishyButton
+            onPress={() => (onStart ? onStart() : Linking.openURL('https://trae.ai'))}
+          >
+            <Typography variant="button">{onStart ? 'Enter' : 'Download App'}</Typography>
           </SquishyButton>
         </View>
         

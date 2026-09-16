@@ -596,10 +596,12 @@ export const SixSecondKissGame: React.FC<GameProps> = ({ onBack, onComplete }) =
   );
 };
 
-export default {
+const CategoryGames = {
   TruthOrTrustGame,
   EyeContactChallengeGame,
   GratitudeCloudGame,
   ApologyAuctionGame,
   SixSecondKissGame,
 };
+
+export default CategoryGames;

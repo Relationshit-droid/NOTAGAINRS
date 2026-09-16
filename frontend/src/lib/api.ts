@@ -82,4 +82,6 @@ export const marcieApi = {
   }),
 };
 
-export default { userApi, coupleApi, gamesApi, loveArcadeApi, sosApi, marcieApi };
+const api = { userApi, coupleApi, gamesApi, loveArcadeApi, sosApi, marcieApi };
+
+export default api;

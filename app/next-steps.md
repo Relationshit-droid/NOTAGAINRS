@@ -1,3 +1,70 @@
+# Next steps / Bug-report template
+
+If `fix-everything-beta.sh` still leaves the app unable to bundle or start, copy and fill in the template below and send it back to the LLM or maintainer.
+
+## What to paste back
+
+```text
+## Environment
+- OS: <your OS and version>
+- Node version: <output of node -v>
+- npm version: <output of npm -v>
+- Expo SDK / package versions: <relevant parts of package.json, or npx expo --version>
+- Device / platform: <Android / iOS / Web, with emulator or physical device if known>
+
+## What I was trying to do
+<one or two sentences>
+
+## Command I ran
+<exact command, for example: EXPO_DEBUG=true npx expo start -c>
+
+## Flags I passed to the script
+<for example: --no-start --strict, or none>
+
+## Last Metro / bundler output
+<paste the last 30 to 60 lines around the stall or error>
+
+## Asset state
+- assets/logo/RSICONNB.png: <exists, missing, or placeholder>
+- assets/logo/RSTRANSPARENTICONNB.png: <exists, missing, or placeholder>
+- assets/logo/RSBLACKNBBANNER.png: <exists, missing, or placeholder>
+- assets/logo/RSBLACKNBSQUARE.png: <exists, missing, or placeholder>
+- assets/logo/RSWHITENBBANNER.png: <exists, missing, or placeholder>
+- assets/logo/RSWHITENBSQUARE.png: <exists, missing, or placeholder>
+- Other logo files found in the repo: <list paths and names — there should be none outside the six canonical files>
+
+## What the script reported
+- fix-everything-beta.log: <paste relevant excerpts or say "attached">
+- fix-everything-beta-report.txt: <paste relevant excerpts or say "attached">
+- Did any step fail? Which ones?
+
+## What I already tried
+<list any manual fixes, cache clears, file renames, reinstalls, etc.>
+
+## What I expected to happen
+<short description>
+
+## What actually happened
+<short description>
+```
+
+## Safe things to try first
+
+1. Confirm all six canonical logo files exist with the exact names:
+   `assets/logo/RSBLACKNBBANNER.png`, `assets/logo/RSBLACKNBSQUARE.png`,
+   `assets/logo/RSICONNB.png`, `assets/logo/RSTRANSPARENTICONNB.png`,
+   `assets/logo/RSWHITENBBANNER.png`, `assets/logo/RSWHITENBSQUARE.png`.
+2. If any of them is a placeholder, replace it with the real image and clear
+   caches again.
+3. Run the script again with `--strict` to surface any hidden lint or TS
+   warnings.
+4. If only one platform fails, mention that explicitly in the report.
+
+## What not to paste
+
+- Real API keys, secrets, or personal data from `.env`.
+- Large binary files or full screenshots unless they are necessary.
+
 # Next steps — and what to send back if the script still fails
 
 ## If the script finished successfully

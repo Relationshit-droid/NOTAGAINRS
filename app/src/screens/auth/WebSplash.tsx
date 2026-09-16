@@ -11,7 +11,7 @@ export default function WebSplash() {
       <RadialGradientBackground />
       <View style={styles.content}>
         <Image source={LOGO_IMAGES[0]} style={styles.logo} resizeMode="contain" />
-        <Typography variant="header" style={styles.title}>Love, Actually... The Game</Typography>
+        <Typography variant="header" style={styles.title}>RELATIONSHIT!</Typography>
         <Typography variant="body" style={styles.subtitle}>How About We Don't Break Up?</Typography>
         
         <View style={styles.buttons}>

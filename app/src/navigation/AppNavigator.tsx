@@ -24,7 +24,10 @@ import MemoryGalleryScreen from '../screens/MemoryGalleryScreen';
 import LoveLanguageDashboardScreen from '../screens/LoveLanguageDashboardScreen';
 
 // Auth Screens
-import SplashScreen from '../screens/auth/SplashScreen';
+// NOTE: SplashScreen is intentionally NOT imported here. The shipping entry
+// point (App.tsx) renders <SplashScreen> directly as a pre-navigation gate, and
+// the `Splash` *route* is registered in screens/auth/OnboardingNavigator.tsx.
+// This file previously imported it without registering it, leaving dead code.
 import WebSplash from '../screens/auth/WebSplash';
 import SignInScreen from '../screens/auth/SignInScreen';
 import LoginAndSignUp from '../screens/auth/LoginAndSignUp';

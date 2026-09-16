@@ -1,3 +1,54 @@
+# What the script does
+
+This is a single automation script (`fix-everything-beta.sh`) that repairs an Expo app when its bundler fails because image files are missing or have the wrong capitalization.
+
+The main steps are:
+
+1. **Make sure `assets/logo/` exists.**  
+   If the folder is not there, the script creates it.
+
+2. **Fix the six canonical logo files.**
+   The script looks for each of the six sanctioned brand logos
+   (`RSBLACKNBBANNER.png`, `RSBLACKNBSQUARE.png`, `RSICONNB.png`,
+   `RSTRANSPARENTICONNB.png`, `RSWHITENBBANNER.png`, `RSWHITENBSQUARE.png`),
+   ignoring capital letters. If one turns up elsewhere in the project it is
+   copied into `assets/logo/` under the canonical name. If no copy exists
+   anywhere, it creates a tiny invisible 1×1 transparent PNG with the right name
+   so Metro can bundle without crashing.
+
+3. **Verify the logo files.**  
+   The script checks that all six files now exist, that they are real PNG images, and it logs their sizes.
+
+4. **Reinstall the exact Expo dependency versions.**  
+   It runs `npx expo install --fix` so every Expo-related package matches the version the project expects.
+
+5. **Run `npm install`.**  
+   This refreshes `package-lock.json` and makes sure the remaining packages are in sync.
+
+6. **Delete all caches.**  
+   The script removes Expo, Metro, Jest, and Node cache folders, and tells watchman to forget all watched folders. This clears the stale state that was causing the bundler to stall around 56%.
+
+7. **Run the linter.**  
+   It runs ESLint on all TypeScript and TSX files. If there are errors, the script can stop or continue depending on the flags you pass.
+
+8. **Run the TypeScript type checker.**  
+   It runs `npx tsc --noEmit` to confirm the code type-checks cleanly.
+
+9. **Run the Jest tests.**  
+    If no tests exist at all, the script creates one tiny placeholder test so Jest can still run. Then it runs the whole test suite.
+
+10. **Run `expo doctor` and `npx expo install --check`.**  
+    These commands confirm that the Expo SDK and its pinned packages are installed correctly.
+
+11. **Start Metro or print a final report.**  
+    By default, the script ends by starting the Expo bundler in debug mode. If you pass `--no-start`, it stops after printing a friendly summary.
+
+The script writes two files you can look at later:
+- `fix-everything-beta.log` for machines and debugging.
+- `fix-everything-beta-report.txt` for a human-readable summary.
+
+You can control the script with flags such as `--no-start`, `--skip-lint`, `--skip-typecheck`, `--skip-tests`, `--skip-doctor`, `--strict`, and `--continue-on-error`.
+
 # What the script does — `fix-everything-beta.sh`
 
 This script is like a **pit crew for the app**. You run it once from the `app/`
@@ -18,9 +69,11 @@ or, if you don't want the dev server to start at the end:
 
 ## Step by step, in plain English
 
-**1. Repair the two missing logo pictures.**
-The app was crashing because two image files could not be found
-(`RSTRANSPARENTICONNB.png` and `mainlogoone.png`). The script:
+**1. Repair the missing logo pictures.**
+The app was crashing because its brand images could not be found. Only six logos
+are sanctioned: `RSBLACKNBBANNER.png`, `RSBLACKNBSQUARE.png`, `RSICONNB.png`,
+`RSTRANSPARENTICONNB.png`, `RSWHITENBBANNER.png`, `RSWHITENBSQUARE.png`.
+The script:
 
 - Leaves them alone if they already exist with the correct name (running it
   twice never overwrites a good file).

@@ -20,10 +20,25 @@ export type NavigationState = {
   sosSessionId?: string;
 };
 
+/**
+ * The slice of app-store state (src/state/store.ts) that this module maps from.
+ * The store names these fields `navCurrentScreen` / `navPreviousScreen`, so this
+ * input shape is deliberately distinct from the `NavigationState` output shape
+ * above. Typing the parameters as `NavigationState` previously made these
+ * lookups look like typos when they were in fact correct.
+ */
+export type NavigationStoreState = {
+  navCurrentScreen: string;
+  navPreviousScreen: string;
+  onboardingStep: number;
+  gameInProgress: boolean;
+  sosSessionId?: string;
+};
+
 type NavigationOptions = { force?: boolean; transition?: 'fade' | 'slide' | 'none'; params?: any };
 
 // Accept store state as parameter to avoid circular import
-export function getCurrentState(storeState: NavigationState): NavigationState {
+export function getCurrentState(storeState: NavigationStoreState): NavigationState {
   return {
     currentScreen: storeState.navCurrentScreen,
     previousScreen: storeState.navPreviousScreen,
@@ -37,7 +52,7 @@ export function getCurrentState(storeState: NavigationState): NavigationState {
 export function navigateTo(
   screenId: string, 
   options: NavigationOptions,
-  storeState: NavigationState,
+  storeState: NavigationStoreState,
   setCurrentScreen: (id: string) => void
 ) {
   const current = getCurrentState(storeState);

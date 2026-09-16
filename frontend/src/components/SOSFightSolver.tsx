@@ -206,12 +206,12 @@ const SOSFightSolver: React.FC<SOSFightSolverProps> = ({ onNavigate }) => {
 
             <button
               onClick={handleSubmitBooth}
-              disabled={!iFeel || !whenPartner || !becauseITellMyself || !whatINeed}
+              disabled={loading || !iFeel || !whenPartner || !becauseITellMyself || !whatINeed}
               className="btn-primary w-full py-4 flex items-center justify-center gap-2 disabled:opacity-50"
               data-testid="submit-booth-btn"
             >
               <Send className="w-5 h-5" />
-              Submit to Dr. Marcie
+              {loading ? 'Consulting Dr. Marcie…' : 'Submit to Dr. Marcie'}
             </button>
           </div>
         )}

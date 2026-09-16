@@ -100,6 +100,16 @@ function App() {
 
   return (
     <div className="App">
+      {gameResults && (
+        <div
+          role="status"
+          data-testid="game-results-banner"
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 glass-card px-6 py-3 text-white shadow-lg"
+        >
+          <span className="font-semibold">Last result:</span> {gameResults.score} points
+          {gameResults.badge ? ` • ${gameResults.badge}` : ''}
+        </div>
+      )}
       {renderScreen()}
     </div>
   );

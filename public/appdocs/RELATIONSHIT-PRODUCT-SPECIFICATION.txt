@@ -2749,7 +2749,7 @@ Week 17-20: Polish & Launch
 □ Performance monitoring with Firebase Performance Monitoring
 20.2 Asset Integration
 □ Intro video: marcie-intro.webm
-□ Logo assets: mainlogoone.png + variants
+□ Logo assets: the six canonical logos (RSBLACKNBBANNER.png, RSBLACKNBSQUARE.png, RSICONNB.png, RSTRANSPARENTICONNB.png, RSWHITENBBANNER.png, RSWHITENBSQUARE.png)
 □ Dr. Marcie character assets (16 animations, expressions, gestures)
 □ Custom fonts: BarbieDream, Cheese, HolidayChristmas, SweetPink, WonderfulSometimes
 □ Sound effects library

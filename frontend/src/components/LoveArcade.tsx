@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Play, Trophy, Star, Flame } from 'lucide-react';
+import { ArrowLeft, Play, Trophy, Flame } from 'lucide-react';
 
 const ARCADE_GAMES = [
   {

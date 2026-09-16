@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleStripeWebhook = exports.updateGameScore = exports.validateBetaCode = void 0;
+exports.revokeAdminRole = exports.grantAdminRole = exports.createAdminUser = exports.handleStripeWebhook = exports.updateGameScore = exports.validateBetaCode = void 0;
 const admin = __importStar(require("firebase-admin"));
 const crypto = __importStar(require("crypto"));
 const stripe_1 = __importDefault(require("stripe"));
@@ -153,5 +153,91 @@ exports.handleStripeWebhook = (0, https_2.onRequest)(async (req, res) => {
         }
     }
     res.status(200).send();
+});
+// 4. Create Admin User Function (callable - requires existing admin)
+exports.createAdminUser = (0, https_1.onCall)(async (request) => {
+    // Verify the caller is already an admin
+    if (!request.auth?.token?.admin) {
+        throw new https_1.HttpsError("permission-denied", "Only existing admins can create new admin users.");
+    }
+    const { email, password, displayName } = request.data;
+    if (!email || !password) {
+        throw new https_1.HttpsError("invalid-argument", "Email and password are required.");
+    }
+    try {
+        // 1. Create the user in Firebase Auth
+        const userRecord = await admin.auth().createUser({
+            email,
+            password,
+            displayName: displayName || "Admin User",
+        });
+        // 2. Set the custom claim 'admin: true'
+        await admin.auth().setCustomUserClaims(userRecord.uid, { admin: true });
+        // 3. Also store role in Firestore for easy querying
+        await db.collection("users").doc(userRecord.uid).set({
+            email,
+            displayName: displayName || "Admin User",
+            role: "admin",
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        }, { merge: true });
+        console.log(`Successfully created admin user with UID: ${userRecord.uid}`);
+        return { success: true, uid: userRecord.uid, message: "Admin user created successfully." };
+    }
+    catch (error) {
+        console.error('Error creating admin user:', error);
+        throw new https_1.HttpsError("internal", error.message || "Failed to create admin user");
+    }
+});
+// 5. Grant Admin Role to Existing User (callable - requires existing admin)
+exports.grantAdminRole = (0, https_1.onCall)(async (request) => {
+    // Verify the caller is already an admin
+    if (!request.auth?.token?.admin) {
+        throw new https_1.HttpsError("permission-denied", "Only existing admins can grant admin roles.");
+    }
+    const { uid } = request.data;
+    if (!uid) {
+        throw new https_1.HttpsError("invalid-argument", "User UID is required.");
+    }
+    try {
+        // 1. Set the custom claim 'admin: true'
+        await admin.auth().setCustomUserClaims(uid, { admin: true });
+        // 2. Update Firestore
+        await db.collection("users").doc(uid).set({
+            role: "admin",
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        }, { merge: true });
+        console.log(`Successfully granted admin role to user: ${uid}`);
+        return { success: true, message: "Admin role granted successfully." };
+    }
+    catch (error) {
+        console.error('Error granting admin role:', error);
+        throw new https_1.HttpsError("internal", error.message || "Failed to grant admin role");
+    }
+});
+// 6. Revoke Admin Role (callable - requires existing admin)
+exports.revokeAdminRole = (0, https_1.onCall)(async (request) => {
+    // Verify the caller is already an admin
+    if (!request.auth?.token?.admin) {
+        throw new https_1.HttpsError("permission-denied", "Only existing admins can revoke admin roles.");
+    }
+    const { uid } = request.data;
+    if (!uid) {
+        throw new https_1.HttpsError("invalid-argument", "User UID is required.");
+    }
+    try {
+        // 1. Remove the custom claim
+        await admin.auth().setCustomUserClaims(uid, { admin: false });
+        // 2. Update Firestore
+        await db.collection("users").doc(uid).set({
+            role: "user",
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        }, { merge: true });
+        console.log(`Successfully revoked admin role from user: ${uid}`);
+        return { success: true, message: "Admin role revoked successfully." };
+    }
+    catch (error) {
+        console.error('Error revoking admin role:', error);
+        throw new https_1.HttpsError("internal", error.message || "Failed to revoke admin role");
+    }
 });
 //# sourceMappingURL=index.js.map

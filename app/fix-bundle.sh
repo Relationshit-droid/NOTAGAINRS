@@ -33,8 +33,12 @@ echo ""
 echo "🔍 Step 1/4: Checking required image assets..."
 
 REQUIRED_ASSETS=(
+  "RSBLACKNBBANNER.png"
+  "RSBLACKNBSQUARE.png"
+  "RSICONNB.png"
   "RSTRANSPARENTICONNB.png"
-  "mainlogoone.png"
+  "RSWHITENBBANNER.png"
+  "RSWHITENBSQUARE.png"
 )
 
 for EXPECTED in "${REQUIRED_ASSETS[@]}"; do
@@ -57,11 +61,8 @@ for EXPECTED in "${REQUIRED_ASSETS[@]}"; do
     else
       echo "❌ Missing required asset: assets/logo/$EXPECTED"
       echo "   Expected by code:"
-      if [[ "$EXPECTED" == "RSTRANSPARENTICONNB.png" ]]; then
-        echo "     - src/screens/auth/LoginAndSignUp.tsx -> ../../assets/logo/$EXPECTED"
-      else
-        echo "     - src/constants/assetManifest.ts -> ../../assets/logo/$EXPECTED"
-      fi
+      echo "     - src/constants/assetManifest.ts -> ../../assets/logo/$EXPECTED"
+      echo "     - src/utils/assets.ts           -> ../../assets/logo/$EXPECTED"
       echo "   Please add the file to $ASSET_DIR/ with EXACTLY this case-sensitive name,"
       echo "   or correct the import path in code."
       # Helpful hint: file lives in the other common location in this repo
